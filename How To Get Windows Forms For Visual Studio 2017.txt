@@ -1,0 +1,5 @@
+We are using visual studio 2017
+You want the C# support for windows forms
+Follow this tutorial for help
+
+https://developercommunity.visualstudio.com/content/problem/35708/missed-windows-forms-visual-studio-2017.html

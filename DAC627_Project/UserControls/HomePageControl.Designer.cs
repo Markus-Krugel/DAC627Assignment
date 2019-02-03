@@ -56,20 +56,26 @@
             // txtPassword
             // 
             this.txtPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPassword.ForeColor = System.Drawing.Color.Gray;
             this.txtPassword.Location = new System.Drawing.Point(887, 32);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(192, 21);
             this.txtPassword.TabIndex = 2;
             this.txtPassword.Text = "Password";
+            this.txtPassword.Enter += new System.EventHandler(this.txtPassword_Enter);
+            this.txtPassword.Leave += new System.EventHandler(this.txtPassword_Leave);
             // 
             // txtUserName
             // 
             this.txtUserName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtUserName.ForeColor = System.Drawing.Color.Gray;
             this.txtUserName.Location = new System.Drawing.Point(689, 32);
             this.txtUserName.Name = "txtUserName";
             this.txtUserName.Size = new System.Drawing.Size(192, 20);
             this.txtUserName.TabIndex = 3;
-            this.txtUserName.Text = "Username";
+            this.txtUserName.Text = "User Name";
+            this.txtUserName.Enter += new System.EventHandler(this.txtUserName_Enter);
+            this.txtUserName.Leave += new System.EventHandler(this.txtUserName_Leave);
             // 
             // HomePageControl
             // 

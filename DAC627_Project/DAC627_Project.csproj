@@ -46,10 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CreateAccountPageControl.cs">
+    <Compile Include="UserControls\CreateAccountPageControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CreateAccountPageControl.Designer.cs">
+    <Compile Include="UserControls\CreateAccountPageControl.Designer.cs">
       <DependentUpon>CreateAccountPageControl.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\AccountPageControl.cs">
@@ -80,7 +80,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="CreateAccountPageControl.resx">
+    <EmbeddedResource Include="UserControls\CreateAccountPageControl.resx">
       <DependentUpon>CreateAccountPageControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\AccountPageControl.resx">

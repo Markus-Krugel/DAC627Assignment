@@ -90,7 +90,7 @@
             this.Controls.Add(this.txtUserName);
             this.Controls.Add(this.lblUserName);
             this.Name = "LoginPageControl";
-            this.Size = new System.Drawing.Size(1264, 681);
+            this.Size = new System.Drawing.Size(1280, 720);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -86,7 +86,7 @@
             this.Controls.Add(this.btnJoin);
             this.Controls.Add(this.btnLogin);
             this.Name = "HomePageControl";
-            this.Size = new System.Drawing.Size(1264, 681);
+            this.Size = new System.Drawing.Size(1280, 720);
             this.ResumeLayout(false);
             this.PerformLayout();
 

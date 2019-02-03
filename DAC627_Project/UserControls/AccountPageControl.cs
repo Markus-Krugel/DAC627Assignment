@@ -12,9 +12,12 @@ namespace DAC627_Project
 {
     public partial class AccountPageControl : UserControl
     {
-        public AccountPageControl()
+        FormMain formMain;
+
+        public AccountPageControl(FormMain form)
         {
             InitializeComponent();
+            formMain = form;
         }
 
        

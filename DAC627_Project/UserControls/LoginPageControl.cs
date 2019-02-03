@@ -12,9 +12,11 @@ namespace DAC627_Project
 {
     public partial class LoginPageControl : UserControl
     {
-        public LoginPageControl()
+        FormMain formMain;
+        public LoginPageControl(FormMain form)
         {
             InitializeComponent();
+            formMain = form;
         }
     }
 }

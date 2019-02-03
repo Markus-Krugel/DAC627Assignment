@@ -10,16 +10,26 @@ using System.Windows.Forms;
 
 namespace DAC627_Project
 {
-    public partial class MainForm : Form
+    public partial class FormMain : Form
     {
-        public MainForm()
+        public FormMain()
         {
             InitializeComponent();
+
+            //use this in order to display the user control of your choice...
+            UserControl foo = new CreateAccountPageControl(this);
+            foo.Dock = DockStyle.Fill;
+            Controls.Add(foo);
         }
 
+
+        //**All global functions or variables should go here**
+
+        
         public bool RemoveGrayText(TextBox textBox, string testingValue)
         {
-            if (textBox.Text == testingValue && textBox.ForeColor == Color.Gray)
+            //Test if the text box has the default text, the colour for your default name text boxes should ALWAYS be Color.Grey to ensure this works.
+            if (textBox.Text == testingValue && textBox.ForeColor == Color.Gray) 
             {
                 textBox.Text = "";
                 textBox.ForeColor = Color.Black;
@@ -33,6 +43,7 @@ namespace DAC627_Project
 
         public bool CheckEmpty(TextBox textBox, string orginalValue)
         {
+            //If the user did not type anything, then return text to orginal value and colours 
             if (textBox.Text == "")
             {
                 textBox.Text = orginalValue;

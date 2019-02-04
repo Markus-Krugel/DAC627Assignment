@@ -22,23 +22,23 @@ namespace DAC627_Project
 
         private void txtUserName_Enter(object sender, EventArgs e)
         {
-            formMain.RemoveGrayText(txtUserName, "User Name");
+            formMain.RemoveGrayText(txtUserName);
         }
 
         private void txtUserName_Leave(object sender, EventArgs e)
         {
-            formMain.CheckEmpty(txtUserName, "User Name");
+            formMain.CheckEmpty(txtUserName);
         }
 
         private void txtPassword_Enter(object sender, EventArgs e)
         {
-            formMain.RemoveGrayText(txtPassword, "Password");
+            formMain.RemoveGrayText(txtPassword);
             txtPassword.PasswordChar = '•';
         }
 
         private void txtPassword_Leave(object sender, EventArgs e)
         {
-            if (formMain.CheckEmpty(txtPassword, "Password"))
+            if (formMain.CheckEmpty(txtPassword))
             {
                 txtPassword.PasswordChar = '\0';
             }

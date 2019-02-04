@@ -86,9 +86,9 @@
             this.lblUserName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUserName.Location = new System.Drawing.Point(464, 144);
             this.lblUserName.Name = "lblUserName";
-            this.lblUserName.Size = new System.Drawing.Size(84, 18);
+            this.lblUserName.Size = new System.Drawing.Size(77, 18);
             this.lblUserName.TabIndex = 14;
-            this.lblUserName.Text = "User Name";
+            this.lblUserName.Text = "Username";
             // 
             // lblConfirmPassword
             // 
@@ -112,14 +112,14 @@
             // 
             // txtUserName
             // 
-            this.txtUserName.AccessibleName = "User Name";
+            this.txtUserName.AccessibleName = "Username";
             this.txtUserName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtUserName.ForeColor = System.Drawing.Color.Gray;
             this.txtUserName.Location = new System.Drawing.Point(608, 144);
             this.txtUserName.Name = "txtUserName";
             this.txtUserName.Size = new System.Drawing.Size(192, 20);
             this.txtUserName.TabIndex = 20;
-            this.txtUserName.Text = "User Name";
+            this.txtUserName.Text = "Username";
             this.txtUserName.Enter += new System.EventHandler(this.txt_Enter);
             this.txtUserName.Leave += new System.EventHandler(this.txt_Leave);
             // 

@@ -17,7 +17,7 @@ namespace DAC627_Project
             InitializeComponent();
 
             //use this in order to display the user control of your choice...
-            UserControl foo = new CreateAccountPageControl(this);
+            UserControl foo = new HomePageControl(this);
             foo.Dock = DockStyle.Fill;
             Controls.Add(foo);
         }
@@ -26,10 +26,10 @@ namespace DAC627_Project
         //**All global functions or variables should go here**
 
         
-        public bool RemoveGrayText(TextBox textBox, string testingValue)
+        public bool RemoveGrayText(TextBox textBox)
         {
             //Test if the text box has the default text, the colour for your default name text boxes should ALWAYS be Color.Grey to ensure this works.
-            if (textBox.Text == testingValue && textBox.ForeColor == Color.Gray) 
+            if (textBox.Text == textBox.AccessibleName && textBox.ForeColor == Color.Gray) 
             {
                 textBox.Text = "";
                 textBox.ForeColor = Color.Black;
@@ -41,12 +41,12 @@ namespace DAC627_Project
             }
         }
 
-        public bool CheckEmpty(TextBox textBox, string orginalValue)
+        public bool CheckEmpty(TextBox textBox)
         {
             //If the user did not type anything, then return text to orginal value and colours 
             if (textBox.Text == "")
             {
-                textBox.Text = orginalValue;
+                textBox.Text = textBox.AccessibleName;
                 textBox.ForeColor = Color.Gray;
                 return true;
             }

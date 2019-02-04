@@ -41,9 +41,9 @@
             this.lblUserName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUserName.Location = new System.Drawing.Point(496, 232);
             this.lblUserName.Name = "lblUserName";
-            this.lblUserName.Size = new System.Drawing.Size(80, 18);
+            this.lblUserName.Size = new System.Drawing.Size(77, 18);
             this.lblUserName.TabIndex = 0;
-            this.lblUserName.Text = "UserName";
+            this.lblUserName.Text = "Username";
             // 
             // txtUserName
             // 

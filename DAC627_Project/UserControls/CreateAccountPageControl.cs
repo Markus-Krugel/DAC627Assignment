@@ -24,14 +24,14 @@ namespace DAC627_Project
         private void txtPassword_Enter(object sender, EventArgs e)
         {
             TextBox txtInput = (TextBox)sender;
-            formMain.RemoveGrayText(txtInput, txtInput.AccessibleName);
+            formMain.RemoveGrayText(txtInput);
             txtInput.PasswordChar = '•';
         }
 
         private void txtPassword_Leave(object sender, EventArgs e)
         {
             TextBox txtInput = (TextBox)sender;
-            if (formMain.CheckEmpty(txtInput, txtInput.AccessibleName))
+            if (formMain.CheckEmpty(txtInput))
             {
                 txtInput.PasswordChar = '\0';
             }
@@ -40,13 +40,13 @@ namespace DAC627_Project
         private void txt_Enter(object sender, EventArgs e)
         {
             TextBox txtInput = (TextBox)sender;
-            formMain.RemoveGrayText((TextBox)sender, txtInput.AccessibleName);
+            formMain.RemoveGrayText((TextBox)sender);
         }
 
         private void txt_Leave(object sender, EventArgs e)
         {
             TextBox txtInput = (TextBox)sender;
-            formMain.CheckEmpty((TextBox)sender, txtInput.AccessibleName);
+            formMain.CheckEmpty((TextBox)sender);
         }
     }
 }

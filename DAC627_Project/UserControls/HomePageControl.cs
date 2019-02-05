@@ -44,9 +44,30 @@ namespace DAC627_Project
             }
         }
 
+        private void btn_CreateAnAccount_click(object sender, EventArgs e)
+        {
+            formMain.ChangeToPage(FormMain.Pages.CreateAccountPage);
+            this.Hide();
+        }
 
+        private void btn_logIn_click(object sender, EventArgs e)
+        {
+            UsersAccounts.UserData? m_user = formMain.UsersAccounts.RetrieveUserData(txtUserName.Text);
+            lblPasswordNotFound.Hide();
+            lblUserNotFound.Hide();
 
-
-        
+            if (m_user != null)
+            {
+                if (m_user.Value.IsValidPassword(txtPassword.Text))
+                {
+                    formMain.ChangeToPage(FormMain.Pages.AccountPage);
+                    formMain.UsersAccounts.SetCurrentUser(m_user);
+                    this.Hide();
+                }
+                lblPasswordNotFound.Show();
+                return;
+            }
+            lblUserNotFound.Show();
+        }
     }
 }

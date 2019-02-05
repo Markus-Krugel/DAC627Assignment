@@ -12,12 +12,15 @@ namespace DAC627_Project
 {
     public partial class FormMain : Form
     {
+
+        public UsersAccounts UsersAccounts = new UsersAccounts();
+
         public FormMain()
         {
             InitializeComponent();
 
             //use this in order to display the user control of your choice...
-            UserControl foo = new HomePageControl(this);
+            UserControl foo = new CreateAccountPageControl(this);
             foo.Dock = DockStyle.Fill;
             Controls.Add(foo);
         }
@@ -54,6 +57,40 @@ namespace DAC627_Project
             {
                 return false;
             }
+        }
+
+        //Pages
+        public enum Pages
+        {
+            AccountPage,
+            CreateAccountPage,
+            HomePage,
+            LoginPage
+        }
+
+        public void ChangeToPage(Pages _page)
+        {
+            UserControl m_userControl = new UserControl();
+
+            switch (_page)
+            {
+                case Pages.AccountPage:
+                    m_userControl = new AccountPageControl(this);
+                    break;
+                case Pages.CreateAccountPage:
+                    m_userControl = new CreateAccountPageControl(this);
+                    break;
+                case Pages.HomePage:
+                    m_userControl = new HomePageControl(this);
+                    break;
+                case Pages.LoginPage:
+                    break;
+                default:
+                    return;
+            }
+
+            m_userControl.Dock = DockStyle.Fill;
+            Controls.Add(m_userControl);
         }
     }
 }

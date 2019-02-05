@@ -44,7 +44,7 @@
             this.lblErrorEmail = new System.Windows.Forms.Label();
             this.lblErrorConfirmEmail = new System.Windows.Forms.Label();
             this.lblErrorPassword = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblErrorConfirmPassword = new System.Windows.Forms.Label();
             this.cboUserType = new System.Windows.Forms.ComboBox();
             this.lblErrorUserType = new System.Windows.Forms.Label();
             this.chkTermsConditions = new System.Windows.Forms.CheckBox();
@@ -119,6 +119,7 @@
             this.txtUserName.Name = "txtUserName";
             this.txtUserName.Size = new System.Drawing.Size(192, 20);
             this.txtUserName.TabIndex = 20;
+            this.txtUserName.Tag = "Username";
             this.txtUserName.Text = "Username";
             this.txtUserName.Enter += new System.EventHandler(this.txt_Enter);
             this.txtUserName.Leave += new System.EventHandler(this.txt_Leave);
@@ -132,6 +133,7 @@
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(192, 20);
             this.txtEmail.TabIndex = 21;
+            this.txtEmail.Tag = "Email";
             this.txtEmail.Text = "Email";
             this.txtEmail.Enter += new System.EventHandler(this.txt_Enter);
             this.txtEmail.Leave += new System.EventHandler(this.txt_Leave);
@@ -145,6 +147,7 @@
             this.txtConfirmEmail.Name = "txtConfirmEmail";
             this.txtConfirmEmail.Size = new System.Drawing.Size(192, 20);
             this.txtConfirmEmail.TabIndex = 22;
+            this.txtConfirmEmail.Tag = "ConfirmEmail";
             this.txtConfirmEmail.Text = "Confirm Email";
             this.txtConfirmEmail.Enter += new System.EventHandler(this.txt_Enter);
             this.txtConfirmEmail.Leave += new System.EventHandler(this.txt_Leave);
@@ -158,6 +161,7 @@
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(192, 20);
             this.txtPassword.TabIndex = 23;
+            this.txtPassword.Tag = "Password";
             this.txtPassword.Text = "Password";
             this.txtPassword.Enter += new System.EventHandler(this.txtPassword_Enter);
             this.txtPassword.Leave += new System.EventHandler(this.txtPassword_Leave);
@@ -171,6 +175,7 @@
             this.txtConfirmPassword.Name = "txtConfirmPassword";
             this.txtConfirmPassword.Size = new System.Drawing.Size(192, 20);
             this.txtConfirmPassword.TabIndex = 24;
+            this.txtConfirmPassword.Tag = "ConfirmPassword";
             this.txtConfirmPassword.Text = "Confirm Password";
             this.txtConfirmPassword.Enter += new System.EventHandler(this.txtPassword_Enter);
             this.txtConfirmPassword.Leave += new System.EventHandler(this.txtPassword_Leave);
@@ -183,6 +188,7 @@
             this.btnJoin.TabIndex = 26;
             this.btnJoin.Text = "Join";
             this.btnJoin.UseVisualStyleBackColor = true;
+            this.btnJoin.Click += new System.EventHandler(this.btn_join_click);
             // 
             // lblErrorUserName
             // 
@@ -228,16 +234,16 @@
             this.lblErrorPassword.Text = "Error, password is not between 6-12 characters";
             this.lblErrorPassword.Visible = false;
             // 
-            // label1
+            // lblErrorConfirmPassword
             // 
-            this.label1.AutoSize = true;
-            this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(608, 376);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(128, 13);
-            this.label1.TabIndex = 31;
-            this.label1.Text = "Error, Email Already Exists";
-            this.label1.Visible = false;
+            this.lblErrorConfirmPassword.AutoSize = true;
+            this.lblErrorConfirmPassword.ForeColor = System.Drawing.Color.Red;
+            this.lblErrorConfirmPassword.Location = new System.Drawing.Point(608, 376);
+            this.lblErrorConfirmPassword.Name = "lblErrorConfirmPassword";
+            this.lblErrorConfirmPassword.Size = new System.Drawing.Size(150, 13);
+            this.lblErrorConfirmPassword.TabIndex = 31;
+            this.lblErrorConfirmPassword.Text = "Error, passwords do not match";
+            this.lblErrorConfirmPassword.Visible = false;
             // 
             // cboUserType
             // 
@@ -271,6 +277,7 @@
             this.chkTermsConditions.TabIndex = 34;
             this.chkTermsConditions.Text = "I agree to the terms and conditions";
             this.chkTermsConditions.UseVisualStyleBackColor = true;
+            this.chkTermsConditions.CheckedChanged += new System.EventHandler(this.chkTermsConditions_CheckedChanged);
             // 
             // CreateAccountPageControl
             // 
@@ -279,7 +286,7 @@
             this.Controls.Add(this.chkTermsConditions);
             this.Controls.Add(this.lblErrorUserType);
             this.Controls.Add(this.cboUserType);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblErrorConfirmPassword);
             this.Controls.Add(this.lblErrorPassword);
             this.Controls.Add(this.lblErrorConfirmEmail);
             this.Controls.Add(this.lblErrorEmail);
@@ -321,7 +328,7 @@
         private System.Windows.Forms.Label lblErrorEmail;
         private System.Windows.Forms.Label lblErrorConfirmEmail;
         private System.Windows.Forms.Label lblErrorPassword;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblErrorConfirmPassword;
         private System.Windows.Forms.ComboBox cboUserType;
         private System.Windows.Forms.Label lblErrorUserType;
         private System.Windows.Forms.CheckBox chkTermsConditions;

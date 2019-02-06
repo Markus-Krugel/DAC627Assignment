@@ -188,7 +188,7 @@
             this.btnJoin.TabIndex = 26;
             this.btnJoin.Text = "Join";
             this.btnJoin.UseVisualStyleBackColor = true;
-            this.btnJoin.Click += new System.EventHandler(this.btn_join_click);
+            this.btnJoin.Click += new System.EventHandler(this.btnJoin_click);
             // 
             // lblErrorUserName
             // 

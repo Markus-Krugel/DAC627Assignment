@@ -11,42 +11,42 @@ namespace DAC627_Project
     public class UsersAccounts
     {
         //Varibles
-        private List<UserData> m_allUsers = new List<UserData>();
-        private UserData? m_currentUser = null;
+        private List<UserData> _allUsers = new List<UserData>();
+        private UserData? _currentUser = null;
 
         //struct
         public struct UserData
         {
             //Backend Managment Data
-            private int? m_userID;
+            private int? _userID;
 
             //Login Information
-            public string m_userName;
-            public string m_emailAddress;
-            private string m_password;
+            public string userName;
+            public string emailAddress;
+            private string _password;
 
             //Private Data
-            public string m_address;
-            public string m_profilePicture;
+            public string address;
+            public string profilePicture;
 
             //Functions
             public void OneTimeSetUserID(int? userId)
             {
-                if (m_userID == null)
+                if (_userID == null)
                 {
-                    m_userID = userId;
+                    _userID = userId;
                 }
             }
 
             public void SetPassword(string newPassword)
             {
-                m_password = EncryptDecrypt(newPassword);
+                _password = EncryptDecrypt(newPassword);
             }
 
             public bool IsValidPassword(string testPassword)
             {
-                Console.WriteLine(m_password);
-                if (m_password == EncryptDecrypt(testPassword))
+                Console.WriteLine(_password);
+                if (_password == EncryptDecrypt(testPassword))
                 {
                     return true;
                 }
@@ -55,7 +55,7 @@ namespace DAC627_Project
 
             public bool IsValidUsernameOrEmail(string UsernameOrEmail)
             {
-                if (m_userName == UsernameOrEmail || m_emailAddress == UsernameOrEmail)
+                if (userName == UsernameOrEmail || emailAddress == UsernameOrEmail)
                 {
                     return true;
                 }
@@ -64,7 +64,7 @@ namespace DAC627_Project
 
             private string EncryptDecrypt(string szPlainText)
             {
-                int szEncryptionKey = m_userID.Value;
+                int szEncryptionKey = _userID.Value;
                 string szInputStringBuild = szPlainText;
                 char[] szOutStringBuild = new char[szPlainText.Length];
 
@@ -81,24 +81,24 @@ namespace DAC627_Project
 
         public void SetCurrentUser(UserData? currentUser)
         {
-            m_currentUser = currentUser;
+            _currentUser = currentUser;
         }
 
         public UserData? GetCurrentUser()
         {
-            return m_currentUser;
+            return _currentUser;
         }
 
         public void AddUser(UserData _userData)
         {
-            m_allUsers.Add(_userData);
+            _allUsers.Add(_userData);
         }
 
         public UserData? RetrieveUserData(string UsernameOrEmail)
         {
-            foreach (UserData user in m_allUsers)
+            foreach (UserData user in _allUsers)
             {
-                if (user.m_userName == UsernameOrEmail || user.m_emailAddress == UsernameOrEmail)
+                if (user.userName == UsernameOrEmail || user.emailAddress == UsernameOrEmail)
                 {
                     return user;
                 }

@@ -13,12 +13,12 @@ namespace DAC627_Project
     public partial class CreateAccountPageControl : UserControl
     {
         FormMain formMain;
+        
+        private string _tempPassword;
+        private string _tempUsername;
+        private string _tempEmail;
 
-        string m_tempPassword;
-        string m_tempUsername;
-        string m_tempEmail;
-
-        List<bool> m_isInfoFilledOutCorrectly = new List<bool> { false, false, false, false, false, false };
+        private List<bool> _isInfoFilledOutCorrectly = new List<bool> { false, false, false, false, false, false };
 
         public CreateAccountPageControl(FormMain form)
         {
@@ -66,55 +66,63 @@ namespace DAC627_Project
                 case "Username":
                     if (formMain.UsersAccounts.RetrieveUserData(txtSender.Text) == null)
                     {
-                        m_tempUsername = txtSender.Text;
+                        _tempUsername = txtSender.Text;
                         lblErrorUserName.Hide();
-                        m_isInfoFilledOutCorrectly[0] = true;
+                        _isInfoFilledOutCorrectly[0] = true;
                     }
                     else
                     {
                         lblErrorUserName.Show();
-                        m_isInfoFilledOutCorrectly[0] = false;
+                        _isInfoFilledOutCorrectly[0] = false;
                     }
                     break;
                 case "Email":
                     if (txtSender.Text.Contains('@') && formMain.UsersAccounts.RetrieveUserData(txtSender.Text) == null)
                     {
-                        m_tempEmail = txtSender.Text;
+                        _tempEmail = txtSender.Text;
                         lblErrorEmail.Hide();
-                        m_isInfoFilledOutCorrectly[1] = true;
+                        _isInfoFilledOutCorrectly[1] = true;
                     }
                     else
                     {
+                        if (!txtSender.Text.Contains('@'))
+                        {
+                            lblErrorEmail.Text = "Error, not an email address";
+                        }
+                        else
+                        {
+                            lblErrorEmail.Text = "Error, email already exists";
+                        }
                         lblErrorEmail.Show();
-                        m_isInfoFilledOutCorrectly[1] = false;
+                        _isInfoFilledOutCorrectly[1] = false;
                     }
                     break;
                 case "ConfirmEmail":
-                    if(txtSender.Text != m_tempEmail)
+                    if(txtSender.Text != _tempEmail)
                     {
                         lblErrorConfirmEmail.Show();
-                        m_isInfoFilledOutCorrectly[2] = false;
+                        _isInfoFilledOutCorrectly[2] = false;
                     }
                     else
                     {
                         lblErrorConfirmEmail.Hide();
-                        m_isInfoFilledOutCorrectly[2] = true;
+                        _isInfoFilledOutCorrectly[2] = true;
                     }
                     break;
                 case "Password":
-                    m_tempPassword = txtSender.Text;
-                    m_isInfoFilledOutCorrectly[3] = true;
+                    _tempPassword = txtSender.Text;
+                    _isInfoFilledOutCorrectly[3] = true;
                     break;
                 case "ConfirmPassword":
-                    if(m_tempPassword != txtSender.Text)
+                    if(_tempPassword != txtSender.Text)
                     {
                         lblErrorConfirmPassword.Show();
-                        m_isInfoFilledOutCorrectly[4] = false;
+                        _isInfoFilledOutCorrectly[4] = false;
                     }
                     else
                     {
                         lblErrorConfirmPassword.Hide();
-                        m_isInfoFilledOutCorrectly[4] = true;
+                        _isInfoFilledOutCorrectly[4] = true;
                     }
                     break;
 
@@ -124,9 +132,9 @@ namespace DAC627_Project
 
         }
 
-        private void btn_join_click(object sender, EventArgs e)
+        private void btnJoin_click(object sender, EventArgs e)
         {
-            foreach (bool item in m_isInfoFilledOutCorrectly)
+            foreach (bool item in _isInfoFilledOutCorrectly)
             {
                 if (item == false)
                 {
@@ -134,14 +142,14 @@ namespace DAC627_Project
                 }
             }
             
-            UsersAccounts.UserData  m_userData = new UsersAccounts.UserData
+            UsersAccounts.UserData  userData = new UsersAccounts.UserData
             {
-                m_userName = m_tempUsername,
-                m_emailAddress = m_tempEmail
+                userName = _tempUsername,
+                emailAddress = _tempEmail
             };
-            m_userData.OneTimeSetUserID(5);
-            m_userData.SetPassword(m_tempPassword);
-            formMain.UsersAccounts.AddUser(m_userData);
+            userData.OneTimeSetUserID(5);
+            userData.SetPassword(_tempPassword);
+            formMain.UsersAccounts.AddUser(userData);
             formMain.ChangeToPage(FormMain.Pages.HomePage);
             this.Hide();
         }
@@ -151,11 +159,11 @@ namespace DAC627_Project
             var checkBox = sender as CheckBox;
             if(checkBox.Checked == true)
             {
-                m_isInfoFilledOutCorrectly[5] = true;
+                _isInfoFilledOutCorrectly[5] = true;
             }
             else
             {
-                m_isInfoFilledOutCorrectly[5] = false;
+                _isInfoFilledOutCorrectly[5] = false;
             }
         }
     }

@@ -84,6 +84,11 @@ namespace DAC627_Project
             m_currentUser = currentUser;
         }
 
+        public UserData? GetCurrentUser()
+        {
+            return m_currentUser;
+        }
+
         public void AddUser(UserData _userData)
         {
             m_allUsers.Add(_userData);

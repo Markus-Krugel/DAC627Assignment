@@ -60,8 +60,8 @@ namespace DAC627_Project
             {
                 if (m_user.Value.IsValidPassword(txtPassword.Text))
                 {
-                    formMain.ChangeToPage(FormMain.Pages.AccountPage);
                     formMain.UsersAccounts.SetCurrentUser(m_user);
+                    formMain.ChangeToPage(FormMain.Pages.AccountPage);
                     this.Hide();
                 }
                 lblPasswordNotFound.Show();

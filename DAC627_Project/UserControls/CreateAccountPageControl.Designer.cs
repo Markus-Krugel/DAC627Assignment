@@ -48,6 +48,8 @@
             this.cboUserType = new System.Windows.Forms.ComboBox();
             this.lblErrorUserType = new System.Windows.Forms.Label();
             this.chkTermsConditions = new System.Windows.Forms.CheckBox();
+            this.lblFullName = new System.Windows.Forms.Label();
+            this.txtFullName = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // lblConfirmEmail
@@ -279,10 +281,36 @@
             this.chkTermsConditions.UseVisualStyleBackColor = true;
             this.chkTermsConditions.CheckedChanged += new System.EventHandler(this.chkTermsConditions_CheckedChanged);
             // 
+            // lblFullName
+            // 
+            this.lblFullName.AutoSize = true;
+            this.lblFullName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFullName.Location = new System.Drawing.Point(464, 96);
+            this.lblFullName.Name = "lblFullName";
+            this.lblFullName.Size = new System.Drawing.Size(75, 18);
+            this.lblFullName.TabIndex = 35;
+            this.lblFullName.Text = "Full Name";
+            // 
+            // txtFullName
+            // 
+            this.txtFullName.AccessibleName = "Full Name";
+            this.txtFullName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtFullName.ForeColor = System.Drawing.Color.Gray;
+            this.txtFullName.Location = new System.Drawing.Point(608, 96);
+            this.txtFullName.Name = "txtFullName";
+            this.txtFullName.Size = new System.Drawing.Size(192, 20);
+            this.txtFullName.TabIndex = 36;
+            this.txtFullName.Tag = "FullName";
+            this.txtFullName.Text = "Full Name";
+            this.txtFullName.Enter += new System.EventHandler(this.txt_Enter);
+            this.txtFullName.Leave += new System.EventHandler(this.txt_Leave);
+            // 
             // CreateAccountPageControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.txtFullName);
+            this.Controls.Add(this.lblFullName);
             this.Controls.Add(this.chkTermsConditions);
             this.Controls.Add(this.lblErrorUserType);
             this.Controls.Add(this.cboUserType);
@@ -332,6 +360,8 @@
         private System.Windows.Forms.ComboBox cboUserType;
         private System.Windows.Forms.Label lblErrorUserType;
         private System.Windows.Forms.CheckBox chkTermsConditions;
+        private System.Windows.Forms.Label lblFullName;
+        private System.Windows.Forms.TextBox txtFullName;
         //private DAC627_Project.UserControls.Component1 component11;
     }
 }

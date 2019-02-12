@@ -12,7 +12,7 @@ namespace DAC627_Project
 {
     public partial class FormMain : Form
     {
-
+        public UserControl currentPage;
         public UsersAccounts UsersAccounts = new UsersAccounts();
 
         public FormMain()
@@ -20,15 +20,28 @@ namespace DAC627_Project
             InitializeComponent();
 
             //use this in order to display the user control of your choice...
-            UserControl foo = new CreateAccountPageControl(this);
-            foo.Dock = DockStyle.Fill;
-            Controls.Add(foo);
+            ChangeToPage(Pages.CreateAccountPage);
         }
 
+        private void picHomeButton_Click(object sender, EventArgs e)
+        {
+            currentPage.Hide();
+            ChangeToPage(FormMain.Pages.HomePage);
+        }
+
+        private void picHomeButton_MouseEnter(object sender, EventArgs e)
+        {
+            Btn_DeafultMouseEnter();
+        }
+
+        private void picHomeButton_MouseLeave(object sender, EventArgs e)
+        {
+            Btn_DeafultMouseLeave();
+        }
 
         //**All global functions or variables should go here**
 
-        
+
         public bool RemoveGrayText(TextBox textBox)
         {
             //Test if the text box has the default text, the colour for your default name text boxes should ALWAYS be Color.Grey to ensure this works.
@@ -59,6 +72,19 @@ namespace DAC627_Project
             }
         }
 
+        //This is what every button will do when a mouse enters it 
+        public void Btn_DeafultMouseEnter()
+        {
+            this.Cursor = Cursors.Hand;
+        }
+        
+        //This is what every button will do when a mouse leaves it 
+        public void Btn_DeafultMouseLeave()
+        {
+            this.Cursor = Cursors.Default;
+        }
+
+
         //Pages
         public enum Pages
         {
@@ -71,7 +97,7 @@ namespace DAC627_Project
         public void ChangeToPage(Pages _page)
         {
             UserControl m_userControl = new UserControl();
-
+           
             switch (_page)
             {
                 case Pages.AccountPage:
@@ -84,13 +110,16 @@ namespace DAC627_Project
                     m_userControl = new HomePageControl(this);
                     break;
                 case Pages.LoginPage:
+                    m_userControl = new LoginPageControl(this);
                     break;
                 default:
                     return;
             }
-
+            currentPage = m_userControl;
             m_userControl.Dock = DockStyle.Fill;
             Controls.Add(m_userControl);
         }
+
+       
     }
 }

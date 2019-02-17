@@ -28,22 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.picLogo = new System.Windows.Forms.PictureBox();
+            this.picHomeButton = new System.Windows.Forms.PictureBox();
             this.lblProfileName = new System.Windows.Forms.Label();
             this.picProfile = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picHomeButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picProfile)).BeginInit();
             this.SuspendLayout();
             // 
-            // picLogo
+            // picHomeButton
             // 
-            this.picLogo.Image = global::DAC627_Project.Properties.Resources.thEGE72UK4;
-            this.picLogo.Location = new System.Drawing.Point(16, 16);
-            this.picLogo.Name = "picLogo";
-            this.picLogo.Size = new System.Drawing.Size(256, 48);
-            this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picLogo.TabIndex = 0;
-            this.picLogo.TabStop = false;
+            this.picHomeButton.Image = global::DAC627_Project.Properties.Resources.thEGE72UK4;
+            this.picHomeButton.Location = new System.Drawing.Point(16, 16);
+            this.picHomeButton.Name = "picHomeButton";
+            this.picHomeButton.Size = new System.Drawing.Size(256, 48);
+            this.picHomeButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picHomeButton.TabIndex = 0;
+            this.picHomeButton.TabStop = false;
+            this.picHomeButton.Click += new System.EventHandler(this.picHomeButton_Click);
+            this.picHomeButton.MouseEnter += new System.EventHandler(this.picHomeButton_MouseEnter);
+            this.picHomeButton.MouseLeave += new System.EventHandler(this.picHomeButton_MouseLeave);
             // 
             // lblProfileName
             // 
@@ -75,10 +78,10 @@
             this.ClientSize = new System.Drawing.Size(1276, 720);
             this.Controls.Add(this.lblProfileName);
             this.Controls.Add(this.picProfile);
-            this.Controls.Add(this.picLogo);
+            this.Controls.Add(this.picHomeButton);
             this.Name = "FormMain";
             this.Text = "Prototype";
-            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picHomeButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picProfile)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -87,7 +90,7 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox picLogo;
+        private System.Windows.Forms.PictureBox picHomeButton;
         private System.Windows.Forms.Label lblProfileName;
         private System.Windows.Forms.PictureBox picProfile;
     }

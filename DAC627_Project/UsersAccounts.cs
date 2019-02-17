@@ -25,16 +25,16 @@ namespace DAC627_Project
             public string emailAddress;
             private string _password;
 
-            //Private Data
-            public string address;
-            public string profilePicture;
+            //Other Information
+            public string name;
+            public string profilePicturePath;
 
             //Functions
-            public void OneTimeSetUserID(int? userId)
+            public void OneTimeSetUserID(int? userID)
             {
                 if (_userID == null)
                 {
-                    _userID = userId;
+                    _userID = userID;
                 }
             }
 

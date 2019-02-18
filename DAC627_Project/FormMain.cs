@@ -23,6 +23,11 @@ namespace DAC627_Project
             ChangeToPage(Pages.CreateAccountPage);
         }
 
+        internal void Button_MouseEnter()
+        {
+            throw new NotImplementedException();
+        }
+
         private void picHomeButton_Click(object sender, EventArgs e)
         {
             currentPage.Hide();

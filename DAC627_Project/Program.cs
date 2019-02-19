@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DAC627_Project.Enums;
 
 namespace DAC627_Project
 {
@@ -18,32 +19,71 @@ namespace DAC627_Project
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new FormMain());
 
-            DataBaseAccess test = new DataBaseAccess();
+            DataBaseAccess database = new DataBaseAccess();
 
-            //test.addUser("Tach", "email@email.com", "Email", "Reviewer");
-            //test.addAsset("Car", 1, "1.3", "Completed", "Text");
-            //test.addProject("Game engine", "Software", "Simple 2D game engine", 2, "Software", "In Development");
+            //database.addUser("Tach", "email@email.com", "Email", UserType.Reviewer);
+            //database.addAsset("Car", 1, "1.3", AssetStatus.Planning, AssetTag.Sound, "Audacity");
+            //database.addProject("Game engine", ProjectType.Software, "Simple 2D game engine", 2, ProjectTag.Software, ProjectStatus.Planning);
 
-            //test.changeUsername("test12345", "test");
-            //test.changeUsername(2, "test12345");
+            //database.changeUserName("test12345", "Test");
+            //database.changeUserName(2, "test12345");
 
-            //test.changePassword(2, "test12345");
-            //test.changePassword("test12345", "test");
+            //database.changeUserPassword(2, "test12345");
+            //database.changeUserPassword("test12345", "Test");
 
-            //test.changeEmail("MarkusK", "mk2@web.de");
-            //test.changeEmail(1, "mk@web.de");
+            //database.changeUserEmail("MarkusK", "mk2@web.de");
+            //database.changeUserEmail(1, "mk@web.de");
 
-            //test.changeType("MarkusK", "Reviewer");
-            //test.changeType(1, "Developer");
+            //database.changeUserType("MarkusK", "Reviewer");
+            //database.changeUserType(1, "Developer");
 
-            //test.changeUserStatus("MarkusK", "Online");
-            //test.changeUserStatus(1, "Offline");
+            //database.changeUserStatus("MarkusK", "Online");
+            //database.changeUserStatus(1, "Offline");
 
-            //test.showAllUsers();
-            //test.showAllProjects();
-            //test.showAllAssets();
+            //database.changeProjectName("Sorting algorithms", "Test");
+            //database.changeProjectName(1, "Sorting algorithms");
 
-            test.closeConnection();
+            //database.changeProjectStatus("Sorting algorithms", ProjectStatus.Planning);
+            //database.changeProjectStatus(1, ProjectStatus.Completed);
+
+            //database.changeProjectDescription("Sorting algorithms", "Test");
+            //database.changeProjectDescription(1, "A list of common sorting algorithms");
+
+            //database.changeProjectTag("Sorting algorithms", ProjectTag.Software);
+            //database.changeProjectTag(1, ProjectTag.Research);
+
+            //database.changeProjectOwner("Sorting algorithms", 4);
+            //database.changeProjectOwner(1, 1);
+
+            //database.changeProjectOwner("Sorting algorithms", 4);
+            //database.changeProjectOwner(1, 1);
+
+            //database.changeProjectType("Sorting algorithms", ProjectType.Software);
+            //database.changeProjectType(1, ProjectType.Research);
+
+            //database.changeAssetName("Algorithms", "Test");
+            //database.changeAssetName(1, "Algorithms");
+
+            //database.changeAssetCreator("Algorithms", 10);
+            //database.changeAssetCreator(1, 1);
+
+            //database.changeAssetVersion("Algorithms", "2.1");
+            //database.changeAssetVersion(1, "1.0");
+
+            //database.changeAssetSoftware("Algorithms", "Gimp");
+            //database.changeAssetSoftware(1, "Texteditor");
+
+            //database.changeAssetStatus("Algorithms", AssetStatus.Planning);
+            //database.changeAssetStatus(1, AssetStatus.In_Development);
+
+            //database.changeAssetTag("Algorithms", AssetTag.Sound);
+            //database.changeAssetTag(1, AssetTag.Text);
+
+            //database.showAllUsers();
+            //database.showAllProjects();
+            database.showAllAssets();
+
+            database.closeConnection();
         }
     }
 }

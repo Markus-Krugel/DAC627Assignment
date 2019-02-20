@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace DAC627_Project.UserControls
+namespace DAC627_Project
 {
-    class UserAssets
+    public class UserAssets
     {
         private string _assetName;
         private UsersAccounts.UserData _author;

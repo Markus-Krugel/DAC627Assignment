@@ -18,9 +18,5 @@ namespace DAC627_Project
             InitializeComponent();
             formMain = form;
         }
-
-        private void btnLogin_MouseEnter(object sender, EventArgs e)
-        {
-        }
     }
 }

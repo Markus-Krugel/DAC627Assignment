@@ -79,6 +79,7 @@
             this.btnLogin.TabIndex = 7;
             this.btnLogin.Text = "Log In";
             this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.MouseEnter += new System.EventHandler(this.btnLogin_MouseEnter);
             // 
             // LoginPageControl
             // 

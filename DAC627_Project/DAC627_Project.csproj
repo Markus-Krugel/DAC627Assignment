@@ -48,16 +48,16 @@
   <ItemGroup>
     <Compile Include="Classes\UserProject.cs" />
     <Compile Include="UserAssets.cs" />
-    <Compile Include="UserControls\CreateAccountPageControl.cs">
+    <Compile Include="UserControls\Pages\CreateAccountPageControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\CreateAccountPageControl.Designer.cs">
+    <Compile Include="UserControls\Pages\CreateAccountPageControl.Designer.cs">
       <DependentUpon>CreateAccountPageControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\AccountPageControl.cs">
+    <Compile Include="UserControls\Pages\AccountPageControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\AccountPageControl.Designer.cs">
+    <Compile Include="UserControls\Pages\AccountPageControl.Designer.cs">
       <DependentUpon>AccountPageControl.cs</DependentUpon>
     </Compile>
     <Compile Include="FormMain.cs">
@@ -66,43 +66,55 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\HomePageControl.cs">
+    <Compile Include="UserControls\Pages\HomePageControl.cs">
       <SubType>UserControl</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="UserControls\HomePageControl.Designer.cs">
+    <Compile Include="UserControls\Pages\HomePageControl.Designer.cs">
       <DependentUpon>HomePageControl.cs</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="UserControls\LoginPageControl.cs">
+    <Compile Include="UserControls\Pages\LoginPageControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\LoginPageControl.Designer.cs">
+    <Compile Include="UserControls\Pages\LoginPageControl.Designer.cs">
       <DependentUpon>LoginPageControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Classes\UsersAccounts.cs" />
-    <Compile Include="UserControls\TestControl.cs">
+    <Compile Include="UserControls\Pages\MyAssetsPageControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\TestControl.Designer.cs">
-      <DependentUpon>TestControl.cs</DependentUpon>
+    <Compile Include="UserControls\Pages\MyAssetsPageControl.Designer.cs">
+      <DependentUpon>MyAssetsPageControl.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="UserControls\CreateAccountPageControl.resx">
+    <Compile Include="UserControls\Pages\TestPageControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Pages\TestPageControl.Designer.cs">
+      <DependentUpon>TestPageControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Prefabs\AssetButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Prefabs\AssetButton.Designer.cs">
+      <DependentUpon>AssetButton.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="UserControls\Pages\CreateAccountPageControl.resx">
       <DependentUpon>CreateAccountPageControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\AccountPageControl.resx">
+    <EmbeddedResource Include="UserControls\Pages\AccountPageControl.resx">
       <DependentUpon>AccountPageControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\HomePageControl.resx">
+    <EmbeddedResource Include="UserControls\Pages\HomePageControl.resx">
       <DependentUpon>HomePageControl.cs</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\LoginPageControl.resx">
+    <EmbeddedResource Include="UserControls\Pages\LoginPageControl.resx">
       <DependentUpon>LoginPageControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -110,8 +122,14 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\TestControl.resx">
-      <DependentUpon>TestControl.cs</DependentUpon>
+    <EmbeddedResource Include="UserControls\Pages\MyAssetsPageControl.resx">
+      <DependentUpon>MyAssetsPageControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Pages\TestPageControl.resx">
+      <DependentUpon>TestPageControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Prefabs\AssetButton.resx">
+      <DependentUpon>AssetButton.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

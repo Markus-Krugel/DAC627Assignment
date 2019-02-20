@@ -80,7 +80,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UsersAccounts.cs" />
+    <Compile Include="Classes\UserAssets.cs" />
+    <Compile Include="Classes\UsersAccounts.cs" />
     <EmbeddedResource Include="UserControls\CreateAccountPageControl.resx">
       <DependentUpon>CreateAccountPageControl.cs</DependentUpon>
     </EmbeddedResource>

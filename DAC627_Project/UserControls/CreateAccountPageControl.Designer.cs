@@ -33,7 +33,6 @@
             this.lblEmail = new System.Windows.Forms.Label();
             this.lblUserName = new System.Windows.Forms.Label();
             this.lblConfirmPassword = new System.Windows.Forms.Label();
-            this.lblUserType = new System.Windows.Forms.Label();
             this.txtUserName = new System.Windows.Forms.TextBox();
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.txtConfirmEmail = new System.Windows.Forms.TextBox();
@@ -45,11 +44,10 @@
             this.lblErrorConfirmEmail = new System.Windows.Forms.Label();
             this.lblErrorPassword = new System.Windows.Forms.Label();
             this.lblErrorConfirmPassword = new System.Windows.Forms.Label();
-            this.cboUserType = new System.Windows.Forms.ComboBox();
-            this.lblErrorUserType = new System.Windows.Forms.Label();
             this.chkTermsConditions = new System.Windows.Forms.CheckBox();
             this.lblFullName = new System.Windows.Forms.Label();
             this.txtFullName = new System.Windows.Forms.TextBox();
+            this.lblErrorName = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblConfirmEmail
@@ -101,16 +99,6 @@
             this.lblConfirmPassword.Size = new System.Drawing.Size(132, 18);
             this.lblConfirmPassword.TabIndex = 18;
             this.lblConfirmPassword.Text = "Confirm Password";
-            // 
-            // lblUserType
-            // 
-            this.lblUserType.AutoSize = true;
-            this.lblUserType.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUserType.Location = new System.Drawing.Point(464, 416);
-            this.lblUserType.Name = "lblUserType";
-            this.lblUserType.Size = new System.Drawing.Size(72, 18);
-            this.lblUserType.TabIndex = 19;
-            this.lblUserType.Text = "UserType";
             // 
             // txtUserName
             // 
@@ -184,7 +172,7 @@
             // 
             // btnJoin
             // 
-            this.btnJoin.Location = new System.Drawing.Point(576, 512);
+            this.btnJoin.Location = new System.Drawing.Point(570, 460);
             this.btnJoin.Name = "btnJoin";
             this.btnJoin.Size = new System.Drawing.Size(75, 23);
             this.btnJoin.TabIndex = 26;
@@ -247,33 +235,10 @@
             this.lblErrorConfirmPassword.Text = "Error, passwords do not match";
             this.lblErrorConfirmPassword.Visible = false;
             // 
-            // cboUserType
-            // 
-            this.cboUserType.FormattingEnabled = true;
-            this.cboUserType.Items.AddRange(new object[] {
-            "Developer",
-            "Creator"});
-            this.cboUserType.Location = new System.Drawing.Point(608, 416);
-            this.cboUserType.Name = "cboUserType";
-            this.cboUserType.Size = new System.Drawing.Size(192, 21);
-            this.cboUserType.TabIndex = 32;
-            this.cboUserType.Text = "[Select One]";
-            // 
-            // lblErrorUserType
-            // 
-            this.lblErrorUserType.AutoSize = true;
-            this.lblErrorUserType.ForeColor = System.Drawing.Color.Red;
-            this.lblErrorUserType.Location = new System.Drawing.Point(608, 440);
-            this.lblErrorUserType.Name = "lblErrorUserType";
-            this.lblErrorUserType.Size = new System.Drawing.Size(129, 13);
-            this.lblErrorUserType.TabIndex = 33;
-            this.lblErrorUserType.Text = "Error, you must select one";
-            this.lblErrorUserType.Visible = false;
-            // 
             // chkTermsConditions
             // 
             this.chkTermsConditions.AutoSize = true;
-            this.chkTermsConditions.Location = new System.Drawing.Point(528, 480);
+            this.chkTermsConditions.Location = new System.Drawing.Point(522, 428);
             this.chkTermsConditions.Name = "chkTermsConditions";
             this.chkTermsConditions.Size = new System.Drawing.Size(189, 17);
             this.chkTermsConditions.TabIndex = 34;
@@ -305,15 +270,25 @@
             this.txtFullName.Enter += new System.EventHandler(this.txt_Enter);
             this.txtFullName.Leave += new System.EventHandler(this.txt_Leave);
             // 
+            // lblErrorName
+            // 
+            this.lblErrorName.AutoSize = true;
+            this.lblErrorName.ForeColor = System.Drawing.Color.Red;
+            this.lblErrorName.Location = new System.Drawing.Point(608, 119);
+            this.lblErrorName.Name = "lblErrorName";
+            this.lblErrorName.Size = new System.Drawing.Size(223, 13);
+            this.lblErrorName.TabIndex = 37;
+            this.lblErrorName.Text = "Error, name required between 1-12 characters";
+            this.lblErrorName.Visible = false;
+            // 
             // CreateAccountPageControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.lblErrorName);
             this.Controls.Add(this.txtFullName);
             this.Controls.Add(this.lblFullName);
             this.Controls.Add(this.chkTermsConditions);
-            this.Controls.Add(this.lblErrorUserType);
-            this.Controls.Add(this.cboUserType);
             this.Controls.Add(this.lblErrorConfirmPassword);
             this.Controls.Add(this.lblErrorPassword);
             this.Controls.Add(this.lblErrorConfirmEmail);
@@ -325,7 +300,6 @@
             this.Controls.Add(this.txtConfirmEmail);
             this.Controls.Add(this.txtEmail);
             this.Controls.Add(this.txtUserName);
-            this.Controls.Add(this.lblUserType);
             this.Controls.Add(this.lblConfirmPassword);
             this.Controls.Add(this.lblConfirmEmail);
             this.Controls.Add(this.lblPassword);
@@ -345,7 +319,6 @@
         private System.Windows.Forms.Label lblEmail;
         private System.Windows.Forms.Label lblUserName;
         private System.Windows.Forms.Label lblConfirmPassword;
-        private System.Windows.Forms.Label lblUserType;
         private System.Windows.Forms.TextBox txtUserName;
         private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.TextBox txtConfirmEmail;
@@ -357,11 +330,10 @@
         private System.Windows.Forms.Label lblErrorConfirmEmail;
         private System.Windows.Forms.Label lblErrorPassword;
         private System.Windows.Forms.Label lblErrorConfirmPassword;
-        private System.Windows.Forms.ComboBox cboUserType;
-        private System.Windows.Forms.Label lblErrorUserType;
         private System.Windows.Forms.CheckBox chkTermsConditions;
         private System.Windows.Forms.Label lblFullName;
         private System.Windows.Forms.TextBox txtFullName;
+        private System.Windows.Forms.Label lblErrorName;
         //private DAC627_Project.UserControls.Component1 component11;
     }
 }

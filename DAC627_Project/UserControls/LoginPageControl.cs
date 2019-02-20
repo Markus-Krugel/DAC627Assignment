@@ -21,7 +21,6 @@ namespace DAC627_Project
 
         private void btnLogin_MouseEnter(object sender, EventArgs e)
         {
-            formMain.Button_MouseEnter();
         }
     }
 }

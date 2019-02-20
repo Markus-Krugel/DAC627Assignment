@@ -17,8 +17,9 @@ namespace DAC627_Project
         private string _tempPassword;
         private string _tempUsername;
         private string _tempEmail;
+        private string _tempName;
 
-        private List<bool> _isInfoFilledOutCorrectly = new List<bool> { false, false, false, false, false, false };
+        private List<bool> _isInfoFilledOutCorrectly = new List<bool> { false, false, false, false, false, false, false };
 
         public CreateAccountPageControl(FormMain form)
         {
@@ -110,8 +111,17 @@ namespace DAC627_Project
                     }
                     break;
                 case "Password":
-                    _tempPassword = txtSender.Text;
-                    _isInfoFilledOutCorrectly[3] = true;
+                    if(txtSender.Text.Count() >= 6 && txtSender.Text.Count() < 12)
+                    {
+                        _tempPassword = txtSender.Text;
+                        _isInfoFilledOutCorrectly[3] = true;
+                        lblErrorPassword.Hide();
+                    }
+                    else
+                    {
+                        _isInfoFilledOutCorrectly[3] = false;
+                        lblErrorPassword.Show();
+                    }
                     break;
                 case "ConfirmPassword":
                     if(_tempPassword != txtSender.Text)
@@ -123,6 +133,19 @@ namespace DAC627_Project
                     {
                         lblErrorConfirmPassword.Hide();
                         _isInfoFilledOutCorrectly[4] = true;
+                    }
+                    break;
+                case "FullName":
+                    if (txtSender.Text.Count() >= 1 && txtSender.Text.Count() < 12)
+                    {
+                        _tempName = txtSender.Text;
+                        _isInfoFilledOutCorrectly[5] = true;
+                        lblErrorName.Hide();
+                    }
+                    else
+                    {
+                        _isInfoFilledOutCorrectly[5] = false;
+                        lblErrorName.Show();
                     }
                     break;
 
@@ -141,11 +164,12 @@ namespace DAC627_Project
                     return;
                 }
             }
-            
-            UsersAccounts.UserData  userData = new UsersAccounts.UserData
+
+            UsersAccounts.UserData userData = new UsersAccounts.UserData
             {
                 userName = _tempUsername,
-                emailAddress = _tempEmail
+                emailAddress = _tempEmail,
+                name = _tempName
             };
             userData.OneTimeSetUserID(5);
             userData.SetPassword(_tempPassword);
@@ -159,11 +183,11 @@ namespace DAC627_Project
             var checkBox = sender as CheckBox;
             if(checkBox.Checked == true)
             {
-                _isInfoFilledOutCorrectly[5] = true;
+                _isInfoFilledOutCorrectly[6] = true;
             }
             else
             {
-                _isInfoFilledOutCorrectly[5] = false;
+                _isInfoFilledOutCorrectly[6] = false;
             }
         }
     }

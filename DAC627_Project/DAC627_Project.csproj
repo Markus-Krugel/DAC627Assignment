@@ -155,5 +155,8 @@
   <ItemGroup>
     <None Include="Resources\thEGE72UK4.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Placeholder.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

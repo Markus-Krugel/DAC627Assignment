@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AssetButton));
             this.picAsset = new System.Windows.Forms.PictureBox();
             this.lblName = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picAsset)).BeginInit();
@@ -35,9 +36,12 @@
             // 
             // picAsset
             // 
+            this.picAsset.Image = ((System.Drawing.Image)(resources.GetObject("picAsset.Image")));
+            this.picAsset.InitialImage = null;
             this.picAsset.Location = new System.Drawing.Point(0, 0);
             this.picAsset.Name = "picAsset";
             this.picAsset.Size = new System.Drawing.Size(200, 200);
+            this.picAsset.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picAsset.TabIndex = 0;
             this.picAsset.TabStop = false;
             // 

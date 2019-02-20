@@ -20,7 +20,7 @@ namespace DAC627_Project
             InitializeComponent();
 
             //use this in order to display the user control of your choice...
-            ChangeToPage(Pages.TestPage);
+            ChangeToPage(Pages.MyAssetsPage);
         }
 
         private void picHomeButton_Click(object sender, EventArgs e)

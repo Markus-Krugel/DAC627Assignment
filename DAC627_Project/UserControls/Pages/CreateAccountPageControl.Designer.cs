@@ -175,7 +175,7 @@
             this.btnJoin.Location = new System.Drawing.Point(570, 460);
             this.btnJoin.Name = "btnJoin";
             this.btnJoin.Size = new System.Drawing.Size(75, 23);
-            this.btnJoin.TabIndex = 26;
+            this.btnJoin.TabIndex = 35;
             this.btnJoin.Text = "Join";
             this.btnJoin.UseVisualStyleBackColor = true;
             this.btnJoin.Click += new System.EventHandler(this.btnJoin_click);
@@ -264,7 +264,7 @@
             this.txtFullName.Location = new System.Drawing.Point(608, 96);
             this.txtFullName.Name = "txtFullName";
             this.txtFullName.Size = new System.Drawing.Size(192, 20);
-            this.txtFullName.TabIndex = 36;
+            this.txtFullName.TabIndex = 0;
             this.txtFullName.Tag = "FullName";
             this.txtFullName.Text = "Full Name";
             this.txtFullName.Enter += new System.EventHandler(this.txt_Enter);

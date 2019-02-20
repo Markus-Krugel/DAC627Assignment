@@ -46,8 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\HelperTools.cs" />
     <Compile Include="Classes\UserProject.cs" />
-    <Compile Include="UserAssets.cs" />
+    <Compile Include="Classes\UserAssets.cs" />
     <Compile Include="UserControls\Pages\CreateAccountPageControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

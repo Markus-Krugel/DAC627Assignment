@@ -22,39 +22,38 @@ namespace DAC627_Project
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var filePath = string.Empty;
+            //var filePath = string.Empty;
 
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
-            {
-                openFileDialog.Title = "NAME ME BIATCH";
-                openFileDialog.InitialDirectory = "c:\\";
-                openFileDialog.Filter = "PNG files (*.png)|*.png|JPEG files (*.jpg)|*.jpg|All files (*.*)|*.*";
-                openFileDialog.FilterIndex = 2;
-                openFileDialog.RestoreDirectory = true;
+            //using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            //{
+            //    openFileDialog.Title = "NAME ME BIATCH";
+            //    openFileDialog.InitialDirectory = "c:\\";
+            //    openFileDialog.Filter = "PNG files (*.png)|*.png|JPEG files (*.jpg)|*.jpg|All files (*.*)|*.*";
+            //    openFileDialog.FilterIndex = 2;
+            //    openFileDialog.RestoreDirectory = true;
 
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    //ADD YOUR CODE HERE  
+            //    if (openFileDialog.ShowDialog() == DialogResult.OK)
+            //    {
+            //        //ADD YOUR CODE HERE  
 
-                    //Get the path of specified file
-                    filePath = openFileDialog.FileName;
+            //        //Get the path of specified file
+            //        filePath = openFileDialog.FileName;
 
-                    //Set image here
-                    pictureBox1.Image = Image.FromFile(filePath);
-                    pictureBox1.Size = pictureBox1.Image.Size;
+            //Set image here
+
+                    string filepath = HelperTools.LoadFromFile();
+
+                    pictureBox1.Image = Image.FromFile(filepath);
+                    //  pictureBox1.Size = pictureBox1.Image.;
+                    pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
                     //File path 
-                    label1.Text = filePath;
-                }
-                else
-                {
-                    MessageBox.Show("Aaron you numnut...you need to find a file", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-
-            
-            
-           
-            
+                    label1.Text = filepath;
+            //    }
+            //    else
+            //    {
+            //        MessageBox.Show("Aaron you numnut...you need to find a file", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    }
+            //} 
            
         }
     }

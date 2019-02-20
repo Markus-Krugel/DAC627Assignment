@@ -19,8 +19,56 @@ namespace DAC627_Project
             formMain = form;
         }
 
-        private void btnLogin_MouseEnter(object sender, EventArgs e)
+        private void txtUserName_Enter(object sender, EventArgs e)
         {
+            formMain.RemoveGrayText(txtUserName);
+        }
+
+        private void txtPassword_Enter(object sender, EventArgs e)
+        {
+            formMain.RemoveGrayText(txtPassword);
+            txtPassword.PasswordChar = '•';
+        }
+
+        private void txtPassword_Leave(object sender, EventArgs e)
+        {
+            if (formMain.CheckEmpty(txtPassword))
+            {
+                txtPassword.PasswordChar = '\0';
+            }
+        }
+
+        private void txtUserName_Leave(object sender, EventArgs e)
+        {
+            formMain.CheckEmpty(txtUserName);
+        }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            UsersAccounts.UserData? m_user = formMain.UsersAccounts.RetrieveUserData(txtUserName.Text);
+
+            lblErrorUsername.Hide();
+            lblErrorPassword.Hide();
+
+            if (m_user != null)
+            {
+                if (m_user.Value.IsValidPassword(txtPassword.Text))
+                {
+                    formMain.UsersAccounts.SetCurrentUser(m_user);
+                    formMain.ChangeToPage(FormMain.Pages.AccountPage);
+                    this.Hide();
+                    return;
+                }
+                lblErrorPassword.Show();
+                return;
+            }
+            lblErrorUsername.Show();
+        }
+
+        private void btnJoin_Click(object sender, EventArgs e)
+        {
+            formMain.ChangeToPage(FormMain.Pages.CreateAccountPage);
+            this.Hide();
         }
     }
 }

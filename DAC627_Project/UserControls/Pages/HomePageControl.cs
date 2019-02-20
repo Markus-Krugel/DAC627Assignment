@@ -18,6 +18,13 @@ namespace DAC627_Project
         {
             InitializeComponent();
             formMain = form;
+            if (formMain.UsersAccounts.GetCurrentUser() != null)
+            {
+                txtUserName.Hide();
+                txtPassword.Hide();
+                btnJoin.Hide();
+                btnLogin.Hide();
+            }
         }
 
         private void txtUserName_Enter(object sender, EventArgs e)
@@ -53,8 +60,6 @@ namespace DAC627_Project
         private void btn_logIn_click(object sender, EventArgs e)
         {
             UsersAccounts.UserData? m_user = formMain.UsersAccounts.RetrieveUserData(txtUserName.Text);
-            lblPasswordNotFound.Hide();
-            lblUserNotFound.Hide();
 
             if (m_user != null)
             {
@@ -63,11 +68,11 @@ namespace DAC627_Project
                     formMain.UsersAccounts.SetCurrentUser(m_user);
                     formMain.ChangeToPage(FormMain.Pages.AccountPage);
                     this.Hide();
-                }
-                lblPasswordNotFound.Show();
-                return;
+                    return;
+                }                              
             }
-            lblUserNotFound.Show();
+            formMain.ChangeToPage(FormMain.Pages.LoginPage);
+            this.Hide();
         }
     }
 }

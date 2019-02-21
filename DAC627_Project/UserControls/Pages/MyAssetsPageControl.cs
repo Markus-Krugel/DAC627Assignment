@@ -12,7 +12,7 @@ namespace DAC627_Project
 {
     public partial class MyAssetsPageControl : UserControl
     {
-        Form formMain;
+        FormMain formMain;
        
        
         Point defaultLocation = new Point(48, 104);
@@ -20,7 +20,7 @@ namespace DAC627_Project
         const int distancePerAssetButtonX = 248;
         const int distancePerAssetButtonY = 280;
 
-        public MyAssetsPageControl(Form form)
+        public MyAssetsPageControl(FormMain form)
         {
             InitializeComponent();
             formMain = form;

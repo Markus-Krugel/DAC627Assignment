@@ -96,6 +96,12 @@
     <Compile Include="UserControls\Pages\TestPageControl.Designer.cs">
       <DependentUpon>TestPageControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Pages\UploadAssetPageControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Pages\UploadAssetPageControl.Designer.cs">
+      <DependentUpon>UploadAssetPageControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Prefabs\AssetButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -129,6 +135,9 @@
     <EmbeddedResource Include="UserControls\Pages\TestPageControl.resx">
       <DependentUpon>TestPageControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Pages\UploadAssetPageControl.resx">
+      <DependentUpon>UploadAssetPageControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Prefabs\AssetButton.resx">
       <DependentUpon>AssetButton.cs</DependentUpon>
     </EmbeddedResource>
@@ -159,5 +168,6 @@
   <ItemGroup>
     <Content Include="Resources\Placeholder.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

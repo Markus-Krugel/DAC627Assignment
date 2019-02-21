@@ -13,15 +13,16 @@ namespace DAC627_Project
     static class HelperTools
     {
 
-        static public string LoadFromFile()
+        static public string LoadFromFile(string titleName = "Choose File", string filter = "All files (*.*)|*.*", string initialDirectory = "c:\\")
         {
             string filePath = string.Empty;
+            string fileContent = string.Empty;
 
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-                openFileDialog.Title = "NAME ME BIATCH";
-                openFileDialog.InitialDirectory = "c:\\";
-                openFileDialog.Filter = "PNG files (*.png)|*.png|JPEG files (*.jpg)|*.jpg|All files (*.*)|*.*";
+                openFileDialog.Title = titleName;
+                openFileDialog.Filter = filter;
+                openFileDialog.InitialDirectory = initialDirectory;
                 openFileDialog.FilterIndex = 2;
                 openFileDialog.RestoreDirectory = true;
 
@@ -32,6 +33,10 @@ namespace DAC627_Project
                     //Get the path of specified file
                     return filePath = openFileDialog.FileName;
 
+                    using (StreamReader reader = new StreamReader(openFileDialog.OpenFile()))
+                    {
+                        fileContent = reader.ReadToEnd();
+                    }
                 }
                 else
                 {

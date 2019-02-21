@@ -13,8 +13,8 @@ namespace DAC627_Project
 {
     public partial class TestPageControl : UserControl
     {
-        Form formMain;
-        public TestPageControl(Form form)
+        FormMain formMain;
+        public TestPageControl(FormMain form)
         {
             InitializeComponent();
             formMain = form;
@@ -41,7 +41,7 @@ namespace DAC627_Project
 
             //Set image here
 
-                    string filepath = HelperTools.LoadFromFile();
+                    string filepath = HelperTools.LoadFromFile("Hello", "JPEG Files (*.jpg)|*.jpg|", "c:\\");
 
                     pictureBox1.Image = Image.FromFile(filepath);
                     //  pictureBox1.Size = pictureBox1.Image.;

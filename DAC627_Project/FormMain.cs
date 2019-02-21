@@ -20,7 +20,7 @@ namespace DAC627_Project
             InitializeComponent();
 
             //use this in order to display the user control of your choice...
-            ChangeToPage(Pages.MyAssetsPage);
+            ChangeToPage(Pages.UploadAssetPage);
         }
 
         private void picHomeButton_Click(object sender, EventArgs e)
@@ -93,6 +93,7 @@ namespace DAC627_Project
             HomePage,
             LoginPage,
             MyAssetsPage,
+            UploadAssetPage,
             TestPage,
         }
 
@@ -119,6 +120,9 @@ namespace DAC627_Project
                     break;
                 case Pages.MyAssetsPage:
                     m_userControl = new MyAssetsPageControl(this);
+                    break;
+                case Pages.UploadAssetPage:
+                    m_userControl = new UploadAssetPageControl(this);
                     break;
                 default:
                     return;

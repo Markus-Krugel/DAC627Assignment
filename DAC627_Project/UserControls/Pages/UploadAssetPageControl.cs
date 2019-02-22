@@ -33,14 +33,42 @@ namespace DAC627_Project
 
         private void btnChooseAsset_Click(object sender, EventArgs e)
         {
-            HelperTools.LoadFromFile("UploadFile", "PNG File (*.png)|*.png|JPEG File (*.jpg)|*.jpg|GIF File (*.gif)|*.gif|OBJ File (*.obj)|*.obj|FBX File (*.fbx)|*.fbx|WAVE file (*.wav)|*.wav|MP3 File (*.mp3)|*.mp3");
+            if(cboAssetType.Text != string.Empty)
+            {
+                string filter = string.Empty;
+
+                switch (cboAssetType.SelectedIndex)
+                {
+                    case 0:
+                    case 1:
+                        filter = "PNG File (*.png) | *.png | JPEG File (*.jpg) | *.jpg";
+                        break;
+                    case 2:
+                        filter = "GIF File (*.gif) | *.gif";
+                        break;
+                    case 3:
+                    case 4:
+                        filter = "FBX File (*.fbx)|*.fbx|OBJ File (*.obj)|*.obj|Maya File (*.mb)|*.mb|Maya File (*.ma)|*.ma|3ds Max File (*.max)|*.max|Cinema 4D File (*.c4d)|*.c4d";
+                        break;
+                    case 5:
+                        filter = "WAVE file (*.wav)|*.wav|MP3 File (*.mp3)|*.mp3";
+                        break;
+                }
+
+                HelperTools.LoadFromFile("Upload Asset", filter);
+            }
+            else
+            {
+                MessageBox.Show("cboAssetType = null");
+            }
         }
 
         private void cboUploadType_SelectedIndexChanged(object sender, EventArgs e)
         {
             if(cboUploadType.Text == "Project")
             {
-                //Change Page to Project Page   
+                formMain.currentPage.Hide();
+                formMain.ChangeToPage(FormMain.Pages.UploadProjectPage);
             }
         }
     }

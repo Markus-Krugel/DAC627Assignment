@@ -67,6 +67,18 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Pages\EditAssetPageControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Pages\EditAssetPageControl.Designer.cs">
+      <DependentUpon>EditAssetPageControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Pages\EditProjectPageControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Pages\EditProjectPageControl.Designer.cs">
+      <DependentUpon>EditProjectPageControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Pages\HomePageControl.cs">
       <SubType>UserControl</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -102,6 +114,12 @@
     <Compile Include="UserControls\Pages\UploadAssetPageControl.Designer.cs">
       <DependentUpon>UploadAssetPageControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Pages\UploadProjectPageControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Pages\UploadProjectPageControl.Designer.cs">
+      <DependentUpon>UploadProjectPageControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Prefabs\AssetButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -116,6 +134,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Pages\EditAssetPageControl.resx">
+      <DependentUpon>EditAssetPageControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Pages\EditProjectPageControl.resx">
+      <DependentUpon>EditProjectPageControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Pages\HomePageControl.resx">
       <DependentUpon>HomePageControl.cs</DependentUpon>
@@ -137,6 +161,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Pages\UploadAssetPageControl.resx">
       <DependentUpon>UploadAssetPageControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Pages\UploadProjectPageControl.resx">
+      <DependentUpon>UploadProjectPageControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Prefabs\AssetButton.resx">
       <DependentUpon>AssetButton.cs</DependentUpon>

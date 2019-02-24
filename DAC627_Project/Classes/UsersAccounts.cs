@@ -12,10 +12,10 @@ namespace DAC627_Project
     {
         //Varibles
         private List<UserData> _allUsers = new List<UserData>();
-        private UserData? _currentUser = null;
+        private UserData _currentUser = null;
 
         //struct
-        public struct UserData
+        public class UserData
         {
             //Backend Managment Data
             private int? _userID;
@@ -29,7 +29,31 @@ namespace DAC627_Project
             public string name;
             public string profilePicturePath;
 
+            //User Projects and Assets
+            private List<UserProject> _userProjects = new List<UserProject>();
+            private List<UserAsset> _userAssets = new List<UserAsset>();
+
             //Functions
+            public List<UserProject> GetUsersProjects()
+            {
+                return _userProjects;
+            }
+
+            public List<UserAsset> GetUserAssets()
+            {
+                return _userAssets;
+            }
+
+            public void AddUserProject(UserProject project)
+            {
+                _userProjects.Add(project);
+            }
+
+            public void AddUserAsset(UserAsset asset)
+            {
+                _userAssets.Add(asset);
+            }
+
             public void OneTimeSetUserID(int? userID)
             {
                 if (_userID == null)
@@ -79,12 +103,12 @@ namespace DAC627_Project
             }
         }
 
-        public void SetCurrentUser(UserData? currentUser)
+        public void SetCurrentUser(UserData currentUser)
         {
             _currentUser = currentUser;
         }
 
-        public UserData? GetCurrentUser()
+        public UserData GetCurrentUser()
         {
             return _currentUser;
         }
@@ -94,7 +118,7 @@ namespace DAC627_Project
             _allUsers.Add(_userData);
         }
 
-        public UserData? RetrieveUserData(string UsernameOrEmail)
+        public UserData RetrieveUserData(string UsernameOrEmail)
         {
             foreach (UserData user in _allUsers)
             {

@@ -13,7 +13,7 @@ namespace DAC627_Project
     public partial class AccountPageControl : UserControl
     {
         FormMain formMain;
-        UsersAccounts.UserData? _currentUser;
+        UsersAccounts.UserData _currentUser;
 
 
         public AccountPageControl(FormMain form)
@@ -22,9 +22,9 @@ namespace DAC627_Project
             formMain = form;
             _currentUser = formMain.UsersAccounts.GetCurrentUser();
 
-            txtUserName.Text = _currentUser.Value.userName;
-            txtEmail.Text = _currentUser.Value.emailAddress;
-            txtName.Text = _currentUser.Value.name;
+            txtUserName.Text = _currentUser.userName;
+            txtEmail.Text = _currentUser.emailAddress;
+            txtName.Text = _currentUser.name;
         }
 
         private void txt_Enter(object sender, EventArgs e)

@@ -13,7 +13,7 @@ namespace DAC627_Project
     public partial class UploadAssetPageControl : UserControl
     {
         FormMain formMain;
-        private UserAssets _userAssets;
+        private UserAsset _userAsset;
         bool _assetUploaded = false;
 
         public UploadAssetPageControl(FormMain form)
@@ -23,7 +23,7 @@ namespace DAC627_Project
             cboUploadType.SelectedIndex = 0;
             if (formMain.UsersAccounts.GetCurrentUser() != null)
             {
-                _userAssets = new UserAssets((UsersAccounts.UserData)formMain.UsersAccounts.GetCurrentUser());
+                _userAsset = new UserAsset((UsersAccounts.UserData)formMain.UsersAccounts.GetCurrentUser());
             }
             else
             {
@@ -65,7 +65,7 @@ namespace DAC627_Project
                         break;
                 }
 
-                _userAssets.SetAssetPath(HelperTools.LoadFromFile("Upload Asset", filter));
+                _userAsset.SetAssetPath(HelperTools.LoadFromFile("Upload Asset", filter));
                 _assetUploaded = true;
             }
             else
@@ -88,19 +88,19 @@ namespace DAC627_Project
         {
             if (((TextBox)sender) == txtTitle)
             {
-                _userAssets.SetAssetTitle(txtTitle.Text);
+                _userAsset.SetAssetTitle(txtTitle.Text);
             }
             else if (((TextBox)sender) == txtSoftwareUsed)
             {
-                _userAssets.SetAssetTitle(txtSoftwareUsed.Text);
+                _userAsset.SetAssetTitle(txtSoftwareUsed.Text);
             }
             else if (((TextBox)sender) == txtAssetStatus)
             {
-                _userAssets.SetAssetTitle(txtAssetStatus.Text);
+                _userAsset.SetAssetTitle(txtAssetStatus.Text);
             }
             else if (((TextBox)sender) == txtNotes)
             {
-                _userAssets.SetAssetTitle(txtNotes.Text);
+                _userAsset.SetAssetTitle(txtNotes.Text);
             }
             txt_Leave(sender, e);
         }
@@ -109,7 +109,7 @@ namespace DAC627_Project
         {
             if (((ComboBox)sender) == cboAssetType)
             {
-                _userAssets.SetAssetType((UserAssets.AssetType)cboAssetType.SelectedIndex);
+                _userAsset.SetAssetType((UserAsset.AssetType)cboAssetType.SelectedIndex);
             }
             else if (((ComboBox)sender) == cboPegi)
             {
@@ -134,7 +134,7 @@ namespace DAC627_Project
                     default:
                         break;
                 }
-                _userAssets.SetPegiRating(ageNum);
+                _userAsset.SetPegiRating(ageNum);
             }
         }
 
@@ -174,7 +174,9 @@ namespace DAC627_Project
 
             if (errorDetected == false)
             {
-               
+                formMain.UsersAccounts.GetCurrentUser().AddUserAsset(_userAsset);
+                Hide();
+                formMain.ChangeToPage(FormMain.Pages.EditAssetPage);
             }
         }
     }

@@ -45,14 +45,14 @@ namespace DAC627_Project
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            UsersAccounts.UserData? m_user = formMain.UsersAccounts.RetrieveUserData(txtUserName.Text);
+            UsersAccounts.UserData m_user = formMain.UsersAccounts.RetrieveUserData(txtUserName.Text);
 
             lblErrorUsername.Hide();
             lblErrorPassword.Hide();
 
             if (m_user != null)
             {
-                if (m_user.Value.IsValidPassword(txtPassword.Text))
+                if (m_user.IsValidPassword(txtPassword.Text))
                 {
                     formMain.UsersAccounts.SetCurrentUser(m_user);
                     formMain.ChangeToPage(FormMain.Pages.AccountPage);

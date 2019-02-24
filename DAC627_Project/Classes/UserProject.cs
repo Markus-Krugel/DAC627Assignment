@@ -8,11 +8,41 @@ namespace DAC627_Project
 {
     public class UserProject
     {
-        private List<UserAssets> _connectedAssets;
-        private UsersAccounts.UserData _author;
-        private string _projectName;
+        public enum ProjectType
+        {
+            Unity,
+            UnrealEngine
+        }
 
-        public List<UserAssets> GetConnectedAssets()
+        private List<UserAsset> _connectedAssets = new List<UserAsset>();
+        private UsersAccounts.UserData _author;
+        private string _projectTitle;
+        private ProjectType _projectType;
+        private string _notes;
+
+        public UserProject(UsersAccounts.UserData author)
+        {
+            _author = author;
+        }
+
+        //Sets
+        public void SetProjectTitle(string projectTitle)
+        {
+            _projectTitle = projectTitle;
+        }
+
+        public void SetProjectType(ProjectType projectType)
+        {
+            _projectType = projectType;
+        }
+
+        public void SetNotes(string notes)
+        {
+            _notes = notes;
+        }
+
+        //Gets
+        public List<UserAsset> GetConnectedAssets()
         {
             return _connectedAssets;
         }
@@ -22,9 +52,9 @@ namespace DAC627_Project
             return _author;
         }
 
-        public string GetProjectName()
+        public string GetProjectTitle()
         {
-            return _projectName;
+            return _projectTitle;
         }
     }
 }

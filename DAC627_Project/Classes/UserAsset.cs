@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DAC627_Project
 {
-    public class UserAssets
+    public class UserAsset
     {
         public enum AssetType
         {
@@ -29,7 +29,7 @@ namespace DAC627_Project
         private List<string> _picturesPath; //First element is thumbnail
         private string _assetPath;
 
-        public UserAssets(UsersAccounts.UserData author)
+        public UserAsset(UsersAccounts.UserData author)
         {
             _author = author;
         }

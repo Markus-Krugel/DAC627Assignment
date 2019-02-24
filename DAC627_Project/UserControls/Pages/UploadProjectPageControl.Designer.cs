@@ -106,6 +106,7 @@
             this.btnUploadAsset.TabIndex = 6;
             this.btnUploadAsset.Text = "Upload Asset";
             this.btnUploadAsset.UseVisualStyleBackColor = true;
+            this.btnUploadAsset.Click += new System.EventHandler(this.btnUploadAsset_Click);
             // 
             // txtNotes
             // 

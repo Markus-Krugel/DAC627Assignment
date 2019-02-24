@@ -13,11 +13,21 @@ namespace DAC627_Project
     public partial class UploadProjectPageControl : UserControl
     {
         FormMain formMain;
+        UserProject _userProject;
+
         public UploadProjectPageControl(FormMain form)
         {
             InitializeComponent();
             cboUploadType.SelectedIndex = 1;
             formMain = form;
+            if (formMain.UsersAccounts.GetCurrentUser() != null)
+            {
+                _userProject = new UserProject((UsersAccounts.UserData)formMain.UsersAccounts.GetCurrentUser());
+            }
+            else
+            {
+                MessageBox.Show("Error: No user logged in");
+            }
         }
 
         private void txt_Enter(object sender, EventArgs e)
@@ -44,6 +54,47 @@ namespace DAC627_Project
             {
                 formMain.currentPage.Hide();
                 formMain.ChangeToPage(FormMain.Pages.UploadAssetPage);
+            }
+        }
+
+        private void TextInput(object sender, EventArgs e)
+        {
+            if (((TextBox)sender) == txtTitle)
+            {
+                _userProject.SetProjectTitle(txtTitle.Text);
+            }
+            else if (((TextBox)sender) == txtNotes)
+            {
+                _userProject.SetNotes(txtNotes.Text);
+            }
+            txt_Leave(sender, e);
+        }
+
+        private void DropDownInput(object sender, EventArgs e)
+        {
+            if (((ComboBox)sender) == cboProjectType)
+            {
+                _userProject.SetProjectType((UserProject.ProjectType)cboProjectType.SelectedIndex);
+            }           
+        }
+
+        private void btnUploadAsset_Click(object sender, EventArgs e)
+        {
+            bool errorDetected = false;
+            if (txtTitle.Text == string.Empty)
+            {
+                lblErrorTitle.Show();
+                errorDetected = true;
+            }
+            if (cboProjectType.SelectedIndex < 0)
+            {
+                lblErrorAssetType.Show();
+                errorDetected = true;
+            }
+
+            if (errorDetected == false)
+            {
+
             }
         }
     }

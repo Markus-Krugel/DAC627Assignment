@@ -69,6 +69,7 @@
             this.picProfile.TabIndex = 2;
             this.picProfile.TabStop = false;
             this.picProfile.Visible = false;
+            this.picProfile.Click += new System.EventHandler(this.picProfile_Click);
             // 
             // FormMain
             // 

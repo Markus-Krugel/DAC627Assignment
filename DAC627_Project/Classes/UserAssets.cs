@@ -9,14 +9,72 @@ namespace DAC627_Project
 {
     public class UserAssets
     {
-        private string _assetName;
+        public enum AssetType
+        {
+            _2DArt,         //.png/.jpg
+            _ConceptArt,    //.png/.jpg
+            _2DAnimation,   //.gif
+            _3DModel,       //.fbx/.obj/.mb/.ma/.max
+            _3DAnimation,   //.fbx/.obj/.mb/.ma/.max
+            _Audio          //.wav/.mp3
+        };
+
         private UsersAccounts.UserData _author;
-        private List<string> _picturesPath;
+        private string _assetTitle;
+        private AssetType _assetType;
+        private string _softwareUsed;
+        private int _pegiRating;
+        private string _assetStatus;
+        private string _notes;
+        private List<string> _picturesPath; //First element is thumbnail
         private string _assetPath;
 
-        public string GetAssetName()
+        public UserAssets(UsersAccounts.UserData author)
         {
-            return _assetName;
+            _author = author;
+        }
+
+        //Set Functions
+        public void SetAssetTitle(string assetTitle)
+        {
+            _assetTitle = assetTitle;
+        }
+
+        public void SetAssetType(AssetType assetType)
+        {
+            _assetType = assetType;
+        }
+
+        public void SetSoftwareUsed(string softwareUsed)
+        {
+            _softwareUsed = softwareUsed;
+        }
+
+        public void SetPegiRating(int pegiRating)
+        {
+            _pegiRating = pegiRating;
+        }
+
+        public void SetAssetSatus(string assetStatus)
+        {
+            _assetStatus = assetStatus;
+        }
+
+        public void SetNotes(string notes)
+        {
+            _notes = notes;
+        }
+
+        public void SetAssetPath(string assetPath)
+        {
+            _assetPath = assetPath;
+        }
+
+
+        //Get Functions
+        public string GetAssetTitle()
+        {
+            return _assetTitle;
         }
 
         public UsersAccounts.UserData GetAuthor()
@@ -24,14 +82,26 @@ namespace DAC627_Project
             return _author;
         }
 
-        public List<string> GetPicturesPath()
+        public List<string> GetPicturesPath() //Element 0 is the thumbail
         {
             return _picturesPath;
         }
 
-        public string AssetPath() 
+        public string GetAssetPath() 
         {
             return _assetPath;
+        }
+
+
+        //Picture Functions
+        public void AddPictureToGallery(string picturePath)
+        {
+            _picturesPath.Add(picturePath);
+        }
+
+        public void SetThumbnailPicture(string picturePath)
+        {
+            _picturesPath[0] = picturePath;
         }
     }
 }

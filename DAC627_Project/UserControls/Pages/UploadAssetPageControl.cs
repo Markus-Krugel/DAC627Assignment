@@ -13,12 +13,22 @@ namespace DAC627_Project
     public partial class UploadAssetPageControl : UserControl
     {
         FormMain formMain;
+        private UserAssets _userAssets;
+        bool _assetUploaded = false;
 
         public UploadAssetPageControl(FormMain form)
         {
             InitializeComponent();
             formMain = form;
             cboUploadType.SelectedIndex = 0;
+            if (formMain.UsersAccounts.GetCurrentUser() != null)
+            {
+                _userAssets = new UserAssets((UsersAccounts.UserData)formMain.UsersAccounts.GetCurrentUser());
+            }
+            else
+            {
+                MessageBox.Show("Error: No user logged in");
+            }
         }
 
         private void txt_Enter(object sender, EventArgs e)
@@ -55,7 +65,8 @@ namespace DAC627_Project
                         break;
                 }
 
-                HelperTools.LoadFromFile("Upload Asset", filter);
+                _userAssets.SetAssetPath(HelperTools.LoadFromFile("Upload Asset", filter));
+                _assetUploaded = true;
             }
             else
             {
@@ -69,6 +80,101 @@ namespace DAC627_Project
             {
                 formMain.currentPage.Hide();
                 formMain.ChangeToPage(FormMain.Pages.UploadProjectPage);
+            }
+        }
+
+
+        private void TextInput(object sender, EventArgs e)
+        {
+            if (((TextBox)sender) == txtTitle)
+            {
+                _userAssets.SetAssetTitle(txtTitle.Text);
+            }
+            else if (((TextBox)sender) == txtSoftwareUsed)
+            {
+                _userAssets.SetAssetTitle(txtSoftwareUsed.Text);
+            }
+            else if (((TextBox)sender) == txtAssetStatus)
+            {
+                _userAssets.SetAssetTitle(txtAssetStatus.Text);
+            }
+            else if (((TextBox)sender) == txtNotes)
+            {
+                _userAssets.SetAssetTitle(txtNotes.Text);
+            }
+            txt_Leave(sender, e);
+        }
+
+        private void DropDownInput(object sender, EventArgs e)
+        {
+            if (((ComboBox)sender) == cboAssetType)
+            {
+                _userAssets.SetAssetType((UserAssets.AssetType)cboAssetType.SelectedIndex);
+            }
+            else if (((ComboBox)sender) == cboPegi)
+            {
+                int ageNum = 0;
+                switch (cboPegi.SelectedIndex)
+                {
+                    case 0:
+                        ageNum = 3;
+                        break;
+                    case 1:
+                        ageNum = 7;
+                        break;
+                    case 2:
+                        ageNum = 12;
+                        break;
+                    case 3:
+                        ageNum = 16;
+                        break;
+                    case 4:
+                        ageNum = 18;
+                        break;
+                    default:
+                        break;
+                }
+                _userAssets.SetPegiRating(ageNum);
+            }
+        }
+
+        private void btnUploadAsset_Click(object sender, EventArgs e)
+        {
+            bool errorDetected = false;
+            if (txtTitle.Text == string.Empty)
+            {
+                lblErrorTitle.Show();
+                errorDetected = true;
+            }
+            if (cboAssetType.SelectedIndex < 0)
+            {
+                lblErrorAssetType.Show();
+                errorDetected = true;
+            }
+            if (txtSoftwareUsed.Text == string.Empty)
+            {
+                lblErrorSoftwareUsed.Show();
+                errorDetected = true;
+            }
+            if (cboPegi.SelectedIndex < 0)
+            {
+                lblErrorPegi.Show();
+                errorDetected = true;
+            }
+            if (txtAssetStatus.Text == string.Empty)
+            {
+                lblErrorAssetStatus.Show();
+                errorDetected = true;
+            }
+            if (_assetUploaded == false)
+            {
+                lblErrorAssetStatus.Show();
+                errorDetected = true;
+            }
+
+            if (errorDetected == false)
+            {
+               
             }
         }
     }

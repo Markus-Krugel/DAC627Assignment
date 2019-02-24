@@ -77,7 +77,7 @@
             this.txtTitle.Tag = "";
             this.txtTitle.Text = "Title";
             this.txtTitle.Enter += new System.EventHandler(this.txt_Enter);
-            this.txtTitle.Leave += new System.EventHandler(this.txt_Leave);
+            this.txtTitle.Leave += new System.EventHandler(this.TextInput);
             // 
             // lblTitle
             // 
@@ -156,7 +156,7 @@
             this.txtAssetStatus.Tag = "";
             this.txtAssetStatus.Text = "Asset Status";
             this.txtAssetStatus.Enter += new System.EventHandler(this.txt_Enter);
-            this.txtAssetStatus.Leave += new System.EventHandler(this.txt_Leave);
+            this.txtAssetStatus.Leave += new System.EventHandler(this.TextInput);
             // 
             // txtSoftwareUsed
             // 
@@ -170,7 +170,7 @@
             this.txtSoftwareUsed.Tag = "";
             this.txtSoftwareUsed.Text = "Software Used";
             this.txtSoftwareUsed.Enter += new System.EventHandler(this.txt_Enter);
-            this.txtSoftwareUsed.Leave += new System.EventHandler(this.txt_Leave);
+            this.txtSoftwareUsed.Leave += new System.EventHandler(this.TextInput);
             // 
             // lblNotes
             // 
@@ -248,7 +248,7 @@
             this.txtNotes.TabIndex = 6;
             this.txtNotes.Text = "Notes";
             this.txtNotes.Enter += new System.EventHandler(this.txt_Enter);
-            this.txtNotes.Leave += new System.EventHandler(this.txt_Leave);
+            this.txtNotes.Leave += new System.EventHandler(this.TextInput);
             // 
             // btnUploadAsset
             // 
@@ -258,6 +258,7 @@
             this.btnUploadAsset.TabIndex = 9;
             this.btnUploadAsset.Text = "Upload Asset";
             this.btnUploadAsset.UseVisualStyleBackColor = true;
+            this.btnUploadAsset.Click += new System.EventHandler(this.btnUploadAsset_Click);
             // 
             // btnChooseAsset
             // 

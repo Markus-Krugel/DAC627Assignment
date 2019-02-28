@@ -92,15 +92,15 @@ namespace DAC627_Project
             }
             else if (((TextBox)sender) == txtSoftwareUsed)
             {
-                _userAsset.SetAssetTitle(txtSoftwareUsed.Text);
+                _userAsset.SetSoftwareUsed(txtSoftwareUsed.Text);
             }
             else if (((TextBox)sender) == txtAssetStatus)
             {
-                _userAsset.SetAssetTitle(txtAssetStatus.Text);
+                _userAsset.SetAssetStatus(txtAssetStatus.Text);
             }
             else if (((TextBox)sender) == txtNotes)
             {
-                _userAsset.SetAssetTitle(txtNotes.Text);
+                _userAsset.SetNotes(txtNotes.Text);
             }
             txt_Leave(sender, e);
         }
@@ -112,29 +112,8 @@ namespace DAC627_Project
                 _userAsset.SetAssetType((UserAsset.AssetType)cboAssetType.SelectedIndex);
             }
             else if (((ComboBox)sender) == cboPegi)
-            {
-                int ageNum = 0;
-                switch (cboPegi.SelectedIndex)
-                {
-                    case 0:
-                        ageNum = 3;
-                        break;
-                    case 1:
-                        ageNum = 7;
-                        break;
-                    case 2:
-                        ageNum = 12;
-                        break;
-                    case 3:
-                        ageNum = 16;
-                        break;
-                    case 4:
-                        ageNum = 18;
-                        break;
-                    default:
-                        break;
-                }
-                _userAsset.SetPegiRating(ageNum);
+            {         
+                _userAsset.SetPegiRating((UserAsset.PegiRating)cboAssetType.SelectedIndex);
             }
         }
 

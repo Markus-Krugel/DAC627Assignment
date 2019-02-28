@@ -19,11 +19,20 @@ namespace DAC627_Project
             _Audio          //.wav/.mp3
         };
 
+        public enum PegiRating
+        {
+            _3,
+            _7,
+            _12,
+            _16,
+            _18
+        }
+
         private UsersAccounts.UserData _author;
         private string _assetTitle;
         private AssetType _assetType;
         private string _softwareUsed;
-        private int _pegiRating;
+        private PegiRating _pegiRating;
         private string _assetStatus;
         private string _notes;
         private List<string> _picturesPath; //First element is thumbnail
@@ -50,12 +59,12 @@ namespace DAC627_Project
             _softwareUsed = softwareUsed;
         }
 
-        public void SetPegiRating(int pegiRating)
+        public void SetPegiRating(PegiRating pegiRating)
         {
             _pegiRating = pegiRating;
         }
 
-        public void SetAssetSatus(string assetStatus)
+        public void SetAssetStatus(string assetStatus)
         {
             _assetStatus = assetStatus;
         }
@@ -92,6 +101,30 @@ namespace DAC627_Project
             return _assetPath;
         }
 
+        public AssetType GetAssetType()
+        {
+            return _assetType;
+        }
+
+        public string GetSoftwareUsed()
+        {
+           return _softwareUsed;
+        }
+
+        public PegiRating GetPegiRating()
+        {
+            return _pegiRating;
+        }
+
+        public string GetAssetStatus()
+        {
+            return _assetStatus;
+        }
+
+        public string GetNotes()
+        {
+            return _notes;
+        }
 
         //Picture Functions
         public void AddPictureToGallery(string picturePath)

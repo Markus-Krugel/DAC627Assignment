@@ -86,6 +86,7 @@
             this.cboAssetType.Name = "cboAssetType";
             this.cboAssetType.Size = new System.Drawing.Size(192, 21);
             this.cboAssetType.TabIndex = 58;
+            this.cboAssetType.Leave += new System.EventHandler(this.DropDownInput);
             // 
             // txtNotes
             // 
@@ -98,7 +99,7 @@
             this.txtNotes.TabIndex = 62;
             this.txtNotes.Text = "Notes";
             this.txtNotes.Enter += new System.EventHandler(this.txt_Enter);
-            this.txtNotes.Leave += new System.EventHandler(this.txt_Leave);
+            this.txtNotes.Leave += new System.EventHandler(this.TextInput);
             // 
             // cboPegi
             // 
@@ -114,6 +115,7 @@
             this.cboPegi.Name = "cboPegi";
             this.cboPegi.Size = new System.Drawing.Size(192, 21);
             this.cboPegi.TabIndex = 60;
+            this.cboPegi.Leave += new System.EventHandler(this.TextInput);
             // 
             // lblErrorTitle
             // 
@@ -138,7 +140,7 @@
             this.txtTitle.Tag = "";
             this.txtTitle.Text = "Title";
             this.txtTitle.Enter += new System.EventHandler(this.txt_Enter);
-            this.txtTitle.Leave += new System.EventHandler(this.txt_Leave);
+            this.txtTitle.Leave += new System.EventHandler(this.TextInput);
             // 
             // lblTitle
             // 
@@ -207,7 +209,7 @@
             this.txtAssetStatus.Tag = "";
             this.txtAssetStatus.Text = "Asset Status";
             this.txtAssetStatus.Enter += new System.EventHandler(this.txt_Enter);
-            this.txtAssetStatus.Leave += new System.EventHandler(this.txt_Leave);
+            this.txtAssetStatus.Leave += new System.EventHandler(this.TextInput);
             // 
             // txtSoftwareUsed
             // 
@@ -221,7 +223,7 @@
             this.txtSoftwareUsed.Tag = "";
             this.txtSoftwareUsed.Text = "Software Used";
             this.txtSoftwareUsed.Enter += new System.EventHandler(this.txt_Enter);
-            this.txtSoftwareUsed.Leave += new System.EventHandler(this.txt_Leave);
+            this.txtSoftwareUsed.Leave += new System.EventHandler(this.TextInput);
             // 
             // lblNotes
             // 
@@ -281,6 +283,7 @@
             this.btnConfirmChanges.TabIndex = 74;
             this.btnConfirmChanges.Text = "Confirm Changes";
             this.btnConfirmChanges.UseVisualStyleBackColor = true;
+            this.btnConfirmChanges.Click += new System.EventHandler(this.btnConfirmChanges_Click);
             // 
             // picGallery
             // 

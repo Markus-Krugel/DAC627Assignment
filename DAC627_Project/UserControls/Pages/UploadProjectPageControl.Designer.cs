@@ -119,7 +119,7 @@
             this.txtNotes.TabIndex = 3;
             this.txtNotes.Text = "Notes";
             this.txtNotes.Enter += new System.EventHandler(this.txt_Enter);
-            this.txtNotes.Leave += new System.EventHandler(this.txt_Leave);
+            this.txtNotes.Leave += new System.EventHandler(this.TextInput);
             // 
             // lblErrorTitle
             // 
@@ -144,7 +144,7 @@
             this.txtTitle.Tag = "";
             this.txtTitle.Text = "Title";
             this.txtTitle.Enter += new System.EventHandler(this.txt_Enter);
-            this.txtTitle.Leave += new System.EventHandler(this.txt_Leave);
+            this.txtTitle.Leave += new System.EventHandler(this.TextInput);
             // 
             // lblTitle
             // 
@@ -207,6 +207,7 @@
             this.cboProjectType.Name = "cboProjectType";
             this.cboProjectType.Size = new System.Drawing.Size(192, 21);
             this.cboProjectType.TabIndex = 2;
+            this.cboProjectType.Leave += new System.EventHandler(this.DropDownInput);
             // 
             // UploadProjectPageControl
             // 

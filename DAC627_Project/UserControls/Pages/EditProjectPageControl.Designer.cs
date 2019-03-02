@@ -37,7 +37,7 @@
             this.btnUploadThumbnail = new System.Windows.Forms.Button();
             this.picThumbnail = new System.Windows.Forms.PictureBox();
             this.cboProjectType = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblErrorProjectType = new System.Windows.Forms.Label();
             this.lblProjectType = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picThumbnail)).BeginInit();
             this.SuspendLayout();
@@ -50,6 +50,7 @@
             this.btnConfirmChanges.TabIndex = 96;
             this.btnConfirmChanges.Text = "Confirm Changes";
             this.btnConfirmChanges.UseVisualStyleBackColor = true;
+            this.btnConfirmChanges.Click += new System.EventHandler(this.btnConfirmChanges_Click);
             // 
             // txtNotes
             // 
@@ -62,7 +63,7 @@
             this.txtNotes.TabIndex = 84;
             this.txtNotes.Text = "Notes";
             this.txtNotes.Enter += new System.EventHandler(this.txt_Enter);
-            this.txtNotes.Leave += new System.EventHandler(this.txt_Leave);
+            this.txtNotes.Leave += new System.EventHandler(this.TextInput);
             // 
             // lblErrorTitle
             // 
@@ -87,7 +88,7 @@
             this.txtTitle.Tag = "";
             this.txtTitle.Text = "Title";
             this.txtTitle.Enter += new System.EventHandler(this.txt_Enter);
-            this.txtTitle.Leave += new System.EventHandler(this.txt_Leave);
+            this.txtTitle.Leave += new System.EventHandler(this.TextInput);
             // 
             // lblTitle
             // 
@@ -136,17 +137,18 @@
             this.cboProjectType.Name = "cboProjectType";
             this.cboProjectType.Size = new System.Drawing.Size(192, 21);
             this.cboProjectType.TabIndex = 97;
+            this.cboProjectType.Leave += new System.EventHandler(this.DropDownInput);
             // 
-            // label1
+            // lblErrorProjectType
             // 
-            this.label1.AutoSize = true;
-            this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(792, 208);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(131, 13);
-            this.label1.TabIndex = 99;
-            this.label1.Text = "Error, project type required";
-            this.label1.Visible = false;
+            this.lblErrorProjectType.AutoSize = true;
+            this.lblErrorProjectType.ForeColor = System.Drawing.Color.Red;
+            this.lblErrorProjectType.Location = new System.Drawing.Point(792, 208);
+            this.lblErrorProjectType.Name = "lblErrorProjectType";
+            this.lblErrorProjectType.Size = new System.Drawing.Size(131, 13);
+            this.lblErrorProjectType.TabIndex = 99;
+            this.lblErrorProjectType.Text = "Error, project type required";
+            this.lblErrorProjectType.Visible = false;
             // 
             // lblProjectType
             // 
@@ -163,7 +165,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.cboProjectType);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblErrorProjectType);
             this.Controls.Add(this.lblProjectType);
             this.Controls.Add(this.btnConfirmChanges);
             this.Controls.Add(this.txtNotes);
@@ -192,7 +194,7 @@
         private System.Windows.Forms.Button btnUploadThumbnail;
         private System.Windows.Forms.PictureBox picThumbnail;
         private System.Windows.Forms.ComboBox cboProjectType;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblErrorProjectType;
         private System.Windows.Forms.Label lblProjectType;
     }
 }

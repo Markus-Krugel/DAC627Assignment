@@ -56,5 +56,15 @@ namespace DAC627_Project
         {
             return _projectTitle;
         }
+
+        public ProjectType GetProjectType()
+        {
+            return _projectType;
+        }
+
+        public string GetNotes()
+        {
+            return _notes;
+        }
     }
 }

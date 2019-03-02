@@ -22,7 +22,7 @@ namespace DAC627_Project
             formMain = form;
             if (formMain.UsersAccounts.GetCurrentUser() != null)
             {
-                _userProject = new UserProject((UsersAccounts.UserData)formMain.UsersAccounts.GetCurrentUser());
+                _userProject = new UserProject(formMain.UsersAccounts.GetCurrentUser());
             }
             else
             {
@@ -94,7 +94,9 @@ namespace DAC627_Project
 
             if (errorDetected == false)
             {
-
+                formMain.UsersAccounts.GetCurrentUser().AddUserProject(_userProject);
+                Hide();
+                formMain.ChangeToPage(FormMain.Pages.EditProjectPage);
             }
         }
     }

@@ -21,8 +21,10 @@ namespace DAC627_Project
 
             DataBaseAccess database = new DataBaseAccess();
 
+            database.startConnection();
+
             //database.addUser("Tach", "email@email.com", "Email", UserType.Reviewer);
-            //database.addAsset("Car", 1, "1.3", AssetStatus.Planning, AssetTag.Sound, "Audacity");
+            //database.addAsset("Car", 1, AssetStatus.Planning, AssetTag.Sound, "Audacity", "1.3");
             //database.addProject("Game engine", ProjectType.Software, "Simple 2D game engine", 2, ProjectTag.Software, ProjectStatus.Planning);
 
             //database.changeUserName("test12345", "Test");
@@ -79,9 +81,12 @@ namespace DAC627_Project
             //database.changeAssetTag("Algorithms", AssetTag.Sound);
             //database.changeAssetTag(1, AssetTag.Text);
 
+            //Console.WriteLine(database.GetUser(1));
+            Console.WriteLine(database.GetUser("DieterF"));
+
             //database.showAllUsers();
             //database.showAllProjects();
-            database.showAllAssets();
+            //database.showAllAssets();
 
             database.closeConnection();
         }

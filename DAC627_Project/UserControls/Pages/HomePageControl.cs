@@ -25,16 +25,21 @@ namespace DAC627_Project
                 btnJoin.Hide();
                 btnLogin.Hide();
             }
+
+            //Used to create the asset 
+            HelperTools.CreateAssetButtons(new Point(152, 160), this, 3, 2);
+            HelperTools.CreateAssetButtons(new Point(700, 160), this, 2, 2);
+            
         }
 
-        private void txtUserName_Enter(object sender, EventArgs e)
+        private void txt_Enter(object sender, EventArgs e)
         {
-            formMain.RemoveGrayText(txtUserName);
+            formMain.RemoveGrayText((TextBox)sender);
         }
 
-        private void txtUserName_Leave(object sender, EventArgs e)
+        private void txt_Leave(object sender, EventArgs e)
         {
-            formMain.CheckEmpty(txtUserName);
+            formMain.CheckEmpty((TextBox)sender);
         }
 
         private void txtPassword_Enter(object sender, EventArgs e)

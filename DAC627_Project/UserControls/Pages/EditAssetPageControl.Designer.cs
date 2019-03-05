@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.btnUploadThumbnail = new System.Windows.Forms.Button();
-            this.btnUploadGallery = new System.Windows.Forms.Button();
             this.cboAssetType = new System.Windows.Forms.ComboBox();
             this.txtNotes = new System.Windows.Forms.TextBox();
             this.cboPegi = new System.Windows.Forms.ComboBox();
@@ -48,9 +47,8 @@
             this.lblSoftwareUsed = new System.Windows.Forms.Label();
             this.lblAssetType = new System.Windows.Forms.Label();
             this.btnConfirmChanges = new System.Windows.Forms.Button();
-            this.picGallery = new System.Windows.Forms.PictureBox();
             this.picThumbnail = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.picGallery)).BeginInit();
+            this.pictureGallery1 = new DAC627_Project.PictureGallery();
             ((System.ComponentModel.ISupportInitialize)(this.picThumbnail)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,15 +60,6 @@
             this.btnUploadThumbnail.TabIndex = 1;
             this.btnUploadThumbnail.Text = "Upload Thumbnail";
             this.btnUploadThumbnail.UseVisualStyleBackColor = true;
-            // 
-            // btnUploadGallery
-            // 
-            this.btnUploadGallery.Location = new System.Drawing.Point(264, 536);
-            this.btnUploadGallery.Name = "btnUploadGallery";
-            this.btnUploadGallery.Size = new System.Drawing.Size(168, 23);
-            this.btnUploadGallery.TabIndex = 2;
-            this.btnUploadGallery.Text = "Upload Gallery";
-            this.btnUploadGallery.UseVisualStyleBackColor = true;
             // 
             // cboAssetType
             // 
@@ -285,14 +274,6 @@
             this.btnConfirmChanges.UseVisualStyleBackColor = true;
             this.btnConfirmChanges.Click += new System.EventHandler(this.btnConfirmChanges_Click);
             // 
-            // picGallery
-            // 
-            this.picGallery.Location = new System.Drawing.Point(112, 432);
-            this.picGallery.Name = "picGallery";
-            this.picGallery.Size = new System.Drawing.Size(464, 81);
-            this.picGallery.TabIndex = 3;
-            this.picGallery.TabStop = false;
-            // 
             // picThumbnail
             // 
             this.picThumbnail.Location = new System.Drawing.Point(232, 128);
@@ -301,10 +282,18 @@
             this.picThumbnail.TabIndex = 0;
             this.picThumbnail.TabStop = false;
             // 
+            // pictureGallery1
+            // 
+            this.pictureGallery1.Location = new System.Drawing.Point(216, 408);
+            this.pictureGallery1.Name = "pictureGallery1";
+            this.pictureGallery1.Size = new System.Drawing.Size(250, 230);
+            this.pictureGallery1.TabIndex = 75;
+            // 
             // EditAssetPageControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.pictureGallery1);
             this.Controls.Add(this.btnConfirmChanges);
             this.Controls.Add(this.cboAssetType);
             this.Controls.Add(this.txtNotes);
@@ -323,13 +312,10 @@
             this.Controls.Add(this.lblAssetStatus);
             this.Controls.Add(this.lblSoftwareUsed);
             this.Controls.Add(this.lblAssetType);
-            this.Controls.Add(this.picGallery);
-            this.Controls.Add(this.btnUploadGallery);
             this.Controls.Add(this.btnUploadThumbnail);
             this.Controls.Add(this.picThumbnail);
             this.Name = "EditAssetPageControl";
             this.Size = new System.Drawing.Size(1280, 720);
-            ((System.ComponentModel.ISupportInitialize)(this.picGallery)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picThumbnail)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -340,8 +326,6 @@
 
         private System.Windows.Forms.PictureBox picThumbnail;
         private System.Windows.Forms.Button btnUploadThumbnail;
-        private System.Windows.Forms.Button btnUploadGallery;
-        private System.Windows.Forms.PictureBox picGallery;
         private System.Windows.Forms.ComboBox cboAssetType;
         private System.Windows.Forms.TextBox txtNotes;
         private System.Windows.Forms.ComboBox cboPegi;
@@ -360,5 +344,6 @@
         private System.Windows.Forms.Label lblSoftwareUsed;
         private System.Windows.Forms.Label lblAssetType;
         private System.Windows.Forms.Button btnConfirmChanges;
+        private PictureGallery pictureGallery1;
     }
 }

@@ -46,31 +46,36 @@ namespace DAC627_Project
             }
         }
 
-        static public List<AssetButton> CreateTabs(int numberOfAssets, UserControl form)
+        static public List<AssetButton> CreateAssetButtons(Point startingLocation, UserControl form, int numberOfAssets = 2, int amountPerRow = 2, string nameForAssets = "DefaultAsset")
         {
-            Point _defaultLocation = new Point(48, 104);
-            const int _amountPerRow = 5;
             const int _distancePerAssetButtonX = 248;
             const int _distancePerAssetButtonY = 280;
+            int rowLimit = 0; 
 
             List<AssetButton> listAssetButtons = new List<AssetButton>();
+            
+            
 
             for (int i = 0; i < numberOfAssets; i++)
             {
                 AssetButton newAssetButton = new AssetButton();
-                newAssetButton.Name = "newAssetButton" + i;
-                if (i < _amountPerRow)
+                newAssetButton.Name = nameForAssets + i;
+
+                
+
+                if (rowLimit < amountPerRow)
                 {
-                    newAssetButton.Location = new Point(_defaultLocation.X + (_distancePerAssetButtonX * i), _defaultLocation.Y);
+                    newAssetButton.Location = new Point(startingLocation.X + (_distancePerAssetButtonX * rowLimit), startingLocation.Y);
+                    rowLimit++;
                 }
                 else
                 {
-                    newAssetButton.Location = new Point(_defaultLocation.X + (_distancePerAssetButtonX * (i - _amountPerRow)), _defaultLocation.Y + _distancePerAssetButtonY);
+                    startingLocation.Y += _distancePerAssetButtonY;
+                    rowLimit = 0;
+                    newAssetButton.Location = new Point(startingLocation.X + (_distancePerAssetButtonX * rowLimit), startingLocation.Y);
                 }
-
                 newAssetButton.Show();
                 form.Controls.Add(newAssetButton);
-
                 listAssetButtons.Add(newAssetButton);
             }
 

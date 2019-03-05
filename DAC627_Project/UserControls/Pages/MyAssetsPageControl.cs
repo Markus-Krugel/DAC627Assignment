@@ -24,7 +24,7 @@ namespace DAC627_Project
         {
             InitializeComponent();
             formMain = form;
-            HelperTools.CreateTabs(5, this);
+            HelperTools.CreateAssetButtons(new Point(48, 104), this, 5, 5);
         }
 
         

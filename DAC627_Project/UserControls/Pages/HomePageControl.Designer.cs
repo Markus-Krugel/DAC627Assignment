@@ -32,6 +32,8 @@
             this.btnJoin = new System.Windows.Forms.Button();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.txtUserName = new System.Windows.Forms.TextBox();
+            this.txtSearchAsset = new System.Windows.Forms.TextBox();
+            this.txtSearchProject = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btnLogin
@@ -78,13 +80,41 @@
             this.txtUserName.Size = new System.Drawing.Size(192, 20);
             this.txtUserName.TabIndex = 0;
             this.txtUserName.Text = "Username";
-            this.txtUserName.Enter += new System.EventHandler(this.txtUserName_Enter);
-            this.txtUserName.Leave += new System.EventHandler(this.txtUserName_Leave);
+            this.txtUserName.Enter += new System.EventHandler(this.txt_Enter);
+            this.txtUserName.Leave += new System.EventHandler(this.txt_Leave);
+            // 
+            // txtSearchAsset
+            // 
+            this.txtSearchAsset.AccessibleName = "Search Assets";
+            this.txtSearchAsset.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSearchAsset.ForeColor = System.Drawing.Color.Gray;
+            this.txtSearchAsset.Location = new System.Drawing.Point(280, 112);
+            this.txtSearchAsset.Name = "txtSearchAsset";
+            this.txtSearchAsset.Size = new System.Drawing.Size(192, 20);
+            this.txtSearchAsset.TabIndex = 5;
+            this.txtSearchAsset.Text = "Search Assets";
+            this.txtSearchAsset.Enter += new System.EventHandler(this.txt_Enter);
+            this.txtSearchAsset.Leave += new System.EventHandler(this.txt_Leave);
+            // 
+            // txtSearchProject
+            // 
+            this.txtSearchProject.AccessibleName = "Search Projects";
+            this.txtSearchProject.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSearchProject.ForeColor = System.Drawing.Color.Gray;
+            this.txtSearchProject.Location = new System.Drawing.Point(832, 112);
+            this.txtSearchProject.Name = "txtSearchProject";
+            this.txtSearchProject.Size = new System.Drawing.Size(192, 20);
+            this.txtSearchProject.TabIndex = 6;
+            this.txtSearchProject.Text = "Search Projects";
+            this.txtSearchProject.Enter += new System.EventHandler(this.txt_Enter);
+            this.txtSearchProject.Leave += new System.EventHandler(this.txt_Leave);
             // 
             // HomePageControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.txtSearchProject);
+            this.Controls.Add(this.txtSearchAsset);
             this.Controls.Add(this.txtUserName);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.btnJoin);
@@ -102,5 +132,7 @@
         private System.Windows.Forms.Button btnJoin;
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.TextBox txtUserName;
+        private System.Windows.Forms.TextBox txtSearchAsset;
+        private System.Windows.Forms.TextBox txtSearchProject;
     }
 }

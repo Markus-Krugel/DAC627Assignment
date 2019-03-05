@@ -49,7 +49,7 @@
             // 
             this.btnRight.Location = new System.Drawing.Point(224, 104);
             this.btnRight.Name = "btnRight";
-            this.btnRight.Size = new System.Drawing.Size(24, 23);
+            this.btnRight.Size = new System.Drawing.Size(24, 24);
             this.btnRight.TabIndex = 1;
             this.btnRight.Text = ">";
             this.btnRight.UseVisualStyleBackColor = true;
@@ -59,7 +59,7 @@
             // 
             this.btnLeft.Location = new System.Drawing.Point(0, 104);
             this.btnLeft.Name = "btnLeft";
-            this.btnLeft.Size = new System.Drawing.Size(24, 23);
+            this.btnLeft.Size = new System.Drawing.Size(24, 24);
             this.btnLeft.TabIndex = 2;
             this.btnLeft.Text = "<";
             this.btnLeft.UseVisualStyleBackColor = true;
@@ -69,7 +69,7 @@
             // 
             this.btnUpload.Location = new System.Drawing.Point(152, 200);
             this.btnUpload.Name = "btnUpload";
-            this.btnUpload.Size = new System.Drawing.Size(75, 23);
+            this.btnUpload.Size = new System.Drawing.Size(75, 24);
             this.btnUpload.TabIndex = 3;
             this.btnUpload.Text = "Upload";
             this.btnUpload.UseVisualStyleBackColor = true;
@@ -79,7 +79,7 @@
             // 
             this.btnDelete.Location = new System.Drawing.Point(24, 200);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnDelete.Size = new System.Drawing.Size(75, 24);
             this.btnDelete.TabIndex = 4;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;

@@ -20,7 +20,7 @@ namespace DAC627_Project
             InitializeComponent();
 
             //use this in order to display the user control of your choice...
-            ChangeToPage(Pages.EditAssetPage);
+            ChangeToPage(Pages.ViewAssetPage);
         }
 
         private void picHomeButton_Click(object sender, EventArgs e)
@@ -102,6 +102,7 @@ namespace DAC627_Project
             EditAssetPage,
             EditProjectPage,
             TestPage,
+            ViewAssetPage,
         }
 
         public void ChangeToPage(Pages _page)
@@ -139,6 +140,9 @@ namespace DAC627_Project
                     break;
                 case Pages.TestPage:
                     m_userControl = new TestPageControl(this);
+                    break;
+                case Pages.ViewAssetPage:
+                    m_userControl = new ViewAssetPageControl(this);
                     break;
                 default:
                     return;

@@ -35,6 +35,9 @@
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.txtName = new System.Windows.Forms.TextBox();
             this.picAccountPageProfile = new System.Windows.Forms.PictureBox();
+            this.btnViewMyAssets = new System.Windows.Forms.Button();
+            this.btnUploadAsset = new System.Windows.Forms.Button();
+            this.btnUploadProject = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picAccountPageProfile)).BeginInit();
             this.SuspendLayout();
             // 
@@ -102,10 +105,40 @@
             this.picAccountPageProfile.TabIndex = 2;
             this.picAccountPageProfile.TabStop = false;
             // 
+            // btnViewMyAssets
+            // 
+            this.btnViewMyAssets.Location = new System.Drawing.Point(696, 296);
+            this.btnViewMyAssets.Name = "btnViewMyAssets";
+            this.btnViewMyAssets.Size = new System.Drawing.Size(104, 23);
+            this.btnViewMyAssets.TabIndex = 15;
+            this.btnViewMyAssets.Text = "View My Assets";
+            this.btnViewMyAssets.UseVisualStyleBackColor = true;
+            // 
+            // btnUploadAsset
+            // 
+            this.btnUploadAsset.Location = new System.Drawing.Point(632, 336);
+            this.btnUploadAsset.Name = "btnUploadAsset";
+            this.btnUploadAsset.Size = new System.Drawing.Size(104, 23);
+            this.btnUploadAsset.TabIndex = 16;
+            this.btnUploadAsset.Text = "Upload Asset";
+            this.btnUploadAsset.UseVisualStyleBackColor = true;
+            // 
+            // btnUploadProject
+            // 
+            this.btnUploadProject.Location = new System.Drawing.Point(760, 336);
+            this.btnUploadProject.Name = "btnUploadProject";
+            this.btnUploadProject.Size = new System.Drawing.Size(104, 23);
+            this.btnUploadProject.TabIndex = 17;
+            this.btnUploadProject.Text = "Upload Project";
+            this.btnUploadProject.UseVisualStyleBackColor = true;
+            // 
             // AccountPageControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnUploadProject);
+            this.Controls.Add(this.btnUploadAsset);
+            this.Controls.Add(this.btnViewMyAssets);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.txtEmail);
@@ -129,5 +162,8 @@
         private System.Windows.Forms.TextBox txtUserName;
         private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.TextBox txtName;
+        private System.Windows.Forms.Button btnViewMyAssets;
+        private System.Windows.Forms.Button btnUploadAsset;
+        private System.Windows.Forms.Button btnUploadProject;
     }
 }

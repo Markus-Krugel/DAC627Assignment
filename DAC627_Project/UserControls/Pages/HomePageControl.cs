@@ -29,6 +29,7 @@ namespace DAC627_Project
             //Used to create the asset 
             HelperTools.CreateAssetButtons(new Point(152, 160), this, 3, 2);
             HelperTools.CreateAssetButtons(new Point(700, 160), this, 2, 2);
+          
             
         }
 

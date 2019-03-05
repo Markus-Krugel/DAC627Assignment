@@ -21,17 +21,61 @@ namespace DAC627_Project
             IsEditable(true);
             //Can anything fuckign work poleawr
             _pictures.Add("null");
+          //  SetToLarge();
         }
 
         public void IsEditable(bool input)
         {
             btnUpload.Visible = input;
-            
+            btnDelete.Visible = input;
+        }
+
+        public void SetToLarge()
+        {
+            this.Size = new Size(500, 460);
+
+            picImage.Size = new Size(400, 400);
+            picImage.Location = new Point(48, 0);
+
+            btnLeft.Size = new Size(24, 24);
+            btnLeft.Location = new Point(16, 200);
+
+            btnRight.Size = new Size(24, 24);
+            btnRight.Location = new Point(464, 200);
+
+            btnDelete.Size = new Size(75, 24);
+            btnDelete.Location = new Point(64, 408);
+
+            btnUpload.Size = new Size(75, 24);
+            btnUpload.Location = new Point(360, 408);
+
+
+        }
+
+        public void SetToSmall()
+        {
+            this.Size = new Size(250, 230);
+
+            picImage.Size = new Size(200, 200);
+            picImage.Location = new Point(24, 0);
+
+            btnLeft.Size = new Size(24, 24);
+            btnLeft.Location = new Point(0, 104);
+
+            btnRight.Size = new Size(24, 24);
+            btnRight.Location = new Point(224, 104);
+
+            btnDelete.Size = new Size(75, 24);
+            btnDelete.Location = new Point(24, 200);
+
+            btnUpload.Size = new Size(75, 24);
+            btnUpload.Location = new Point(152, 200);
         }
 
 
         private void btnUpload_Click(object sender, EventArgs e)
         {
+           
            string _uploadedPic = HelperTools.LoadFromFile("Choose Image", "PNG File (*.png)|*.png|JPEG File (*.jpg)|*.jpg");
             if (_uploadedPic != string.Empty)
             {

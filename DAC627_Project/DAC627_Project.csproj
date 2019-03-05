@@ -120,6 +120,12 @@
     <Compile Include="UserControls\Pages\UploadProjectPageControl.Designer.cs">
       <DependentUpon>UploadProjectPageControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Pages\ViewAssetPageControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Pages\ViewAssetPageControl.Designer.cs">
+      <DependentUpon>ViewAssetPageControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Prefabs\AssetButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -170,6 +176,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Pages\UploadProjectPageControl.resx">
       <DependentUpon>UploadProjectPageControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Pages\ViewAssetPageControl.resx">
+      <DependentUpon>ViewAssetPageControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Prefabs\AssetButton.resx">
       <DependentUpon>AssetButton.cs</DependentUpon>

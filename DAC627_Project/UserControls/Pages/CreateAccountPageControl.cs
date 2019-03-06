@@ -175,7 +175,6 @@ namespace DAC627_Project
             userData.SetPassword(_tempPassword);
             formMain.UsersAccounts.AddUser(userData);
             formMain.ChangeToPage(FormMain.Pages.HomePage);
-            this.Hide();
         }
 
         private void chkTermsConditions_CheckedChanged(object sender, EventArgs e)

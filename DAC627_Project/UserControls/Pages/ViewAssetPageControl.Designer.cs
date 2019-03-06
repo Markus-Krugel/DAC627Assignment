@@ -30,7 +30,6 @@
         {
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblDescription = new System.Windows.Forms.Label();
-            this.galImageGallery = new DAC627_Project.PictureGallery();
             this.lblTitle = new System.Windows.Forms.Label();
             this.lblAssetType = new System.Windows.Forms.Label();
             this.lblPegi = new System.Windows.Forms.Label();
@@ -38,6 +37,7 @@
             this.lblAssetStatus = new System.Windows.Forms.Label();
             this.lblCreator = new System.Windows.Forms.Label();
             this.btnDownload = new System.Windows.Forms.Button();
+            this.galPictureGallery = new DAC627_Project.PictureGallery();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,13 +57,6 @@
             this.lblDescription.Size = new System.Drawing.Size(252, 52);
             this.lblDescription.TabIndex = 2;
             this.lblDescription.Text = "This is a bunch of Text as a description for this thing\r\nHA \r\nHA \r\nHA\r\n";
-            // 
-            // galImageGallery
-            // 
-            this.galImageGallery.Location = new System.Drawing.Point(384, 104);
-            this.galImageGallery.Name = "galImageGallery";
-            this.galImageGallery.Size = new System.Drawing.Size(250, 230);
-            this.galImageGallery.TabIndex = 0;
             // 
             // lblTitle
             // 
@@ -128,10 +121,18 @@
             this.btnDownload.Text = "Download";
             this.btnDownload.UseVisualStyleBackColor = true;
             // 
+            // galPictureGallery
+            // 
+            this.galPictureGallery.Location = new System.Drawing.Point(372, 73);
+            this.galPictureGallery.Name = "galPictureGallery";
+            this.galPictureGallery.Size = new System.Drawing.Size(250, 230);
+            this.galPictureGallery.TabIndex = 10;
+            // 
             // ViewAssetPageControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.galPictureGallery);
             this.Controls.Add(this.btnDownload);
             this.Controls.Add(this.lblCreator);
             this.Controls.Add(this.lblAssetStatus);
@@ -141,7 +142,6 @@
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.lblDescription);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.galImageGallery);
             this.Name = "ViewAssetPageControl";
             this.Size = new System.Drawing.Size(1280, 720);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -162,5 +162,6 @@
         private System.Windows.Forms.Label lblAssetStatus;
         private System.Windows.Forms.Label lblCreator;
         private System.Windows.Forms.Button btnDownload;
+        private PictureGallery galPictureGallery;
     }
 }

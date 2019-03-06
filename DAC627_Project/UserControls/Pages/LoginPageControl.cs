@@ -68,7 +68,6 @@ namespace DAC627_Project
         private void btnJoin_Click(object sender, EventArgs e)
         {
             formMain.ChangeToPage(FormMain.Pages.CreateAccountPage);
-            this.Hide();
         }
     }
 }

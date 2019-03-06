@@ -154,7 +154,6 @@ namespace DAC627_Project
             if (errorDetected == false)
             {
                 formMain.UsersAccounts.GetCurrentUser().AddUserAsset(_userAsset);
-                Hide();
                 formMain.ChangeToPage(FormMain.Pages.EditAssetPage);
             }
         }

@@ -18,8 +18,8 @@ namespace DAC627_Project
         {
             formMain = form;
             InitializeComponent();
-            galImageGallery.SetToLarge();
-            galImageGallery.IsEditable(false);
+            galPictureGallery.SetToLarge();
+            galPictureGallery.IsEditable(false);
         }
     }
 }

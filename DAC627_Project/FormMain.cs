@@ -25,7 +25,6 @@ namespace DAC627_Project
 
         private void picHomeButton_Click(object sender, EventArgs e)
         {
-            currentPage.Hide();
             ChangeToPage(FormMain.Pages.HomePage);
             if (UsersAccounts.GetCurrentUser() != null)
             {
@@ -147,6 +146,14 @@ namespace DAC627_Project
                 default:
                     return;
             }
+
+            if (currentPage != null)
+            {
+                currentPage.Controls.Clear();
+                currentPage.Dispose();
+                this.Controls.Remove(currentPage);
+            }
+
             currentPage = m_userControl;
             m_userControl.Dock = DockStyle.Fill;
             Controls.Add(m_userControl);
@@ -154,7 +161,6 @@ namespace DAC627_Project
 
         private void picProfile_Click(object sender, EventArgs e)
         {
-            currentPage.Hide();
             ChangeToPage(Pages.UploadAssetPage);
         }
     }

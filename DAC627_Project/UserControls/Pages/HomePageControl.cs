@@ -73,12 +73,10 @@ namespace DAC627_Project
                 {
                     formMain.UsersAccounts.SetCurrentUser(m_user);
                     formMain.ChangeToPage(FormMain.Pages.AccountPage);
-                    this.Hide();
                     return;
                 }                              
             }
             formMain.ChangeToPage(FormMain.Pages.LoginPage);
-            this.Hide();
         }
     }
 }

@@ -20,11 +20,18 @@ namespace DAC627_Project
         const int distancePerAssetButtonX = 248;
         const int distancePerAssetButtonY = 280;
 
+        List<UserAsset> curUserAssets = null;
+
         public MyAssetsPageControl(FormMain form)
         {
             InitializeComponent();
             formMain = form;
-            HelperTools.CreateAssetButtons(new Point(48, 104), this, 5, 5);
+            curUserAssets = formMain.UsersAccounts.GetCurrentUser().GetUserAssets();
+
+            if (curUserAssets != null)
+            {
+                HelperTools.CreateAssetButtons(new Point(48, 104), formMain, this, curUserAssets.Count, 5, curUserAssets);
+            }
         }
 
         

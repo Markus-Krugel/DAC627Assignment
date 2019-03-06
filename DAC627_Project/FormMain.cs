@@ -14,13 +14,15 @@ namespace DAC627_Project
     {
         public UserControl currentPage;
         public UsersAccounts UsersAccounts = new UsersAccounts();
+        public UserAsset curSelectedAsset  = null;
+        public UserProject curSelectedUserProject = null;
 
         public FormMain()
         {
             InitializeComponent();
 
             //use this in order to display the user control of your choice...
-            ChangeToPage(Pages.ViewAssetPage);
+            ChangeToPage(Pages.LoginPage);
         }
 
         private void picHomeButton_Click(object sender, EventArgs e)
@@ -106,47 +108,6 @@ namespace DAC627_Project
 
         public void ChangeToPage(Pages _page)
         {
-            UserControl m_userControl = new UserControl();
-           
-            switch (_page)
-            {
-                case Pages.AccountPage:
-                    m_userControl = new AccountPageControl(this);
-                    break;
-                case Pages.CreateAccountPage:
-                    m_userControl = new CreateAccountPageControl(this);
-                    break;
-                case Pages.HomePage:
-                    m_userControl = new HomePageControl(this);
-                    break;
-                case Pages.LoginPage:
-                    m_userControl = new LoginPageControl(this);
-                    break;
-                case Pages.MyAssetsPage:
-                    m_userControl = new MyAssetsPageControl(this);
-                    break;
-                case Pages.UploadAssetPage:
-                    m_userControl = new UploadAssetPageControl(this);
-                    break;
-                case Pages.UploadProjectPage:
-                    m_userControl = new UploadProjectPageControl(this);
-                    break;
-                case Pages.EditAssetPage:
-                    m_userControl = new EditAssetPageControl(this);
-                    break;
-                case Pages.EditProjectPage:
-                    m_userControl = new EditProjectPageControl(this);
-                    break;
-                case Pages.TestPage:
-                    m_userControl = new TestPageControl(this);
-                    break;
-                case Pages.ViewAssetPage:
-                    m_userControl = new ViewAssetPageControl(this);
-                    break;
-                default:
-                    return;
-            }
-
             if (currentPage != null)
             {
                 currentPage.Controls.Clear();
@@ -154,14 +115,52 @@ namespace DAC627_Project
                 this.Controls.Remove(currentPage);
             }
 
-            currentPage = m_userControl;
-            m_userControl.Dock = DockStyle.Fill;
-            Controls.Add(m_userControl);
+
+            switch (_page)
+            {
+                case Pages.AccountPage:
+                    currentPage = new AccountPageControl(this);
+                    break;
+                case Pages.CreateAccountPage:
+                    currentPage = new CreateAccountPageControl(this);
+                    break;
+                case Pages.HomePage:
+                    currentPage = new HomePageControl(this);
+                    break;
+                case Pages.LoginPage:
+                    currentPage = new LoginPageControl(this);
+                    break;
+                case Pages.MyAssetsPage:
+                    currentPage = new MyAssetsPageControl(this);
+                    break;
+                case Pages.UploadAssetPage:
+                    currentPage = new UploadAssetPageControl(this);
+                    break;
+                case Pages.UploadProjectPage:
+                    currentPage = new UploadProjectPageControl(this);
+                    break;
+                case Pages.EditAssetPage:
+                    currentPage = new EditAssetPageControl(this, ref curSelectedAsset);
+                    break;
+                case Pages.EditProjectPage:
+                    currentPage = new EditProjectPageControl(this);
+                    break;
+                case Pages.TestPage:
+                    currentPage = new TestPageControl(this);
+                    break;
+                case Pages.ViewAssetPage:
+                    currentPage = new ViewAssetPageControl(this, ref curSelectedAsset);
+                    break;
+                default:
+                    return;
+            }
+            currentPage.Dock = DockStyle.Fill;
+            Controls.Add(currentPage);
         }
 
         private void picProfile_Click(object sender, EventArgs e)
         {
-            ChangeToPage(Pages.UploadAssetPage);
+            ChangeToPage(Pages.AccountPage);
         }
     }
 }

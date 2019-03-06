@@ -30,10 +30,7 @@
         {
             this.lblUploadType = new System.Windows.Forms.Label();
             this.cboUploadType = new System.Windows.Forms.ComboBox();
-            this.lblErrorChooseAsset = new System.Windows.Forms.Label();
-            this.lblChooseAsset = new System.Windows.Forms.Label();
-            this.btnChooseAsset = new System.Windows.Forms.Button();
-            this.btnUploadAsset = new System.Windows.Forms.Button();
+            this.btnCreateProject = new System.Windows.Forms.Button();
             this.txtNotes = new System.Windows.Forms.TextBox();
             this.lblErrorTitle = new System.Windows.Forms.Label();
             this.txtTitle = new System.Windows.Forms.TextBox();
@@ -67,46 +64,15 @@
             this.cboUploadType.TabIndex = 0;
             this.cboUploadType.SelectedIndexChanged += new System.EventHandler(this.cboUploadType_SelectedIndexChanged);
             // 
-            // lblErrorChooseAsset
+            // btnCreateProject
             // 
-            this.lblErrorChooseAsset.AutoSize = true;
-            this.lblErrorChooseAsset.ForeColor = System.Drawing.Color.Red;
-            this.lblErrorChooseAsset.Location = new System.Drawing.Point(616, 408);
-            this.lblErrorChooseAsset.Name = "lblErrorChooseAsset";
-            this.lblErrorChooseAsset.Size = new System.Drawing.Size(158, 13);
-            this.lblErrorChooseAsset.TabIndex = 88;
-            this.lblErrorChooseAsset.Text = "Error, you must choose an asset";
-            this.lblErrorChooseAsset.Visible = false;
-            // 
-            // lblChooseAsset
-            // 
-            this.lblChooseAsset.AutoSize = true;
-            this.lblChooseAsset.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblChooseAsset.Location = new System.Drawing.Point(456, 384);
-            this.lblChooseAsset.Name = "lblChooseAsset";
-            this.lblChooseAsset.Size = new System.Drawing.Size(102, 18);
-            this.lblChooseAsset.TabIndex = 87;
-            this.lblChooseAsset.Text = "Choose Asset";
-            // 
-            // btnChooseAsset
-            // 
-            this.btnChooseAsset.Location = new System.Drawing.Point(616, 384);
-            this.btnChooseAsset.Name = "btnChooseAsset";
-            this.btnChooseAsset.Size = new System.Drawing.Size(96, 23);
-            this.btnChooseAsset.TabIndex = 4;
-            this.btnChooseAsset.Text = "Choose Asset";
-            this.btnChooseAsset.UseVisualStyleBackColor = true;
-            this.btnChooseAsset.Click += new System.EventHandler(this.btnChooseAsset_Click);
-            // 
-            // btnUploadAsset
-            // 
-            this.btnUploadAsset.Location = new System.Drawing.Point(576, 480);
-            this.btnUploadAsset.Name = "btnUploadAsset";
-            this.btnUploadAsset.Size = new System.Drawing.Size(104, 24);
-            this.btnUploadAsset.TabIndex = 6;
-            this.btnUploadAsset.Text = "Upload Asset";
-            this.btnUploadAsset.UseVisualStyleBackColor = true;
-            this.btnUploadAsset.Click += new System.EventHandler(this.btnUploadAsset_Click);
+            this.btnCreateProject.Location = new System.Drawing.Point(576, 480);
+            this.btnCreateProject.Name = "btnCreateProject";
+            this.btnCreateProject.Size = new System.Drawing.Size(104, 24);
+            this.btnCreateProject.TabIndex = 6;
+            this.btnCreateProject.Text = "Create Project";
+            this.btnCreateProject.UseVisualStyleBackColor = true;
+            this.btnCreateProject.Click += new System.EventHandler(this.btnUploadAsset_Click);
             // 
             // txtNotes
             // 
@@ -216,10 +182,7 @@
             this.Controls.Add(this.cboProjectType);
             this.Controls.Add(this.lblUploadType);
             this.Controls.Add(this.cboUploadType);
-            this.Controls.Add(this.lblErrorChooseAsset);
-            this.Controls.Add(this.lblChooseAsset);
-            this.Controls.Add(this.btnChooseAsset);
-            this.Controls.Add(this.btnUploadAsset);
+            this.Controls.Add(this.btnCreateProject);
             this.Controls.Add(this.txtNotes);
             this.Controls.Add(this.lblErrorTitle);
             this.Controls.Add(this.txtTitle);
@@ -239,10 +202,7 @@
 
         private System.Windows.Forms.Label lblUploadType;
         private System.Windows.Forms.ComboBox cboUploadType;
-        private System.Windows.Forms.Label lblErrorChooseAsset;
-        private System.Windows.Forms.Label lblChooseAsset;
-        private System.Windows.Forms.Button btnChooseAsset;
-        private System.Windows.Forms.Button btnUploadAsset;
+        private System.Windows.Forms.Button btnCreateProject;
         private System.Windows.Forms.TextBox txtNotes;
         private System.Windows.Forms.Label lblErrorTitle;
         private System.Windows.Forms.TextBox txtTitle;

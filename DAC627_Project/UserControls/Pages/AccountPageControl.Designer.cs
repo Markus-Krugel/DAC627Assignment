@@ -37,7 +37,8 @@
             this.picAccountPageProfile = new System.Windows.Forms.PictureBox();
             this.btnViewMyAssets = new System.Windows.Forms.Button();
             this.btnUploadAsset = new System.Windows.Forms.Button();
-            this.btnUploadProject = new System.Windows.Forms.Button();
+            this.btnCreateProject = new System.Windows.Forms.Button();
+            this.btnViewMyProjects = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picAccountPageProfile)).BeginInit();
             this.SuspendLayout();
             // 
@@ -107,12 +108,13 @@
             // 
             // btnViewMyAssets
             // 
-            this.btnViewMyAssets.Location = new System.Drawing.Point(696, 296);
+            this.btnViewMyAssets.Location = new System.Drawing.Point(632, 297);
             this.btnViewMyAssets.Name = "btnViewMyAssets";
             this.btnViewMyAssets.Size = new System.Drawing.Size(104, 23);
             this.btnViewMyAssets.TabIndex = 15;
             this.btnViewMyAssets.Text = "View My Assets";
             this.btnViewMyAssets.UseVisualStyleBackColor = true;
+            this.btnViewMyAssets.Click += new System.EventHandler(this.btnViewMyAssets_Click);
             // 
             // btnUploadAsset
             // 
@@ -120,23 +122,35 @@
             this.btnUploadAsset.Name = "btnUploadAsset";
             this.btnUploadAsset.Size = new System.Drawing.Size(104, 23);
             this.btnUploadAsset.TabIndex = 16;
-            this.btnUploadAsset.Text = "Upload Asset";
+            this.btnUploadAsset.Text = "Upload A Asset";
             this.btnUploadAsset.UseVisualStyleBackColor = true;
+            this.btnUploadAsset.Click += new System.EventHandler(this.btnUploadAsset_Click);
             // 
-            // btnUploadProject
+            // btnCreateProject
             // 
-            this.btnUploadProject.Location = new System.Drawing.Point(760, 336);
-            this.btnUploadProject.Name = "btnUploadProject";
-            this.btnUploadProject.Size = new System.Drawing.Size(104, 23);
-            this.btnUploadProject.TabIndex = 17;
-            this.btnUploadProject.Text = "Upload Project";
-            this.btnUploadProject.UseVisualStyleBackColor = true;
+            this.btnCreateProject.Location = new System.Drawing.Point(760, 336);
+            this.btnCreateProject.Name = "btnCreateProject";
+            this.btnCreateProject.Size = new System.Drawing.Size(104, 23);
+            this.btnCreateProject.TabIndex = 17;
+            this.btnCreateProject.Text = "Create A Project";
+            this.btnCreateProject.UseVisualStyleBackColor = true;
+            this.btnCreateProject.Click += new System.EventHandler(this.btnCreateProject_Click);
+            // 
+            // btnViewMyProjects
+            // 
+            this.btnViewMyProjects.Location = new System.Drawing.Point(760, 297);
+            this.btnViewMyProjects.Name = "btnViewMyProjects";
+            this.btnViewMyProjects.Size = new System.Drawing.Size(104, 23);
+            this.btnViewMyProjects.TabIndex = 18;
+            this.btnViewMyProjects.Text = "View My Projects";
+            this.btnViewMyProjects.UseVisualStyleBackColor = true;
             // 
             // AccountPageControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.btnUploadProject);
+            this.Controls.Add(this.btnViewMyProjects);
+            this.Controls.Add(this.btnCreateProject);
             this.Controls.Add(this.btnUploadAsset);
             this.Controls.Add(this.btnViewMyAssets);
             this.Controls.Add(this.txtName);
@@ -164,6 +178,7 @@
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Button btnViewMyAssets;
         private System.Windows.Forms.Button btnUploadAsset;
-        private System.Windows.Forms.Button btnUploadProject;
+        private System.Windows.Forms.Button btnCreateProject;
+        private System.Windows.Forms.Button btnViewMyProjects;
     }
 }

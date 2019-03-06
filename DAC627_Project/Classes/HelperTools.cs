@@ -46,7 +46,7 @@ namespace DAC627_Project
             }
         }
 
-        static public List<AssetButton> CreateAssetButtons(Point startingLocation, UserControl form, int numberOfAssets = 2, int amountPerRow = 2, string nameForAssets = "DefaultAsset")
+        static public List<AssetButton> CreateAssetButtons(Point startingLocation, FormMain formMain, UserControl curPage ,int numberOfAssets = 2, int amountPerRow = 2, List<UserAsset> userAssets = null, List<UserProject> userProjects = null)
         {
             const int _distancePerAssetButtonX = 248;
             const int _distancePerAssetButtonY = 280;
@@ -58,8 +58,21 @@ namespace DAC627_Project
 
             for (int i = 0; i < numberOfAssets; i++)
             {
-                AssetButton newAssetButton = new AssetButton();
-                newAssetButton.Name = nameForAssets + i;
+                AssetButton newAssetButton;
+                if (userAssets != null)
+                {
+                    newAssetButton = new AssetButton(formMain, userAssets[i]);
+                    newAssetButton.SetName(userAssets[i].GetAssetTitle());
+                }
+                else if (userProjects != null)
+                {
+                    newAssetButton = new AssetButton(formMain, userProjects[i]);
+                    newAssetButton.SetName(userProjects[i].GetProjectTitle());
+                }
+                else
+                {
+                    return null;
+                }
 
                 
 
@@ -75,8 +88,10 @@ namespace DAC627_Project
                     newAssetButton.Location = new Point(startingLocation.X + (_distancePerAssetButtonX * rowLimit), startingLocation.Y);
                 }
                 newAssetButton.Show();
-                form.Controls.Add(newAssetButton);
+
+                curPage.Controls.Add(newAssetButton);
                 listAssetButtons.Add(newAssetButton);
+                
             }
 
             return listAssetButtons;

@@ -44,6 +44,7 @@
             this.picAsset.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picAsset.TabIndex = 0;
             this.picAsset.TabStop = false;
+            this.picAsset.Click += new System.EventHandler(this.picAsset_Click);
             // 
             // lblName
             // 

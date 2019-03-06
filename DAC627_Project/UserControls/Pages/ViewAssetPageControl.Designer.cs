@@ -37,7 +37,9 @@
             this.lblAssetStatus = new System.Windows.Forms.Label();
             this.lblCreator = new System.Windows.Forms.Label();
             this.btnDownload = new System.Windows.Forms.Button();
+            this.lblTitleEdit = new System.Windows.Forms.Label();
             this.galPictureGallery = new DAC627_Project.PictureGallery();
+            this.btnEdit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -121,6 +123,15 @@
             this.btnDownload.Text = "Download";
             this.btnDownload.UseVisualStyleBackColor = true;
             // 
+            // lblTitleEdit
+            // 
+            this.lblTitleEdit.AutoSize = true;
+            this.lblTitleEdit.Location = new System.Drawing.Point(1161, 152);
+            this.lblTitleEdit.Name = "lblTitleEdit";
+            this.lblTitleEdit.Size = new System.Drawing.Size(27, 13);
+            this.lblTitleEdit.TabIndex = 11;
+            this.lblTitleEdit.Text = "Title";
+            // 
             // galPictureGallery
             // 
             this.galPictureGallery.Location = new System.Drawing.Point(372, 73);
@@ -128,10 +139,23 @@
             this.galPictureGallery.Size = new System.Drawing.Size(250, 230);
             this.galPictureGallery.TabIndex = 10;
             // 
+            // btnEdit
+            // 
+            this.btnEdit.Location = new System.Drawing.Point(1164, 416);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(88, 23);
+            this.btnEdit.TabIndex = 12;
+            this.btnEdit.Text = "Edit";
+            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Visible = false;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            // 
             // ViewAssetPageControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnEdit);
+            this.Controls.Add(this.lblTitleEdit);
             this.Controls.Add(this.galPictureGallery);
             this.Controls.Add(this.btnDownload);
             this.Controls.Add(this.lblCreator);
@@ -163,5 +187,7 @@
         private System.Windows.Forms.Label lblCreator;
         private System.Windows.Forms.Button btnDownload;
         private PictureGallery galPictureGallery;
+        private System.Windows.Forms.Label lblTitleEdit;
+        private System.Windows.Forms.Button btnEdit;
     }
 }

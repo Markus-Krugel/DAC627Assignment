@@ -39,5 +39,19 @@ namespace DAC627_Project
             formMain.CheckEmpty((TextBox)sender);
         }
 
+        private void btnViewMyAssets_Click(object sender, EventArgs e)
+        {
+            formMain.ChangeToPage(FormMain.Pages.MyAssetsPage);
+        }
+
+        private void btnUploadAsset_Click(object sender, EventArgs e)
+        {
+            formMain.ChangeToPage(FormMain.Pages.UploadAssetPage);
+        }
+
+        private void btnCreateProject_Click(object sender, EventArgs e)
+        {
+            formMain.ChangeToPage(FormMain.Pages.UploadProjectPage);
+        }
     }
 }

@@ -16,13 +16,13 @@ namespace DAC627_Project
         private UserAsset _userAsset = new UserAsset(null);
         private UserAsset _curUserAsset = null;
 
-        public EditAssetPageControl(FormMain form)
+        public EditAssetPageControl(FormMain form, ref UserAsset userAsset)
         {
+            _curUserAsset = userAsset;
             InitializeComponent();
             formMain = form;
             if (formMain.UsersAccounts.GetCurrentUser() != null)
             {
-                _curUserAsset = formMain.UsersAccounts.GetCurrentUser().GetUserAssets()[0];
                 if(_curUserAsset == null)
                 {
                     MessageBox.Show("Error: Asset Not Found");
@@ -35,6 +35,12 @@ namespace DAC627_Project
                     cboPegi.SelectedIndex = (int)_curUserAsset.GetPegiRating();
                     txtAssetStatus.Text = _curUserAsset.GetAssetStatus();
                     txtNotes.Text = _curUserAsset.GetNotes();
+                    _userAsset.SetAssetTitle(_curUserAsset.GetAssetTitle());
+                    _userAsset.SetAssetType(_curUserAsset.GetAssetType());
+                    _userAsset.SetSoftwareUsed(_curUserAsset.GetSoftwareUsed());
+                    _userAsset.SetPegiRating(_curUserAsset.GetPegiRating());
+                    _userAsset.SetAssetStatus(_curUserAsset.GetAssetStatus());
+                    _userAsset.SetNotes(_curUserAsset.GetNotes());
                 }
             }
             else
@@ -123,6 +129,8 @@ namespace DAC627_Project
                 _curUserAsset.SetPegiRating(_userAsset.GetPegiRating());
                 _curUserAsset.SetAssetStatus(_userAsset.GetAssetStatus());
                 _curUserAsset.SetNotes(_userAsset.GetNotes());
+                formMain.curSelectedAsset = _curUserAsset;
+                formMain.ChangeToPage(FormMain.Pages.ViewAssetPage);
             }
         }
     }

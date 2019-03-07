@@ -33,12 +33,11 @@ namespace DAC627_Project.Database_Classes
             private set { description = value; }
         }
 
-        private int ownerID;
+        private DatabaseUser owner;
 
-        public int OwnerID
+        public DatabaseUser Owner
         {
-            get { return ownerID; }
-            private set { ownerID = value; }
+            get { return owner; }
         }
 
         private ProjectType type;
@@ -66,20 +65,30 @@ namespace DAC627_Project.Database_Classes
         }
 
 
-        public DatabaseProject(int id, string projectname, string description, int ownerID, ProjectType type, ProjectStatus status, ProjectTag tag)
+        public DatabaseProject(int id, string projectname, string description, DatabaseUser owner, ProjectType type, ProjectStatus status, ProjectTag tag)
         {
             ID = id;
             Projectname = projectname;
             Description = description;
-            OwnerID = ownerID;
+            this.owner = owner;
             Type = type;
             Status = status;
             Tag = tag;
         }
 
+        /// <summary>
+        /// Returns ID, projectname, description, name of owner, type, status and tag
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
-            return id + ", " + Projectname + ", " + Description + ", " + OwnerID + ", " + Type + ", " + Status+ ", "+Tag;
+            return id + ", " + Projectname + ", " + Description + ", " + owner.Username + ", " + Type + ", " + Status+ ", "+Tag;
+        }
+
+        // Just for test purpose
+        public string ToStringWithoutOwner()
+        {
+            return id + ", " + Projectname + ", " + Description + ", " + Type + ", " + Status + ", " + Tag;
         }
     }
 }

@@ -22,7 +22,7 @@ namespace DAC627_Project
         /// <summary>
         /// Start the connection to the database.
         /// </summary>
-        public void startConnection()
+        public void StartConnection()
         {
             try
             {
@@ -40,7 +40,7 @@ namespace DAC627_Project
         /// <summary>
         /// Close the connection to the database.
         /// </summary>
-        public void closeConnection()
+        public void CloseConnection()
         {
             connection.Close();
         }
@@ -50,7 +50,7 @@ namespace DAC627_Project
         /// Executes the given command
         /// </summary>
         /// <param name="commandText">The command to execute</param>
-        private void executeCommand(string commandText)
+        private void ExecuteCommand(string commandText)
         {
             try
             {
@@ -69,7 +69,172 @@ namespace DAC627_Project
             Console.WriteLine();
         }
 
-        #region add commands
+        #region search commands
+
+        public List<DatabaseProject> SearchProject(String name = null, ProjectType typeSearch = ProjectType.Null, ProjectTag tagSearch = ProjectTag.Null, ProjectStatus statusSearch = ProjectStatus.Null)
+        {
+            try
+            {
+                List<DatabaseProject> result = new List<DatabaseProject>();
+
+                OleDbCommand command = new OleDbCommand();
+                command.Connection = connection;
+
+                string commandtext = "SELECT Project.* FROM[Project] ";
+
+                if(name != null || typeSearch != ProjectType.Null || tagSearch != ProjectTag.Null || statusSearch != ProjectStatus.Null)
+                {
+                    commandtext += "WHERE ";
+                    bool added = false;
+
+
+                    if (name != null)
+                    {
+                        commandtext += "UCase(Projectname) like UCase('%" + name + "%') ";
+                        added = true;
+                    }
+                    if (typeSearch != ProjectType.Null && !added)
+                    {
+                        commandtext += "Type = '" + typeSearch + "' ";
+                        added = true;
+                    }
+                    else if (typeSearch != ProjectType.Null)
+                        commandtext += "AND Type = '" + typeSearch + "' ";
+                    if (tagSearch != ProjectTag.Null && !added)
+                    {
+                        commandtext += "Tag = '" + tagSearch + "' ";
+                        added = true;
+                    }
+                    else if(tagSearch != ProjectTag.Null)
+                        commandtext += "AND Tag = '" + tagSearch + "' ";
+                    if (statusSearch != ProjectStatus.Null && !added)
+                        commandtext += "Status = '" + statusSearch + "' ";
+                    else if(statusSearch != ProjectStatus.Null)
+                        commandtext += "AND Status = '" + statusSearch + "' ";
+                }
+
+                command.CommandText = commandtext;
+
+                OleDbDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    int id = reader.GetInt32(0);
+                    string projectname = reader.GetString(1);
+                    ProjectType type;
+                    ProjectTag tag;
+                    ProjectStatus status;
+
+                    Enum.TryParse<ProjectType>(reader.GetString(2), out type);
+                    string description = reader.GetString(3);
+                    int ownerID = reader.GetInt32(4);
+                    Enum.TryParse<ProjectTag>(reader.GetString(5), out tag);
+                    Enum.TryParse<ProjectStatus>(reader.GetString(6), out status);
+
+                    DatabaseUser owner = GetUser(ownerID);
+
+                    result.Add(new DatabaseProject(id, projectname, description, owner, type, status, tag));
+                }
+
+                return result;
+            }
+                       
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+            Console.WriteLine();
+
+            return null;
+        }
+
+        public List<DatabaseAsset> SearchAsset(String name = null, AssetType typeSearch = AssetType.Null, AssetStatus statusSearch = AssetStatus.Null, int pegi = 0)
+        {
+            try
+            {
+                List<DatabaseAsset> result = new List<DatabaseAsset>();
+
+                OleDbCommand command = new OleDbCommand();
+                command.Connection = connection;
+
+                string commandtext = "SELECT Asset.* FROM[Asset] ";
+
+                if (name != null || typeSearch != AssetType.Null || statusSearch != AssetStatus.Null || pegi != 0)
+                {
+                    commandtext += "WHERE ";
+                    bool added = false;
+
+
+                    if (name != null)
+                    {
+                        commandtext += "UCase(Assetname) like UCase('%" + name + "%') ";
+                        added = true;
+                    }
+                    if (typeSearch != AssetType.Null && !added)
+                    {
+                        commandtext += "Type = '" + typeSearch + "' ";
+                        added = true;
+                    }
+                    else if (typeSearch != AssetType.Null)
+                        commandtext += "AND Type = '" + typeSearch + "' ";
+                    if (statusSearch != AssetStatus.Null && !added)
+                    {
+                        commandtext += "Status = '" + statusSearch + "' ";
+                        added = true;
+                    }
+                    else if (statusSearch != AssetStatus.Null)
+                        commandtext += "AND Status = '" + statusSearch + "' ";
+                    if (pegi != 0 && !added)
+                        commandtext += "PegiRating = " + pegi + " ";
+                    else if (pegi != 0)
+                        commandtext += "AND PegiRating = " + pegi + " ";
+                }
+
+                command.CommandText = commandtext;
+
+                OleDbDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    int id = 1;
+                    string assetname = "";
+                    string notes = "";
+                    AssetType type = AssetType.Image;
+                    AssetStatus status = AssetStatus.Completed;
+                    String software = "";
+                    int pegiRating = 3;
+
+                    id = reader.GetInt32(0);
+                    assetname = reader.GetString(1);
+                    notes = reader.GetString(3);
+                    Enum.TryParse<AssetStatus>(reader.GetString(4), out status);
+                    Enum.TryParse<AssetType>(reader.GetString(5), out type);
+                    software = reader.GetString(7);
+                    pegiRating = reader.GetInt32(8);
+                    Console.WriteLine();
+
+                    result.Add(new DatabaseAsset(id, assetname, notes, null, type, status, software, pegiRating));
+                }
+
+                return result;
+            }
+
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+            Console.WriteLine();
+
+            return null;
+        }
+
+        #endregion
+
+        #region Add commands
 
         /// <summary>
         /// Adds an user to the database
@@ -79,12 +244,12 @@ namespace DAC627_Project
         /// <param name="username">Tbe username</param>
         /// <param name="type">Type of user (see UserType class)</param>
         /// <param name="status">The current status of the user (see UserStatus class)</param>
-        public void addUser(string password, string email, string username, UserType type, UserStatus status = UserStatus.Offline)
+        public void AddUser(string password, string email, string username, UserType type, UserStatus status = UserStatus.Offline)
         {
             string commandText = "INSERT INTO [User] (Status, [Password], Email, Username, Type ) VALUES " +
                                 "('" + status + "','" + password + "','" + email + "','" + username + "','" + type + "')";
 
-            executeCommand(commandText);
+            ExecuteCommand(commandText);
         }
 
         /// <summary>
@@ -96,12 +261,12 @@ namespace DAC627_Project
         /// <param name="owner">The ID of the project owner</param>
         /// <param name="tag">Tag for the project</param>
         /// <param name="status">The current status of the project</param>
-        public void addProject(string name, ProjectType type, string description, int owner, ProjectTag tag, ProjectStatus status)
+        public void AddProject(string name, ProjectType type, string description, int owner, ProjectTag tag, ProjectStatus status)
         {
             string commandText = "INSERT INTO Project ( Projectname, Type, Description, Owner, Tag, Status ) VALUES " +
                                     "('" + name + "','" + type + "','" + description + "','" + owner + "','" + tag + "','" + status + "')";
 
-            executeCommand(commandText);
+            ExecuteCommand(commandText);
         }
 
         /// <summary>
@@ -112,13 +277,13 @@ namespace DAC627_Project
         /// <param name="status">The current status of the asset</param>
         /// <param name="tag">Tag for the asset</param>
         /// <param name="software">The software used to create the asset</param>
-        /// <param name="version">The version of the used software</param>
-        public void addAsset(string name, int creator, AssetStatus status, AssetTag tag, string software, string version = "1.0")
+        /// <param name="notes">The notes of the asset</param>
+        public void AddAsset(string name, int creator, AssetStatus status, AssetType tag, string software, string notes = "1.0")
         {
-            string commandText = "INSERT INTO Asset ( Assetname, Creator, [Software Version], Status, Tag, Software ) VALUES " +
-                                    "('" + name + "'," + creator + ",'" + version + "','" + status + "','" + tag + "', '"+ software +"')";
+            string commandText = "INSERT INTO Asset ( Assetname, Creator, Notes, Status, Tag, Software ) VALUES " +
+                                    "('" + name + "'," + creator + ",'" + notes + "','" + status + "','" + tag + "', '"+ software +"')";
 
-            executeCommand(commandText);
+            ExecuteCommand(commandText);
         }
 
         #endregion
@@ -206,6 +371,7 @@ namespace DAC627_Project
 
                 OleDbDataReader reader = command.ExecuteReader();
 
+                int id = 1;
                 string description = "";
                 int ownerID = 1;
                 ProjectType type = ProjectType.Game;
@@ -214,15 +380,17 @@ namespace DAC627_Project
 
                 while (reader.Read())
                 {
-                    Console.Write(reader.GetInt32(0) + ", ");
-                    Console.Write(reader.GetString(1) + ", ");
-                    Console.Write(reader.GetString(2) + ", ");
-                    Console.Write(reader.GetString(3) + ", ");
-                    Console.Write(reader.GetValue(4).ToString() + ", ");
-                    Console.Write(reader.GetString(5) + ", ");
-                    Console.Write(reader.GetString(6));
-                    Console.WriteLine();
+                    id = reader.GetInt32(0);
+                    Enum.TryParse<ProjectType>(reader.GetString(2), out type);
+                    description = reader.GetString(3);
+                    ownerID = reader.GetInt32(4);
+                    Enum.TryParse<ProjectTag>(reader.GetString(5), out tag);
+                    Enum.TryParse<ProjectStatus>(reader.GetString(6), out status);
                 }
+
+                DatabaseUser owner = GetUser(ownerID);
+
+                return new DatabaseProject(id, projectname, description, owner, type, status, tag);
             }
 
             catch (Exception e)
@@ -231,24 +399,396 @@ namespace DAC627_Project
             }
 
             Console.WriteLine();
+
+            return null;
+        }
+
+        public DatabaseProject getProject(int projectID)
+        {
+            try
+            {
+                OleDbCommand command = new OleDbCommand();
+                command.Connection = connection;
+                command.CommandText = "SELECT Project.* FROM[Project] ";
+
+                OleDbDataReader reader = command.ExecuteReader();
+
+                string projectName = "";
+                string description = "";
+                int ownerID = 1;
+                ProjectType type = ProjectType.Game;
+                ProjectStatus status = ProjectStatus.Completed;
+                ProjectTag tag = ProjectTag.Game;
+
+                while (reader.Read())
+                {
+                    projectName = reader.GetString(1);
+                    Enum.TryParse<ProjectType>(reader.GetString(2), out type);
+                    description = reader.GetString(3);
+                    ownerID = reader.GetInt32(4);
+                    Enum.TryParse<ProjectTag>(reader.GetString(5), out tag);
+                    Enum.TryParse<ProjectStatus>(reader.GetString(6), out status);
+                }
+
+                DatabaseUser owner = GetUser(ownerID);
+
+                return new DatabaseProject(projectID, projectName, description, owner, type, status, tag);
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+            Console.WriteLine();
+
+            return null;
+        }
+
+        public DatabaseAsset getAsset(string assetname)
+        {
+            try
+            {
+                OleDbCommand command = new OleDbCommand();
+                command.Connection = connection;
+                command.CommandText = "SELECT Asset.* FROM[Asset] ";
+
+                OleDbDataReader reader = command.ExecuteReader();
+
+                int id = 1;
+                string notes = "";
+                int creatorID = 1;
+                AssetType type = AssetType.Image;
+                AssetStatus status = AssetStatus.Completed;
+                String software = "";
+                int pegiRating = 3;
+
+                while (reader.Read())
+                {
+                    id = reader.GetInt32(0);
+                    creatorID = reader.GetInt32(2);
+                    notes = (reader.GetString(7));
+                    Enum.TryParse<AssetStatus>(reader.GetString(3), out status);
+                    Enum.TryParse<AssetType>(reader.GetString(4), out type);
+                    software = reader.GetString(5);
+                    pegiRating = reader.GetInt32(8);
+                    Console.WriteLine();                    
+                }
+
+                DatabaseUser creator = GetUser(creatorID);
+
+                return new DatabaseAsset(id, assetname, notes, creator, type, status, software, pegiRating);
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+            Console.WriteLine();
+
+            return null;
+        }
+
+        public DatabaseAsset getAsset(int assetID)
+        {
+            try
+            {
+                OleDbCommand command = new OleDbCommand();
+                command.Connection = connection;
+                command.CommandText = "SELECT Asset.* FROM[Asset] ";
+
+                OleDbDataReader reader = command.ExecuteReader();
+
+                string assetname = "";
+                string notes = "";
+                int creatorID = 1;
+                AssetType type = AssetType.Image;
+                AssetStatus status = AssetStatus.Completed;
+                String software = "";
+                int pegiRating = 3;
+
+                while (reader.Read())
+                {
+                    assetname = reader.GetString(1);
+                    creatorID = reader.GetInt32(2);
+                    notes = (reader.GetString(7));
+                    Enum.TryParse<AssetStatus>(reader.GetString(3), out status);
+                    Enum.TryParse<AssetType>(reader.GetString(4), out type);
+                    software = reader.GetString(5);
+                    pegiRating = reader.GetInt32(8);
+                    Console.WriteLine();
+                }
+
+                DatabaseUser creator = GetUser(creatorID);
+
+                return new DatabaseAsset(assetID, assetname, notes, creator, type, status, software, pegiRating);
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+            Console.WriteLine();
+
+            return null;
+        }
+
+        public List<DatabaseAsset> getAssetsOfUser(int userID)
+        {
+            try
+            {
+                OleDbCommand command = new OleDbCommand();
+                command.Connection = connection;
+                command.CommandText = "SELECT Asset.* FROM[Asset] WHERE Creator = "+userID;
+
+                OleDbDataReader reader = command.ExecuteReader();
+
+                List<DatabaseAsset> result = new List<DatabaseAsset>();
+
+                while (reader.Read())
+                {
+                    int id = 1;
+                    string assetname = "";
+                    string notes = "";
+                    AssetType type = AssetType.Image;
+                    AssetStatus status = AssetStatus.Completed;
+                    String software = "";
+                    int pegiRating = 3;
+
+                    id = reader.GetInt32(0);
+                    assetname = reader.GetString(1);
+                    notes = reader.GetString(3);
+                    Enum.TryParse<AssetStatus>(reader.GetString(4), out status);
+                    Enum.TryParse<AssetType>(reader.GetString(5), out type);
+                    software = reader.GetString(7);
+                    pegiRating = reader.GetInt32(8);
+                    Console.WriteLine();
+
+                    result.Add(new DatabaseAsset(id, assetname, notes, null, type, status, software, pegiRating));
+                }
+
+                return result;
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+            Console.WriteLine();
+
+            return null;
+        }
+
+        public List<DatabaseProject> getProjectsOfUser(int userID)
+        {
+            try
+            {
+                OleDbCommand command = new OleDbCommand();
+                command.Connection = connection;
+
+                command.CommandText = "SELECT Project.* FROM[Project] project" +
+                    " Inner join [UsersInProjects] uip" +
+                    " On uip.ProjectID = project.ID " +
+                    " WHERE uip.UserID = "+userID;
+
+                OleDbDataReader reader = command.ExecuteReader();
+
+                List<DatabaseProject> result = new List<DatabaseProject>();
+
+                while (reader.Read())
+                {
+                    int id = 1;
+                    string projectName = "";
+                    string description = "";
+                    ProjectType type = ProjectType.Game;
+                    ProjectStatus status = ProjectStatus.Completed;
+                    ProjectTag tag = ProjectTag.Game;
+
+                    id = reader.GetInt32(0);
+                    projectName = reader.GetString(1);
+                    Enum.TryParse<ProjectType>(reader.GetString(2), out type);
+                    description = reader.GetString(3);
+                    Enum.TryParse<ProjectTag>(reader.GetString(5), out tag);
+                    Enum.TryParse<ProjectStatus>(reader.GetString(6), out status);
+
+                    result.Add(new DatabaseProject(id, projectName, description, null, type, status, tag));
+                }
+
+                return result;
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+            Console.WriteLine();
+
+            return null;
+        }
+
+        public List<DatabaseAsset> getAssetsInProject(int projectID)
+        {
+            try
+            {
+                OleDbCommand command = new OleDbCommand();
+                command.Connection = connection;
+
+                command.CommandText = "SELECT Asset.* FROM[Asset] asset " +
+                    "Inner join [AssetsInProjects] aip " +
+                    "On aip.AssetID = asset.ID " +
+                    "WHERE aip.ProjectID = "+projectID;
+
+                OleDbDataReader reader = command.ExecuteReader();
+
+                List<DatabaseAsset> result = new List<DatabaseAsset>();
+
+                while (reader.Read())
+                {
+                    int id = 1;
+                    string assetname = "";
+                    string notes = "";
+                    AssetType type = AssetType.Image;
+                    AssetStatus status = AssetStatus.Completed;
+                    String software = "";
+                    int pegiRating = 3;
+
+                    id = reader.GetInt32(0);
+                    assetname = reader.GetString(1);
+                    notes = reader.GetString(3);
+                    Enum.TryParse<AssetStatus>(reader.GetString(4), out status);
+                    Enum.TryParse<AssetType>(reader.GetString(5), out type);
+                    software = reader.GetString(7);
+                    pegiRating = reader.GetInt32(8);
+                    Console.WriteLine();
+
+                    result.Add(new DatabaseAsset(id, assetname, notes, null, type, status, software, pegiRating));
+                }
+
+                return result;
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+            Console.WriteLine();
+
+            return null;
+        }
+
+        public List<DatabaseUser> getUsersInProject(int projectID)
+        {
+            try
+            {
+                OleDbCommand command = new OleDbCommand();
+                command.Connection = connection;
+
+                command.CommandText = "SELECT User.* FROM [User]" +
+                    " Inner join [UsersInProjects]" +
+                    " On [UsersInProjects].UserID = [User].ID " +
+                    " WHERE [UsersInProjects].ProjectID = " + projectID;
+
+                OleDbDataReader reader = command.ExecuteReader();
+
+                List<DatabaseUser> result = new List<DatabaseUser>();                
+
+                while (reader.Read())
+                {
+                    string password = "";
+                    string email = "";
+                    int id = 1;
+                    UserStatus status = UserStatus.Offline;
+                    UserType type = UserType.Developer;
+                    string username = "";
+
+                    id = reader.GetInt32(0);
+                    Enum.TryParse<UserStatus>(reader.GetString(1), out status);
+                    password = reader.GetString(2);
+                    email = reader.GetString(3);
+                    username = reader.GetString(4);
+                    Enum.TryParse<UserType>(reader.GetString(5), out type);
+
+                    result.Add(new DatabaseUser(id, username, password, email, type, status));
+                }  
+
+                return result;
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+            Console.WriteLine();
+
+            return null;
+        }
+
+        public List<DatabaseProject> getOwnedProjectsOfUser(int userID)
+        {
+            try
+            {
+                OleDbCommand command = new OleDbCommand();
+                command.Connection = connection;
+                command.CommandText = "SELECT Project.* FROM[Project] WHERE Owner = " + userID;
+
+                OleDbDataReader reader = command.ExecuteReader();
+
+                List<DatabaseProject> result = new List<DatabaseProject>();
+
+                while (reader.Read())
+                {
+
+                    int id = 1;
+                    string projectName = "";
+                    string description = "";
+                    ProjectType type = ProjectType.Game;
+                    ProjectStatus status = ProjectStatus.Completed;
+                    ProjectTag tag = ProjectTag.Game;
+
+                    projectName = reader.GetString(1);
+                    Enum.TryParse<ProjectType>(reader.GetString(2), out type);
+                    description = reader.GetString(3);
+                    Enum.TryParse<ProjectTag>(reader.GetString(5), out tag);
+                    Enum.TryParse<ProjectStatus>(reader.GetString(6), out status);
+
+                    result.Add(new DatabaseProject(id, projectName, description, null, type, status, tag));
+                }
+
+                return result;
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+            Console.WriteLine();
+
+            return null;
         }
 
         #endregion
 
-        #region change values
+        #region Change values
 
-        #region change user values
+        #region Change user values
 
         /// <summary>
         /// Change the username
         /// </summary>
         /// <param name="oldValue">Old username</param>
         /// <param name="newValue">New username</param>
-        public void changeUserName(string oldValue, string newValue)
+        public void ChangeUserName(string oldValue, string newValue)
         {
             string commandText = "UPDATE [User] SET Username = '" + newValue + "' WHERE Username = '" + oldValue + "'";
 
-            executeCommand(commandText);
+            ExecuteCommand(commandText);
         }
 
         /// <summary>
@@ -256,11 +796,11 @@ namespace DAC627_Project
         /// </summary>
         /// <param name="id">The ID of the User</param>
         /// <param name="newValue">New username</param>
-        public void changeUserName(int id, string newValue)
+        public void ChangeUserName(int id, string newValue)
         {
             string commandText = "UPDATE [User] SET Username = '" + newValue + "' WHERE ID = " + id + "";
 
-            executeCommand(commandText);
+            ExecuteCommand(commandText);
         }
         
         /// <summary>
@@ -268,11 +808,11 @@ namespace DAC627_Project
         /// </summary>
         /// <param name="username">The name of the user</param>
         /// <param name="newValue">New Email of the user</param>
-        public void changeUserEmail(string username, string newValue)
+        public void ChangeUserEmail(string username, string newValue)
         {
             string commandText = "UPDATE [User] SET Email = '" + newValue + "' WHERE Username = '" + username + "'";
 
-            executeCommand(commandText);
+            ExecuteCommand(commandText);
         }
 
         /// <summary>
@@ -280,11 +820,11 @@ namespace DAC627_Project
         /// </summary>
         /// <param name="id">The ID of the user</param>
         /// <param name="newValue">New Email of the user</param>
-        public void changeUserEmail(int id, string newValue)
+        public void ChangeUserEmail(int id, string newValue)
         {
             string commandText = "UPDATE [User] SET Email = '" + newValue + "' WHERE ID = " + id + "";
 
-            executeCommand(commandText);
+            ExecuteCommand(commandText);
         }
 
         /// <summary>
@@ -292,11 +832,11 @@ namespace DAC627_Project
         /// </summary>
         /// <param name="username">The name of the user</param>
         /// <param name="newValue">New type for the user</param>
-        public void changeUserType(string username, UserType newValue)
+        public void ChangeUserType(string username, UserType newValue)
         {
             string commandText = "UPDATE [User] SET Type = '" + newValue + "' WHERE Username = '" + username + "'";
 
-            executeCommand(commandText);
+            ExecuteCommand(commandText);
         }
 
         /// <summary>
@@ -304,11 +844,11 @@ namespace DAC627_Project
         /// </summary>
         /// <param name="id">The ID of the user</param>
         /// <param name="newValue">New type for the user</param>
-        public void changeUserType(int id, UserType newValue)
+        public void ChangeUserType(int id, UserType newValue)
         {
             string commandText = "UPDATE [User] SET Type = '" + newValue + "' WHERE ID = " + id + "";
 
-            executeCommand(commandText);
+            ExecuteCommand(commandText);
         }
 
         /// <summary>
@@ -316,11 +856,11 @@ namespace DAC627_Project
         /// </summary>
         /// <param name="username">The name of the user</param>
         /// <param name="newValue">New status of the user</param>
-        public void changeUserStatus(string username, UserStatus newValue)
+        public void ChangeUserStatus(string username, UserStatus newValue)
         {
             string commandText = "UPDATE [User] SET Status = '" + newValue + "' WHERE Username = '" + username + "'";
 
-            executeCommand(commandText);
+            ExecuteCommand(commandText);
         }
 
         /// <summary>
@@ -328,11 +868,11 @@ namespace DAC627_Project
         /// </summary>
         /// <param name="id">The ID of the user</param>
         /// <param name="newValue">New status of the user</param>
-        public void changeUserStatus(int id, UserStatus newValue)
+        public void ChangeUserStatus(int id, UserStatus newValue)
         {
             string commandText = "UPDATE [User] SET Status = '" + newValue + "' WHERE ID = " + id + "";
 
-            executeCommand(commandText);
+            ExecuteCommand(commandText);
         }
         
         /// <summary>
@@ -340,11 +880,11 @@ namespace DAC627_Project
         /// </summary>
         /// <param name="username">The name of the user</param>
         /// <param name="newValue">New password of the user</param>
-        public void changeUserPassword(string username, string newValue)
+        public void ChangeUserPassword(string username, string newValue)
         {
             string commandText = "UPDATE [User] SET [Password] = '" + newValue + "' WHERE Username = '" + username + "'";
 
-            executeCommand(commandText);
+            ExecuteCommand(commandText);
         }
 
         /// <summary>
@@ -352,27 +892,27 @@ namespace DAC627_Project
         /// </summary>
         /// <param name="id">The ID of the user</param>
         /// <param name="newValue">New Password of the user</param>
-        public void changeUserPassword(int id, string newValue)
+        public void ChangeUserPassword(int id, string newValue)
         {
             string commandText = "UPDATE [User] SET [Password] = '" + newValue + "' WHERE ID = " + id + "";
 
-            executeCommand(commandText);
+            ExecuteCommand(commandText);
         }
 
         #endregion
 
-        #region change project values
+        #region Change project values
 
         /// <summary>
         /// Changes the name of a project
         /// </summary>
         /// <param name="oldValue">The old project name</param>
         /// <param name="newValue">New project name</param>
-        public void changeProjectName(string oldValue, string newValue)
+        public void ChangeProjectName(string oldValue, string newValue)
         {
             string commandText = "UPDATE [Project] SET Projectname = '" + newValue + "' WHERE Projectname = '" + oldValue + "'";
 
-            executeCommand(commandText);
+            ExecuteCommand(commandText);
         }
 
         /// <summary>
@@ -380,11 +920,11 @@ namespace DAC627_Project
         /// </summary>
         /// <param name="id">The ID of the project</param>
         /// <param name="newValue">New project name</param>
-        public void changeProjectName(int id, string newValue)
+        public void ChangeProjectName(int id, string newValue)
         {
             string commandText = "UPDATE [Project] SET Projectname = '" + newValue + "' WHERE ID = " + id + "";
 
-            executeCommand(commandText);
+            ExecuteCommand(commandText);
         }
 
         /// <summary>
@@ -392,11 +932,11 @@ namespace DAC627_Project
         /// </summary>
         /// <param name="projectname">The name of the project</param>
         /// <param name="newValue">New type for the project</param>
-        public void changeProjectType(string projectname, ProjectType newValue)
+        public void ChangeProjectType(string projectname, ProjectType newValue)
         {
             string commandText = "UPDATE [Project] SET Type = '" + newValue + "' WHERE Projectname = '" + projectname + "'";
 
-            executeCommand(commandText);
+            ExecuteCommand(commandText);
         }
 
         /// <summary>
@@ -404,11 +944,11 @@ namespace DAC627_Project
         /// </summary>
         /// <param name="id">The ID of the project</param>
         /// <param name="newValue">New type for the project</param>
-        public void changeProjectType(int id, ProjectType newValue)
+        public void ChangeProjectType(int id, ProjectType newValue)
         {
             string commandText = "UPDATE [Project] SET Type = '" + newValue + "' WHERE ID = " + id + "";
 
-            executeCommand(commandText);
+            ExecuteCommand(commandText);
         }
 
         /// <summary>
@@ -416,11 +956,11 @@ namespace DAC627_Project
         /// </summary>
         /// <param name="projectname">The name of the project</param>
         /// <param name="newValue">New description of the project</param>
-        public void changeProjectDescription(string projectname, string newValue)
+        public void ChangeProjectDescription(string projectname, string newValue)
         {
             string commandText = "UPDATE [Project] SET Description = '" + newValue + "' WHERE Projectname = '" + projectname + "'";
 
-            executeCommand(commandText);
+            ExecuteCommand(commandText);
         }
 
         /// <summary>
@@ -428,11 +968,11 @@ namespace DAC627_Project
         /// </summary>
         /// <param name="id">The ID of the project</param>
         /// <param name="newValue">New description of the project</param>
-        public void changeProjectDescription(int id, string newValue)
+        public void ChangeProjectDescription(int id, string newValue)
         {
             string commandText = "UPDATE [Project] SET Description = '" + newValue + "' WHERE ID = " + id + "";
 
-            executeCommand(commandText);
+            ExecuteCommand(commandText);
         }
 
         /// <summary>
@@ -440,11 +980,11 @@ namespace DAC627_Project
         /// </summary>
         /// <param name="projectname">The name of the project</param>
         /// <param name="newValue">The ID of the new owner</param>
-        public void changeProjectOwner(string projectname, int newValue)
+        public void ChangeProjectOwner(string projectname, int newValue)
         {
             string commandText = "UPDATE [Project] SET Owner = " + newValue + " WHERE Projectname = '" + projectname + "'";
 
-            executeCommand(commandText);
+            ExecuteCommand(commandText);
         }
 
         /// <summary>
@@ -452,11 +992,11 @@ namespace DAC627_Project
         /// </summary>
         /// <param name="id">The ID of the project</param>
         /// <param name="newValue">The ID of the new owner</param>
-        public void changeProjectOwner(int id, int newValue)
+        public void ChangeProjectOwner(int id, int newValue)
         {
            string commandText = "UPDATE [Project] SET Owner = " + newValue + " WHERE ID = " + id + "";
 
-            executeCommand(commandText);
+            ExecuteCommand(commandText);
         }
 
         /// <summary>
@@ -464,11 +1004,11 @@ namespace DAC627_Project
         /// </summary>
         /// <param name="projectname">The name of the project</param>
         /// <param name="newValue">New tag of the project</param>
-        public void changeProjectTag(string projectname, ProjectTag newValue)
+        public void ChangeProjectTag(string projectname, ProjectTag newValue)
         {
             string commandText = "UPDATE [Project] SET Tag = '" + newValue + "' WHERE Projectname = '" + projectname + "'";
 
-            executeCommand(commandText);
+            ExecuteCommand(commandText);
         }
 
         /// <summary>
@@ -476,11 +1016,11 @@ namespace DAC627_Project
         /// </summary>
         /// <param name="id">The ID of the project</param>
         /// <param name="newValue">New tag for the project</param>
-        public void changeProjectTag(int id, int newValue)
+        public void ChangeProjectTag(int id, int newValue)
         {
             string commandText = "UPDATE [Project] SET Tag = '" + newValue + "' WHERE ID = " + id + "";
 
-            executeCommand(commandText);
+            ExecuteCommand(commandText);
         }
 
         /// <summary>
@@ -488,11 +1028,11 @@ namespace DAC627_Project
         /// </summary>
         /// <param name="projectname"></param>
         /// <param name="newValue"></param>
-        public void changeProjectStatus(string projectname, ProjectStatus newValue)
+        public void ChangeProjectStatus(string projectname, ProjectStatus newValue)
         {
             string commandText = "UPDATE [Project] SET Status = '" + newValue + "' WHERE Projectname = '" + projectname + "'";
 
-            executeCommand(commandText);
+            ExecuteCommand(commandText);
         }
 
         /// <summary>
@@ -500,28 +1040,28 @@ namespace DAC627_Project
         /// </summary>
         /// <param name="id">The ID of the project</param>
         /// <param name="newValue">New status of the project</param>
-        public void changeProjectStatus(int id, ProjectStatus newValue)
+        public void ChangeProjectStatus(int id, ProjectStatus newValue)
         {
             string commandText = "UPDATE [Project] SET Status = '" + newValue + "' WHERE ID = " + id + "";
 
-            executeCommand(commandText);
+            ExecuteCommand(commandText);
         }
 
 
         #endregion
 
-        #region change asset values
+        #region Change asset values
 
         /// <summary>
         /// Changes the name of the asset
         /// </summary>
         /// <param name="oldValue">Old name of the asset</param>
         /// <param name="newValue">New name of the asset</param>
-        public void changeAssetName(string oldValue, string newValue)
+        public void ChangeAssetName(string oldValue, string newValue)
         {
             string commandText = "UPDATE [Asset] SET Assetname = '" + newValue + "' WHERE Assetname = '" + oldValue + "'";
 
-            executeCommand(commandText);
+            ExecuteCommand(commandText);
         }
 
         /// <summary>
@@ -529,11 +1069,11 @@ namespace DAC627_Project
         /// </summary>
         /// <param name="id">The ID of the asset</param>
         /// <param name="newValue">New name of the asset</param>
-        public void changeAssetName(int id, string newValue)
+        public void ChangeAssetName(int id, string newValue)
         {
             string commandText = "UPDATE [Asset] SET Assetname = '" + newValue + "' WHERE ID = " + id + "";
 
-            executeCommand(commandText);
+            ExecuteCommand(commandText);
         }
 
         /// <summary>
@@ -541,11 +1081,11 @@ namespace DAC627_Project
         /// </summary>
         /// <param name="assetname">The name of the asset</param>
         /// <param name="newValue">The ID of the new creator of the asset</param>
-        public void changeAssetCreator(string assetname, int newValue)
+        public void ChangeAssetCreator(string assetname, int newValue)
         {
             string commandText = "UPDATE [Asset] SET Creator = " + newValue + " WHERE Assetname = '" + assetname + "'";
 
-            executeCommand(commandText);
+            ExecuteCommand(commandText);
         }
 
         /// <summary>
@@ -553,11 +1093,11 @@ namespace DAC627_Project
         /// </summary>
         /// <param name="id">The ID of the asset</param>
         /// <param name="newValue">The ID of the new creator of the asset</param>
-        public void changeAssetCreator(int id, int newValue)
+        public void ChangeAssetCreator(int id, int newValue)
         {
             string commandText = "UPDATE [Asset] SET Creator = " + newValue + " WHERE ID = " + id + "";
 
-            executeCommand(commandText);
+            ExecuteCommand(commandText);
         }
 
         /// <summary>
@@ -565,11 +1105,11 @@ namespace DAC627_Project
         /// </summary>
         /// <param name="assetname">The name of the asset</param>
         /// <param name="newValue">New software used to create the asset</param>
-        public void changeAssetSoftware(string assetname, string newValue)
+        public void ChangeAssetSoftware(string assetname, string newValue)
         {
             string commandText = "UPDATE [Asset] SET Software  = '" + newValue + "' WHERE Assetname = '" + assetname + "'";
 
-            executeCommand(commandText);
+            ExecuteCommand(commandText);
         }
 
         /// <summary>
@@ -577,35 +1117,35 @@ namespace DAC627_Project
         /// </summary>
         /// <param name="id">The ID of the asset</param>
         /// <param name="newValue">New software used to create the asset</param>
-        public void changeAssetSoftware(int id, string newValue)
+        public void ChangeAssetSoftware(int id, string newValue)
         {
             string commandText = "UPDATE [Asset] SET Software = '" + newValue + "' WHERE ID = " + id + "";
 
-            executeCommand(commandText);
+            ExecuteCommand(commandText);
         }
 
         /// <summary>
-        /// Changes the software version used for the asset
+        /// Changes the software notes
         /// </summary>
         /// <param name="assetname">The name of the asset</param>
-        /// <param name="newValue">New software version used for the asset</param>
-        public void changeAssetVersion(string assetname, string newValue)
+        /// <param name="newValue">New notes for the asset</param>
+        public void ChangeAssetNotes(string assetname, string newValue)
         {
-            string commandText = "UPDATE [Asset] SET [Software Version] = '" + newValue + "' WHERE Assetname = '" + assetname + "'";
+            string commandText = "UPDATE [Asset] SET Notes = '" + newValue + "' WHERE Assetname = '" + assetname + "'";
 
-            executeCommand(commandText);
+            ExecuteCommand(commandText);
         }
 
         /// <summary>
-        /// Changes the software version used for the asset
+        /// Changes the notes for the asset
         /// </summary>
         /// <param name="id">The ID of the asset</param>
-        /// <param name="newValue">New software version used for the asset</param>
-        public void changeAssetVersion(int id, string newValue)
+        /// <param name="newValue">New notes for the asset</param>
+        public void ChangeAssetNotes(int id, string newValue)
         {
-            string commandText = "UPDATE [Asset] SET [Software Version] = '" + newValue + "' WHERE ID = " + id + "";
+            string commandText = "UPDATE [Asset] SET Notes = '" + newValue + "' WHERE ID = " + id + "";
 
-            executeCommand(commandText);
+            ExecuteCommand(commandText);
         }
 
         /// <summary>
@@ -613,11 +1153,11 @@ namespace DAC627_Project
         /// </summary>
         /// <param name="assetname">The name of the asset</param>
         /// <param name="newValue">New status of the asset</param>
-        public void changeAssetStatus(string assetname, AssetStatus newValue)
+        public void ChangeAssetStatus(string assetname, AssetStatus newValue)
         {
             string commandText = "UPDATE [Asset] SET Status = '" + newValue + "' WHERE Assetname = '" + assetname + "'";
 
-            executeCommand(commandText);
+            ExecuteCommand(commandText);
         }
 
         /// <summary>
@@ -625,11 +1165,11 @@ namespace DAC627_Project
         /// </summary>
         /// <param name="id">The ID of the asset</param>
         /// <param name="newValue">New status of the asset</param>
-        public void changeAssetStatus(int id, AssetStatus newValue)
+        public void ChangeAssetStatus(int id, AssetStatus newValue)
         {
             string commandText = "UPDATE [Asset] SET Status = '" + newValue + "' WHERE ID = " + id + "";
 
-            executeCommand(commandText);
+            ExecuteCommand(commandText);
         }
 
         /// <summary>
@@ -637,11 +1177,11 @@ namespace DAC627_Project
         /// </summary>
         /// <param name="assetname">The name of the asset</param>
         /// <param name="newValue">New status of the asset</param>
-        public void changeAssetTag(string assetname, AssetTag newValue)
+        public void ChangeAssetTag(string assetname, AssetType newValue)
         {
             string commandText = "UPDATE [Asset] SET Tag = '" + newValue + "' WHERE Assetname = '" + assetname + "'";
 
-            executeCommand(commandText);
+            ExecuteCommand(commandText);
         }
 
         /// <summary>
@@ -649,11 +1189,11 @@ namespace DAC627_Project
         /// </summary>
         /// <param name="id">The ID of the asset</param>
         /// <param name="newValue">New tag of the asset</param>
-        public void changeAssetTag(int id, AssetTag newValue)
+        public void ChangeAssetTag(int id, AssetType newValue)
         {
             string commandText = "UPDATE [Asset] SET Tag = '" + newValue + "' WHERE ID = " + id + "";
 
-            executeCommand(commandText);
+            ExecuteCommand(commandText);
         }
 
         #endregion
@@ -665,7 +1205,7 @@ namespace DAC627_Project
         /// <summary>
         /// Shows a list of all users
         /// </summary>
-        public void showAllUsers()
+        public void ShowAllUsers()
         {
             try
             {
@@ -697,7 +1237,7 @@ namespace DAC627_Project
         /// <summary>
         /// Shows a list of all projects
         /// </summary>
-        public void showAllProjects()
+        public void ShowAllProjects()
         {
             try
             {
@@ -730,7 +1270,7 @@ namespace DAC627_Project
         /// <summary>
         /// Shows a list of all assets
         /// </summary>
-        public void showAllAssets()
+        public void ShowAllAssets()
         {
             try
             {
@@ -747,7 +1287,8 @@ namespace DAC627_Project
                     Console.Write(reader.GetString(7) + ", ");
                     Console.Write(reader.GetString(3) + ", ");
                     Console.Write(reader.GetString(4) + ", ");
-                    Console.Write(reader.GetString(5));
+                    Console.Write(reader.GetString(5) + ", ");
+                    Console.Write(reader.GetInt32(8));
                     Console.WriteLine();
                 }
             }

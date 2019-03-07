@@ -46,11 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Database Classes\DatabaseAsset.cs" />
     <Compile Include="Database Classes\DatabaseProject.cs" />
     <Compile Include="Database Classes\DatabaseUser.cs" />
     <Compile Include="DataBaseAccess.cs" />
     <Compile Include="Enums\AssetStatus.cs" />
-    <Compile Include="Enums\AssetTag.cs" />
+    <Compile Include="Enums\AssetType.cs" />
     <Compile Include="Enums\UserStatus.cs" />
     <Compile Include="Enums\UserType.cs" />
     <Compile Include="Enums\ProjectStatus.cs" />

@@ -8,6 +8,7 @@ namespace DAC627_Project.Enums
 {
     public enum ProjectStatus
     {
+        Null,
         Completed,
         Planning,
         In_Development

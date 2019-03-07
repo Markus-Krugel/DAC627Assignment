@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace DAC627_Project.Enums
 {
-    public enum AssetTag
+    public enum AssetType
     {
+        Null,
         Text,
         Image,
         Model,

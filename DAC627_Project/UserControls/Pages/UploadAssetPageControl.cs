@@ -109,11 +109,11 @@ namespace DAC627_Project
         {
             if (((ComboBox)sender) == cboAssetType)
             {
-                _userAsset.SetAssetType((UserAsset.AssetType)cboAssetType.SelectedIndex);
+                _userAsset.SetAssetType((AssetType)cboAssetType.SelectedIndex);
             }
             else if (((ComboBox)sender) == cboPegi)
             {         
-                _userAsset.SetPegiRating((UserAsset.PegiRating)cboAssetType.SelectedIndex);
+                _userAsset.SetPegiRating((PegiRating)cboAssetType.SelectedIndex);
             }
         }
 

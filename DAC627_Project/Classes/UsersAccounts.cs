@@ -28,10 +28,27 @@ namespace DAC627_Project
             //Other Information
             public string name;
             public string profilePicturePath;
+            private UserStatus _userStatus;
 
             //User Projects and Assets
             private List<UserProject> _userProjects = new List<UserProject>();
             private List<UserAsset> _userAssets = new List<UserAsset>();
+
+            //Constructor
+            public UserData(int userID, string UserName, string EmailAddress, string password, UserStatus userStatus)
+            {
+                _userID = userID;
+                userName = UserName;
+                emailAddress = EmailAddress;
+                _password = password;
+                //name = Name;
+                _userStatus = userStatus;
+            }
+
+            public UserData()
+            {
+
+            }
 
             //Functions
             public List<UserProject> GetUsersProjects()

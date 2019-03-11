@@ -67,7 +67,7 @@ namespace DAC627_Project
         {
             if (((ComboBox)sender) == cboProjectType)
             {
-                _userProject.SetProjectType((UserProject.ProjectType)cboProjectType.SelectedIndex);
+                _userProject.SetProjectType((ProjectType)cboProjectType.SelectedIndex);
             }
         }
 

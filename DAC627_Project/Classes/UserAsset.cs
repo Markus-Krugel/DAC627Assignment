@@ -9,25 +9,7 @@ namespace DAC627_Project
 {
     public class UserAsset
     {
-        public enum AssetType
-        {
-            _2DArt,         //.png/.jpg
-            _ConceptArt,    //.png/.jpg
-            _2DAnimation,   //.gif
-            _3DModel,       //.fbx/.obj/.mb/.ma/.max
-            _3DAnimation,   //.fbx/.obj/.mb/.ma/.max
-            _Audio          //.wav/.mp3
-        };
-
-        public enum PegiRating
-        {
-            _3,
-            _7,
-            _12,
-            _16,
-            _18
-        }
-
+        
         private UsersAccounts.UserData _author;
         private string _assetTitle;
         private AssetType _assetType;
@@ -37,10 +19,21 @@ namespace DAC627_Project
         private string _notes;
         private List<string> _picturesPath; //First element is thumbnail
         private string _assetPath;
+        private int _id;
 
         public UserAsset(UsersAccounts.UserData author)
         {
             _author = author;
+        }
+
+        public UserAsset(int id, string assetName, string notes, UsersAccounts.UserData author, AssetType assetType, string softwareUsed)
+        {
+            _author = author;
+            _id = id;
+            _assetTitle = assetName;
+            _notes = notes;
+            _assetType = assetType;
+            _softwareUsed = softwareUsed;
         }
 
         //Set Functions

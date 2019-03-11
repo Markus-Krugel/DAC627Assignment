@@ -46,9 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums.cs" />
     <Compile Include="Classes\HelperTools.cs" />
     <Compile Include="Classes\UserProject.cs" />
     <Compile Include="Classes\UserAsset.cs" />
+    <Compile Include="DataBaseAccess.cs" />
     <Compile Include="UserControls\Pages\CreateAccountPageControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

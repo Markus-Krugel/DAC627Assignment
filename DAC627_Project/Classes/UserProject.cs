@@ -8,21 +8,27 @@ namespace DAC627_Project
 {
     public class UserProject
     {
-        public enum ProjectType
-        {
-            Unity,
-            UnrealEngine
-        }
-
         private List<UserAsset> _connectedAssets = new List<UserAsset>();
         private UsersAccounts.UserData _author;
         private string _projectTitle;
         private ProjectType _projectType;
         private string _notes;
+        private int _id;
+        private ProjectStatus _projectStatus;
 
         public UserProject(UsersAccounts.UserData author)
         {
             _author = author;
+        }
+
+        public UserProject(int id, string projectname, string notes, UsersAccounts.UserData author, ProjectType projectType, ProjectStatus projectStatus)
+        {
+            _author = author;
+            _id = id;
+            _projectTitle = projectname;
+            _notes = notes;
+            _projectType = projectType;
+            _projectStatus = projectStatus;
         }
 
         //Sets

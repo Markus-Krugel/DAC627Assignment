@@ -23,7 +23,7 @@ namespace DAC627_Project
             //Login Information
             public string userName;
             public string emailAddress;
-            private string _password;
+            public string _password;
 
             //Other Information
             public string name;
@@ -79,6 +79,11 @@ namespace DAC627_Project
                 }
             }
 
+            public int? GetUserID()
+            {
+                return _userID;
+            }
+
             public void SetPassword(string newPassword)
             {
                 _password = EncryptDecrypt(newPassword);
@@ -105,7 +110,7 @@ namespace DAC627_Project
 
             private string EncryptDecrypt(string szPlainText)
             {
-                int szEncryptionKey = _userID.Value;
+                int szEncryptionKey = 5;
                 string szInputStringBuild = szPlainText;
                 char[] szOutStringBuild = new char[szPlainText.Length];
 
@@ -132,18 +137,22 @@ namespace DAC627_Project
 
         public void AddUser(UserData _userData)
         {
-            _allUsers.Add(_userData);
+            DataBaseAccess dataBase = new DataBaseAccess();
+            dataBase.StartConnection();
+            dataBase.AddUser( _userData._password ,_userData.emailAddress, _userData.userName, UserType.Developer);
+            dataBase.CloseConnection();
         }
 
         public UserData RetrieveUserData(string UsernameOrEmail)
         {
-            foreach (UserData user in _allUsers)
-            {
-                if (user.userName == UsernameOrEmail || user.emailAddress == UsernameOrEmail)
+            DataBaseAccess dataBase = new DataBaseAccess();
+            dataBase.StartConnection();
+            UserData userData = dataBase.GetUser(UsernameOrEmail);
+            dataBase.CloseConnection();
+                if (userData != null)
                 {
-                    return user;
+                    return userData;
                 }
-            }
             return null;
         }
 

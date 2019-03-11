@@ -304,7 +304,7 @@ namespace DAC627_Project
 
              string password = "";
              string email = "";
-             int id = 1;
+             int id = 0;
              UserStatus status = UserStatus.Offline;
              UserType type = UserType.Developer;
 
@@ -317,6 +317,10 @@ namespace DAC627_Project
                  Enum.TryParse<UserType>(reader.GetString(5), out type);
              }
 
+            if (id == 0)
+            {
+                return null;
+            }
              return new UsersAccounts.UserData(id, username, email, password, status);
         }
 

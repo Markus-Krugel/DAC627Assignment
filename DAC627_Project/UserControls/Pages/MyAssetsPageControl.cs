@@ -26,7 +26,10 @@ namespace DAC627_Project
         {
             InitializeComponent();
             formMain = form;
-            curUserAssets = formMain.UsersAccounts.GetCurrentUser().GetUserAssets();
+            DataBaseAccess dataBase = new DataBaseAccess();
+            dataBase.StartConnection();
+            curUserAssets = dataBase.getAssetsOfUser((int)formMain.UsersAccounts.GetCurrentUser().GetUserID());
+            dataBase.CloseConnection();
 
             if (curUserAssets != null)
             {

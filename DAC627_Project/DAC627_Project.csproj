@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -128,6 +129,12 @@
     <Compile Include="UserControls\Pages\ViewAssetPageControl.Designer.cs">
       <DependentUpon>ViewAssetPageControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Pages\ViewProjectPageControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Pages\ViewProjectPageControl.Designer.cs">
+      <DependentUpon>ViewProjectPageControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Prefabs\AssetButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -181,6 +188,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Pages\ViewAssetPageControl.resx">
       <DependentUpon>ViewAssetPageControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Pages\ViewProjectPageControl.resx">
+      <DependentUpon>ViewProjectPageControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Prefabs\AssetButton.resx">
       <DependentUpon>AssetButton.cs</DependentUpon>

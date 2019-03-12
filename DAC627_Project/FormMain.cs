@@ -104,6 +104,7 @@ namespace DAC627_Project
             EditProjectPage,
             TestPage,
             ViewAssetPage,
+            ViewProjectPage,
         }
 
         public void ChangeToPage(Pages _page)
@@ -150,6 +151,9 @@ namespace DAC627_Project
                     break;
                 case Pages.ViewAssetPage:
                     currentPage = new ViewAssetPageControl(this, curSelectedAssetID);
+                    break;
+                case Pages.ViewProjectPage:
+                    currentPage = new ViewProjectPageControl(this);
                     break;
                 default:
                     return;

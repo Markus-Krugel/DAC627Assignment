@@ -276,10 +276,10 @@ namespace DAC627_Project
         /// <param name="tag">Tag for the asset</param>
         /// <param name="software">The software used to create the asset</param>
         /// <param name="notes">The notes of the asset</param>
-        public void AddAsset(string name, int creator, AssetStatus status, AssetType tag, string software, string notes = "1.0")
+        public void AddAsset(string name, int creator, AssetStatus status, AssetType type, string software, string notes = "1.0")
         {
-            string commandText = "INSERT INTO Asset ( Assetname, Creator, Notes, Status, Tag, Software ) VALUES " +
-                                    "('" + name + "'," + creator + ",'" + notes + "','" + status + "','" + tag + "', '"+ software +"')";
+            string commandText = "INSERT INTO Asset ( Assetname, Creator, Notes, Status, Type, Software ) VALUES " +
+                                    "('" + name + "'," + creator + ",'" + notes + "','" + status + "','" + type + "', '"+ software +"')";
 
             ExecuteCommand(commandText);
         }
@@ -369,7 +369,7 @@ namespace DAC627_Project
             {
                 OleDbCommand command = new OleDbCommand();
                 command.Connection = connection;
-                command.CommandText = "SELECT Project.* FROM[Project] ";
+                command.CommandText = "SELECT Project.* FROM[Project]  WHERE Projectname = " + projectname;
 
                 OleDbDataReader reader = command.ExecuteReader();
 
@@ -411,7 +411,7 @@ namespace DAC627_Project
             {
                 OleDbCommand command = new OleDbCommand();
                 command.Connection = connection;
-                command.CommandText = "SELECT Project.* FROM[Project] ";
+                command.CommandText = "SELECT Project.* FROM[Project] WHERE ID = " + projectID;
 
                 OleDbDataReader reader = command.ExecuteReader();
 
@@ -453,7 +453,7 @@ namespace DAC627_Project
             {
                 OleDbCommand command = new OleDbCommand();
                 command.Connection = connection;
-                command.CommandText = "SELECT Asset.* FROM[Asset] ";
+                command.CommandText = "SELECT Asset.* FROM[Asset] WHERE Assetname = " + assetname;
 
                 OleDbDataReader reader = command.ExecuteReader();
 
@@ -498,7 +498,7 @@ namespace DAC627_Project
             {
                 OleDbCommand command = new OleDbCommand();
                 command.Connection = connection;
-                command.CommandText = "SELECT Asset.* FROM[Asset] ";
+                command.CommandText = "SELECT Asset.* FROM[Asset] WHERE ID = " + assetID;
 
                 OleDbDataReader reader = command.ExecuteReader();
 

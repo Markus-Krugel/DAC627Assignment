@@ -45,12 +45,12 @@ namespace DAC627_Project
             connection.Close();
         }
 
-
         /// <summary>
         /// Executes the given command
         /// </summary>
         /// <param name="commandText">The command to execute</param>
-        private void ExecuteCommand(string commandText)
+        /// <returns>Returns if the command was executed correctly</returns>
+        private bool ExecuteCommand(string commandText)
         {
             try
             {
@@ -59,14 +59,15 @@ namespace DAC627_Project
                 command.CommandText = commandText;
 
                 command.ExecuteNonQuery();
+
+                return true;
             }
 
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
+                return false;
             }
-
-            Console.WriteLine();
         }
 
         #region search commands
@@ -244,12 +245,29 @@ namespace DAC627_Project
         /// <param name="username">Tbe username</param>
         /// <param name="type">Type of user (see UserType class)</param>
         /// <param name="status">The current status of the user (see UserStatus class)</param>
-        public void AddUser(string password, string email, string username, UserType type, UserStatus status = UserStatus.Offline)
+        /// <returns>Returns the ID of the added User</returns>
+        public int AddUser(string password, string email, string username, UserType type, UserStatus status = UserStatus.Offline)
         {
             string commandText = "INSERT INTO [User] (Status, [Password], Email, Username, Type ) VALUES " +
                                 "('" + status + "','" + password + "','" + email + "','" + username + "','" + type + "')";
 
-            ExecuteCommand(commandText);
+            bool executed = ExecuteCommand(commandText);
+
+            int id = 0;
+
+            if (executed)
+            {
+                OleDbCommand command2 = new OleDbCommand();
+                command2.Connection = connection;
+                command2.CommandText = "SELECT User.ID FROM[User] WHERE Username = '" + username + "'";
+
+                OleDbDataReader reader = command2.ExecuteReader();
+                               
+                while (reader.Read())
+                    id = reader.GetInt32(0);
+
+            }
+            return id;
         }
 
         /// <summary>
@@ -261,12 +279,29 @@ namespace DAC627_Project
         /// <param name="owner">The ID of the project owner</param>
         /// <param name="tag">Tag for the project</param>
         /// <param name="status">The current status of the project</param>
-        public void AddProject(string name, ProjectType type, string description, int owner, ProjectTag tag, ProjectStatus status)
+        /// <returns>Returns the ID of the added Project</returns>
+        public int AddProject(string name, ProjectType type, string description, int owner, ProjectTag tag, ProjectStatus status)
         {
             string commandText = "INSERT INTO Project ( Projectname, Type, Description, Owner, Tag, Status ) VALUES " +
                                     "('" + name + "','" + type + "','" + description + "','" + owner + "','" + tag + "','" + status + "')";
 
-            ExecuteCommand(commandText);
+            bool executed = ExecuteCommand(commandText);
+
+            int id = 0;
+
+            if (executed)
+            {
+                OleDbCommand command2 = new OleDbCommand();
+                command2.Connection = connection;
+                command2.CommandText = "SELECT Project.ID FROM[Project] WHERE Projectname = '" + name + "'";
+
+                OleDbDataReader reader = command2.ExecuteReader();
+                               
+                while (reader.Read())
+                    id = reader.GetInt32(0);
+
+            }
+            return id;
         }
 
         /// <summary>
@@ -278,12 +313,30 @@ namespace DAC627_Project
         /// <param name="type">Type of asset</param>
         /// <param name="software">The software used to create the asset</param>
         /// <param name="notes">The notes of the asset</param>
-        public void AddAsset(string name, int creator, AssetStatus status, AssetType type, string software, string notes = "1.0")
+        /// <returns>Returns the ID of the added Asset</returns>
+        public int AddAsset(string name, int creator, AssetStatus status, AssetType type, string software, string notes = "1.0")
         {
             string commandText = "INSERT INTO Asset ( Assetname, Creator, Notes, Status, Type, Software ) VALUES " +
                                     "('" + name + "'," + creator + ",'" + notes + "','" + status + "','" + type + "', '"+ software +"')";
 
-            ExecuteCommand(commandText);
+            bool executed = ExecuteCommand(commandText);
+
+            int id = 0;
+
+            if (executed)
+            {
+                OleDbCommand command2 = new OleDbCommand();
+                command2.Connection = connection;
+                command2.CommandText = "SELECT Asset.ID FROM[Asset] WHERE Assetname = '" + name + "'";
+
+                OleDbDataReader reader = command2.ExecuteReader();
+
+                while (reader.Read())
+                    id = reader.GetInt32(0);
+
+            }
+
+            return id;
         }
 
         #endregion

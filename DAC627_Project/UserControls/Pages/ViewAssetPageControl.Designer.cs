@@ -37,9 +37,14 @@
             this.lblAssetStatus = new System.Windows.Forms.Label();
             this.lblCreator = new System.Windows.Forms.Label();
             this.btnDownload = new System.Windows.Forms.Button();
-            this.lblTitleEdit = new System.Windows.Forms.Label();
+            this.lblTitleDisplay = new System.Windows.Forms.Label();
             this.galPictureGallery = new DAC627_Project.PictureGallery();
             this.btnEdit = new System.Windows.Forms.Button();
+            this.lblAssetTypeDisplay = new System.Windows.Forms.Label();
+            this.lblSoftwareDisplay = new System.Windows.Forms.Label();
+            this.lblPegiDisplay = new System.Windows.Forms.Label();
+            this.lblAssetStatusDisplay = new System.Windows.Forms.Label();
+            this.lblCreatorDisplay = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -54,7 +59,7 @@
             // lblDescription
             // 
             this.lblDescription.AutoSize = true;
-            this.lblDescription.Location = new System.Drawing.Point(448, 520);
+            this.lblDescription.Location = new System.Drawing.Point(440, 556);
             this.lblDescription.Name = "lblDescription";
             this.lblDescription.Size = new System.Drawing.Size(252, 52);
             this.lblDescription.TabIndex = 2;
@@ -101,9 +106,9 @@
             this.lblAssetStatus.AutoSize = true;
             this.lblAssetStatus.Location = new System.Drawing.Point(1024, 280);
             this.lblAssetStatus.Name = "lblAssetStatus";
-            this.lblAssetStatus.Size = new System.Drawing.Size(63, 13);
+            this.lblAssetStatus.Size = new System.Drawing.Size(66, 13);
             this.lblAssetStatus.TabIndex = 7;
-            this.lblAssetStatus.Text = "Asset Satus";
+            this.lblAssetStatus.Text = "Asset Status";
             // 
             // lblCreator
             // 
@@ -123,14 +128,14 @@
             this.btnDownload.Text = "Download";
             this.btnDownload.UseVisualStyleBackColor = true;
             // 
-            // lblTitleEdit
+            // lblTitleDisplay
             // 
-            this.lblTitleEdit.AutoSize = true;
-            this.lblTitleEdit.Location = new System.Drawing.Point(1161, 152);
-            this.lblTitleEdit.Name = "lblTitleEdit";
-            this.lblTitleEdit.Size = new System.Drawing.Size(27, 13);
-            this.lblTitleEdit.TabIndex = 11;
-            this.lblTitleEdit.Text = "Title";
+            this.lblTitleDisplay.AutoSize = true;
+            this.lblTitleDisplay.Location = new System.Drawing.Point(1161, 152);
+            this.lblTitleDisplay.Name = "lblTitleDisplay";
+            this.lblTitleDisplay.Size = new System.Drawing.Size(27, 13);
+            this.lblTitleDisplay.TabIndex = 11;
+            this.lblTitleDisplay.Text = "Title";
             // 
             // galPictureGallery
             // 
@@ -150,12 +155,62 @@
             this.btnEdit.Visible = false;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
+            // lblAssetTypeDisplay
+            // 
+            this.lblAssetTypeDisplay.AutoSize = true;
+            this.lblAssetTypeDisplay.Location = new System.Drawing.Point(1161, 183);
+            this.lblAssetTypeDisplay.Name = "lblAssetTypeDisplay";
+            this.lblAssetTypeDisplay.Size = new System.Drawing.Size(27, 13);
+            this.lblAssetTypeDisplay.TabIndex = 13;
+            this.lblAssetTypeDisplay.Text = "Title";
+            // 
+            // lblSoftwareDisplay
+            // 
+            this.lblSoftwareDisplay.AutoSize = true;
+            this.lblSoftwareDisplay.Location = new System.Drawing.Point(1161, 216);
+            this.lblSoftwareDisplay.Name = "lblSoftwareDisplay";
+            this.lblSoftwareDisplay.Size = new System.Drawing.Size(27, 13);
+            this.lblSoftwareDisplay.TabIndex = 14;
+            this.lblSoftwareDisplay.Text = "Title";
+            // 
+            // lblPegiDisplay
+            // 
+            this.lblPegiDisplay.AutoSize = true;
+            this.lblPegiDisplay.Location = new System.Drawing.Point(1161, 248);
+            this.lblPegiDisplay.Name = "lblPegiDisplay";
+            this.lblPegiDisplay.Size = new System.Drawing.Size(27, 13);
+            this.lblPegiDisplay.TabIndex = 15;
+            this.lblPegiDisplay.Text = "Title";
+            // 
+            // lblAssetStatusDisplay
+            // 
+            this.lblAssetStatusDisplay.AutoSize = true;
+            this.lblAssetStatusDisplay.Location = new System.Drawing.Point(1161, 280);
+            this.lblAssetStatusDisplay.Name = "lblAssetStatusDisplay";
+            this.lblAssetStatusDisplay.Size = new System.Drawing.Size(27, 13);
+            this.lblAssetStatusDisplay.TabIndex = 16;
+            this.lblAssetStatusDisplay.Text = "Title";
+            // 
+            // lblCreatorDisplay
+            // 
+            this.lblCreatorDisplay.AutoSize = true;
+            this.lblCreatorDisplay.Location = new System.Drawing.Point(1161, 312);
+            this.lblCreatorDisplay.Name = "lblCreatorDisplay";
+            this.lblCreatorDisplay.Size = new System.Drawing.Size(27, 13);
+            this.lblCreatorDisplay.TabIndex = 17;
+            this.lblCreatorDisplay.Text = "Title";
+            // 
             // ViewAssetPageControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.lblCreatorDisplay);
+            this.Controls.Add(this.lblAssetStatusDisplay);
+            this.Controls.Add(this.lblPegiDisplay);
+            this.Controls.Add(this.lblSoftwareDisplay);
+            this.Controls.Add(this.lblAssetTypeDisplay);
             this.Controls.Add(this.btnEdit);
-            this.Controls.Add(this.lblTitleEdit);
+            this.Controls.Add(this.lblTitleDisplay);
             this.Controls.Add(this.galPictureGallery);
             this.Controls.Add(this.btnDownload);
             this.Controls.Add(this.lblCreator);
@@ -187,7 +242,12 @@
         private System.Windows.Forms.Label lblCreator;
         private System.Windows.Forms.Button btnDownload;
         private PictureGallery galPictureGallery;
-        private System.Windows.Forms.Label lblTitleEdit;
+        private System.Windows.Forms.Label lblTitleDisplay;
         private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.Label lblAssetTypeDisplay;
+        private System.Windows.Forms.Label lblSoftwareDisplay;
+        private System.Windows.Forms.Label lblPegiDisplay;
+        private System.Windows.Forms.Label lblAssetStatusDisplay;
+        private System.Windows.Forms.Label lblCreatorDisplay;
     }
 }

@@ -36,18 +36,21 @@ namespace DAC627_Project
             }
             else
             {
-                for (int i = 0; i < _curUserData.GetUserAssets().Count; i++)
+                if (_curUserData.GetUserID() == _userAsset.GetAuthor().GetUserID())
                 {
-                    if (_curUserData.GetUserAssets()[i] == _userAsset)
-                    {
-                        btnEdit.Show();
-                    }
+                    btnEdit.Show();
                 }
             }
 
             galPictureGallery.SetToLarge();
             galPictureGallery.IsEditable(false);
-            lblTitleEdit.Text = _userAsset.GetAssetTitle();
+
+            lblTitleDisplay.Text = _userAsset.GetAssetTitle();
+            lblAssetStatusDisplay.Text = _userAsset.GetAssetStatus();
+            lblAssetTypeDisplay.Text = _userAsset.GetAssetType().ToString();
+            lblCreatorDisplay.Text = _userAsset.GetAuthor().userName;
+            lblPegiDisplay.Text = _userAsset.GetPegiRating().ToString();
+            lblDescription.Text = _userAsset.GetNotes();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)

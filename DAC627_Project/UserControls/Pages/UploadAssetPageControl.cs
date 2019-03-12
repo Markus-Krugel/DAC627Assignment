@@ -157,7 +157,7 @@ namespace DAC627_Project
                 dataBase.StartConnection();
                 dataBase.AddAsset(_userAsset.GetAssetTitle(), (int)formMain.UsersAccounts.GetCurrentUser().GetUserID(), AssetStatus.Planning, _userAsset.GetAssetType(), _userAsset.GetSoftwareUsed(), _userAsset.GetNotes());
                 dataBase.CloseConnection();
-                formMain.curSelectedAsset = _userAsset;
+               // formMain.curSelectedAssetID = _userAsset;
                 formMain.ChangeToPage(FormMain.Pages.EditAssetPage);
             }
         }

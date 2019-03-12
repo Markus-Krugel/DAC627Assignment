@@ -72,5 +72,10 @@ namespace DAC627_Project
         {
             return _notes;
         }
+
+        public int GetID()
+        {
+            return _id;
+        }
     }
 }

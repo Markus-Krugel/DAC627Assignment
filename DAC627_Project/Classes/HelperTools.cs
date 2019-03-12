@@ -61,12 +61,12 @@ namespace DAC627_Project
                 AssetButton newAssetButton;
                 if (userAssets != null)
                 {
-                    newAssetButton = new AssetButton(formMain, userAssets[i]);
+                    newAssetButton = new AssetButton(formMain, userAssets[i].GetID(), true);
                     newAssetButton.SetName(userAssets[i].GetAssetTitle());
                 }
                 else if (userProjects != null)
                 {
-                    newAssetButton = new AssetButton(formMain, userProjects[i]);
+                    newAssetButton = new AssetButton(formMain, userProjects[i].GetID(), false);
                     newAssetButton.SetName(userProjects[i].GetProjectTitle());
                 }
                 else

@@ -119,6 +119,11 @@ namespace DAC627_Project
             return _notes;
         }
 
+        public int GetID()
+        {
+            return _id;
+        }
+
         //Picture Functions
         public void AddPictureToGallery(string picturePath)
         {

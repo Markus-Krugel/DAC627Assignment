@@ -15,15 +15,21 @@ namespace DAC627_Project
         FormMain formMain;
         private UserAsset _userAsset = new UserAsset(null);
         private UserAsset _curUserAsset = null;
+        private int? _userAssetID = null;
 
-        public EditAssetPageControl(FormMain form, ref UserAsset userAsset)
+        public EditAssetPageControl(FormMain form, int? userAssetID)
         {
-            _curUserAsset = userAsset;
+            _userAssetID = userAssetID;
+            DataBaseAccess dataBase = new DataBaseAccess();
+            dataBase.StartConnection();
+            _curUserAsset = dataBase.getAsset((int)userAssetID);
+            dataBase.CloseConnection();
+
             InitializeComponent();
             formMain = form;
             if (formMain.UsersAccounts.GetCurrentUser() != null)
             {
-                if(_curUserAsset == null)
+                if(_curUserAsset == null || userAssetID == null)
                 {
                     MessageBox.Show("Error: Asset Not Found");
                 }
@@ -129,7 +135,7 @@ namespace DAC627_Project
                 _curUserAsset.SetPegiRating(_userAsset.GetPegiRating());
                 _curUserAsset.SetAssetStatus(_userAsset.GetAssetStatus());
                 _curUserAsset.SetNotes(_userAsset.GetNotes());
-                formMain.curSelectedAsset = _curUserAsset;
+                formMain.curSelectedAssetID = _userAssetID;
                 formMain.ChangeToPage(FormMain.Pages.ViewAssetPage);
             }
         }

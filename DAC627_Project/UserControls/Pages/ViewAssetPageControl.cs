@@ -15,11 +15,18 @@ namespace DAC627_Project
         FormMain formMain;
         UserAsset _userAsset = null;
         UsersAccounts.UserData _curUserData;
+        int? _userAssetID;
 
-        public ViewAssetPageControl(FormMain form, ref UserAsset userAsset)
+        public ViewAssetPageControl(FormMain form, int? userAssetID)
         {
             formMain = form;
-            _userAsset = userAsset;
+            _userAssetID = userAssetID;
+
+            DataBaseAccess dataBase = new DataBaseAccess();
+            dataBase.StartConnection();
+            _userAsset = dataBase.getAsset((int)userAssetID);
+            dataBase.CloseConnection();
+
             _curUserData = formMain.UsersAccounts.GetCurrentUser();
             InitializeComponent();
 
@@ -45,7 +52,7 @@ namespace DAC627_Project
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            formMain.curSelectedAsset = _userAsset;
+            formMain.curSelectedAssetID = _userAsset.GetID();
             formMain.ChangeToPage(FormMain.Pages.EditAssetPage);
         }
     }

@@ -94,7 +94,12 @@ namespace DAC627_Project
 
             if (errorDetected == false)
             {
-                formMain.UsersAccounts.GetCurrentUser().AddUserProject(_userProject);
+                //formMain.curSelectedUserProject = _userProject;
+                DataBaseAccess dataBase = new DataBaseAccess();
+                dataBase.StartConnection();
+                dataBase.AddProject(_userProject.GetProjectTitle(), _userProject.GetProjectType(), _userProject.GetNotes(), (int)formMain.UsersAccounts.GetCurrentUser().GetUserID(), ProjectTag.Game, ProjectStatus.In_Development);
+                dataBase.CloseConnection();
+
                 Hide();
                 formMain.ChangeToPage(FormMain.Pages.EditProjectPage);
             }

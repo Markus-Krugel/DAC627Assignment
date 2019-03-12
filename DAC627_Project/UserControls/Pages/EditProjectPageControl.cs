@@ -16,14 +16,18 @@ namespace DAC627_Project
         private UserProject _userProject = new UserProject(null);
         private UserProject _curUserProject = null;
 
-        public EditProjectPageControl(FormMain form)
+        public EditProjectPageControl(FormMain form, int? curUserProjectID)
         {
             InitializeComponent();
             formMain = form;
             if (formMain.UsersAccounts.GetCurrentUser() != null)
             {
-                _curUserProject = formMain.UsersAccounts.GetCurrentUser().GetUsersProjects()[0];
-                if (_curUserProject == null)
+                DataBaseAccess dataBase = new DataBaseAccess();
+                dataBase.StartConnection();
+                _curUserProject = dataBase.getProject((int)curUserProjectID);
+                dataBase.CloseConnection();
+
+                if (curUserProjectID == null || _curUserProject == null)
                 {
                     MessageBox.Show("Error: Asset Not Found");
                 }

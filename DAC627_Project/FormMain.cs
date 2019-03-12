@@ -14,8 +14,8 @@ namespace DAC627_Project
     {
         public UserControl currentPage;
         public UsersAccounts UsersAccounts = new UsersAccounts();
-        public UserAsset curSelectedAsset  = null;
-        public UserProject curSelectedUserProject = null;
+        public int? curSelectedAssetID  = null;
+        public int? curSelectedUserProjectID = null;
 
         public FormMain()
         {
@@ -140,16 +140,16 @@ namespace DAC627_Project
                     currentPage = new UploadProjectPageControl(this);
                     break;
                 case Pages.EditAssetPage:
-                    currentPage = new EditAssetPageControl(this, ref curSelectedAsset);
+                    currentPage = new EditAssetPageControl(this, curSelectedAssetID);
                     break;
                 case Pages.EditProjectPage:
-                    currentPage = new EditProjectPageControl(this);
+                    currentPage = new EditProjectPageControl(this, curSelectedUserProjectID);
                     break;
                 case Pages.TestPage:
                     currentPage = new TestPageControl(this);
                     break;
                 case Pages.ViewAssetPage:
-                    currentPage = new ViewAssetPageControl(this, ref curSelectedAsset);
+                    currentPage = new ViewAssetPageControl(this, curSelectedAssetID);
                     break;
                 default:
                     return;

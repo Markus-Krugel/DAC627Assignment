@@ -14,19 +14,13 @@ namespace DAC627_Project
     {
 
         FormMain _formMain;
-        UserAsset _userAsset = null;
-        UserProject _userProject = null;
+        int? _userAssetOrProjectID = null;
+        bool _isAsset = false;
 
-        public AssetButton(FormMain formMain, UserAsset userAsset)
+        public AssetButton(FormMain formMain, int? userAssetOrProjectID, bool isAsset)
         {
-            _userAsset = userAsset;
-            InitializeComponent();
-            _formMain = formMain;
-        }
-
-        public AssetButton(FormMain formMain, UserProject userProject)
-        {
-            _userProject = userProject;
+            _isAsset = isAsset;
+            _userAssetOrProjectID = userAssetOrProjectID;
             InitializeComponent();
             _formMain = formMain;
         }
@@ -38,14 +32,15 @@ namespace DAC627_Project
 
         private void picAsset_Click(object sender, EventArgs e)
         {
-            if (_userAsset != null)
+
+            if (_isAsset)
             {
-                _formMain.curSelectedAsset = _userAsset;
+                _formMain.curSelectedAssetID = _userAssetOrProjectID;
                 _formMain.ChangeToPage(FormMain.Pages.ViewAssetPage);
             }
-            else if (_userProject != null)
+            else if (!_isAsset)
             {
-                _formMain.curSelectedUserProject = _userProject;
+                _formMain.curSelectedUserProjectID = _userAssetOrProjectID;
             }
         }
     }

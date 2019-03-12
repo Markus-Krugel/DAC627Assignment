@@ -275,13 +275,13 @@ namespace DAC627_Project
         /// <param name="name">The name of the asset</param>
         /// <param name="creator">The ID of the creator</param> 
         /// <param name="status">The current status of the asset</param>
-        /// <param name="tag">Tag for the asset</param>
+        /// <param name="type">Type of asset</param>
         /// <param name="software">The software used to create the asset</param>
         /// <param name="notes">The notes of the asset</param>
-        public void AddAsset(string name, int creator, AssetStatus status, AssetType tag, string software, string notes = "1.0")
+        public void AddAsset(string name, int creator, AssetStatus status, AssetType type, string software, string notes = "1.0")
         {
-            string commandText = "INSERT INTO Asset ( Assetname, Creator, Notes, Status, Tag, Software ) VALUES " +
-                                    "('" + name + "'," + creator + ",'" + notes + "','" + status + "','" + tag + "', '"+ software +"')";
+            string commandText = "INSERT INTO Asset ( Assetname, Creator, Notes, Status, Type, Software ) VALUES " +
+                                    "('" + name + "'," + creator + ",'" + notes + "','" + status + "','" + type + "', '"+ software +"')";
 
             ExecuteCommand(commandText);
         }
@@ -1173,25 +1173,25 @@ namespace DAC627_Project
         }
 
         /// <summary>
-        /// Changes the tag of the asset
+        /// Changes the type of the asset
         /// </summary>
         /// <param name="assetname">The name of the asset</param>
-        /// <param name="newValue">New status of the asset</param>
-        public void ChangeAssetTag(string assetname, AssetType newValue)
+        /// <param name="newValue">New type of the asset</param>
+        public void ChangeAssetType(string assetname, AssetType newValue)
         {
-            string commandText = "UPDATE [Asset] SET Tag = '" + newValue + "' WHERE Assetname = '" + assetname + "'";
+            string commandText = "UPDATE [Asset] SET Type = '" + newValue + "' WHERE Assetname = '" + assetname + "'";
 
             ExecuteCommand(commandText);
         }
 
         /// <summary>
-        /// Changes the tag of the asset
+        /// Changes the type of the asset
         /// </summary>
         /// <param name="id">The ID of the asset</param>
-        /// <param name="newValue">New tag of the asset</param>
-        public void ChangeAssetTag(int id, AssetType newValue)
+        /// <param name="newValue">New type of the asset</param>
+        public void ChangeAssetType(int id, AssetType newValue)
         {
-            string commandText = "UPDATE [Asset] SET Tag = '" + newValue + "' WHERE ID = " + id + "";
+            string commandText = "UPDATE [Asset] SET Type = '" + newValue + "' WHERE ID = " + id + "";
 
             ExecuteCommand(commandText);
         }

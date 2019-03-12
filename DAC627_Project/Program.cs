@@ -27,7 +27,7 @@ namespace DAC627_Project
             // Commands for adding
 
             //database.addUser("Tach", "email@email.com", "Email", UserType.Reviewer);
-            //database.addAsset("Car", 1, AssetStatus.Planning, AssetTag.Sound, "Audacity", "1.3");
+            //database.AddAsset("Car", 1, AssetStatus.Planning, AssetType.Sound, "Audacity", "1.3");
             //database.addProject("Game engine", ProjectType.Software, "Simple 2D game engine", 2, ProjectTag.Software, ProjectStatus.Planning);
 
 
@@ -85,8 +85,8 @@ namespace DAC627_Project
             //database.changeAssetStatus("Algorithms", AssetStatus.Planning);
             //database.changeAssetStatus(1, AssetStatus.In_Development);
 
-            //database.changeAssetTag("Algorithms", AssetTag.Sound);
-            //database.changeAssetTag(1, AssetTag.Text);
+            //database.ChangeAssetType("Algorithms", AssetType.Sound);
+            database.ChangeAssetType(1, AssetType.Text);
 
 
 
@@ -150,7 +150,7 @@ namespace DAC627_Project
 
             //database.showAllUsers();
             //database.showAllProjects();
-            //database.showAllAssets();
+            database.ShowAllAssets();
 
             database.CloseConnection();
         }

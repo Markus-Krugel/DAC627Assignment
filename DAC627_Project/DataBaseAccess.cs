@@ -339,15 +339,99 @@ namespace DAC627_Project
             return id;
         }
 
+        /// <summary>
+        /// Adds an user to a project
+        /// </summary>
+        /// <param name="projectID">The ID of the project</param>
+        /// <param name="userID">The ID of the User</param>
+        public void AddUserToProject(int projectID, int userID)
+        {
+            string command = "INSERT INTO UsersInProjects ( ProjectID, UserID ) VALUES" +
+                "("+projectID+", "+userID+" )";
+
+            ExecuteCommand(command);
+        }
+
+        /// <summary>
+        /// Adds an asset to a project
+        /// </summary>
+        /// <param name="projectID">The ID of the project</param>
+        /// <param name="assetID">The ID of the asset</param>
+        public void AddAssetToProject(int projectID, int assetID)
+        {
+            string command = "INSERT INTO AssetsInProjects ( ProjectID, AssetID ) VALUES" +
+                "(" + projectID + ", " + assetID + " )";
+
+            ExecuteCommand(command);
+        }
+
         #endregion
 
-        #region get commands
+        #region Delete Commands
+
+        public void DeleteProject(int projectID)
+        {
+            string command = "DELETE FROM [Project] WHERE ID = " + projectID;
+
+            ExecuteCommand(command);
+        }
+
+        public void DeleteUser(int userID)
+        {
+            string command = "DELETE FROM [Messages] WHERE Sender = " + userID+
+                "or Receiver = "+userID;
+
+            ExecuteCommand(command);
+
+            command = "DELETE FROM [User] WHERE ID = " + userID;
+
+            ExecuteCommand(command);
+        }
+
+        public void DeleteAsset(int assetID)
+        {
+            string command = "DELETE FROM [Asset] WHERE ID = " + assetID;
+
+            ExecuteCommand(command);
+        }
+
+        #endregion
+
+        #region Remove Commands
+
+        /// <summary>
+        /// Removes an asset from a project
+        /// </summary>
+        /// <param name="projectID">The ID of the project</param>
+        /// <param name="assetID">The ID of the asset</param>
+        public void RemoveAssetFromProject(int projectID, int assetID)
+        {
+            string command = "DELETE FROM [AssetsInProjects] WHERE ProjectID = " + projectID + " AND AssetID = " + assetID;
+
+            ExecuteCommand(command);
+        }
+
+        /// <summary>
+        /// Removes an user from a project
+        /// </summary>
+        /// <param name="projectID">The ID of the project</param>
+        /// <param name="userID">The ID of the User</param>
+        public void RemoveUserFromProject(int projectID, int userID)
+        {
+            string command = "DELETE FROM [UsersInProjects] WHERE ProjectID = " + projectID + " AND UserID = " + userID;
+
+            ExecuteCommand(command);
+        }
+
+        #endregion
+
+        #region Get commands
 
         /// <summary>
         /// Get a specific user
         /// </summary>
         /// <param name="username">The name of the user</param>
-        /// <returns></returns>
+        /// <returns>The specified User</returns>
         public DatabaseUser GetUser(string username)
         {
         
@@ -379,7 +463,7 @@ namespace DAC627_Project
         /// Get a specific user
         /// </summary>
         /// <param name="id">The ID of the user</param>
-        /// <returns></returns>
+        /// <returns>The specified User</returns>
         public DatabaseUser GetUser(int id)
         {
             try
@@ -414,6 +498,11 @@ namespace DAC627_Project
             }
         }
 
+        /// <summary>
+        /// Get a specific project
+        /// </summary>
+        /// <param name="projectname">The name of the Project</param>
+        /// <returns>The specified project</returns>
         public DatabaseProject getProject(string projectname)
         {
             try
@@ -456,6 +545,11 @@ namespace DAC627_Project
             return null;
         }
 
+        /// <summary>
+        /// Returns a specific project
+        /// </summary>
+        /// <param name="projectID">The ID of the project</param>
+        /// <returns>The specific project</returns>
         public DatabaseProject getProject(int projectID)
         {
             try
@@ -498,6 +592,11 @@ namespace DAC627_Project
             return null;
         }
 
+        /// <summary>
+        /// Returns a specific asset
+        /// </summary>
+        /// <param name="assetname">The name of the asset</param>
+        /// <returns>The specified asset</returns>
         public DatabaseAsset getAsset(string assetname)
         {
             try
@@ -543,6 +642,11 @@ namespace DAC627_Project
             return null;
         }
 
+        /// <summary>
+        /// Returns a specific asset
+        /// </summary>
+        /// <param name="assetID">The ID of the asset</param>
+        /// <returns>The specified asset</returns>
         public DatabaseAsset getAsset(int assetID)
         {
             try
@@ -588,6 +692,11 @@ namespace DAC627_Project
             return null;
         }
 
+        /// <summary>
+        /// Returns the Assets created by the user
+        /// </summary>
+        /// <param name="userID">The ID of the User</param>
+        /// <returns>A list of assets created by the user</returns>
         public List<DatabaseAsset> getAssetsOfUser(int userID)
         {
             try
@@ -635,6 +744,11 @@ namespace DAC627_Project
             return null;
         }
 
+        /// <summary>
+        /// Returns the projects where the user is part of.
+        /// </summary>
+        /// <param name="userID">The ID of the user</param>
+        /// <returns>Returns a list of projects where the user is part of.</returns>
         public List<DatabaseProject> getProjectsOfUser(int userID)
         {
             try
@@ -683,6 +797,11 @@ namespace DAC627_Project
             return null;
         }
 
+        /// <summary>
+        /// Returns all assets in a project
+        /// </summary>
+        /// <param name="projectID">The ID of the project</param>
+        /// <returns>A list of assets in the project</returns>
         public List<DatabaseAsset> getAssetsInProject(int projectID)
         {
             try
@@ -734,6 +853,11 @@ namespace DAC627_Project
             return null;
         }
 
+        /// <summary>
+        /// Returns all users inside the project
+        /// </summary>
+        /// <param name="projectID">The ID of the Project</param>
+        /// <returns>A list of users in the project</returns>
         public List<DatabaseUser> getUsersInProject(int projectID)
         {
             try
@@ -782,6 +906,11 @@ namespace DAC627_Project
             return null;
         }
 
+        /// <summary>
+        /// Returns the projects owned by an user
+        /// </summary>
+        /// <param name="userID">The ID of the user</param>
+        /// <returns>A list of projects owned by the user</returns>
         public List<DatabaseProject> getOwnedProjectsOfUser(int userID)
         {
             try

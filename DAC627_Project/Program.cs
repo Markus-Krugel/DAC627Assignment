@@ -28,7 +28,7 @@ namespace DAC627_Project
 
             //Console.WriteLine(database.AddUser("Tach", "email@email.com", "Email", UserType.Reviewer));
             //Console.WriteLine(database.AddAsset("Car", 1, AssetStatus.Planning, AssetType.Sound, "Audacity", "1.3"));
-            Console.WriteLine(database.AddProject("Game engine 2", ProjectType.Software, "Simple 2D game engine", 2, ProjectTag.Software, ProjectStatus.Planning));
+            //Console.WriteLine(database.AddProject("Game engine 2", ProjectType.Software, "Simple 2D game engine", 2, ProjectTag.Software, ProjectStatus.Planning));
 
 
 
@@ -145,6 +145,32 @@ namespace DAC627_Project
             //
             //foreach (DatabaseAsset asset in searchAssets)
             //    Console.WriteLine(asset.ToStringWithoutCreator());
+
+
+
+            // Add to projects
+
+            //database.AddAssetToProject(2, 1);
+            //database.AddUserToProject(1, 2);
+
+
+
+            // Remove from Projects
+
+            //database.RemoveAssetFromProject(2, 1);
+            //database.RemoveUserFromProject(1, 2);
+
+
+
+
+            // Delete Commands
+
+            //database.DeleteProject(1);
+            //database.DeleteUser(1);
+            database.DeleteAsset(1);
+
+
+
 
 
             // Shows list of all datas in the output window

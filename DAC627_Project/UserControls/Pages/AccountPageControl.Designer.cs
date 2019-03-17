@@ -144,6 +144,7 @@
             this.btnViewMyProjects.TabIndex = 18;
             this.btnViewMyProjects.Text = "View My Projects";
             this.btnViewMyProjects.UseVisualStyleBackColor = true;
+            this.btnViewMyProjects.Click += new System.EventHandler(this.btnViewMyProjects_Click);
             // 
             // AccountPageControl
             // 

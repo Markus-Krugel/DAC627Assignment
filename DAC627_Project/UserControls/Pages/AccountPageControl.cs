@@ -41,7 +41,7 @@ namespace DAC627_Project
 
         private void btnViewMyAssets_Click(object sender, EventArgs e)
         {
-            formMain.ChangeToPage(FormMain.Pages.MyAssetsPage);
+            formMain.ChangeToPage(FormMain.Pages.MyAssetsPage, "asset");
         }
 
         private void btnUploadAsset_Click(object sender, EventArgs e)
@@ -52,6 +52,11 @@ namespace DAC627_Project
         private void btnCreateProject_Click(object sender, EventArgs e)
         {
             formMain.ChangeToPage(FormMain.Pages.UploadProjectPage);
+        }
+
+        private void btnViewMyProjects_Click(object sender, EventArgs e)
+        {
+            formMain.ChangeToPage(FormMain.Pages.MyAssetsPage, "project");
         }
     }
 }

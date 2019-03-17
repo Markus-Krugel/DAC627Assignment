@@ -95,6 +95,7 @@
             this.txtSearchAsset.Text = "Search Assets";
             this.txtSearchAsset.Enter += new System.EventHandler(this.txt_Enter);
             this.txtSearchAsset.Leave += new System.EventHandler(this.txt_Leave);
+            this.txtSearchAsset.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtSearchAsset_PreviewKeyDown);
             // 
             // txtSearchProject
             // 
@@ -108,6 +109,7 @@
             this.txtSearchProject.Text = "Search Projects";
             this.txtSearchProject.Enter += new System.EventHandler(this.txt_Enter);
             this.txtSearchProject.Leave += new System.EventHandler(this.txt_Leave);
+            this.txtSearchProject.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtSearchProject_PreviewKeyDown);
             // 
             // HomePageControl
             // 

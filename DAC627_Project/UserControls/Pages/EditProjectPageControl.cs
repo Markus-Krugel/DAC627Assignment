@@ -94,7 +94,8 @@ namespace DAC627_Project
                 _curUserProject.SetProjectTitle(_userProject.GetProjectTitle());
                 _curUserProject.SetProjectType(_userProject.GetProjectType());
                 _curUserProject.SetNotes(_userProject.GetNotes());
-
+                formMain.curSelectedUserProjectID = _userProject.GetID();
+                formMain.ChangeToPage(FormMain.Pages.ViewProjectPage);
             }
         }
     }

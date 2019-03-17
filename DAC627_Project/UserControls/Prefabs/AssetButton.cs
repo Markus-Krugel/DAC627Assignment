@@ -41,6 +41,7 @@ namespace DAC627_Project
             else if (!_isAsset)
             {
                 _formMain.curSelectedUserProjectID = _userAssetOrProjectID;
+                _formMain.ChangeToPage(FormMain.Pages.ViewProjectPage);
             }
         }
     }

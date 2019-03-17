@@ -29,16 +29,18 @@ namespace DAC627_Project
 
             _curUserData = formMain.UsersAccounts.GetCurrentUser();
             InitializeComponent();
-
-            if (_userAsset == null)
+            if (formMain.UsersAccounts.GetCurrentUser() != null)
             {
-                formMain.ChangeToPage(FormMain.Pages.HomePage);
-            }
-            else
-            {
-                if (_curUserData.GetUserID() == _userAsset.GetAuthor().GetUserID())
+                if (_userAsset == null)
                 {
-                    btnEdit.Show();
+                    formMain.ChangeToPage(FormMain.Pages.HomePage);
+                }
+                else
+                {
+                    if (_curUserData.GetUserID() == _userAsset.GetAuthor().GetUserID())
+                    {
+                        btnEdit.Show();
+                    }
                 }
             }
 

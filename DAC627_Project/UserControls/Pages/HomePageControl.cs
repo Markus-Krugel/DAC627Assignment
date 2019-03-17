@@ -78,5 +78,39 @@ namespace DAC627_Project
             }
             formMain.ChangeToPage(FormMain.Pages.LoginPage);
         }
+
+        private void txtSearchAsset_Enter(object sender, EventArgs e)
+        {
+            //DataBaseAccess data = new DataBaseAccess();
+            //data.StartConnection();
+            //List<UserAsset> userAssets = data.SearchAsset(txtSearchAsset.Text);
+            //data.CloseConnection();
+            //HelperTools.CreateAssetButtons(new Point(48, 104), formMain, this, userAssets.Count(), 1, userAssets, null);
+            //txt_Leave(sender, e);
+        }
+
+        private void txtSearchAsset_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                DataBaseAccess data = new DataBaseAccess();
+                data.StartConnection();
+                List<UserAsset> userAssets = data.SearchAsset(txtSearchAsset.Text);
+                data.CloseConnection();
+                HelperTools.CreateAssetButtons(new Point(160, 150), formMain, this, userAssets.Count(), 2, userAssets, null);
+            }
+        }
+
+        private void txtSearchProject_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                DataBaseAccess data = new DataBaseAccess();
+                data.StartConnection();
+                List<UserProject> userProjects = data.SearchProject(txtSearchProject.Text);
+                data.CloseConnection();
+                HelperTools.CreateAssetButtons(new Point(720, 150), formMain, this, userProjects.Count(), 2, null, userProjects);
+            }
+        }
     }
 }

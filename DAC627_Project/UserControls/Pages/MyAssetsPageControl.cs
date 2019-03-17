@@ -14,26 +14,37 @@ namespace DAC627_Project
     {
         FormMain formMain;
        
-       
         Point defaultLocation = new Point(48, 104);
         const int amountPerRow = 5;
         const int distancePerAssetButtonX = 248;
         const int distancePerAssetButtonY = 280;
 
         List<UserAsset> curUserAssets = null;
+        List<UserProject> curUserProjects = null;
 
-        public MyAssetsPageControl(FormMain form)
+        public MyAssetsPageControl(FormMain form, string message)
         {
             InitializeComponent();
             formMain = form;
             DataBaseAccess dataBase = new DataBaseAccess();
             dataBase.StartConnection();
-            curUserAssets = dataBase.getAssetsOfUser((int)formMain.UsersAccounts.GetCurrentUser().GetUserID());
+            if (message == "project")
+            {
+                curUserProjects = dataBase.getProjectsOfUser((int)formMain.UsersAccounts.GetCurrentUser().GetUserID());
+            }
+            else if (message == "asset")
+            {
+                curUserAssets = dataBase.getAssetsOfUser((int)formMain.UsersAccounts.GetCurrentUser().GetUserID());
+            }
             dataBase.CloseConnection();
 
-            if (curUserAssets != null)
+            if (curUserAssets != null && message == "asset")
             {
                 HelperTools.CreateAssetButtons(new Point(48, 104), formMain, this, curUserAssets.Count, 5, curUserAssets);
+            }
+            else if (curUserProjects != null && message == "project")
+            {
+                HelperTools.CreateAssetButtons(new Point(48, 104), formMain, this, curUserProjects.Count, 5, null, curUserProjects);
             }
         }
 

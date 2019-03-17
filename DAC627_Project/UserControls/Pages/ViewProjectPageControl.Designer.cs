@@ -38,6 +38,7 @@
             this.lblTitle = new System.Windows.Forms.Label();
             this.btnExpressIntrest = new System.Windows.Forms.Button();
             this.lblDescription = new System.Windows.Forms.Label();
+            this.btnEdit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picThumbNail)).BeginInit();
             this.SuspendLayout();
             // 
@@ -48,42 +49,40 @@
             this.picThumbNail.Size = new System.Drawing.Size(225, 225);
             this.picThumbNail.TabIndex = 0;
             this.picThumbNail.TabStop = false;
+            this.picThumbNail.Visible = false;
             // 
             // lblDescriptionDisplay
             // 
             this.lblDescriptionDisplay.AutoSize = true;
             this.lblDescriptionDisplay.Location = new System.Drawing.Point(336, 120);
             this.lblDescriptionDisplay.Name = "lblDescriptionDisplay";
-            this.lblDescriptionDisplay.Size = new System.Drawing.Size(114, 13);
+            this.lblDescriptionDisplay.Size = new System.Drawing.Size(0, 13);
             this.lblDescriptionDisplay.TabIndex = 1;
-            this.lblDescriptionDisplay.Text = "Description Goes Here";
             // 
             // lblCreatorDisplay
             // 
             this.lblCreatorDisplay.AutoSize = true;
-            this.lblCreatorDisplay.Location = new System.Drawing.Point(1216, 160);
+            this.lblCreatorDisplay.Location = new System.Drawing.Point(1179, 160);
             this.lblCreatorDisplay.Name = "lblCreatorDisplay";
-            this.lblCreatorDisplay.Size = new System.Drawing.Size(27, 13);
+            this.lblCreatorDisplay.Size = new System.Drawing.Size(0, 13);
             this.lblCreatorDisplay.TabIndex = 23;
-            this.lblCreatorDisplay.Text = "Title";
             // 
             // lblAssetTypeDisplay
             // 
             this.lblAssetTypeDisplay.AutoSize = true;
-            this.lblAssetTypeDisplay.Location = new System.Drawing.Point(1216, 127);
+            this.lblAssetTypeDisplay.Location = new System.Drawing.Point(1179, 128);
             this.lblAssetTypeDisplay.Name = "lblAssetTypeDisplay";
-            this.lblAssetTypeDisplay.Size = new System.Drawing.Size(27, 13);
+            this.lblAssetTypeDisplay.Size = new System.Drawing.Size(0, 13);
             this.lblAssetTypeDisplay.TabIndex = 22;
-            this.lblAssetTypeDisplay.Text = "Title";
             // 
             // lblTitleDisplay
             // 
             this.lblTitleDisplay.AutoSize = true;
-            this.lblTitleDisplay.Location = new System.Drawing.Point(1216, 96);
+            this.lblTitleDisplay.Location = new System.Drawing.Point(1179, 96);
             this.lblTitleDisplay.Name = "lblTitleDisplay";
-            this.lblTitleDisplay.Size = new System.Drawing.Size(27, 13);
+            this.lblTitleDisplay.Size = new System.Drawing.Size(33, 13);
             this.lblTitleDisplay.TabIndex = 21;
-            this.lblTitleDisplay.Text = "Title";
+            this.lblTitleDisplay.Text = "Penis";
             // 
             // lblCreator
             // 
@@ -130,15 +129,27 @@
             this.lblDescription.TabIndex = 25;
             this.lblDescription.Text = "Description:";
             // 
+            // btnEdit
+            // 
+            this.btnEdit.Location = new System.Drawing.Point(1182, 296);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(88, 23);
+            this.btnEdit.TabIndex = 26;
+            this.btnEdit.Text = "Edit";
+            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Visible = false;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            // 
             // ViewProjectPageControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.lblTitleDisplay);
+            this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.lblDescription);
             this.Controls.Add(this.btnExpressIntrest);
             this.Controls.Add(this.lblCreatorDisplay);
             this.Controls.Add(this.lblAssetTypeDisplay);
-            this.Controls.Add(this.lblTitleDisplay);
             this.Controls.Add(this.lblCreator);
             this.Controls.Add(this.lblAssetType);
             this.Controls.Add(this.lblTitle);
@@ -164,5 +175,6 @@
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Button btnExpressIntrest;
         private System.Windows.Forms.Label lblDescription;
+        private System.Windows.Forms.Button btnEdit;
     }
 }

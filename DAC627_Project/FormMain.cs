@@ -107,7 +107,7 @@ namespace DAC627_Project
             ViewProjectPage,
         }
 
-        public void ChangeToPage(Pages _page)
+        public void ChangeToPage(Pages _page, string message = null)
         {
             if (currentPage != null)
             {
@@ -132,7 +132,7 @@ namespace DAC627_Project
                     currentPage = new LoginPageControl(this);
                     break;
                 case Pages.MyAssetsPage:
-                    currentPage = new MyAssetsPageControl(this);
+                    currentPage = new MyAssetsPageControl(this, message);
                     break;
                 case Pages.UploadAssetPage:
                     currentPage = new UploadAssetPageControl(this);
@@ -153,7 +153,7 @@ namespace DAC627_Project
                     currentPage = new ViewAssetPageControl(this, curSelectedAssetID);
                     break;
                 case Pages.ViewProjectPage:
-                    currentPage = new ViewProjectPageControl(this);
+                    currentPage = new ViewProjectPageControl(this, curSelectedUserProjectID);
                     break;
                 default:
                     return;

@@ -13,6 +13,8 @@ namespace DAC627_Project
     public partial class HomePageControl : UserControl
     {
         FormMain formMain;
+        List<AssetButton> _projectButtons;
+        List<AssetButton> _assetButtons;
 
         public HomePageControl(FormMain form)
         {
@@ -93,11 +95,20 @@ namespace DAC627_Project
         {
             if(e.KeyCode == Keys.Enter)
             {
+                if (_assetButtons != null)
+                {
+                    for (int i = 0; i < _assetButtons.Count; i++)
+                    {
+                        _assetButtons[i].Dispose();
+                        this.Controls.Remove(_assetButtons[i]);
+                    }
+                }
+
                 DataBaseAccess data = new DataBaseAccess();
                 data.StartConnection();
                 List<UserAsset> userAssets = data.SearchAsset(txtSearchAsset.Text);
                 data.CloseConnection();
-                HelperTools.CreateAssetButtons(new Point(160, 150), formMain, this, userAssets.Count(), 2, userAssets, null);
+                _assetButtons = HelperTools.CreateAssetButtons(new Point(160, 150), formMain, this, userAssets.Count(), 2, userAssets, null);
             }
         }
 
@@ -105,11 +116,20 @@ namespace DAC627_Project
         {
             if (e.KeyCode == Keys.Enter)
             {
+                if (_projectButtons != null)
+                {
+                    for (int i = 0; i < _projectButtons.Count; i++)
+                    {
+                        _projectButtons[i].Dispose();
+                        this.Controls.Remove(_projectButtons[i]);
+                    }
+                }
+
                 DataBaseAccess data = new DataBaseAccess();
                 data.StartConnection();
                 List<UserProject> userProjects = data.SearchProject(txtSearchProject.Text);
                 data.CloseConnection();
-                HelperTools.CreateAssetButtons(new Point(720, 150), formMain, this, userProjects.Count(), 2, null, userProjects);
+                _projectButtons = HelperTools.CreateAssetButtons(new Point(720, 150), formMain, this, userProjects.Count(), 2, null, userProjects);
             }
         }
     }

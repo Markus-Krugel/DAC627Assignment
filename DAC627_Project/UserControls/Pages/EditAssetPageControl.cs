@@ -129,12 +129,33 @@ namespace DAC627_Project
 
             if (errorDetected == false)
             {
-                _curUserAsset.SetAssetTitle(_userAsset.GetAssetTitle());
-                _curUserAsset.SetAssetType(_userAsset.GetAssetType());
-                _curUserAsset.SetSoftwareUsed(_userAsset.GetSoftwareUsed());
-                _curUserAsset.SetPegiRating(_userAsset.GetPegiRating());
-                _curUserAsset.SetAssetStatus(_userAsset.GetAssetStatus());
-                _curUserAsset.SetNotes(_userAsset.GetNotes());
+                //_curUserAsset.SetAssetTitle(_userAsset.GetAssetTitle());
+                //_curUserAsset.SetAssetType(_userAsset.GetAssetType());
+                //_curUserAsset.SetSoftwareUsed(_userAsset.GetSoftwareUsed());
+                //_curUserAsset.SetPegiRating(_userAsset.GetPegiRating());
+                //_curUserAsset.SetAssetStatus(_userAsset.GetAssetStatus());
+                //_curUserAsset.SetNotes(_userAsset.GetNotes());
+
+                DataBaseAccess dataBase = new DataBaseAccess();
+                dataBase.StartConnection();
+                if (_curUserAsset.GetAssetTitle() != _userAsset.GetAssetTitle())
+                    dataBase.ChangeAssetName((int)_userAssetID, _userAsset.GetAssetTitle());
+
+                if (_curUserAsset.GetAssetType() != _userAsset.GetAssetType())
+                    dataBase.ChangeAssetTag((int)_userAssetID, _userAsset.GetAssetType());
+
+                if (_curUserAsset.GetSoftwareUsed() != _userAsset.GetSoftwareUsed())
+                    dataBase.ChangeAssetSoftware((int)_userAssetID, _userAsset.GetSoftwareUsed());
+
+
+
+
+                if (_curUserAsset.GetNotes() != _userAsset.GetNotes())
+                    dataBase.ChangeAssetNotes((int)_userAssetID, _userAsset.GetNotes());
+
+                dataBase.CloseConnection();
+
+
                 formMain.curSelectedAssetID = _userAssetID;
                 formMain.ChangeToPage(FormMain.Pages.ViewAssetPage);
             }

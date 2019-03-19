@@ -15,11 +15,14 @@ namespace DAC627_Project
         FormMain formMain;
         private UserProject _userProject = new UserProject(null);
         private UserProject _curUserProject = null;
+        private int? _curUserProjectID;
 
         public EditProjectPageControl(FormMain form, int? curUserProjectID)
         {
             InitializeComponent();
             formMain = form;
+            _curUserProjectID = curUserProjectID;
+
             if (formMain.UsersAccounts.GetCurrentUser() != null)
             {
                 DataBaseAccess dataBase = new DataBaseAccess();
@@ -91,9 +94,20 @@ namespace DAC627_Project
 
             if (errorDetected == false)
             {
-                _curUserProject.SetProjectTitle(_userProject.GetProjectTitle());
-                _curUserProject.SetProjectType(_userProject.GetProjectType());
-                _curUserProject.SetNotes(_userProject.GetNotes());
+
+                DataBaseAccess dataBase = new DataBaseAccess();
+                dataBase.StartConnection();
+                if (_curUserProject.GetProjectTitle() != _userProject.GetProjectTitle())
+                    dataBase.ChangeProjectName((int)_curUserProjectID, _userProject.GetProjectTitle());
+
+                if (_curUserProject.GetProjectType() != _userProject.GetProjectType())
+                    dataBase.ChangeProjectType((int)_curUserProjectID, _userProject.GetProjectType());
+
+                if (_curUserProject.GetNotes() != _userProject.GetNotes())
+                    dataBase.ChangeProjectDescription((int)_curUserProjectID, _userProject.GetNotes());
+
+                dataBase.CloseConnection();
+
                 formMain.curSelectedUserProjectID = _userProject.GetID();
                 formMain.ChangeToPage(FormMain.Pages.ViewProjectPage);
             }

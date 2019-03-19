@@ -80,9 +80,8 @@
             this.lblTitleDisplay.AutoSize = true;
             this.lblTitleDisplay.Location = new System.Drawing.Point(1179, 96);
             this.lblTitleDisplay.Name = "lblTitleDisplay";
-            this.lblTitleDisplay.Size = new System.Drawing.Size(33, 13);
+            this.lblTitleDisplay.Size = new System.Drawing.Size(0, 13);
             this.lblTitleDisplay.TabIndex = 21;
-            this.lblTitleDisplay.Text = "Penis";
             // 
             // lblCreator
             // 

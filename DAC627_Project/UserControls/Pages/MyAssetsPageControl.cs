@@ -30,7 +30,7 @@ namespace DAC627_Project
             dataBase.StartConnection();
             if (message == "project")
             {
-                curUserProjects = dataBase.getProjectsOfUser((int)formMain.UsersAccounts.GetCurrentUser().GetUserID());
+                curUserProjects = dataBase.getOwnedProjectsOfUser((int)formMain.UsersAccounts.GetCurrentUser().GetUserID());
             }
             else if (message == "asset")
             {
@@ -38,7 +38,7 @@ namespace DAC627_Project
             }
             dataBase.CloseConnection();
 
-            if (curUserAssets != null && message == "asset")
+            if (curUserAssets != null && message == "asset") 
             {
                 HelperTools.CreateAssetButtons(new Point(48, 104), formMain, this, curUserAssets.Count, 5, curUserAssets);
             }

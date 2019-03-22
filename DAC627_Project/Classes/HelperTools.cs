@@ -50,7 +50,9 @@ namespace DAC627_Project
         {
             const int _distancePerAssetButtonX = 248;
             const int _distancePerAssetButtonY = 280;
-            int rowLimit = 0; 
+            int rowLimit = 0;
+            //This is done so that the value inserted makes sense in our minds, but translates well in the code 
+            amountPerRow--; 
 
             List<AssetButton> listAssetButtons = new List<AssetButton>();
             
@@ -61,11 +63,13 @@ namespace DAC627_Project
                 AssetButton newAssetButton;
                 if (userAssets != null)
                 {
+                    //create user assets
                     newAssetButton = new AssetButton(formMain, userAssets[i].GetID(), true);
                     newAssetButton.SetName(userAssets[i].GetAssetTitle());
                 }
                 else if (userProjects != null)
                 {
+                    //Create user projects
                     newAssetButton = new AssetButton(formMain, userProjects[i].GetID(), false);
                     newAssetButton.SetName(userProjects[i].GetProjectTitle());
                 }
@@ -74,24 +78,23 @@ namespace DAC627_Project
                     return null;
                 }
 
-                
+
+                newAssetButton.Location = new Point(startingLocation.X + (_distancePerAssetButtonX * rowLimit), startingLocation.Y);
 
                 if (rowLimit < amountPerRow)
                 {
-                    newAssetButton.Location = new Point(startingLocation.X + (_distancePerAssetButtonX * rowLimit), startingLocation.Y);
                     rowLimit++;
                 }
                 else
                 {
                     startingLocation.Y += _distancePerAssetButtonY;
                     rowLimit = 0;
-                    newAssetButton.Location = new Point(startingLocation.X + (_distancePerAssetButtonX * rowLimit), startingLocation.Y);
                 }
-                newAssetButton.Show();
 
+                newAssetButton.Show();
                 curPage.Controls.Add(newAssetButton);
                 listAssetButtons.Add(newAssetButton);
-                
+
             }
 
             return listAssetButtons;

@@ -22,7 +22,7 @@ namespace DAC627_Project
             InitializeComponent();
 
             //use this in order to display the user control of your choice...
-            ChangeToPage(Pages.LoginPage);
+            ChangeToPage(Pages.MessagingPage);
         }
 
         private void picHomeButton_Click(object sender, EventArgs e)
@@ -105,6 +105,7 @@ namespace DAC627_Project
             TestPage,
             ViewAssetPage,
             ViewProjectPage,
+            MessagingPage
         }
 
         public void ChangeToPage(Pages _page, string message = null)
@@ -154,6 +155,9 @@ namespace DAC627_Project
                     break;
                 case Pages.ViewProjectPage:
                     currentPage = new ViewProjectPageControl(this, curSelectedUserProjectID);
+                    break;
+                case Pages.MessagingPage:
+                    currentPage = new MessagingPageControl(this);
                     break;
                 default:
                     return;

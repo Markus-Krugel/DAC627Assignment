@@ -99,6 +99,12 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Classes\UsersAccounts.cs" />
+    <Compile Include="UserControls\Pages\MessagingPageControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Pages\MessagingPageControl.Designer.cs">
+      <DependentUpon>MessagingPageControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Pages\MyAssetsPageControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -141,6 +147,24 @@
     <Compile Include="UserControls\Prefabs\AssetButton.Designer.cs">
       <DependentUpon>AssetButton.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Prefabs\Message.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Prefabs\Message.Designer.cs">
+      <DependentUpon>Message.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Prefabs\MessageAccountButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Prefabs\MessageAccountButton.Designer.cs">
+      <DependentUpon>MessageAccountButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Prefabs\MessageHistory.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Prefabs\MessageHistory.Designer.cs">
+      <DependentUpon>MessageHistory.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Prefabs\PictureGallery.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -174,6 +198,9 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Pages\MessagingPageControl.resx">
+      <DependentUpon>MessagingPageControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Pages\MyAssetsPageControl.resx">
       <DependentUpon>MyAssetsPageControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -194,6 +221,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Prefabs\AssetButton.resx">
       <DependentUpon>AssetButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Prefabs\Message.resx">
+      <DependentUpon>Message.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Prefabs\MessageAccountButton.resx">
+      <DependentUpon>MessageAccountButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Prefabs\MessageHistory.resx">
+      <DependentUpon>MessageHistory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Prefabs\PictureGallery.resx">
       <DependentUpon>PictureGallery.cs</DependentUpon>

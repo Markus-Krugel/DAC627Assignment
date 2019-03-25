@@ -72,7 +72,8 @@ namespace DAC627_Project
 
         #region search commands
 
-        public List<DatabaseProject> SearchProject(String name = null, ProjectType typeSearch = ProjectType.Null, ProjectTag tagSearch = ProjectTag.Null, ProjectStatus statusSearch = ProjectStatus.Null)
+        public List<DatabaseProject> SearchProject(String name = null, ProjectType typeSearch = ProjectType.Null, 
+            ProjectTag tagSearch = ProjectTag.Null, ProjectStatus statusSearch = ProjectStatus.Null)
         {
             try
             {
@@ -103,11 +104,11 @@ namespace DAC627_Project
                         commandtext += "AND Type = '" + typeSearch + "' ";
                     if (tagSearch != ProjectTag.Null && !added)
                     {
-                        commandtext += "Tag = '" + tagSearch + "' ";
+                        commandtext += "UCase(Tags) like UCase('%" + tagSearch + "%')";
                         added = true;
                     }
                     else if(tagSearch != ProjectTag.Null)
-                        commandtext += "AND Tag = '" + tagSearch + "' ";
+                        commandtext += "AND UCase(Tags) like UCase('%" + tagSearch + "%')";
                     if (statusSearch != ProjectStatus.Null && !added)
                         commandtext += "Status = '" + statusSearch + "' ";
                     else if(statusSearch != ProjectStatus.Null)
@@ -120,21 +121,21 @@ namespace DAC627_Project
 
                 while (reader.Read())
                 {
-                    int id = reader.GetInt32(0);
-                    string projectname = reader.GetString(1);
+                    int id = int.Parse(reader["ID"].ToString());
+                    string projectname = reader["Projectname"].ToString();
                     ProjectType type;
-                    ProjectTag tag;
                     ProjectStatus status;
 
-                    Enum.TryParse<ProjectType>(reader.GetString(2), out type);
-                    string description = reader.GetString(3);
-                    int ownerID = reader.GetInt32(4);
-                    Enum.TryParse<ProjectTag>(reader.GetString(5), out tag);
-                    Enum.TryParse<ProjectStatus>(reader.GetString(6), out status);
+                    type = (ProjectType)Enum.Parse(typeof(ProjectType), reader["Type"].ToString());
+                    string tags = reader["Tags"].ToString();
+                    string description = reader["Description"].ToString();
+                    int ownerID = int.Parse(reader["Owner"].ToString());
+                    status = (ProjectStatus)Enum.Parse(typeof(ProjectStatus), reader["Status"].ToString());
+                    string thumbnail = reader["Thumbnail"].ToString();
 
                     DatabaseUser owner = GetUser(ownerID);
 
-                    result.Add(new DatabaseProject(id, projectname, description, owner, type, status, tag));
+                    result.Add(new DatabaseProject(id, projectname, description, owner, type, status, tags, thumbnail));
                 }
 
                 return result;
@@ -151,7 +152,8 @@ namespace DAC627_Project
             return null;
         }
 
-        public List<DatabaseAsset> SearchAsset(String name = null, AssetType typeSearch = AssetType.Null, AssetStatus statusSearch = AssetStatus.Null, int pegi = 0)
+        public List<DatabaseAsset> SearchAsset(String name = null, string tags = null, AssetType typeSearch = AssetType.Null, 
+            AssetStatus statusSearch = AssetStatus.Null, PegiRating pegi = PegiRating.Null)
         {
             try
             {
@@ -188,9 +190,16 @@ namespace DAC627_Project
                     else if (statusSearch != AssetStatus.Null)
                         commandtext += "AND Status = '" + statusSearch + "' ";
                     if (pegi != 0 && !added)
-                        commandtext += "PegiRating = " + pegi + " ";
+                    {
+                        commandtext += "PegiRating = '" + pegi + "' ";
+                        added = true;
+                    }
+                    else if (pegi != PegiRating.Null)
+                        commandtext += "AND PegiRating = '" + pegi + "' ";
+                    if (pegi != PegiRating.Null && !added)
+                        commandtext += "UCase(Tags) like UCase('%" + tags + "%') ";
                     else if (pegi != 0)
-                        commandtext += "AND PegiRating = " + pegi + " ";
+                        commandtext += "AND UCase(Tags) like UCase('%" + tags + "%') ";
                 }
 
                 command.CommandText = commandtext;
@@ -205,18 +214,35 @@ namespace DAC627_Project
                     AssetType type = AssetType.Image;
                     AssetStatus status = AssetStatus.Completed;
                     String software = "";
-                    int pegiRating = 3;
+                    PegiRating pegiRating = PegiRating._3;
+                    string path = "";
+                    string thumbnail = "";
+                    string galleryOne = "";
+                    string galleryTwo = "";
+                    string galleryThree = "";
+                    string galleryFour = "";
+                    string galleryFive = "";
 
-                    id = reader.GetInt32(0);
-                    assetname = reader.GetString(1);
-                    notes = reader.GetString(3);
-                    Enum.TryParse<AssetStatus>(reader.GetString(4), out status);
-                    Enum.TryParse<AssetType>(reader.GetString(5), out type);
-                    software = reader.GetString(7);
-                    pegiRating = reader.GetInt32(8);
-                    Console.WriteLine();
+                    assetname = reader["Assetname"].ToString();
+                    notes = reader["Notes"].ToString();
+                    status = (AssetStatus)Enum.Parse(typeof(AssetStatus), reader["Status"].ToString());
+                    type = (AssetType)Enum.Parse(typeof(AssetType), reader["Type"].ToString());
+                    software = reader["Software"].ToString();
+                    pegiRating = (PegiRating)Enum.Parse(typeof(PegiRating), reader["PegiRating"].ToString());
+                    tags = reader["Tags"].ToString();
+                    path = reader["AssetPath"].ToString();
+                    thumbnail = reader["ThumbnailPath"].ToString();
+                    galleryOne = reader["GalleryOne"].ToString();
+                    galleryTwo = reader["GalleryTwo"].ToString();
+                    galleryThree = reader["GalleryThree"].ToString();
+                    galleryFour = reader["GalleryFour"].ToString();
+                    galleryFive = reader["GalleryFive"].ToString();
+                    int creatorID = int.Parse(reader["Creator"].ToString());
 
-                    result.Add(new DatabaseAsset(id, assetname, notes, null, type, status, software, pegiRating));
+                    DatabaseUser creator = GetUser(creatorID);
+
+                    result.Add(new DatabaseAsset(id, assetname, notes, creator, type, status, software, path, pegiRating, tags,
+                    thumbnail, galleryOne, galleryTwo, galleryThree, galleryFour, galleryFive));
                 }
 
                 return result;
@@ -245,11 +271,14 @@ namespace DAC627_Project
         /// <param name="username">Tbe username</param>
         /// <param name="type">Type of user (see UserType class)</param>
         /// <param name="status">The current status of the user (see UserStatus class)</param>
+        /// <param name="profilePicture">The path to the profile picture</param>
         /// <returns>Returns the ID of the added User</returns>
-        public int AddUser(string password, string email, string username, UserType type, UserStatus status = UserStatus.Offline)
+        public int AddUser(string password, string email, string username, UserType type, string fullName,
+            UserStatus status = UserStatus.Offline, string profilePicture = "")
         {
-            string commandText = "INSERT INTO [User] (Status, [Password], Email, Username, Type ) VALUES " +
-                                "('" + status + "','" + password + "','" + email + "','" + username + "','" + type + "')";
+            string commandText = "INSERT INTO [User] (Status, [Password], Email, Username, Type, ProfilePicture, FullName ) VALUES " +
+                                "('" + status + "','" + password + "','" + email + "','" + username + "'," +
+                                "'" + type + "','" + profilePicture + "','" + fullName + "')";
 
             bool executed = ExecuteCommand(commandText);
 
@@ -279,11 +308,14 @@ namespace DAC627_Project
         /// <param name="owner">The ID of the project owner</param>
         /// <param name="tag">Tag for the project</param>
         /// <param name="status">The current status of the project</param>
+        /// <param name="thumbnail">The current status of the project</param>
         /// <returns>Returns the ID of the added Project</returns>
-        public int AddProject(string name, ProjectType type, string description, int owner, ProjectTag tag, ProjectStatus status)
+        public int AddProject(string name, ProjectType type, string description, int owner,
+            ProjectTag tag, ProjectStatus status, string thumbnail = "")
         {
-            string commandText = "INSERT INTO Project ( Projectname, Type, Description, Owner, Tag, Status ) VALUES " +
-                                    "('" + name + "','" + type + "','" + description + "','" + owner + "','" + tag + "','" + status + "')";
+            string commandText = "INSERT INTO Project ( Projectname, Type, Description, Owner, Tags, Status, Thumbnail ) VALUES " +
+                                    "('" + name + "','" + type + "','" + description + "','" + owner + "','" + tag + "','" 
+                                    + status + "','" + thumbnail + "')";
 
             bool executed = ExecuteCommand(commandText);
 
@@ -313,11 +345,24 @@ namespace DAC627_Project
         /// <param name="type">Type of asset</param>
         /// <param name="software">The software used to create the asset</param>
         /// <param name="notes">The notes of the asset</param>
+        /// <param name="tags">The tags of the asset</param>
+        /// <param name="assetPath">The path to the asset</param>
+        /// <param name="thumbnail">The pathfile to the thumbnail picture</param>
+        /// <param name="galleryOne">The path to the first gallery picture</param>
+        /// <param name="galleryTwo">The path to the second gallery picture</param>
+        /// <param name="galleryThree">The path to the third gallery picture</param>
+        /// <param name="galleryFour">The path to the fourth gallery picture</param>
+        /// <param name="galleryFive">The path to the fifth gallery picture</param>
         /// <returns>Returns the ID of the added Asset</returns>
-        public int AddAsset(string name, int creator, AssetStatus status, AssetType type, string software, string notes = "1.0")
+        public int AddAsset(string name, int creator, AssetStatus status, AssetType type, 
+            string software, string notes, string tags, PegiRating pegi, string assetPath = "", string thumbnail = "", 
+            string galleryOne = "", string galleryTwo = "", string galleryThree = "", string galleryFour = "", string galleryFive = "")
         {
-            string commandText = "INSERT INTO Asset ( Assetname, Creator, Notes, Status, Type, Software ) VALUES " +
-                                    "('" + name + "'," + creator + ",'" + notes + "','" + status + "','" + type + "', '"+ software +"')";
+            string commandText = "INSERT INTO Asset ( Assetname, Creator, Notes, Status, Type, Software, Tags, PegiRating," +
+                "AssetPath, ThumbnailPath, GalleryOne, GalleryTwo, GalleryThree, GalleryFour, GalleryFive ) VALUES " +
+                                    "('" + name + "'," + creator + ",'" + notes + "','" + status + "','" + type + "', '"+ software +"'" +
+                                    ",'" + tags + "','" + pegi + "','" + assetPath + "','" + thumbnail + "','" + galleryOne + "" +
+                                    "','" + galleryTwo + "','" + galleryThree + "','" + galleryFour + "','" + galleryFive + "')";
 
             bool executed = ExecuteCommand(commandText);
 
@@ -337,6 +382,25 @@ namespace DAC627_Project
             }
 
             return id;
+        }
+
+        /// <summary>
+        /// Adds a message to the database
+        /// </summary>
+        /// <param name="senderID">The ID of the sender</param>
+        /// <param name="receiverID">The ID of the receiving user</param>
+        /// <param name="message">The message text</param>
+        /// <param name="sended">The date when the message was sended</param>
+        /// <param name="type">The type of message</param>
+        public void AddMessage(int senderID, int receiverID, string message, DateTime sended, MessageType type)
+        {
+            // Removes miliseconds as it causes data type mismatch
+            DateTime time = new DateTime(sended.Year, sended.Month, sended.Day, sended.Hour, sended.Minute, sended.Second);
+
+            string commandText = "INSERT INTO Messages ( Sender, Receiver, Message, Type, SendedDate) VALUES " +
+                                    "('" + senderID + "','" + receiverID + "','" + message + "','" + type + "','" + time+ "')";
+
+            ExecuteCommand(commandText);
         }
 
         /// <summary>
@@ -395,6 +459,13 @@ namespace DAC627_Project
             ExecuteCommand(command);
         }
 
+        public void DeleteMessage(int messageID)
+        {
+            string command = "DELETE FROM [Messages] WHERE ID = " + messageID;
+
+            ExecuteCommand(command);
+        }
+
         #endregion
 
         #region Remove Commands
@@ -441,22 +512,26 @@ namespace DAC627_Project
         
             OleDbDataReader reader = command.ExecuteReader();
 
-             string password = "";
-             string email = "";
-             int id = 1;
-             UserStatus status = UserStatus.Offline;
-             UserType type = UserType.Developer;
+            string password = "";
+            string email = "";
+            int id = 1;
+            UserStatus status = UserStatus.Offline;
+            UserType type = UserType.Developer;
+            string profile = "";
+            string fullName = "";
 
-             while (reader.Read())
-             {
-                 id = reader.GetInt32(0);
-                 Enum.TryParse<UserStatus>(reader.GetString(1), out status);
-                 password = reader.GetString(2);
-                 email = reader.GetString(3);
-                 Enum.TryParse<UserType>(reader.GetString(5), out type);
-             }
+            while (reader.Read())
+            {
+                id = int.Parse(reader["ID"].ToString());
+                status = (UserStatus)Enum.Parse(typeof(UserStatus), reader["Status"].ToString());
+                password = reader["Password"].ToString();
+                email = reader["Email"].ToString();
+                type = (UserType)Enum.Parse(typeof(UserType), reader["Type"].ToString());
+                profile = reader["ProfilePicture"].ToString();
+                fullName = reader["FullName"].ToString();
+            }
 
-             return new DatabaseUser(id, username, password, email, type, status);
+            return new DatabaseUser(id, username, password, email, type, status, profile, fullName);
         }
 
         /// <summary>
@@ -474,22 +549,27 @@ namespace DAC627_Project
 
                 OleDbDataReader reader = command.ExecuteReader();
 
+                string username = "";
                 string password = "";
                 string email = "";
-                string username = "";
                 UserStatus status = UserStatus.Offline;
                 UserType type = UserType.Developer;
+                string profile = "";
+                string fullName = "";
 
                 while (reader.Read())
                 {
-                    Enum.TryParse<UserStatus>(reader.GetString(1), out status);
-                    password = reader.GetString(2);
-                    email = reader.GetString(3);
-                    username = reader.GetString(4);
-                    Enum.TryParse<UserType>(reader.GetString(5), out type);
+                    id = int.Parse(reader["ID"].ToString());
+                    status = (UserStatus)Enum.Parse(typeof(UserStatus), reader["Status"].ToString());
+                    password = reader["Password"].ToString();
+                    email = reader["Email"].ToString();
+                    type = (UserType)Enum.Parse(typeof(UserType), reader["Type"].ToString());
+                    profile = reader["ProfilePicture"].ToString();
+                    username = reader["Username"].ToString();
+                    fullName = reader["FullName"].ToString();
                 }
 
-                return new DatabaseUser(id, username, password, email, type, status);
+                return new DatabaseUser(id, username, password, email, type, status, profile, fullName);
             }
             catch (Exception e)
             {
@@ -516,23 +596,26 @@ namespace DAC627_Project
                 int id = 1;
                 string description = "";
                 int ownerID = 1;
+                string tags = "";
+                string thumbnail = "";
                 ProjectType type = ProjectType.Game;
                 ProjectStatus status = ProjectStatus.Completed;
-                ProjectTag tag = ProjectTag.Game;
 
                 while (reader.Read())
                 {
-                    id = reader.GetInt32(0);
-                    Enum.TryParse<ProjectType>(reader.GetString(2), out type);
-                    description = reader.GetString(3);
-                    ownerID = reader.GetInt32(4);
-                    Enum.TryParse<ProjectTag>(reader.GetString(5), out tag);
-                    Enum.TryParse<ProjectStatus>(reader.GetString(6), out status);
+                    id = int.Parse(reader["ID"].ToString());
+
+                    type = (ProjectType)Enum.Parse(typeof(ProjectType), reader["Type"].ToString());
+                    tags = reader["Tags"].ToString();
+                    description = reader["Description"].ToString();
+                    ownerID = int.Parse(reader["Owner"].ToString());
+                    status = (ProjectStatus)Enum.Parse(typeof(ProjectStatus), reader["Status"].ToString());
+                    thumbnail = reader["Thumbnail"].ToString();
                 }
 
                 DatabaseUser owner = GetUser(ownerID);
 
-                return new DatabaseProject(id, projectname, description, owner, type, status, tag);
+                return new DatabaseProject(id, projectname, description, owner, type, status, tags, thumbnail);
             }
 
             catch (Exception e)
@@ -560,26 +643,30 @@ namespace DAC627_Project
 
                 OleDbDataReader reader = command.ExecuteReader();
 
-                string projectName = "";
+                string projectname = "";
                 string description = "";
                 int ownerID = 1;
+                string tags = "";
+                string thumbnail = "";
                 ProjectType type = ProjectType.Game;
                 ProjectStatus status = ProjectStatus.Completed;
                 ProjectTag tag = ProjectTag.Game;
 
                 while (reader.Read())
                 {
-                    projectName = reader.GetString(1);
-                    Enum.TryParse<ProjectType>(reader.GetString(2), out type);
-                    description = reader.GetString(3);
-                    ownerID = reader.GetInt32(4);
-                    Enum.TryParse<ProjectTag>(reader.GetString(5), out tag);
-                    Enum.TryParse<ProjectStatus>(reader.GetString(6), out status);
+                    projectname = reader["Projectname"].ToString();
+
+                    type = (ProjectType)Enum.Parse(typeof(ProjectType), reader["Type"].ToString());
+                    tags = reader["Tags"].ToString();
+                    description = reader["Description"].ToString();
+                    ownerID = int.Parse(reader["Owner"].ToString());
+                    status = (ProjectStatus)Enum.Parse(typeof(ProjectStatus), reader["Status"].ToString());
+                    thumbnail = reader["Thumbnail"].ToString();
                 }
 
                 DatabaseUser owner = GetUser(ownerID);
 
-                return new DatabaseProject(projectID, projectName, description, owner, type, status, tag);
+                return new DatabaseProject(projectID, projectname, description, owner, type, status, tags, thumbnail);
             }
 
             catch (Exception e)
@@ -607,29 +694,48 @@ namespace DAC627_Project
 
                 OleDbDataReader reader = command.ExecuteReader();
 
-                int id = 1;
+                int assetID = 0;
                 string notes = "";
                 int creatorID = 1;
                 AssetType type = AssetType.Image;
                 AssetStatus status = AssetStatus.Completed;
                 String software = "";
-                int pegiRating = 3;
+                PegiRating pegiRating = PegiRating._3;
+                string tags = "";
+                string path = "";
+                string thumbnail = "";
+                string galleryOne = "";
+                string galleryTwo = "";
+                string galleryThree = "";
+                string galleryFour = "";
+                string galleryFive = "";
 
                 while (reader.Read())
                 {
-                    id = reader.GetInt32(0);
-                    creatorID = reader.GetInt32(2);
-                    notes = (reader.GetString(7));
-                    Enum.TryParse<AssetStatus>(reader.GetString(3), out status);
-                    Enum.TryParse<AssetType>(reader.GetString(4), out type);
-                    software = reader.GetString(5);
-                    pegiRating = reader.GetInt32(8);
-                    Console.WriteLine();                    
+                    assetID = int.Parse(reader["ID"].ToString());
+                    assetname = reader["Assetname"].ToString();
+                    creatorID = int.Parse(reader["Creator"].ToString());
+                    notes = reader["Notes"].ToString();
+                    status = (AssetStatus)Enum.Parse(typeof(AssetStatus), reader["Status"].ToString());
+                    type = (AssetType)Enum.Parse(typeof(AssetType), reader["Type"].ToString());
+                    software = reader["Software"].ToString();
+                    pegiRating = (PegiRating)Enum.Parse(typeof(PegiRating), reader["PegiRating"].ToString());
+                    tags = reader["Tags"].ToString();
+                    path = reader["AssetPath"].ToString();
+                    thumbnail = reader["ThumbnailPath"].ToString();
+                    galleryOne = reader["GalleryOne"].ToString();
+                    galleryTwo = reader["GalleryTwo"].ToString();
+                    galleryThree = reader["GalleryThree"].ToString();
+                    galleryFour = reader["GalleryFour"].ToString();
+                    galleryFive = reader["GalleryFive"].ToString();
+
+                    Console.WriteLine();
                 }
 
                 DatabaseUser creator = GetUser(creatorID);
 
-                return new DatabaseAsset(id, assetname, notes, creator, type, status, software, pegiRating);
+                return new DatabaseAsset(assetID, assetname, notes, creator, type, status, software, path, pegiRating, tags,
+                    thumbnail, galleryOne, galleryTwo, galleryThree, galleryFour, galleryFive);
             }
 
             catch (Exception e)
@@ -663,23 +769,41 @@ namespace DAC627_Project
                 AssetType type = AssetType.Image;
                 AssetStatus status = AssetStatus.Completed;
                 String software = "";
-                int pegiRating = 3;
+                PegiRating pegiRating = PegiRating._3;
+                string tags = "";
+                string path = "";
+                string thumbnail = "";
+                string galleryOne = "";
+                string galleryTwo = "";
+                string galleryThree = "";
+                string galleryFour = "";
+                string galleryFive = "";
 
                 while (reader.Read())
                 {
-                    assetname = reader.GetString(1);
-                    creatorID = reader.GetInt32(2);
-                    notes = (reader.GetString(7));
-                    Enum.TryParse<AssetStatus>(reader.GetString(3), out status);
-                    Enum.TryParse<AssetType>(reader.GetString(4), out type);
-                    software = reader.GetString(5);
-                    pegiRating = reader.GetInt32(8);
+                    assetname = reader["Assetname"].ToString();
+                    creatorID = int.Parse(reader["Creator"].ToString());
+                    notes = reader["Notes"].ToString();
+                    status = (AssetStatus) Enum.Parse(typeof(AssetStatus) , reader["Status"].ToString());
+                    type = (AssetType)Enum.Parse(typeof(AssetType), reader["Type"].ToString());
+                    software = reader["Software"].ToString();
+                    pegiRating = (PegiRating)Enum.Parse(typeof(PegiRating), reader["PegiRating"].ToString());
+                    tags = reader["Tags"].ToString();
+                    path = reader["AssetPath"].ToString();
+                    thumbnail = reader["ThumbnailPath"].ToString();
+                    galleryOne = reader["GalleryOne"].ToString();
+                    galleryTwo = reader["GalleryTwo"].ToString();
+                    galleryThree = reader["GalleryThree"].ToString();
+                    galleryFour = reader["GalleryFour"].ToString();
+                    galleryFive = reader["GalleryFive"].ToString();
+
                     Console.WriteLine();
                 }
 
                 DatabaseUser creator = GetUser(creatorID);
 
-                return new DatabaseAsset(assetID, assetname, notes, creator, type, status, software, pegiRating);
+                return new DatabaseAsset(assetID, assetname, notes, creator, type, status, software, path, pegiRating, tags,
+                    thumbnail, galleryOne, galleryTwo, galleryThree, galleryFour, galleryFive);
             }
 
             catch (Exception e)
@@ -688,6 +812,100 @@ namespace DAC627_Project
             }
 
             Console.WriteLine();
+
+            return null;
+        }
+
+        /// <summary>
+        /// Get all messages sended by the user
+        /// </summary>
+        /// <param name="userID">The ID of the user</param>
+        /// <returns>The list of the messages</returns>
+        public List<DatabaseMessage> GetSendedMessages(int userID)
+        {
+            try
+            {
+                OleDbCommand command = new OleDbCommand();
+                command.Connection = connection;
+                command.CommandText = "SELECT Messages.* FROM[Messages] WHERE Sender = "+ userID;
+
+                OleDbDataReader reader = command.ExecuteReader();
+
+                List<DatabaseMessage> messages = new List<DatabaseMessage>();
+
+                int receiverID = 0;
+                string message = "";
+                int messageID = 1;
+                int senderID = 0;
+                DateTime sended = DateTime.MinValue;
+                MessageType type = MessageType.Invite;   
+
+                while (reader.Read())
+                {
+                    messageID = int.Parse(reader["ID"].ToString());
+                    receiverID = int.Parse(reader["Receiver"].ToString());
+                    senderID = int.Parse(reader["Sender"].ToString());
+                    message = reader["Message"].ToString();
+                    type = (MessageType)Enum.Parse(typeof(MessageType), reader["Type"].ToString());
+                    sended = Convert.ToDateTime(reader["SendedDate"]);
+
+                    messages.Add(new DatabaseMessage(senderID, receiverID, message, sended, type));
+                }
+
+                return messages;
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Get all messages for the user
+        /// </summary>
+        /// <param name="userID">The ID of the user</param>
+        /// <returns>The list of the messages</returns>
+        public List<DatabaseMessage> GetReceivedMessages(int userID)
+        {
+            try
+            {
+                OleDbCommand command = new OleDbCommand();
+                command.Connection = connection;
+                command.CommandText = "SELECT Messages.* FROM[Messages] WHERE Receiver = " + userID;
+
+                OleDbDataReader reader = command.ExecuteReader();
+
+                List<DatabaseMessage> messages = new List<DatabaseMessage>();
+
+                int receiverID = 0;
+                int senderID = 0;
+                string message = "";
+                int messageID = 1;
+                DateTime sended = DateTime.MinValue;
+                MessageType type = MessageType.Invite;
+
+                while (reader.Read())
+                {
+                    messageID = int.Parse(reader["ID"].ToString());
+                    receiverID = int.Parse(reader["Receiver"].ToString());
+                    senderID = int.Parse(reader["Sender"].ToString());
+                    message = reader["Message"].ToString();
+                    type = (MessageType)Enum.Parse(typeof(MessageType), reader["Type"].ToString());
+                    sended = Convert.ToDateTime(reader["SendedDate"]);
+
+                    messages.Add(new DatabaseMessage(senderID, receiverID, message, sended, type));
+                }
+
+                return messages;
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
 
             return null;
         }
@@ -711,24 +929,44 @@ namespace DAC627_Project
 
                 while (reader.Read())
                 {
-                    int id = 1;
+                    int assetID = 0;
                     string assetname = "";
                     string notes = "";
+                    int creatorID = 1;
                     AssetType type = AssetType.Image;
                     AssetStatus status = AssetStatus.Completed;
                     String software = "";
-                    int pegiRating = 3;
+                    PegiRating pegiRating = PegiRating._3;
+                    string tags = "";
+                    string path = "";
+                    string thumbnail = "";
+                    string galleryOne = "";
+                    string galleryTwo = "";
+                    string galleryThree = "";
+                    string galleryFour = "";
+                    string galleryFive = "";
 
-                    id = reader.GetInt32(0);
-                    assetname = reader.GetString(1);
-                    notes = reader.GetString(3);
-                    Enum.TryParse<AssetStatus>(reader.GetString(4), out status);
-                    Enum.TryParse<AssetType>(reader.GetString(5), out type);
-                    software = reader.GetString(7);
-                    pegiRating = reader.GetInt32(8);
-                    Console.WriteLine();
+                    assetID = int.Parse(reader["ID"].ToString());
+                    assetname = reader["Assetname"].ToString();
+                    creatorID = int.Parse(reader["Creator"].ToString());
+                    notes = reader["Notes"].ToString();
+                    status = (AssetStatus)Enum.Parse(typeof(AssetStatus), reader["Status"].ToString());
+                    type = (AssetType)Enum.Parse(typeof(AssetType), reader["Type"].ToString());
+                    software = reader["Software"].ToString();
+                    pegiRating = (PegiRating)Enum.Parse(typeof(PegiRating), reader["PegiRating"].ToString());
+                    tags = reader["Tags"].ToString();
+                    path = reader["AssetPath"].ToString();
+                    thumbnail = reader["ThumbnailPath"].ToString();
+                    galleryOne = reader["GalleryOne"].ToString();
+                    galleryTwo = reader["GalleryTwo"].ToString();
+                    galleryThree = reader["GalleryThree"].ToString();
+                    galleryFour = reader["GalleryFour"].ToString();
+                    galleryFive = reader["GalleryFive"].ToString();
 
-                    result.Add(new DatabaseAsset(id, assetname, notes, null, type, status, software, pegiRating));
+                    DatabaseUser creator = GetUser(creatorID);
+
+                    result.Add(new DatabaseAsset(assetID, assetname, notes, creator, type, status, software, path, pegiRating, tags,
+                        thumbnail, galleryOne, galleryTwo, galleryThree, galleryFour, galleryFive));
                 }
 
                 return result;
@@ -767,21 +1005,27 @@ namespace DAC627_Project
 
                 while (reader.Read())
                 {
-                    int id = 1;
-                    string projectName = "";
+                    int projectID = 0;
+                    string projectname = "";
                     string description = "";
+                    int ownerID = 1;
+                    string tags = "";
+                    string thumbnail = "";
                     ProjectType type = ProjectType.Game;
                     ProjectStatus status = ProjectStatus.Completed;
-                    ProjectTag tag = ProjectTag.Game;
 
-                    id = reader.GetInt32(0);
-                    projectName = reader.GetString(1);
-                    Enum.TryParse<ProjectType>(reader.GetString(2), out type);
-                    description = reader.GetString(3);
-                    Enum.TryParse<ProjectTag>(reader.GetString(5), out tag);
-                    Enum.TryParse<ProjectStatus>(reader.GetString(6), out status);
+                    projectID = int.Parse(reader["ID"].ToString());
+                    projectname = reader["Projectname"].ToString();
+                    type = (ProjectType)Enum.Parse(typeof(ProjectType), reader["Type"].ToString());
+                    tags = reader["Tags"].ToString();
+                    description = reader["Description"].ToString();
+                    ownerID = int.Parse(reader["Owner"].ToString());
+                    status = (ProjectStatus)Enum.Parse(typeof(ProjectStatus), reader["Status"].ToString());
+                    thumbnail = reader["Thumbnail"].ToString();
 
-                    result.Add(new DatabaseProject(id, projectName, description, null, type, status, tag));
+                    DatabaseUser owner = GetUser(ownerID);
+
+                    result.Add(new DatabaseProject(projectID, projectname, description, owner, type, status, tags, thumbnail));
                 }
 
                 return result;
@@ -820,24 +1064,44 @@ namespace DAC627_Project
 
                 while (reader.Read())
                 {
-                    int id = 1;
+                    int assetID = 0;
                     string assetname = "";
                     string notes = "";
+                    int creatorID = 1;
                     AssetType type = AssetType.Image;
                     AssetStatus status = AssetStatus.Completed;
                     String software = "";
-                    int pegiRating = 3;
+                    PegiRating pegiRating = PegiRating._3;
+                    string tags = "";
+                    string path = "";
+                    string thumbnail = "";
+                    string galleryOne = "";
+                    string galleryTwo = "";
+                    string galleryThree = "";
+                    string galleryFour = "";
+                    string galleryFive = "";
 
-                    id = reader.GetInt32(0);
-                    assetname = reader.GetString(1);
-                    notes = reader.GetString(3);
-                    Enum.TryParse<AssetStatus>(reader.GetString(4), out status);
-                    Enum.TryParse<AssetType>(reader.GetString(5), out type);
-                    software = reader.GetString(7);
-                    pegiRating = reader.GetInt32(8);
-                    Console.WriteLine();
+                    assetID = int.Parse(reader["ID"].ToString());
+                    assetname = reader["Assetname"].ToString();
+                    creatorID = int.Parse(reader["Creator"].ToString());
+                    notes = reader["Notes"].ToString();
+                    status = (AssetStatus)Enum.Parse(typeof(AssetStatus), reader["Status"].ToString());
+                    type = (AssetType)Enum.Parse(typeof(AssetType), reader["Type"].ToString());
+                    software = reader["Software"].ToString();
+                    pegiRating = (PegiRating)Enum.Parse(typeof(PegiRating), reader["PegiRating"].ToString());
+                    tags = reader["Tags"].ToString();
+                    path = reader["AssetPath"].ToString();
+                    thumbnail = reader["ThumbnailPath"].ToString();
+                    galleryOne = reader["GalleryOne"].ToString();
+                    galleryTwo = reader["GalleryTwo"].ToString();
+                    galleryThree = reader["GalleryThree"].ToString();
+                    galleryFour = reader["GalleryFour"].ToString();
+                    galleryFive = reader["GalleryFive"].ToString();
 
-                    result.Add(new DatabaseAsset(id, assetname, notes, null, type, status, software, pegiRating));
+                    DatabaseUser creator = GetUser(creatorID);
+
+                    result.Add(new DatabaseAsset(assetID, assetname, notes, creator, type, status, software, path, pegiRating, tags,
+                        thumbnail, galleryOne, galleryTwo, galleryThree, galleryFour, galleryFive));
                 }
 
                 return result;
@@ -882,15 +1146,19 @@ namespace DAC627_Project
                     UserStatus status = UserStatus.Offline;
                     UserType type = UserType.Developer;
                     string username = "";
+                    string profile = "";
+                    string fullName = "";
 
-                    id = reader.GetInt32(0);
-                    Enum.TryParse<UserStatus>(reader.GetString(1), out status);
-                    password = reader.GetString(2);
-                    email = reader.GetString(3);
-                    username = reader.GetString(4);
-                    Enum.TryParse<UserType>(reader.GetString(5), out type);
+                    id = int.Parse(reader["ID"].ToString());
+                    status = (UserStatus)Enum.Parse(typeof(UserStatus), reader["Status"].ToString());
+                    password = reader["Password"].ToString();
+                    email = reader["Email"].ToString();
+                    username = reader["Username"].ToString();
+                    type = (UserType)Enum.Parse(typeof(UserType), reader["Type"].ToString());
+                    profile = reader["ProfilePicture"].ToString();
+                    fullName = reader["FullName"].ToString();
 
-                    result.Add(new DatabaseUser(id, username, password, email, type, status));
+                    result.Add(new DatabaseUser(id, username, password, email, type, status, profile, fullName));
                 }  
 
                 return result;
@@ -926,20 +1194,28 @@ namespace DAC627_Project
                 while (reader.Read())
                 {
 
-                    int id = 1;
-                    string projectName = "";
+                    int projectID = 0;
+                    string projectname = "";
                     string description = "";
+                    int ownerID = 1;
+                    string tags = "";
+                    string thumbnail = "";
                     ProjectType type = ProjectType.Game;
                     ProjectStatus status = ProjectStatus.Completed;
                     ProjectTag tag = ProjectTag.Game;
 
-                    projectName = reader.GetString(1);
-                    Enum.TryParse<ProjectType>(reader.GetString(2), out type);
-                    description = reader.GetString(3);
-                    Enum.TryParse<ProjectTag>(reader.GetString(5), out tag);
-                    Enum.TryParse<ProjectStatus>(reader.GetString(6), out status);
+                    projectID = int.Parse(reader["ID"].ToString());
+                    projectname = reader["Projectname"].ToString();
+                    type = (ProjectType)Enum.Parse(typeof(ProjectType), reader["Type"].ToString());
+                    tags = reader["Tags"].ToString();
+                    description = reader["Description"].ToString();
+                    ownerID = int.Parse(reader["Owner"].ToString());
+                    status = (ProjectStatus)Enum.Parse(typeof(ProjectStatus), reader["Status"].ToString());
+                    thumbnail = reader["Thumbnail"].ToString();
 
-                    result.Add(new DatabaseProject(id, projectName, description, null, type, status, tag));
+                    DatabaseUser owner = GetUser(ownerID);
+
+                    result.Add(new DatabaseProject(projectID, projectname, description, owner, type, status, tags, thumbnail));
                 }
 
                 return result;
@@ -1081,6 +1357,20 @@ namespace DAC627_Project
             ExecuteCommand(commandText);
         }
 
+        public void ChangeUserProfile(int id, string newValue)
+        {
+            string commandText = "UPDATE [User] SET [ProfilePicture] = '" + newValue + "' WHERE ID = " + id + "";
+
+            ExecuteCommand(commandText);
+        }
+
+        public void ChangeUserFullName(int id, string newValue)
+        {
+            string commandText = "UPDATE [User] SET [FullName] = '" + newValue + "' WHERE ID = " + id + "";
+
+            ExecuteCommand(commandText);
+        }
+
         #endregion
 
         #region Change project values
@@ -1182,25 +1472,25 @@ namespace DAC627_Project
         }
 
         /// <summary>
-        /// Changes the Tag of the project
+        /// Changes the Tags of the project
         /// </summary>
         /// <param name="projectname">The name of the project</param>
-        /// <param name="newValue">New tag of the project</param>
-        public void ChangeProjectTag(string projectname, ProjectTag newValue)
+        /// <param name="newValue">New tags of the project</param>
+        public void ChangeProjectTags(string projectname, string newValue)
         {
-            string commandText = "UPDATE [Project] SET Tag = '" + newValue + "' WHERE Projectname = '" + projectname + "'";
+            string commandText = "UPDATE [Project] SET Tags = '" + newValue + "' WHERE Projectname = '" + projectname + "'";
 
             ExecuteCommand(commandText);
         }
 
         /// <summary>
-        /// Changes the Tag of the project
+        /// Changes the Tags of the project
         /// </summary>
         /// <param name="id">The ID of the project</param>
-        /// <param name="newValue">New tag for the project</param>
-        public void ChangeProjectTag(int id, int newValue)
+        /// <param name="newValue">New tags for the project</param>
+        public void ChangeProjectTags(int id, string newValue)
         {
-            string commandText = "UPDATE [Project] SET Tag = '" + newValue + "' WHERE ID = " + id + "";
+            string commandText = "UPDATE [Project] SET Tags = '" + newValue + "' WHERE ID = " + id + "";
 
             ExecuteCommand(commandText);
         }
@@ -1229,6 +1519,12 @@ namespace DAC627_Project
             ExecuteCommand(commandText);
         }
 
+        public void ChangeProjectThumbnail(int id, string newValue)
+        {
+            string commandText = "UPDATE [Project] SET Thumbnail = '" + newValue + "' WHERE ID = " + id + "";
+
+            ExecuteCommand(commandText);
+        }
 
         #endregion
 
@@ -1378,6 +1674,69 @@ namespace DAC627_Project
             ExecuteCommand(commandText);
         }
 
+        public void ChangeAssetPegi(int id, PegiRating newValue)
+        {
+            string commandText = "UPDATE [Asset] SET PegiRating = '" + newValue + "' WHERE ID = " + id + "";
+
+            ExecuteCommand(commandText);
+        }
+
+        public void ChangeAssetTags(int id, string newValue)
+        {
+            string commandText = "UPDATE [Asset] SET Tags = '" + newValue + "' WHERE ID = " + id + "";
+
+            ExecuteCommand(commandText);
+        }
+
+        public void ChangeAssetPath(int id, string newValue)
+        {
+            string commandText = "UPDATE [Asset] SET AssetPath = '" + newValue + "' WHERE ID = " + id + "";
+
+            ExecuteCommand(commandText);
+        }
+
+        public void ChangeAssetThumbnail(int id, string newValue)
+        {
+            string commandText = "UPDATE [Asset] SET ThumbnailPath = '" + newValue + "' WHERE ID = " + id + "";
+
+            ExecuteCommand(commandText);
+        }
+
+        public void ChangeAssetGalleryOne(int id, string newValue)
+        {
+            string commandText = "UPDATE [Asset] SET GalleryOne = '" + newValue + "' WHERE ID = " + id + "";
+
+            ExecuteCommand(commandText);
+        }
+
+        public void ChangeAssetGalleryTwo(int id, string newValue)
+        {
+            string commandText = "UPDATE [Asset] SET GalleryTwo = '" + newValue + "' WHERE ID = " + id + "";
+
+            ExecuteCommand(commandText);
+        }
+
+        public void ChangeAssetGalleryThree(int id, string newValue)
+        {
+            string commandText = "UPDATE [Asset] SET GalleryThree = '" + newValue + "' WHERE ID = " + id + "";
+
+            ExecuteCommand(commandText);
+        }
+
+        public void ChangeAssetGalleryFour(int id, string newValue)
+        {
+            string commandText = "UPDATE [Asset] SET GalleryFour = '" + newValue + "' WHERE ID = " + id + "";
+
+            ExecuteCommand(commandText);
+        }
+
+        public void ChangeAssetGalleryFive(int id, string newValue)
+        {
+            string commandText = "UPDATE [Asset] SET GalleryFive = '" + newValue + "' WHERE ID = " + id + "";
+
+            ExecuteCommand(commandText);
+        }
+
         #endregion
 
         #endregion
@@ -1398,12 +1757,14 @@ namespace DAC627_Project
                 OleDbDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    Console.Write(reader.GetInt32(0) + ", ");
-                    Console.Write(reader.GetString(1) + ", ");
-                    Console.Write(reader.GetString(2) + ", ");
-                    Console.Write(reader.GetString(3) + ", ");
-                    Console.Write(reader.GetString(4) + ", ");
-                    Console.Write(reader.GetString(5));
+                    Console.Write(reader["ID"].ToString() + ", ");
+                    Console.Write(reader["Status"].ToString() + ", ");
+                    Console.Write(reader["Password"].ToString() + ", ");
+                    Console.Write(reader["Email"].ToString() + ", ");
+                    Console.Write(reader["Username"].ToString() + ", ");
+                    Console.Write(reader["Type"].ToString() + ", ");
+                    Console.Write(reader["ProfilePicture"].ToString());
+                    Console.WriteLine(reader["FullName"].ToString());
                     Console.WriteLine();
                 }
             }
@@ -1430,13 +1791,14 @@ namespace DAC627_Project
                 OleDbDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    Console.Write(reader.GetInt32(0) + ", ");
-                    Console.Write(reader.GetString(1) + ", ");
-                    Console.Write(reader.GetString(2) + ", ");
-                    Console.Write(reader.GetString(3) + ", ");
-                    Console.Write(reader.GetValue(4).ToString() + ", ");
-                    Console.Write(reader.GetString(5) + ", ");
-                    Console.Write(reader.GetString(6));
+                    Console.Write(reader["ID"].ToString() + ", ");
+                    Console.Write(reader["Projectname"].ToString() + ", ");
+                    Console.Write(reader["Type"].ToString() + ", ");
+                    Console.Write(reader["Description"].ToString() + ", ");
+                    Console.Write(reader["Owner"].ToString() + ", ");
+                    Console.Write(reader["Tags"].ToString() + ", ");
+                    Console.Write(reader["Status"].ToString() + ", ");
+                    Console.Write(reader["Thumbnail"].ToString());
                     Console.WriteLine();
                 }
             }
@@ -1463,14 +1825,22 @@ namespace DAC627_Project
                 OleDbDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    Console.Write(reader.GetInt32(0) + ", ");
-                    Console.Write(reader.GetString(1) + ", ");
-                    Console.Write(reader.GetValue(2) + ", ");
-                    Console.Write(reader.GetString(7) + ", ");
-                    Console.Write(reader.GetString(3) + ", ");
-                    Console.Write(reader.GetString(4) + ", ");
-                    Console.Write(reader.GetString(5) + ", ");
-                    Console.Write(reader.GetInt32(8));
+                    Console.Write(reader["ID"].ToString() + ", ");
+                    Console.Write(reader["Assetname"].ToString() + ", ");
+                    Console.Write(reader["Creator"].ToString() + ", ");
+                    Console.Write(reader["Notes"].ToString() + ", ");
+                    Console.Write(reader["Status"].ToString() + ", ");
+                    Console.Write(reader["Type"].ToString() + ", ");
+                    Console.Write(reader["Software"].ToString() + ", ");
+                    Console.Write(reader["PegiRating"].ToString() + ", ");
+                    Console.Write(reader["Tags"].ToString() + ", ");
+                    Console.Write(reader["AssetPath"].ToString() + ", ");
+                    Console.Write(reader["ThumbnailPath"].ToString() + ", ");
+                    Console.Write(reader["GalleryOne"].ToString() + ", ");
+                    Console.Write(reader["GalleryTwo"].ToString() + ", ");
+                    Console.Write(reader["GalleryThree"].ToString() + ", ");
+                    Console.Write(reader["GalleryFour"].ToString() + ", ");
+                    Console.Write(reader["GalleryFive"].ToString());
                     Console.WriteLine();
                 }
             }
@@ -1482,6 +1852,36 @@ namespace DAC627_Project
 
             Console.WriteLine();
         } 
+
+        public void ShowAllMessages()
+        {
+            try
+            {
+                OleDbCommand command = new OleDbCommand();
+                command.Connection = connection;
+                command.CommandText = "SELECT Messages.* FROM[Messages] ";
+
+                OleDbDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    Console.Write(reader["ID"].ToString() + ", ");
+                    Console.Write(reader["Receiver"].ToString() + ", ");
+                    Console.Write(reader["Sender"].ToString() + ", ");
+                    Console.Write(reader["Message"].ToString() + ", ");
+                    Console.Write(reader["SendedDate"].ToString() + ", ");
+                    Console.Write(reader["Type"].ToString() + ", ");
+
+                    Console.WriteLine();
+                }
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+            Console.WriteLine(); 
+        }
 
         #endregion
     }

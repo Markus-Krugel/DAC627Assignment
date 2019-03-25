@@ -13,4 +13,14 @@ namespace DAC627_Project.Enums
         Planning,
         In_Development
     }
+
+    public enum PegiRating
+    {
+        Null,
+        _3,
+        _7,
+        _12,
+        _16,
+        _18
+    }
 }

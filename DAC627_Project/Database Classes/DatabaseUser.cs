@@ -57,8 +57,24 @@ namespace DAC627_Project.Database_Classes
             private set { status = value; }
         }
 
+        private string profilePath;
 
-        public DatabaseUser(int id, string username, string password, string email, UserType type, UserStatus status)
+        public string ProfilePath
+        {
+            get { return profilePath; }
+            private set { profilePath = value; }
+        }
+
+        private string fullName;
+
+        public string FullName
+        {
+            get { return fullName; }
+            private set { fullName = value; }
+        }
+
+        public DatabaseUser(int id, string username, string password, string email, UserType type, UserStatus status, 
+            string profilePath, string fullName)
         {
             ID = id;
             Username = username;
@@ -66,6 +82,8 @@ namespace DAC627_Project.Database_Classes
             Email = email;
             Type = type;
             Status = status;
+            ProfilePath = profilePath;
+            FullName = fullName;
         }
 
         public override string ToString()

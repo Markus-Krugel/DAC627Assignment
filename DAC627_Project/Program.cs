@@ -26,9 +26,12 @@ namespace DAC627_Project
 
             // Commands for adding
 
-            //Console.WriteLine(database.AddUser("Tach", "email@email.com", "Email", UserType.Reviewer));
-            //Console.WriteLine(database.AddAsset("Car", 1, AssetStatus.Planning, AssetType.Sound, "Audacity", "1.3"));
-            //Console.WriteLine(database.AddProject("Game engine 2", ProjectType.Software, "Simple 2D game engine", 2, ProjectTag.Software, ProjectStatus.Planning));
+            //Console.WriteLine(database.AddUser("Tach", "email@email.com", "Email", UserType.Reviewer,"Dieter Email",
+            //    UserStatus.Online, "profile"));
+            //Console.WriteLine(database.AddAsset("Car", 1, AssetStatus.Planning, AssetType.Sound, "Audacity", "1.3","vehicle",
+            //    PegiRating._3, "1", "1", "1", "1", "1", "1", "1"));
+            //Console.WriteLine(database.AddProject("Game engine 2", ProjectType.Software, "Simple 2D game engine", 2, 
+            //    ProjectTag.Software, ProjectStatus.Planning,"thumbnail"));
 
 
 
@@ -99,12 +102,12 @@ namespace DAC627_Project
             //Console.WriteLine(database.getProject(1).ToString());
             //Console.WriteLine(database.getProject("Jumper").ToString());
 
-            //Console.WriteLine(database.getAsset(1).ToString());
+            //Console.WriteLine(database.getAsset(9).ToString());
             //Console.WriteLine(database.getAsset("Solent-Logo").ToString());
 
-            //List<DatabaseAsset> assetsOfUser = database.getAssetsOfUser(3);
-            //foreach (DatabaseAsset asset in assetsOfUser)
-            //    Console.WriteLine(asset.ToStringWithoutCreator());
+            // List<DatabaseAsset> assetsOfUser = database.getAssetsOfUser(3);
+            // foreach (DatabaseAsset asset in assetsOfUser)
+            //     Console.WriteLine(asset.ToStringShort());
 
             //List<DatabaseProject> projectsOfUser = database.getOwnedProjectsOfUser(1);
             //foreach (DatabaseProject project in projectsOfUser)
@@ -116,7 +119,7 @@ namespace DAC627_Project
 
             //List<DatabaseAsset> assetsInProject = database.getAssetsInProject(2);
             //foreach (DatabaseAsset asset in assetsInProject)
-            //    Console.WriteLine(asset.ToStringWithoutCreator());
+            //    Console.WriteLine(asset.ToStringShort());
 
             //List<DatabaseUser> usersInProject = database.getUsersInProject(2);
             //foreach (DatabaseUser user in usersInProject)
@@ -141,10 +144,10 @@ namespace DAC627_Project
             //List<DatabaseAsset> searchAssets = database.SearchAsset(null, AssetType.Text);
             //List<DatabaseAsset> searchAssets = database.SearchAsset(null, AssetType.Null, AssetStatus.Completed);
             //List<DatabaseAsset> searchAssets = database.SearchAsset(null, AssetType.Null, AssetStatus.Null, 7);
-            //List<DatabaseAsset> searchAssets = database.SearchAsset("logo", AssetType.Null, AssetStatus.Null, 7);
+            //List<DatabaseAsset> searchAssets = database.SearchAsset(null, "vehicle", AssetType.Null, AssetStatus.Null, PegiRating._3);
             //
             //foreach (DatabaseAsset asset in searchAssets)
-            //    Console.WriteLine(asset.ToStringWithoutCreator());
+            //    Console.WriteLine(asset.ToStringShort());
 
 
 
@@ -167,16 +170,50 @@ namespace DAC627_Project
 
             //database.DeleteProject(1);
             //database.DeleteUser(1);
-            database.DeleteAsset(1);
+            //database.DeleteAsset(1);
 
+
+
+
+
+            // Message Commands
+
+            //database.AddMessage(1, 2, "Message", DateTime.Now, MessageType.Message);
+            //List<DatabaseMessage> messages = database.GetReceivedMessages(1);
+            //foreach(DatabaseMessage message in messages)
+            //    Console.WriteLine(message);
+            //messages = database.GetSendedMessages(1);
+            //foreach (DatabaseMessage message in messages)
+            //    Console.WriteLine(message);
+            //database.DeleteMessage(13);
+            //database.ShowAllMessages();
+
+
+
+
+            // New Change Methods
+
+            //database.ChangeUserFullName(1, "Markus Krugel");
+            //database.ChangeUserProfile(1, "Profile here");
+            database.ChangeProjectTags(1, "Test");
+            database.ChangeProjectThumbnail(1, "Thumbnail");
+            database.ChangeAssetPath(1, "Path");
+            database.ChangeAssetPegi(1, PegiRating._16);
+            database.ChangeAssetThumbnail(1, "Thumbnail");
+            database.ChangeAssetTags(1, "Tags");
+            database.ChangeAssetGalleryOne(1, "One");
+            database.ChangeAssetGalleryTwo(1, "Two");
+            database.ChangeAssetGalleryThree(1, "Three");
+            database.ChangeAssetGalleryFour(1, "Four");
+            database.ChangeAssetGalleryFive(1, "Five");
 
 
 
 
             // Shows list of all datas in the output window
 
-            //database.showAllUsers();
-            //database.showAllProjects();
+            //database.ShowAllUsers();
+            //database.ShowAllProjects();
             //database.ShowAllAssets();
 
             database.CloseConnection();

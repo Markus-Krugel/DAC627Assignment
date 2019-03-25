@@ -39,7 +39,7 @@ namespace DAC627_Project
                     cboAssetType.SelectedIndex = (int)_curUserAsset.GetAssetType();
                     txtSoftwareUsed.Text = _curUserAsset.GetSoftwareUsed();
                     cboPegi.SelectedIndex = (int)_curUserAsset.GetPegiRating();
-                    txtAssetStatus.Text = _curUserAsset.GetAssetStatus();
+                    cboAssetStatus.SelectedIndex = (int)_curUserAsset.GetAssetStatus();
                     txtNotes.Text = _curUserAsset.GetNotes();
                     _userAsset.SetAssetTitle(_curUserAsset.GetAssetTitle());
                     _userAsset.SetAssetType(_curUserAsset.GetAssetType());
@@ -75,10 +75,6 @@ namespace DAC627_Project
             {
                 _userAsset.SetSoftwareUsed(txtSoftwareUsed.Text);
             }
-            else if (((TextBox)sender) == txtAssetStatus)
-            {
-                _userAsset.SetAssetStatus(txtAssetStatus.Text);
-            }
             else if (((TextBox)sender) == txtNotes)
             {
                 _userAsset.SetNotes(txtNotes.Text);
@@ -95,6 +91,10 @@ namespace DAC627_Project
             else if (((ComboBox)sender) == cboPegi)
             {
                 _userAsset.SetPegiRating((PegiRating)cboAssetType.SelectedIndex);
+            }
+            else if (((ComboBox)sender) == cboAssetType)
+            {
+                _userAsset.SetAssetStatus((AssetStatus)cboAssetStatus.SelectedIndex);
             }
         }
 
@@ -121,7 +121,7 @@ namespace DAC627_Project
                 lblErrorPegi.Show();
                 errorDetected = true;
             }
-            if (txtAssetStatus.Text == string.Empty)
+            if (cboAssetType.SelectedIndex < 0)
             {
                 lblErrorAssetStatus.Show();
                 errorDetected = true;
@@ -129,13 +129,6 @@ namespace DAC627_Project
 
             if (errorDetected == false)
             {
-                //_curUserAsset.SetAssetTitle(_userAsset.GetAssetTitle());
-                //_curUserAsset.SetAssetType(_userAsset.GetAssetType());
-                //_curUserAsset.SetSoftwareUsed(_userAsset.GetSoftwareUsed());
-                //_curUserAsset.SetPegiRating(_userAsset.GetPegiRating());
-                //_curUserAsset.SetAssetStatus(_userAsset.GetAssetStatus());
-                //_curUserAsset.SetNotes(_userAsset.GetNotes());
-
                 DataBaseAccess dataBase = new DataBaseAccess();
                 dataBase.StartConnection();
                 if (_curUserAsset.GetAssetTitle() != _userAsset.GetAssetTitle())
@@ -147,8 +140,8 @@ namespace DAC627_Project
                 if (_curUserAsset.GetSoftwareUsed() != _userAsset.GetSoftwareUsed())
                     dataBase.ChangeAssetSoftware((int)_userAssetID, _userAsset.GetSoftwareUsed());
 
-
-
+                if (_curUserAsset.GetAssetStatus() != _userAsset.GetAssetStatus())
+                    dataBase.ChangeAssetStatus((int)_userAssetID, _userAsset.GetAssetStatus());
 
                 if (_curUserAsset.GetNotes() != _userAsset.GetNotes())
                     dataBase.ChangeAssetNotes((int)_userAssetID, _userAsset.GetNotes());

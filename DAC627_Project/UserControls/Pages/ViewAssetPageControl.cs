@@ -48,7 +48,7 @@ namespace DAC627_Project
             galPictureGallery.IsEditable(false);
 
             lblTitleDisplay.Text = _userAsset.GetAssetTitle();
-            lblAssetStatusDisplay.Text = _userAsset.GetAssetStatus();
+            lblAssetStatusDisplay.Text = _userAsset.GetAssetStatus().ToString();
             lblAssetTypeDisplay.Text = _userAsset.GetAssetType().ToString();
             lblCreatorDisplay.Text = _userAsset.GetAuthor().userName;
             lblPegiDisplay.Text = _userAsset.GetPegiRating().ToString();

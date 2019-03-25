@@ -70,6 +70,8 @@
             this.picProfile.TabStop = false;
             this.picProfile.Visible = false;
             this.picProfile.Click += new System.EventHandler(this.picProfile_Click);
+            this.picProfile.MouseEnter += new System.EventHandler(this.picHomeButton_MouseEnter);
+            this.picProfile.MouseLeave += new System.EventHandler(this.picHomeButton_MouseLeave);
             // 
             // FormMain
             // 

@@ -165,10 +165,17 @@
             // 
             // cboProjectType
             // 
+            this.cboProjectType.AutoCompleteCustomSource.AddRange(new string[] {
+            "Research",
+            "Software",
+            "Game",
+            "None of the above"});
             this.cboProjectType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboProjectType.Items.AddRange(new object[] {
-            "Unity Project",
-            "Unreal Project"});
+            "None of the below",
+            "Research",
+            "Software",
+            "Game"});
             this.cboProjectType.Location = new System.Drawing.Point(616, 176);
             this.cboProjectType.Name = "cboProjectType";
             this.cboProjectType.Size = new System.Drawing.Size(192, 21);

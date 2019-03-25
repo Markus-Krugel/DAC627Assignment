@@ -83,7 +83,6 @@ namespace DAC627_Project
             }
         }
 
-
         private void TextInput(object sender, EventArgs e)
         {
             if (((TextBox)sender) == txtTitle)
@@ -93,10 +92,6 @@ namespace DAC627_Project
             else if (((TextBox)sender) == txtSoftwareUsed)
             {
                 _userAsset.SetSoftwareUsed(txtSoftwareUsed.Text);
-            }
-            else if (((TextBox)sender) == txtAssetStatus)
-            {
-                _userAsset.SetAssetStatus(txtAssetStatus.Text);
             }
             else if (((TextBox)sender) == txtNotes)
             {
@@ -113,7 +108,11 @@ namespace DAC627_Project
             }
             else if (((ComboBox)sender) == cboPegi)
             {         
-                _userAsset.SetPegiRating((PegiRating)cboAssetType.SelectedIndex);
+                _userAsset.SetPegiRating((PegiRating)cboPegi.SelectedIndex);
+            }
+            else if (((ComboBox)sender) == cboAssetType)
+            {
+                _userAsset.SetAssetStatus((AssetStatus)cboAssetStatus.SelectedIndex);
             }
         }
 
@@ -140,7 +139,7 @@ namespace DAC627_Project
                 lblErrorPegi.Show();
                 errorDetected = true;
             }
-            if (txtAssetStatus.Text == string.Empty)
+            if (cboAssetType.SelectedIndex < 0)
             {
                 lblErrorAssetStatus.Show();
                 errorDetected = true;
@@ -155,7 +154,7 @@ namespace DAC627_Project
             {
                 DataBaseAccess dataBase = new DataBaseAccess();
                 dataBase.StartConnection();
-                formMain.curSelectedAssetID = dataBase.AddAsset(_userAsset.GetAssetTitle(), (int)formMain.UsersAccounts.GetCurrentUser().GetUserID(), AssetStatus.Planning, _userAsset.GetAssetType(), _userAsset.GetSoftwareUsed(), _userAsset.GetNotes());
+                formMain.curSelectedAssetID = dataBase.AddAsset(_userAsset.GetAssetTitle(), (int)formMain.UsersAccounts.GetCurrentUser().GetUserID(), _userAsset.GetAssetStatus(), _userAsset.GetAssetType(), _userAsset.GetSoftwareUsed(), _userAsset.GetNotes());
                 dataBase.CloseConnection();
                 formMain.ChangeToPage(FormMain.Pages.EditAssetPage);
             }

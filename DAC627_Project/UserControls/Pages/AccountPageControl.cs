@@ -58,5 +58,11 @@ namespace DAC627_Project
         {
             formMain.ChangeToPage(FormMain.Pages.MyAssetsPage, "project");
         }
+
+        private void btnLogOut_Click(object sender, EventArgs e)
+        {
+            formMain.UsersAccounts.SetCurrentUser(null);
+            formMain.ChangeToPage(FormMain.Pages.HomePage);
+        }
     }
 }

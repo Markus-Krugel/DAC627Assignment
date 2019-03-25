@@ -221,7 +221,7 @@ namespace DAC627_Project
                     pegiRating = reader.GetInt32(8);
                     Console.WriteLine();
 
-                    result.Add(new UserAsset(id, assetname, notes, null, type, software));
+                    result.Add(new UserAsset(id, assetname, notes, null, type, status, software));
                 }
 
                 return result;
@@ -339,6 +339,25 @@ namespace DAC627_Project
             }
 
             return id;
+        }
+
+        /// <summary>
+        /// Adds a message to the database
+        /// </summary>
+        /// <param name="senderID">The ID of the sender</param>
+        /// <param name="receiverID">The ID of the receiving user</param>
+        /// <param name="message">The message text</param>
+        /// <param name="sended">The date when the message was sended</param>
+        /// <param name="type">The type of message</param>
+        public void AddMessage(int senderID, int receiverID, string message, DateTime sended, MessageType type)
+        {
+            // Removes miliseconds as it causes data type mismatch
+            DateTime time = new DateTime(sended.Year, sended.Month, sended.Day, sended.Hour, sended.Minute, sended.Second);
+
+            string commandText = "INSERT INTO Messages ( Sender, Receiver, Message, Type, SendedDate) VALUES " +
+                                    "('" + senderID + "','" + receiverID + "','" + message + "','" + type + "','" + time + "')";
+
+            ExecuteCommand(commandText);
         }
 
         #endregion
@@ -536,7 +555,7 @@ namespace DAC627_Project
 
                 UsersAccounts.UserData creator = GetUser(creatorID);
 
-                return new UserAsset(id, assetname, notes, creator, type, software);
+                return new UserAsset(id, assetname, notes, creator, type, status, software);
             }
 
             catch (Exception e)
@@ -581,7 +600,7 @@ namespace DAC627_Project
 
                 UsersAccounts.UserData creator = GetUser(creatorID);
 
-                return new UserAsset(assetID, assetname, notes, creator, type, software);
+                return new UserAsset(assetID, assetname, notes, creator, type, status, software);
             }
 
             catch (Exception e)
@@ -625,7 +644,7 @@ namespace DAC627_Project
                     pegiRating = reader.GetInt32(8);
                     Console.WriteLine();
 
-                    result.Add(new UserAsset(id, assetname, notes, null, type, software));
+                    result.Add(new UserAsset(id, assetname, notes, null, type, status, software));
                 }
 
                 return result;
@@ -724,7 +743,7 @@ namespace DAC627_Project
                     pegiRating = reader.GetInt32(8);
                     Console.WriteLine();
 
-                    result.Add(new UserAsset(id, assetname, notes, null, type, software));
+                    result.Add(new UserAsset(id, assetname, notes, null, type, status, software));
                 }
 
                 return result;
@@ -828,6 +847,100 @@ namespace DAC627_Project
             }
 
             Console.WriteLine();
+
+            return null;
+        }
+
+        /// <summary>
+        /// Get all messages sended by the user
+        /// </summary>
+        /// <param name="userID">The ID of the user</param>
+        /// <returns>The list of the messages</returns>
+        public List<UserMessage> GetSentMessages(int userID)
+        {
+            try
+            {
+                OleDbCommand command = new OleDbCommand();
+                command.Connection = connection;
+                command.CommandText = "SELECT Messages.* FROM[Messages] WHERE Sender = " + userID;
+
+                OleDbDataReader reader = command.ExecuteReader();
+
+                List<UserMessage> messages = new List<UserMessage>();
+
+                int receiverID = 0;
+                string message = "";
+                int messageID = 1;
+                int senderID = 0;
+                DateTime sended = DateTime.MinValue;
+                MessageType type = MessageType.Invite;
+
+                while (reader.Read())
+                {
+                    messageID = int.Parse(reader["ID"].ToString());
+                    receiverID = int.Parse(reader["Receiver"].ToString());
+                    senderID = int.Parse(reader["Sender"].ToString());
+                    message = reader["Message"].ToString();
+                    type = (MessageType)Enum.Parse(typeof(MessageType), reader["Type"].ToString());
+                    sended = Convert.ToDateTime(reader["SendedDate"]);
+
+                    messages.Add(new UserMessage(senderID, receiverID, message, sended, type));
+                }
+
+                return messages;
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Get all messages for the user
+        /// </summary>
+        /// <param name="userID">The ID of the user</param>
+        /// <returns>The list of the messages</returns>
+        public List<UserMessage> GetReceivedMessages(int userID)
+        {
+            try
+            {
+                OleDbCommand command = new OleDbCommand();
+                command.Connection = connection;
+                command.CommandText = "SELECT Messages.* FROM[Messages] WHERE Receiver = " + userID;
+
+                OleDbDataReader reader = command.ExecuteReader();
+
+                List<UserMessage> messages = new List<UserMessage>();
+
+                int receiverID = 0;
+                int senderID = 0;
+                string message = "";
+                int messageID = 1;
+                DateTime sended = DateTime.MinValue;
+                MessageType type = MessageType.Invite;
+
+                while (reader.Read())
+                {
+                    messageID = int.Parse(reader["ID"].ToString());
+                    receiverID = int.Parse(reader["Receiver"].ToString());
+                    senderID = int.Parse(reader["Sender"].ToString());
+                    message = reader["Message"].ToString();
+                    type = (MessageType)Enum.Parse(typeof(MessageType), reader["Type"].ToString());
+                    sended = Convert.ToDateTime(reader["SendedDate"]);
+
+                    messages.Add(new UserMessage(senderID, receiverID, message, sended, type));
+                }
+
+                return messages;
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
 
             return null;
         }

@@ -131,8 +131,10 @@
             // 
             this.cboProjectType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboProjectType.Items.AddRange(new object[] {
-            "Unity Project",
-            "Unreal Project"});
+            "Research",
+            "Software",
+            "Game",
+            "None of the above"});
             this.cboProjectType.Location = new System.Drawing.Point(792, 184);
             this.cboProjectType.Name = "cboProjectType";
             this.cboProjectType.Size = new System.Drawing.Size(192, 21);

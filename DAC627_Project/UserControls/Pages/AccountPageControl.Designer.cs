@@ -39,6 +39,7 @@
             this.btnUploadAsset = new System.Windows.Forms.Button();
             this.btnCreateProject = new System.Windows.Forms.Button();
             this.btnViewMyProjects = new System.Windows.Forms.Button();
+            this.btnLogOut = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picAccountPageProfile)).BeginInit();
             this.SuspendLayout();
             // 
@@ -146,10 +147,21 @@
             this.btnViewMyProjects.UseVisualStyleBackColor = true;
             this.btnViewMyProjects.Click += new System.EventHandler(this.btnViewMyProjects_Click);
             // 
+            // btnLogOut
+            // 
+            this.btnLogOut.Location = new System.Drawing.Point(632, 374);
+            this.btnLogOut.Name = "btnLogOut";
+            this.btnLogOut.Size = new System.Drawing.Size(104, 23);
+            this.btnLogOut.TabIndex = 19;
+            this.btnLogOut.Text = "Log Out";
+            this.btnLogOut.UseVisualStyleBackColor = true;
+            this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
+            // 
             // AccountPageControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnLogOut);
             this.Controls.Add(this.btnViewMyProjects);
             this.Controls.Add(this.btnCreateProject);
             this.Controls.Add(this.btnUploadAsset);
@@ -181,5 +193,6 @@
         private System.Windows.Forms.Button btnUploadAsset;
         private System.Windows.Forms.Button btnCreateProject;
         private System.Windows.Forms.Button btnViewMyProjects;
+        private System.Windows.Forms.Button btnLogOut;
     }
 }

@@ -36,7 +36,6 @@
             this.lblErrorPegi = new System.Windows.Forms.Label();
             this.lblErrorSoftwareUsed = new System.Windows.Forms.Label();
             this.lblErrorAssetType = new System.Windows.Forms.Label();
-            this.txtAssetStatus = new System.Windows.Forms.TextBox();
             this.txtSoftwareUsed = new System.Windows.Forms.TextBox();
             this.lblNotes = new System.Windows.Forms.Label();
             this.lblPegi = new System.Windows.Forms.Label();
@@ -52,6 +51,7 @@
             this.cboUploadType = new System.Windows.Forms.ComboBox();
             this.lblUploadType = new System.Windows.Forms.Label();
             this.cboAssetType = new System.Windows.Forms.ComboBox();
+            this.cboAssetStatus = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // lblErrorTitle
@@ -144,20 +144,6 @@
             this.lblErrorAssetType.Text = "Error, asset type required";
             this.lblErrorAssetType.Visible = false;
             // 
-            // txtAssetStatus
-            // 
-            this.txtAssetStatus.AccessibleName = "Asset Status";
-            this.txtAssetStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAssetStatus.ForeColor = System.Drawing.Color.Gray;
-            this.txtAssetStatus.Location = new System.Drawing.Point(616, 320);
-            this.txtAssetStatus.Name = "txtAssetStatus";
-            this.txtAssetStatus.Size = new System.Drawing.Size(192, 20);
-            this.txtAssetStatus.TabIndex = 5;
-            this.txtAssetStatus.Tag = "";
-            this.txtAssetStatus.Text = "Asset Status";
-            this.txtAssetStatus.Enter += new System.EventHandler(this.txt_Enter);
-            this.txtAssetStatus.Leave += new System.EventHandler(this.TextInput);
-            // 
             // txtSoftwareUsed
             // 
             this.txtSoftwareUsed.AccessibleName = "Software Used";
@@ -236,6 +222,7 @@
             this.cboPegi.Name = "cboPegi";
             this.cboPegi.Size = new System.Drawing.Size(192, 21);
             this.cboPegi.TabIndex = 4;
+            this.cboPegi.SelectedIndexChanged += new System.EventHandler(this.DropDownInput);
             // 
             // txtNotes
             // 
@@ -327,11 +314,32 @@
             this.cboAssetType.Name = "cboAssetType";
             this.cboAssetType.Size = new System.Drawing.Size(192, 21);
             this.cboAssetType.TabIndex = 2;
+            this.cboAssetType.SelectedIndexChanged += new System.EventHandler(this.DropDownInput);
+            // 
+            // cboAssetStatus
+            // 
+            this.cboAssetStatus.AutoCompleteCustomSource.AddRange(new string[] {
+            "Null",
+            "Completed",
+            "In development",
+            "Planning"});
+            this.cboAssetStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboAssetStatus.FormattingEnabled = true;
+            this.cboAssetStatus.Items.AddRange(new object[] {
+            "Completed",
+            "In development",
+            "Planning"});
+            this.cboAssetStatus.Location = new System.Drawing.Point(616, 317);
+            this.cboAssetStatus.Name = "cboAssetStatus";
+            this.cboAssetStatus.Size = new System.Drawing.Size(192, 21);
+            this.cboAssetStatus.TabIndex = 66;
+            this.cboAssetStatus.SelectedIndexChanged += new System.EventHandler(this.DropDownInput);
             // 
             // UploadAssetPageControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.cboAssetStatus);
             this.Controls.Add(this.cboAssetType);
             this.Controls.Add(this.lblUploadType);
             this.Controls.Add(this.cboUploadType);
@@ -349,7 +357,6 @@
             this.Controls.Add(this.lblErrorPegi);
             this.Controls.Add(this.lblErrorSoftwareUsed);
             this.Controls.Add(this.lblErrorAssetType);
-            this.Controls.Add(this.txtAssetStatus);
             this.Controls.Add(this.txtSoftwareUsed);
             this.Controls.Add(this.lblNotes);
             this.Controls.Add(this.lblPegi);
@@ -373,7 +380,6 @@
         private System.Windows.Forms.Label lblErrorPegi;
         private System.Windows.Forms.Label lblErrorSoftwareUsed;
         private System.Windows.Forms.Label lblErrorAssetType;
-        private System.Windows.Forms.TextBox txtAssetStatus;
         private System.Windows.Forms.TextBox txtSoftwareUsed;
         private System.Windows.Forms.Label lblNotes;
         private System.Windows.Forms.Label lblPegi;
@@ -389,5 +395,6 @@
         private System.Windows.Forms.ComboBox cboUploadType;
         private System.Windows.Forms.Label lblUploadType;
         private System.Windows.Forms.ComboBox cboAssetType;
+        private System.Windows.Forms.ComboBox cboAssetStatus;
     }
 }

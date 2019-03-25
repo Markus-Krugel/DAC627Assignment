@@ -52,16 +52,16 @@ namespace DAC627_Project
     {
         Null,
         Completed,
-        Planning,
-        In_Development
+        In_Development,
+        Planning
     }
 
     public enum AssetStatus
     {
         Null,
         Completed,
+        In_Development,
         Planning,
-        In_Development
     }
 
     public enum ProjectType
@@ -70,5 +70,12 @@ namespace DAC627_Project
         Research,
         Software,
         Game
+    }
+
+    enum MessageType
+    {
+        Request,
+        Message,
+        Invite
     }
 }

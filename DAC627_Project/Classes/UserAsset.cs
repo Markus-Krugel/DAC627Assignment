@@ -15,7 +15,7 @@ namespace DAC627_Project
         private AssetType _assetType;
         private string _softwareUsed;
         private PegiRating _pegiRating;
-        private string _assetStatus;
+        private AssetStatus _assetStatus;
         private string _notes;
         private List<string> _picturesPath; //First element is thumbnail
         private string _assetPath;
@@ -26,13 +26,14 @@ namespace DAC627_Project
             _author = author;
         }
 
-        public UserAsset(int id, string assetName, string notes, UsersAccounts.UserData author, AssetType assetType, string softwareUsed)
+        public UserAsset(int id, string assetName, string notes, UsersAccounts.UserData author, AssetType assetType, AssetStatus assetStatus  ,string softwareUsed)
         {
             _author = author;
             _id = id;
             _assetTitle = assetName;
             _notes = notes;
             _assetType = assetType;
+            _assetStatus = assetStatus;
             _softwareUsed = softwareUsed;
         }
 
@@ -57,7 +58,7 @@ namespace DAC627_Project
             _pegiRating = pegiRating;
         }
 
-        public void SetAssetStatus(string assetStatus)
+        public void SetAssetStatus(AssetStatus assetStatus)
         {
             _assetStatus = assetStatus;
         }
@@ -109,7 +110,7 @@ namespace DAC627_Project
             return _pegiRating;
         }
 
-        public string GetAssetStatus()
+        public AssetStatus GetAssetStatus()
         {
             return _assetStatus;
         }

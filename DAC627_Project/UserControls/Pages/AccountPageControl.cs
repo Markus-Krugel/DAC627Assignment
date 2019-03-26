@@ -24,7 +24,7 @@ namespace DAC627_Project
 
             txtUserName.Text = _currentUser.userName;
             txtEmail.Text = _currentUser.emailAddress;
-            txtName.Text = _currentUser.name;
+            txtName.Text = _currentUser.fullName;
         }
 
         private void txt_Enter(object sender, EventArgs e)

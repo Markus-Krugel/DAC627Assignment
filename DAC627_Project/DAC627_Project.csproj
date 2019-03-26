@@ -171,7 +171,7 @@
     <Compile Include="UserControls\Prefabs\PictureGallery.Designer.cs">
       <DependentUpon>PictureGallery.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserMessage.cs" />
+    <Compile Include="Classes\UserMessage.cs" />
     <EmbeddedResource Include="UserControls\Pages\CreateAccountPageControl.resx">
       <DependentUpon>CreateAccountPageControl.cs</DependentUpon>
     </EmbeddedResource>

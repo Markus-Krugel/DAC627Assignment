@@ -135,7 +135,7 @@ namespace DAC627_Project
                     dataBase.ChangeAssetName((int)_userAssetID, _userAsset.GetAssetTitle());
 
                 if (_curUserAsset.GetAssetType() != _userAsset.GetAssetType())
-                    dataBase.ChangeAssetTag((int)_userAssetID, _userAsset.GetAssetType());
+                    dataBase.ChangeAssetType((int)_userAssetID, _userAsset.GetAssetType());
 
                 if (_curUserAsset.GetSoftwareUsed() != _userAsset.GetSoftwareUsed())
                     dataBase.ChangeAssetSoftware((int)_userAssetID, _userAsset.GetSoftwareUsed());

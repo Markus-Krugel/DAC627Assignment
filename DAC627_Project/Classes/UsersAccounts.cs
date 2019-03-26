@@ -26,23 +26,26 @@ namespace DAC627_Project
             public string _password;
 
             //Other Information
-            public string name;
-            public string profilePicturePath;
+            public string fullName;
+            private string _profilePicturePath;
             private UserStatus _userStatus;
+            private UserType _userType;
 
             //User Projects and Assets
             private List<UserProject> _userProjects = new List<UserProject>();
             private List<UserAsset> _userAssets = new List<UserAsset>();
 
             //Constructor
-            public UserData(int userID, string UserName, string EmailAddress, string password, UserStatus userStatus)
+            public UserData(int userID, string UserName, string password, string EmailAddress, UserType userType, UserStatus userStatus, string profilePicturePath = "", string name = "")
             {
                 _userID = userID;
                 userName = UserName;
                 emailAddress = EmailAddress;
                 _password = password;
-                //name = Name;
                 _userStatus = userStatus;
+                _userType = userType;
+                fullName = name;
+                _profilePicturePath = profilePicturePath;
             }
 
             public UserData()
@@ -139,7 +142,7 @@ namespace DAC627_Project
         {
             DataBaseAccess dataBase = new DataBaseAccess();
             dataBase.StartConnection();
-            dataBase.AddUser( _userData._password ,_userData.emailAddress, _userData.userName, UserType.Developer);
+            dataBase.AddUser( _userData._password ,_userData.emailAddress, _userData.userName, UserType.Developer, _userData.fullName);
             dataBase.CloseConnection();
         }
 

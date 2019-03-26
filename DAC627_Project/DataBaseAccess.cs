@@ -507,7 +507,7 @@ namespace DAC627_Project
         /// </summary>
         /// <param name="username">The name of the user</param>
         /// <returns>The specified User</returns>
-        public DatabaseUser GetUser(string username)
+        public UsersAccounts.UserData GetUser(string username)
         {
 
             OleDbCommand command = new OleDbCommand();
@@ -535,7 +535,7 @@ namespace DAC627_Project
                 fullName = reader["FullName"].ToString();
             }
 
-            return new DatabaseUser(id, username, password, email, type, status, profile, fullName);
+            return new UsersAccounts.UserData(id, username, password, email, type, status, profile, fullName);
         }
 
         /// <summary>
@@ -543,7 +543,7 @@ namespace DAC627_Project
         /// </summary>
         /// <param name="id">The ID of the user</param>
         /// <returns>The specified User</returns>
-        public DatabaseUser GetUser(int id)
+        public UsersAccounts.UserData GetUser(int id)
         {
             try
             {
@@ -573,7 +573,7 @@ namespace DAC627_Project
                     fullName = reader["FullName"].ToString();
                 }
 
-                return new DatabaseUser(id, username, password, email, type, status, profile, fullName);
+                return new UsersAccounts.UserData(id, username, password, email, type, status, profile, fullName);
             }
             catch (Exception e)
             {
@@ -587,7 +587,7 @@ namespace DAC627_Project
         /// </summary>
         /// <param name="projectname">The name of the Project</param>
         /// <returns>The specified project</returns>
-        public DatabaseProject getProject(string projectname)
+        public UserProject getProject(string projectname)
         {
             try
             {
@@ -617,9 +617,9 @@ namespace DAC627_Project
                     thumbnail = reader["Thumbnail"].ToString();
                 }
 
-                DatabaseUser owner = GetUser(ownerID);
+                UsersAccounts.UserData owner = GetUser(ownerID);
 
-                return new DatabaseProject(id, projectname, description, owner, type, status, tags, thumbnail);
+                return new UserProject(id, projectname, description, owner, type, status, tags, thumbnail);
             }
 
             catch (Exception e)
@@ -637,7 +637,7 @@ namespace DAC627_Project
         /// </summary>
         /// <param name="projectID">The ID of the project</param>
         /// <returns>The specific project</returns>
-        public DatabaseProject getProject(int projectID)
+        public UserProject getProject(int projectID)
         {
             try
             {
@@ -668,9 +668,9 @@ namespace DAC627_Project
                     thumbnail = reader["Thumbnail"].ToString();
                 }
 
-                DatabaseUser owner = GetUser(ownerID);
+                UsersAccounts.UserData owner = GetUser(ownerID);
 
-                return new DatabaseProject(projectID, projectname, description, owner, type, status, tags, thumbnail);
+                return new UserProject(projectID, projectname, description, owner, type, status, tags, thumbnail);
             }
 
             catch (Exception e)
@@ -688,7 +688,7 @@ namespace DAC627_Project
         /// </summary>
         /// <param name="assetname">The name of the asset</param>
         /// <returns>The specified asset</returns>
-        public DatabaseAsset getAsset(string assetname)
+        public UserAsset getAsset(string assetname)
         {
             try
             {
@@ -701,7 +701,7 @@ namespace DAC627_Project
                 int assetID = 0;
                 string notes = "";
                 int creatorID = 1;
-                AssetType type = AssetType.Image;
+                AssetType type = AssetType._2DArt;
                 AssetStatus status = AssetStatus.Completed;
                 String software = "";
                 PegiRating pegiRating = PegiRating._3;
@@ -736,9 +736,9 @@ namespace DAC627_Project
                     Console.WriteLine();
                 }
 
-                DatabaseUser creator = GetUser(creatorID);
+                UsersAccounts.UserData creator = GetUser(creatorID);
 
-                return new DatabaseAsset(assetID, assetname, notes, creator, type, status, software, path, pegiRating, tags,
+                return new UserAsset(assetID, assetname, notes, creator, type, status, software, path, pegiRating, tags,
                     thumbnail, galleryOne, galleryTwo, galleryThree, galleryFour, galleryFive);
             }
 
@@ -757,7 +757,7 @@ namespace DAC627_Project
         /// </summary>
         /// <param name="assetID">The ID of the asset</param>
         /// <returns>The specified asset</returns>
-        public DatabaseAsset getAsset(int assetID)
+        public UserAsset getAsset(int assetID)
         {
             try
             {
@@ -770,7 +770,7 @@ namespace DAC627_Project
                 string assetname = "";
                 string notes = "";
                 int creatorID = 1;
-                AssetType type = AssetType.Image;
+                AssetType type = AssetType._2DArt;
                 AssetStatus status = AssetStatus.Completed;
                 String software = "";
                 PegiRating pegiRating = PegiRating._3;
@@ -804,9 +804,9 @@ namespace DAC627_Project
                     Console.WriteLine();
                 }
 
-                DatabaseUser creator = GetUser(creatorID);
+                UsersAccounts.UserData creator = GetUser(creatorID);
 
-                return new DatabaseAsset(assetID, assetname, notes, creator, type, status, software, path, pegiRating, tags,
+                return new UserAsset(assetID, assetname, notes, creator, type, status, software, path, pegiRating, tags,
                     thumbnail, galleryOne, galleryTwo, galleryThree, galleryFour, galleryFive);
             }
 
@@ -825,7 +825,7 @@ namespace DAC627_Project
         /// </summary>
         /// <param name="userID">The ID of the user</param>
         /// <returns>The list of the messages</returns>
-        public List<DatabaseMessage> GetSendedMessages(int userID)
+        public List<UserMessage> GetSendedMessages(int userID)
         {
             try
             {
@@ -835,7 +835,7 @@ namespace DAC627_Project
 
                 OleDbDataReader reader = command.ExecuteReader();
 
-                List<DatabaseMessage> messages = new List<DatabaseMessage>();
+                List<UserMessage> messages = new List<UserMessage>();
 
                 int receiverID = 0;
                 string message = "";
@@ -853,7 +853,7 @@ namespace DAC627_Project
                     type = (MessageType)Enum.Parse(typeof(MessageType), reader["Type"].ToString());
                     sended = Convert.ToDateTime(reader["SendedDate"]);
 
-                    messages.Add(new DatabaseMessage(senderID, receiverID, message, sended, type));
+                    messages.Add(new UserMessage(senderID, receiverID, message, sended, type));
                 }
 
                 return messages;
@@ -872,7 +872,7 @@ namespace DAC627_Project
         /// </summary>
         /// <param name="userID">The ID of the user</param>
         /// <returns>The list of the messages</returns>
-        public List<DatabaseMessage> GetReceivedMessages(int userID)
+        public List<UserMessage> GetReceivedMessages(int userID)
         {
             try
             {
@@ -882,7 +882,7 @@ namespace DAC627_Project
 
                 OleDbDataReader reader = command.ExecuteReader();
 
-                List<DatabaseMessage> messages = new List<DatabaseMessage>();
+                List<UserMessage> messages = new List<UserMessage>();
 
                 int receiverID = 0;
                 int senderID = 0;
@@ -900,7 +900,7 @@ namespace DAC627_Project
                     type = (MessageType)Enum.Parse(typeof(MessageType), reader["Type"].ToString());
                     sended = Convert.ToDateTime(reader["SendedDate"]);
 
-                    messages.Add(new DatabaseMessage(senderID, receiverID, message, sended, type));
+                    messages.Add(new UserMessage(senderID, receiverID, message, sended, type));
                 }
 
                 return messages;
@@ -919,7 +919,7 @@ namespace DAC627_Project
         /// </summary>
         /// <param name="userID">The ID of the User</param>
         /// <returns>A list of assets created by the user</returns>
-        public List<DatabaseAsset> getAssetsOfUser(int userID)
+        public List<UserAsset> getAssetsOfUser(int userID)
         {
             try
             {
@@ -929,7 +929,7 @@ namespace DAC627_Project
 
                 OleDbDataReader reader = command.ExecuteReader();
 
-                List<DatabaseAsset> result = new List<DatabaseAsset>();
+                List<UserAsset> result = new List<UserAsset>();
 
                 while (reader.Read())
                 {
@@ -937,7 +937,7 @@ namespace DAC627_Project
                     string assetname = "";
                     string notes = "";
                     int creatorID = 1;
-                    AssetType type = AssetType.Image;
+                    AssetType type = AssetType._2DArt;
                     AssetStatus status = AssetStatus.Completed;
                     String software = "";
                     PegiRating pegiRating = PegiRating._3;
@@ -967,9 +967,9 @@ namespace DAC627_Project
                     galleryFour = reader["GalleryFour"].ToString();
                     galleryFive = reader["GalleryFive"].ToString();
 
-                    DatabaseUser creator = GetUser(creatorID);
+                    UsersAccounts.UserData creator = GetUser(creatorID);
 
-                    result.Add(new DatabaseAsset(assetID, assetname, notes, creator, type, status, software, path, pegiRating, tags,
+                    result.Add(new UserAsset(assetID, assetname, notes, creator, type, status, software, path, pegiRating, tags,
                         thumbnail, galleryOne, galleryTwo, galleryThree, galleryFour, galleryFive));
                 }
 
@@ -991,7 +991,7 @@ namespace DAC627_Project
         /// </summary>
         /// <param name="userID">The ID of the user</param>
         /// <returns>Returns a list of projects where the user is part of.</returns>
-        public List<DatabaseProject> getProjectsOfUser(int userID)
+        public List<UserProject> getProjectsOfUser(int userID)
         {
             try
             {
@@ -1005,7 +1005,7 @@ namespace DAC627_Project
 
                 OleDbDataReader reader = command.ExecuteReader();
 
-                List<DatabaseProject> result = new List<DatabaseProject>();
+                List<UserProject> result = new List<UserProject>();
 
                 while (reader.Read())
                 {
@@ -1027,9 +1027,9 @@ namespace DAC627_Project
                     status = (ProjectStatus)Enum.Parse(typeof(ProjectStatus), reader["Status"].ToString());
                     thumbnail = reader["Thumbnail"].ToString();
 
-                    DatabaseUser owner = GetUser(ownerID);
+                    UsersAccounts.UserData owner = GetUser(ownerID);
 
-                    result.Add(new DatabaseProject(projectID, projectname, description, owner, type, status, tags, thumbnail));
+                    result.Add(new UserProject(projectID, projectname, description, owner, type, status, tags, thumbnail));
                 }
 
                 return result;
@@ -1050,7 +1050,7 @@ namespace DAC627_Project
         /// </summary>
         /// <param name="projectID">The ID of the project</param>
         /// <returns>A list of assets in the project</returns>
-        public List<DatabaseAsset> getAssetsInProject(int projectID)
+        public List<UserAsset> getAssetsInProject(int projectID)
         {
             try
             {
@@ -1064,7 +1064,7 @@ namespace DAC627_Project
 
                 OleDbDataReader reader = command.ExecuteReader();
 
-                List<DatabaseAsset> result = new List<DatabaseAsset>();
+                List<UserAsset> result = new List<UserAsset>();
 
                 while (reader.Read())
                 {
@@ -1072,7 +1072,7 @@ namespace DAC627_Project
                     string assetname = "";
                     string notes = "";
                     int creatorID = 1;
-                    AssetType type = AssetType.Image;
+                    AssetType type = AssetType._2DArt;
                     AssetStatus status = AssetStatus.Completed;
                     String software = "";
                     PegiRating pegiRating = PegiRating._3;
@@ -1102,9 +1102,9 @@ namespace DAC627_Project
                     galleryFour = reader["GalleryFour"].ToString();
                     galleryFive = reader["GalleryFive"].ToString();
 
-                    DatabaseUser creator = GetUser(creatorID);
+                    UsersAccounts.UserData creator = GetUser(creatorID);
 
-                    result.Add(new DatabaseAsset(assetID, assetname, notes, creator, type, status, software, path, pegiRating, tags,
+                    result.Add(new UserAsset(assetID, assetname, notes, creator, type, status, software, path, pegiRating, tags,
                         thumbnail, galleryOne, galleryTwo, galleryThree, galleryFour, galleryFive));
                 }
 
@@ -1126,7 +1126,7 @@ namespace DAC627_Project
         /// </summary>
         /// <param name="projectID">The ID of the Project</param>
         /// <returns>A list of users in the project</returns>
-        public List<DatabaseUser> getUsersInProject(int projectID)
+        public List<UsersAccounts.UserData> getUsersInProject(int projectID)
         {
             try
             {
@@ -1140,7 +1140,7 @@ namespace DAC627_Project
 
                 OleDbDataReader reader = command.ExecuteReader();
 
-                List<DatabaseUser> result = new List<DatabaseUser>();
+                List<UsersAccounts.UserData> result = new List<UsersAccounts.UserData>();
 
                 while (reader.Read())
                 {
@@ -1162,7 +1162,7 @@ namespace DAC627_Project
                     profile = reader["ProfilePicture"].ToString();
                     fullName = reader["FullName"].ToString();
 
-                    result.Add(new DatabaseUser(id, username, password, email, type, status, profile, fullName));
+                    result.Add(new UsersAccounts.UserData(id, username, password, email, type, status, profile, fullName));
                 }
 
                 return result;
@@ -1183,7 +1183,7 @@ namespace DAC627_Project
         /// </summary>
         /// <param name="userID">The ID of the user</param>
         /// <returns>A list of projects owned by the user</returns>
-        public List<DatabaseProject> getOwnedProjectsOfUser(int userID)
+        public List<UserProject> getOwnedProjectsOfUser(int userID)
         {
             try
             {
@@ -1193,7 +1193,7 @@ namespace DAC627_Project
 
                 OleDbDataReader reader = command.ExecuteReader();
 
-                List<DatabaseProject> result = new List<DatabaseProject>();
+                List<UserProject> result = new List<UserProject>();
 
                 while (reader.Read())
                 {
@@ -1217,9 +1217,9 @@ namespace DAC627_Project
                     status = (ProjectStatus)Enum.Parse(typeof(ProjectStatus), reader["Status"].ToString());
                     thumbnail = reader["Thumbnail"].ToString();
 
-                    DatabaseUser owner = GetUser(ownerID);
+                    UsersAccounts.UserData owner = GetUser(ownerID);
 
-                    result.Add(new DatabaseProject(projectID, projectname, description, owner, type, status, tags, thumbnail));
+                    result.Add(new UserProject(projectID, projectname, description, owner, type, status, tags, thumbnail));
                 }
 
                 return result;

@@ -169,7 +169,7 @@ namespace DAC627_Project
             {
                 userName = _tempUsername,
                 emailAddress = _tempEmail,
-                name = _tempName
+                fullName = _tempName
             };
             userData.OneTimeSetUserID(5);
             userData.SetPassword(_tempPassword);

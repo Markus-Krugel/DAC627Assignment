@@ -17,12 +17,25 @@ namespace DAC627_Project
         public int? curSelectedAssetID  = null;
         public int? curSelectedUserProjectID = null;
 
+        int pageHistoryPos = 0;
+        List<PageHistory> pageHistoryList = new List<PageHistory>();
+
+        //Add to this as more information needs to be inputted into userControls
+        public struct PageHistory
+        {
+            public Pages pageType;
+            public int? id;
+            public string message;
+ 
+        }
+
+
         public FormMain()
         {
             InitializeComponent();
 
             //use this in order to display the user control of your choice...
-            ChangeToPage(Pages.MessagingPage);
+            ChangeToPage(Pages.LoginPage);
         }
 
         private void picHomeButton_Click(object sender, EventArgs e)
@@ -123,50 +136,93 @@ namespace DAC627_Project
             }
 
 
+            PageHistory newPageHistory;
+
             switch (_page)
             {
                 case Pages.AccountPage:
                     currentPage = new AccountPageControl(this);
+                    newPageHistory.pageType = Pages.AccountPage;
+                    newPageHistory.id = null;
+                    newPageHistory.message = null;
                     break;
                 case Pages.CreateAccountPage:
                     currentPage = new CreateAccountPageControl(this);
+                    newPageHistory.pageType = Pages.CreateAccountPage;
+                    newPageHistory.id = null;
+                    newPageHistory.message = null;
                     break;
                 case Pages.HomePage:
                     currentPage = new HomePageControl(this);
+                    newPageHistory.pageType = Pages.HomePage;
+                    newPageHistory.id = null;
+                    newPageHistory.message = null;
                     break;
                 case Pages.LoginPage:
                     currentPage = new LoginPageControl(this);
+                    newPageHistory.pageType = Pages.LoginPage;
+                    newPageHistory.id = null;
+                    newPageHistory.message = null;
                     break;
                 case Pages.MyAssetsPage:
                     currentPage = new MyAssetsPageControl(this, message);
+                    newPageHistory.pageType = Pages.MyAssetsPage;
+                    newPageHistory.id = null;
+                    newPageHistory.message = message;
                     break;
                 case Pages.UploadAssetPage:
                     currentPage = new UploadAssetPageControl(this);
+                    newPageHistory.pageType = Pages.UploadAssetPage;
+                    newPageHistory.id = null;
+                    newPageHistory.message = null;
                     break;
                 case Pages.UploadProjectPage:
                     currentPage = new UploadProjectPageControl(this);
+                    newPageHistory.pageType = Pages.UploadProjectPage;
+                    newPageHistory.id = null;
+                    newPageHistory.message = null;
                     break;
                 case Pages.EditAssetPage:
                     currentPage = new EditAssetPageControl(this, curSelectedAssetID);
+                    newPageHistory.pageType = Pages.EditAssetPage;
+                    newPageHistory.id = curSelectedAssetID;
+                    newPageHistory.message = null;
                     break;
                 case Pages.EditProjectPage:
                     currentPage = new EditProjectPageControl(this, curSelectedUserProjectID);
+                    newPageHistory.pageType = Pages.EditProjectPage;
+                    newPageHistory.id = curSelectedAssetID;
+                    newPageHistory.message = null;
                     break;
                 case Pages.TestPage:
                     currentPage = new TestPageControl(this);
+                    newPageHistory.pageType = Pages.TestPage;
+                    newPageHistory.id = null;
+                    newPageHistory.message = null;
                     break;
                 case Pages.ViewAssetPage:
                     currentPage = new ViewAssetPageControl(this, curSelectedAssetID);
+                    newPageHistory.pageType = Pages.ViewAssetPage;
+                    newPageHistory.id = curSelectedAssetID;
+                    newPageHistory.message = null;
                     break;
                 case Pages.ViewProjectPage:
                     currentPage = new ViewProjectPageControl(this, curSelectedUserProjectID);
+                    newPageHistory.pageType = Pages.ViewProjectPage;
+                    newPageHistory.id = null;
+                    newPageHistory.message = null;
                     break;
                 case Pages.MessagingPage:
                     currentPage = new MessagingPageControl(this);
+                    newPageHistory.pageType = Pages.AccountPage;
+                    newPageHistory.id = null;
+                    newPageHistory.message = null;
                     break;
                 default:
                     return;
             }
+            pageHistoryList.Add(newPageHistory);
+            pageHistoryPos++;
             currentPage.Dock = DockStyle.Fill;
             Controls.Add(currentPage);
         }
@@ -174,6 +230,16 @@ namespace DAC627_Project
         private void picProfile_Click(object sender, EventArgs e)
         {
             ChangeToPage(Pages.AccountPage);
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            if (pageHistoryPos > 1)
+            {
+                curSelectedUserProjectID = pageHistoryList[pageHistoryPos - 2].id;
+                ChangeToPage(pageHistoryList[pageHistoryPos - 2].pageType, pageHistoryList[pageHistoryList.Count - 1].message);
+                pageHistoryPos -= 2;
+            }
         }
     }
 }

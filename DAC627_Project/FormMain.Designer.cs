@@ -31,6 +31,7 @@
             this.picHomeButton = new System.Windows.Forms.PictureBox();
             this.lblProfileName = new System.Windows.Forms.Label();
             this.picProfile = new System.Windows.Forms.PictureBox();
+            this.btnBack = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picHomeButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picProfile)).BeginInit();
             this.SuspendLayout();
@@ -38,7 +39,7 @@
             // picHomeButton
             // 
             this.picHomeButton.Image = global::DAC627_Project.Properties.Resources.thEGE72UK4;
-            this.picHomeButton.Location = new System.Drawing.Point(16, 16);
+            this.picHomeButton.Location = new System.Drawing.Point(96, 16);
             this.picHomeButton.Name = "picHomeButton";
             this.picHomeButton.Size = new System.Drawing.Size(256, 48);
             this.picHomeButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -73,12 +74,23 @@
             this.picProfile.MouseEnter += new System.EventHandler(this.picHomeButton_MouseEnter);
             this.picProfile.MouseLeave += new System.EventHandler(this.picHomeButton_MouseLeave);
             // 
+            // btnBack
+            // 
+            this.btnBack.Location = new System.Drawing.Point(8, 16);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(75, 48);
+            this.btnBack.TabIndex = 4;
+            this.btnBack.Text = "<--";
+            this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1276, 720);
+            this.Controls.Add(this.btnBack);
             this.Controls.Add(this.lblProfileName);
             this.Controls.Add(this.picProfile);
             this.Controls.Add(this.picHomeButton);
@@ -96,6 +108,7 @@
         private System.Windows.Forms.PictureBox picHomeButton;
         private System.Windows.Forms.Label lblProfileName;
         private System.Windows.Forms.PictureBox picProfile;
+        private System.Windows.Forms.Button btnBack;
     }
 }
 

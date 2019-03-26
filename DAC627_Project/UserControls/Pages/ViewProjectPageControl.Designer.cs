@@ -39,6 +39,7 @@
             this.btnExpressIntrest = new System.Windows.Forms.Button();
             this.lblDescription = new System.Windows.Forms.Label();
             this.btnEdit = new System.Windows.Forms.Button();
+            this.lblDescriptonDisplay = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picThumbNail)).BeginInit();
             this.SuspendLayout();
             // 
@@ -139,10 +140,19 @@
             this.btnEdit.Visible = false;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
+            // lblDescriptonDisplay
+            // 
+            this.lblDescriptonDisplay.AutoSize = true;
+            this.lblDescriptonDisplay.Location = new System.Drawing.Point(396, 96);
+            this.lblDescriptonDisplay.Name = "lblDescriptonDisplay";
+            this.lblDescriptonDisplay.Size = new System.Drawing.Size(0, 13);
+            this.lblDescriptonDisplay.TabIndex = 27;
+            // 
             // ViewProjectPageControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.lblDescriptonDisplay);
             this.Controls.Add(this.lblTitleDisplay);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.lblDescription);
@@ -175,5 +185,6 @@
         private System.Windows.Forms.Button btnExpressIntrest;
         private System.Windows.Forms.Label lblDescription;
         private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.Label lblDescriptonDisplay;
     }
 }

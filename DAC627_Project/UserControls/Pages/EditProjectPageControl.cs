@@ -39,6 +39,10 @@ namespace DAC627_Project
                     txtTitle.Text = _curUserProject.GetProjectTitle();
                     cboProjectType.SelectedIndex = (int)_curUserProject.GetProjectType();
                     txtNotes.Text = _curUserProject.GetNotes();
+
+                    _userProject.SetProjectTitle(_curUserProject.GetProjectTitle());
+                    _userProject.SetProjectType(_curUserProject.GetProjectType());
+                    _userProject.SetNotes(_curUserProject.GetNotes());
                 }
             }
             else
@@ -72,16 +76,13 @@ namespace DAC627_Project
 
         private void DropDownInput(object sender, EventArgs e)
         {
-            if (((ComboBox)sender) == cboProjectType)
-            {
-                _userProject.SetProjectType((ProjectType)cboProjectType.SelectedIndex);
-            }
+            _userProject.SetProjectType((ProjectType)cboProjectType.SelectedIndex);
         }
 
         private void btnConfirmChanges_Click(object sender, EventArgs e)
         {
             bool errorDetected = false;
-            if (txtTitle.Text == string.Empty)
+            if (txtTitle.Text == string.Empty || txtTitle.Text == "Title")
             {
                 lblErrorTitle.Show();
                 errorDetected = true;
@@ -108,7 +109,7 @@ namespace DAC627_Project
 
                 dataBase.CloseConnection();
 
-                formMain.curSelectedUserProjectID = _userProject.GetID();
+                formMain.curSelectedUserProjectID = _curUserProjectID;
                 formMain.ChangeToPage(FormMain.Pages.ViewProjectPage);
             }
         }

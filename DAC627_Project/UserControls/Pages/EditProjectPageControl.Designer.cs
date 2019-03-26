@@ -131,15 +131,15 @@
             // 
             this.cboProjectType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboProjectType.Items.AddRange(new object[] {
+            "None of the following",
             "Research",
             "Software",
-            "Game",
-            "None of the above"});
+            "Game"});
             this.cboProjectType.Location = new System.Drawing.Point(792, 184);
             this.cboProjectType.Name = "cboProjectType";
             this.cboProjectType.Size = new System.Drawing.Size(192, 21);
             this.cboProjectType.TabIndex = 97;
-            this.cboProjectType.Leave += new System.EventHandler(this.DropDownInput);
+            this.cboProjectType.SelectedIndexChanged += new System.EventHandler(this.DropDownInput);
             // 
             // lblErrorProjectType
             // 

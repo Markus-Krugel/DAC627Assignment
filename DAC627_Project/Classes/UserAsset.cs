@@ -17,7 +17,7 @@ namespace DAC627_Project
         private PegiRating _pegiRating;
         private AssetStatus _assetStatus;
         private string _notes;
-        private List<string> _picturesPath; //First element is thumbnail
+        private List<string> _picturesPath = new List<string>(); //First element is thumbnail
         private string _assetPath;
         private int _id;
         private string _tags;

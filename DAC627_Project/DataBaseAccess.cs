@@ -518,7 +518,7 @@ namespace DAC627_Project
 
             string password = "";
             string email = "";
-            int id = 1;
+            int id = 0;
             UserStatus status = UserStatus.Offline;
             UserType type = UserType.Developer;
             string profile = "";
@@ -534,7 +534,10 @@ namespace DAC627_Project
                 profile = reader["ProfilePicture"].ToString();
                 fullName = reader["FullName"].ToString();
             }
-
+            if (id == 0)
+            {
+                return null;
+            }   
             return new UsersAccounts.UserData(id, username, password, email, type, status, profile, fullName);
         }
 
@@ -643,13 +646,13 @@ namespace DAC627_Project
             {
                 OleDbCommand command = new OleDbCommand();
                 command.Connection = connection;
-                command.CommandText = "SELECT Project.* FROM[Project] ";
+                command.CommandText = "SELECT Project.* FROM[Project] WHERE ID = " + projectID;
 
                 OleDbDataReader reader = command.ExecuteReader();
 
                 string projectname = "";
                 string description = "";
-                int ownerID = 1;
+                int ownerID = 0;
                 string tags = "";
                 string thumbnail = "";
                 ProjectType type = ProjectType.Game;
@@ -670,9 +673,13 @@ namespace DAC627_Project
 
                 UsersAccounts.UserData owner = GetUser(ownerID);
 
+                if (ownerID == 0)
+                {
+                    return null;
+                }
+
                 return new UserProject(projectID, projectname, description, owner, type, status, tags, thumbnail);
             }
-
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
@@ -763,7 +770,7 @@ namespace DAC627_Project
             {
                 OleDbCommand command = new OleDbCommand();
                 command.Connection = connection;
-                command.CommandText = "SELECT Asset.* FROM[Asset] ";
+                command.CommandText = "SELECT Asset.* FROM[Asset]  WHERE ID = " + assetID;
 
                 OleDbDataReader reader = command.ExecuteReader();
 

@@ -92,7 +92,7 @@ namespace DAC627_Project
             {
                 _userAsset.SetPegiRating((PegiRating)cboAssetType.SelectedIndex);
             }
-            else if (((ComboBox)sender) == cboAssetType)
+            else if (((ComboBox)sender) == cboAssetStatus)
             {
                 _userAsset.SetAssetStatus((AssetStatus)cboAssetStatus.SelectedIndex);
             }
@@ -101,7 +101,7 @@ namespace DAC627_Project
         private void btnConfirmChanges_Click(object sender, EventArgs e)
         {
             bool errorDetected = false;
-            if (txtTitle.Text == string.Empty)
+            if (txtTitle.Text == string.Empty || txtTitle.Text == "Title")
             {
                 lblErrorTitle.Show();
                 errorDetected = true;
@@ -111,7 +111,7 @@ namespace DAC627_Project
                 lblErrorAssetType.Show();
                 errorDetected = true;
             }
-            if (txtSoftwareUsed.Text == string.Empty)
+            if (txtSoftwareUsed.Text == string.Empty || txtSoftwareUsed.Text == "Software Used")
             {
                 lblErrorSoftwareUsed.Show();
                 errorDetected = true;
@@ -121,7 +121,7 @@ namespace DAC627_Project
                 lblErrorPegi.Show();
                 errorDetected = true;
             }
-            if (cboAssetType.SelectedIndex < 0)
+            if (cboAssetStatus.SelectedIndex < 0)
             {
                 lblErrorAssetStatus.Show();
                 errorDetected = true;

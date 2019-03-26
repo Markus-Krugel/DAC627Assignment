@@ -14,7 +14,7 @@ namespace DAC627_Project
     {
         FormMain formMain;
         UsersAccounts.UserData _currentUser;
-
+        private bool isAccountInfoEditable = false;
 
         public AccountPageControl(FormMain form)
         {
@@ -63,6 +63,37 @@ namespace DAC627_Project
         {
             formMain.UsersAccounts.SetCurrentUser(null);
             formMain.ChangeToPage(FormMain.Pages.HomePage);
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            if(!isAccountInfoEditable)
+            {
+                txtEmail.ReadOnly = false;
+                txtName.ReadOnly = false;
+                btnEdit.Text = "Confirm Changes!";
+                isAccountInfoEditable = true;
+            }
+            else
+            {
+                txtEmail.ReadOnly = true;
+                txtName.ReadOnly = true;
+                DataBaseAccess dataBaseAccess = new DataBaseAccess();
+                dataBaseAccess.StartConnection();
+                if (txtEmail.Text.Contains('@') && formMain.UsersAccounts.RetrieveUserData(txtEmail.Text) == null)
+                {
+                    dataBaseAccess.ChangeUserEmail(_currentUser.userName, txtEmail.Text);
+
+                }
+                if (txtName.Text.Count() >= 1 && txtName.Text.Count() < 12)
+                {
+                    dataBaseAccess.ChangeUserFullName((int)_currentUser.GetUserID(), txtName.Text);
+                }
+                formMain.UsersAccounts.SetCurrentUser(dataBaseAccess.GetUser((int)_currentUser.GetUserID()));
+                dataBaseAccess.CloseConnection();
+                btnEdit.Text = "Edit User Information";
+                isAccountInfoEditable = false;
+            }
         }
     }
 }

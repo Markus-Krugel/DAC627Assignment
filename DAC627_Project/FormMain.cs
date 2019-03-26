@@ -28,10 +28,6 @@ namespace DAC627_Project
         private void picHomeButton_Click(object sender, EventArgs e)
         {
             ChangeToPage(FormMain.Pages.HomePage);
-            if (UsersAccounts.GetCurrentUser() != null)
-            {
-                picProfile.Show();
-            }
         }
 
         private void picHomeButton_MouseEnter(object sender, EventArgs e)
@@ -110,6 +106,15 @@ namespace DAC627_Project
 
         public void ChangeToPage(Pages _page, string message = null)
         {
+            if (UsersAccounts.GetCurrentUser() != null)
+            {
+                picProfile.Show();
+            }
+            else
+            {
+                picProfile.Hide();
+            }
+
             if (currentPage != null)
             {
                 currentPage.Controls.Clear();

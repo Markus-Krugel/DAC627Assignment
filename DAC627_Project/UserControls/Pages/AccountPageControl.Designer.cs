@@ -40,6 +40,7 @@
             this.btnCreateProject = new System.Windows.Forms.Button();
             this.btnViewMyProjects = new System.Windows.Forms.Button();
             this.btnLogOut = new System.Windows.Forms.Button();
+            this.btnEdit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picAccountPageProfile)).BeginInit();
             this.SuspendLayout();
             // 
@@ -78,6 +79,7 @@
             this.txtUserName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtUserName.Location = new System.Drawing.Point(656, 152);
             this.txtUserName.Name = "txtUserName";
+            this.txtUserName.ReadOnly = true;
             this.txtUserName.Size = new System.Drawing.Size(192, 20);
             this.txtUserName.TabIndex = 8;
             // 
@@ -86,6 +88,7 @@
             this.txtEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEmail.Location = new System.Drawing.Point(656, 200);
             this.txtEmail.Name = "txtEmail";
+            this.txtEmail.ReadOnly = true;
             this.txtEmail.Size = new System.Drawing.Size(192, 20);
             this.txtEmail.TabIndex = 10;
             // 
@@ -94,6 +97,7 @@
             this.txtName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtName.Location = new System.Drawing.Point(656, 242);
             this.txtName.Name = "txtName";
+            this.txtName.ReadOnly = true;
             this.txtName.Size = new System.Drawing.Size(192, 20);
             this.txtName.TabIndex = 14;
             // 
@@ -109,7 +113,7 @@
             // 
             // btnViewMyAssets
             // 
-            this.btnViewMyAssets.Location = new System.Drawing.Point(632, 297);
+            this.btnViewMyAssets.Location = new System.Drawing.Point(639, 314);
             this.btnViewMyAssets.Name = "btnViewMyAssets";
             this.btnViewMyAssets.Size = new System.Drawing.Size(104, 23);
             this.btnViewMyAssets.TabIndex = 15;
@@ -119,7 +123,7 @@
             // 
             // btnUploadAsset
             // 
-            this.btnUploadAsset.Location = new System.Drawing.Point(632, 336);
+            this.btnUploadAsset.Location = new System.Drawing.Point(639, 353);
             this.btnUploadAsset.Name = "btnUploadAsset";
             this.btnUploadAsset.Size = new System.Drawing.Size(104, 23);
             this.btnUploadAsset.TabIndex = 16;
@@ -129,7 +133,7 @@
             // 
             // btnCreateProject
             // 
-            this.btnCreateProject.Location = new System.Drawing.Point(760, 336);
+            this.btnCreateProject.Location = new System.Drawing.Point(767, 353);
             this.btnCreateProject.Name = "btnCreateProject";
             this.btnCreateProject.Size = new System.Drawing.Size(104, 23);
             this.btnCreateProject.TabIndex = 17;
@@ -139,7 +143,7 @@
             // 
             // btnViewMyProjects
             // 
-            this.btnViewMyProjects.Location = new System.Drawing.Point(760, 297);
+            this.btnViewMyProjects.Location = new System.Drawing.Point(767, 314);
             this.btnViewMyProjects.Name = "btnViewMyProjects";
             this.btnViewMyProjects.Size = new System.Drawing.Size(104, 23);
             this.btnViewMyProjects.TabIndex = 18;
@@ -149,18 +153,29 @@
             // 
             // btnLogOut
             // 
-            this.btnLogOut.Location = new System.Drawing.Point(632, 374);
+            this.btnLogOut.Location = new System.Drawing.Point(656, 392);
             this.btnLogOut.Name = "btnLogOut";
-            this.btnLogOut.Size = new System.Drawing.Size(104, 23);
+            this.btnLogOut.Size = new System.Drawing.Size(198, 23);
             this.btnLogOut.TabIndex = 19;
             this.btnLogOut.Text = "Log Out";
             this.btnLogOut.UseVisualStyleBackColor = true;
             this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
             // 
+            // btnEdit
+            // 
+            this.btnEdit.Location = new System.Drawing.Point(656, 285);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(192, 23);
+            this.btnEdit.TabIndex = 20;
+            this.btnEdit.Text = "Edit User Information";
+            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            // 
             // AccountPageControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnLogOut);
             this.Controls.Add(this.btnViewMyProjects);
             this.Controls.Add(this.btnCreateProject);
@@ -194,5 +209,6 @@
         private System.Windows.Forms.Button btnCreateProject;
         private System.Windows.Forms.Button btnViewMyProjects;
         private System.Windows.Forms.Button btnLogOut;
+        private System.Windows.Forms.Button btnEdit;
     }
 }

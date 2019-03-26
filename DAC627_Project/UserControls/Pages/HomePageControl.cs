@@ -108,7 +108,7 @@ namespace DAC627_Project
                 data.StartConnection();
                 List<UserAsset> userAssets = data.SearchAsset(txtSearchAsset.Text);
                 data.CloseConnection();
-                _assetButtons = HelperTools.CreateAssetButtons(new Point(160, 150), formMain, this, userAssets.Count(), 2, userAssets, null);
+                _assetButtons = HelperTools.CreateAssetButtons(new Point(160, 150), formMain, this, userAssets.Count(), 2, userAssets);
             }
         }
 

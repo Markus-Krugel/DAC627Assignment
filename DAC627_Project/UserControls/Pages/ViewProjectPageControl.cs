@@ -51,12 +51,12 @@ namespace DAC627_Project
             lblTitleDisplay.Text = _userProject.GetProjectTitle();
             lblAssetTypeDisplay.Text = _userProject.GetProjectType().ToString();
             lblCreatorDisplay.Text = _userProject.GetAuthor().userName;
-            lblDescription.Text = _userProject.GetNotes();
+            lblDescriptionDisplay.Text = _userProject.GetNotes();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            formMain.curSelectedUserProjectID = _userProject.GetID();
+            formMain.curSelectedUserProjectID = _userProjectID;
             formMain.ChangeToPage(FormMain.Pages.EditProjectPage);
         }
     }

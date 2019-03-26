@@ -14,7 +14,7 @@ namespace DAC627_Project
         _3DModel,       //.fbx/.obj/.mb/.ma/.max
         _3DAnimation,   //.fbx/.obj/.mb/.ma/.max
         _Audio,          //.wav/.mp3
-        _NULL
+        _Null
     };
 
     public enum PegiRating
@@ -23,7 +23,8 @@ namespace DAC627_Project
         _7,
         _12,
         _16,
-        _18
+        _18,
+        _Null
     }
 
     public enum UserType

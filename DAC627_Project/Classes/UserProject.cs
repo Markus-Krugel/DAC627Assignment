@@ -15,13 +15,15 @@ namespace DAC627_Project
         private string _notes;
         private int _id;
         private ProjectStatus _projectStatus;
+        private string _tags;
+        private string _thumbnailPath;
 
         public UserProject(UsersAccounts.UserData author)
         {
             _author = author;
         }
 
-        public UserProject(int id, string projectname, string notes, UsersAccounts.UserData author, ProjectType projectType, ProjectStatus projectStatus)
+        public UserProject(int id, string projectname, string notes, UsersAccounts.UserData author, ProjectType projectType, ProjectStatus projectStatus, string tags, string thumbnailPath)
         {
             _author = author;
             _id = id;
@@ -29,6 +31,8 @@ namespace DAC627_Project
             _notes = notes;
             _projectType = projectType;
             _projectStatus = projectStatus;
+            _tags = tags;
+            _thumbnailPath = thumbnailPath;
         }
 
         //Sets

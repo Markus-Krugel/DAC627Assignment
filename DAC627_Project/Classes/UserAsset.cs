@@ -20,13 +20,14 @@ namespace DAC627_Project
         private List<string> _picturesPath; //First element is thumbnail
         private string _assetPath;
         private int _id;
+        private string _tags;
 
         public UserAsset(UsersAccounts.UserData author)
         {
             _author = author;
         }
 
-        public UserAsset(int id, string assetName, string notes, UsersAccounts.UserData author, AssetType assetType, AssetStatus assetStatus  ,string softwareUsed)
+        public UserAsset(int id, string assetName, string notes, UsersAccounts.UserData author, AssetType assetType, AssetStatus assetStatus  ,string softwareUsed, string assetPath, PegiRating pegiRating, string tags, string thumbnail = null, string galleryOne = null, string galleryTwo = null, string galleryThree = null, string galleryFour = null, string galleryFive = null)
         {
             _author = author;
             _id = id;
@@ -35,6 +36,15 @@ namespace DAC627_Project
             _assetType = assetType;
             _assetStatus = assetStatus;
             _softwareUsed = softwareUsed;
+            _assetPath = assetPath;
+            _pegiRating = pegiRating;
+            _tags = tags;
+            _picturesPath.Add(thumbnail);
+            _picturesPath.Add(galleryOne);
+            _picturesPath.Add(galleryTwo);
+            _picturesPath.Add(galleryThree);
+            _picturesPath.Add(galleryFour);
+            _picturesPath.Add(galleryFive);
         }
 
         //Set Functions

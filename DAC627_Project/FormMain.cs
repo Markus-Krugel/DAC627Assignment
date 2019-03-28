@@ -36,6 +36,10 @@ namespace DAC627_Project
 
             //use this in order to display the user control of your choice...
             ChangeToPage(Pages.LoginPage);
+            //string yeet = HelperTools.LoadFromFile();
+            //string foo = HelperTools.AddFileToStorage(yeet, 0, 1);
+
+            //HelperTools.CopyFile(@"../../", @"C:\Users\mininod\Downloads\TestFolder", "test.txt");
         }
 
         private void picHomeButton_Click(object sender, EventArgs e)

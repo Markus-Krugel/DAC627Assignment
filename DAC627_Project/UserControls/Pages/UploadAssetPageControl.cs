@@ -15,6 +15,8 @@ namespace DAC627_Project
         FormMain formMain;
         private UserAsset _userAsset;
         bool _assetUploaded = false;
+        string _assetFilePath = null;
+        int? _curUserID = null;
 
         public UploadAssetPageControl(FormMain form)
         {
@@ -23,6 +25,7 @@ namespace DAC627_Project
             cboUploadType.SelectedIndex = 0;
             if (formMain.UsersAccounts.GetCurrentUser() != null)
             {
+                _curUserID = formMain.UsersAccounts.GetCurrentUser().GetUserID();
                 _userAsset = new UserAsset((UsersAccounts.UserData)formMain.UsersAccounts.GetCurrentUser());
             }
             else
@@ -65,7 +68,7 @@ namespace DAC627_Project
                         break;
                 }
 
-                _userAsset.SetAssetPath(HelperTools.LoadFromFile("Upload Asset", filter));
+                _assetFilePath = HelperTools.LoadFromFile("Upload Asset", filter);
                 _assetUploaded = true;
             }
             else
@@ -154,8 +157,12 @@ namespace DAC627_Project
             {
                 DataBaseAccess dataBase = new DataBaseAccess();
                 dataBase.StartConnection();
-                formMain.curSelectedAssetID = dataBase.AddAsset(_userAsset.GetAssetTitle(), (int)formMain.UsersAccounts.GetCurrentUser().GetUserID(), _userAsset.GetAssetStatus(), _userAsset.GetAssetType(), _userAsset.GetSoftwareUsed(), _userAsset.GetNotes(), "", _userAsset.GetPegiRating());
+                int assetDatabaseID = dataBase.AddAsset(_userAsset.GetAssetTitle(), (int)formMain.UsersAccounts.GetCurrentUser().GetUserID(), _userAsset.GetAssetStatus(), _userAsset.GetAssetType(), _userAsset.GetSoftwareUsed(), _userAsset.GetNotes(), "", _userAsset.GetPegiRating());
+                dataBase.ChangeAssetPath(assetDatabaseID, HelperTools.AddFileToStorage(_assetFilePath, (int)_curUserID , assetDatabaseID));
                 dataBase.CloseConnection();
+
+                formMain.curSelectedAssetID = assetDatabaseID;
+
                 formMain.ChangeToPage(FormMain.Pages.EditAssetPage);
             }
         }

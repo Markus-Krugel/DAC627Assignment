@@ -46,6 +46,44 @@ namespace DAC627_Project
             }
         }
 
+        static public void CopyFile(string sourcePath, string targetPath, string fileName)
+        {
+            //string fileName = "";
+            //string sourcePath = @"C:\Users\Public\TestFolder";
+            //string targetPath = @"C:\Users\Public\TestFolder\SubDir";
+
+            // Use Path class to manipulate file and directory paths.
+            string sourceFile = System.IO.Path.Combine(sourcePath, fileName);
+            string destFile = System.IO.Path.Combine(targetPath, fileName);
+
+            if (System.IO.Directory.Exists(sourcePath))
+            {
+                System.IO.File.Copy(sourceFile, destFile, true);
+            }
+            else
+            {
+                MessageBox.Show("Source path does not exist!");
+            }
+        }
+
+        static public string AddFileToStorage(string sourceFilePath, int userID, int? assetID = null)
+        {
+            string targetPath = @"../../Resources/Users";
+
+            targetPath = Path.Combine(targetPath, "User_" + userID, "Assets", "Asset_" + assetID);
+
+            if (!System.IO.Directory.Exists(targetPath))
+            {
+                System.IO.Directory.CreateDirectory(targetPath);
+            }
+
+            string dirPath = Path.GetDirectoryName(sourceFilePath);
+            string fileName = Path.GetFileName(sourceFilePath);
+            CopyFile(dirPath, targetPath, fileName);
+
+            return targetPath;
+        }
+
         static public List<AssetButton> CreateAssetButtons(Point startingLocation, FormMain formMain, UserControl curPage ,int numberOfAssets = 2, int amountPerRow = 2, List<UserAsset> userAssets = null, List<UserProject> userProjects = null)
         {
             const int _distancePerAssetButtonX = 248;

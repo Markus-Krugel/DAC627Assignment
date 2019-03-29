@@ -81,5 +81,16 @@ namespace DAC627_Project
         {
             return _id;
         }
+
+        //PictureFuntions
+        public string GetThumbNail()
+        {
+            return _thumbnailPath;
+        }
+
+        public void SetThumbNailPath(string thumbNail)
+        {
+            _thumbnailPath = thumbNail;
+        }
     }
 }

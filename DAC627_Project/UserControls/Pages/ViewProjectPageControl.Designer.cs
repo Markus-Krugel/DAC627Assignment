@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.picThumbNail = new System.Windows.Forms.PictureBox();
             this.lblDescriptionDisplay = new System.Windows.Forms.Label();
             this.lblCreatorDisplay = new System.Windows.Forms.Label();
             this.lblAssetTypeDisplay = new System.Windows.Forms.Label();
@@ -40,22 +39,14 @@
             this.lblDescription = new System.Windows.Forms.Label();
             this.btnEdit = new System.Windows.Forms.Button();
             this.lblDescriptonDisplay = new System.Windows.Forms.Label();
+            this.picThumbNail = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.picThumbNail)).BeginInit();
             this.SuspendLayout();
-            // 
-            // picThumbNail
-            // 
-            this.picThumbNail.Location = new System.Drawing.Point(56, 95);
-            this.picThumbNail.Name = "picThumbNail";
-            this.picThumbNail.Size = new System.Drawing.Size(225, 225);
-            this.picThumbNail.TabIndex = 0;
-            this.picThumbNail.TabStop = false;
-            this.picThumbNail.Visible = false;
             // 
             // lblDescriptionDisplay
             // 
             this.lblDescriptionDisplay.AutoSize = true;
-            this.lblDescriptionDisplay.Location = new System.Drawing.Point(336, 120);
+            this.lblDescriptionDisplay.Location = new System.Drawing.Point(606, 96);
             this.lblDescriptionDisplay.Name = "lblDescriptionDisplay";
             this.lblDescriptionDisplay.Size = new System.Drawing.Size(0, 13);
             this.lblDescriptionDisplay.TabIndex = 1;
@@ -123,7 +114,7 @@
             // lblDescription
             // 
             this.lblDescription.AutoSize = true;
-            this.lblDescription.Location = new System.Drawing.Point(336, 96);
+            this.lblDescription.Location = new System.Drawing.Point(543, 95);
             this.lblDescription.Name = "lblDescription";
             this.lblDescription.Size = new System.Drawing.Size(63, 13);
             this.lblDescription.TabIndex = 25;
@@ -143,15 +134,26 @@
             // lblDescriptonDisplay
             // 
             this.lblDescriptonDisplay.AutoSize = true;
-            this.lblDescriptonDisplay.Location = new System.Drawing.Point(396, 96);
+            this.lblDescriptonDisplay.Location = new System.Drawing.Point(603, 95);
             this.lblDescriptonDisplay.Name = "lblDescriptonDisplay";
             this.lblDescriptonDisplay.Size = new System.Drawing.Size(0, 13);
             this.lblDescriptonDisplay.TabIndex = 27;
+            // 
+            // picThumbNail
+            // 
+            this.picThumbNail.Image = global::DAC627_Project.Properties.Resources.thEGE72UK4;
+            this.picThumbNail.Location = new System.Drawing.Point(104, 128);
+            this.picThumbNail.Name = "picThumbNail";
+            this.picThumbNail.Size = new System.Drawing.Size(275, 275);
+            this.picThumbNail.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picThumbNail.TabIndex = 28;
+            this.picThumbNail.TabStop = false;
             // 
             // ViewProjectPageControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.picThumbNail);
             this.Controls.Add(this.lblDescriptonDisplay);
             this.Controls.Add(this.lblTitleDisplay);
             this.Controls.Add(this.btnEdit);
@@ -163,7 +165,6 @@
             this.Controls.Add(this.lblAssetType);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.lblDescriptionDisplay);
-            this.Controls.Add(this.picThumbNail);
             this.Name = "ViewProjectPageControl";
             this.Size = new System.Drawing.Size(1280, 720);
             ((System.ComponentModel.ISupportInitialize)(this.picThumbNail)).EndInit();
@@ -173,8 +174,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox picThumbNail;
         private System.Windows.Forms.Label lblDescriptionDisplay;
         private System.Windows.Forms.Label lblCreatorDisplay;
         private System.Windows.Forms.Label lblAssetTypeDisplay;
@@ -186,5 +185,6 @@
         private System.Windows.Forms.Label lblDescription;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Label lblDescriptonDisplay;
+        private System.Windows.Forms.PictureBox picThumbNail;
     }
 }

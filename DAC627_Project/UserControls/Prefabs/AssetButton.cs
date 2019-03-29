@@ -16,6 +16,7 @@ namespace DAC627_Project
         FormMain _formMain;
         int? _userAssetOrProjectID = null;
         bool _isAsset = false;
+        string _picturePath = null;
 
         public AssetButton(FormMain formMain, int? userAssetOrProjectID, bool isAsset)
         {
@@ -28,6 +29,12 @@ namespace DAC627_Project
         public void SetName(string name)
         {
             lblName.Text = name;
+        }
+
+        public void SetPicturePath(string path)
+        {
+            _picturePath = path;
+            picAsset.ImageLocation = _picturePath;
         }
 
         private void picAsset_Click(object sender, EventArgs e)

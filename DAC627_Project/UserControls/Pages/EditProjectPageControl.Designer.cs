@@ -118,12 +118,14 @@
             this.btnUploadThumbnail.TabIndex = 76;
             this.btnUploadThumbnail.Text = "Upload Thumbnail";
             this.btnUploadThumbnail.UseVisualStyleBackColor = true;
+            this.btnUploadThumbnail.Click += new System.EventHandler(this.btnUploadThumbnail_Click);
             // 
             // picThumbnail
             // 
             this.picThumbnail.Location = new System.Drawing.Point(232, 128);
             this.picThumbnail.Name = "picThumbnail";
             this.picThumbnail.Size = new System.Drawing.Size(225, 224);
+            this.picThumbnail.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picThumbnail.TabIndex = 75;
             this.picThumbnail.TabStop = false;
             // 

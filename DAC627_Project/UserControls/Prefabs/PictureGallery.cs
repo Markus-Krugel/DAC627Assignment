@@ -14,14 +14,22 @@ namespace DAC627_Project
     {
         List<string> _pictures = new List<string>();
         int _pictureInView = 0;
+        int _userID;
+        int _assetID;
 
         public PictureGallery()
         {
-            InitializeComponent(); 
+            InitializeComponent();
             IsEditable(true);
             //Can anything fuckign work poleawr
             _pictures.Add("null");
-          //  SetToLarge();
+            //  SetToLarge();
+        }
+
+        public void InitializePictureGallery(int userID, int assetID)
+        {
+            _userID = userID;
+            _assetID = assetID;
         }
 
         public void IsEditable(bool input)
@@ -76,7 +84,8 @@ namespace DAC627_Project
         private void btnUpload_Click(object sender, EventArgs e)
         {
            
-           string _uploadedPic = HelperTools.LoadFromFile("Choose Image", "PNG File (*.png)|*.png|JPEG File (*.jpg)|*.jpg");
+            string _uploadedPic = HelperTools.LoadFromFile("Choose Image", "PNG File (*.png)|*.png|JPEG File (*.jpg)|*.jpg");
+            _uploadedPic = HelperTools.AddFileToStorage(_uploadedPic, _userID, _assetID);
             if (_uploadedPic != string.Empty)
             {
                 if(_pictures[_pictureInView] == "null")
@@ -154,6 +163,22 @@ namespace DAC627_Project
                 picImage.Image = null;
             }
             
+        }
+
+        public List<string> GetPicturesPathFromGallery()
+        {
+            return _pictures;
+        }
+
+        public void AddPicturesToGallery(List<string> picturePaths)
+        {
+            for (int i = 0; i < picturePaths.Count; i++)
+            {
+                if (picturePaths[i] != string.Empty)
+                {
+                    _pictures.Add(picturePaths[i]);
+                }
+            }
         }
     }
 }

@@ -46,7 +46,8 @@ namespace DAC627_Project
 
             galPictureGallery.SetToLarge();
             galPictureGallery.IsEditable(false);
-
+            galPictureGallery.AddPicturesToGallery(_userAsset.GetPicturesPath());
+            pictureBox1.ImageLocation = _userAsset.GetThumbNail();
             lblTitleDisplay.Text = _userAsset.GetAssetTitle();
             lblAssetTypeDisplay.Text = _userAsset.GetAssetType().ToString();
             lblSoftwareDisplay.Text = _userAsset.GetSoftwareUsed();

@@ -81,7 +81,7 @@ namespace DAC627_Project
             string fileName = Path.GetFileName(sourceFilePath);
             CopyFile(dirPath, targetPath, fileName);
 
-            return targetPath;
+            return Path.Combine(targetPath, fileName);
         }
 
         static public List<AssetButton> CreateAssetButtons(Point startingLocation, FormMain formMain, UserControl curPage ,int numberOfAssets = 2, int amountPerRow = 2, List<UserAsset> userAssets = null, List<UserProject> userProjects = null)
@@ -104,12 +104,14 @@ namespace DAC627_Project
                     //create user assets
                     newAssetButton = new AssetButton(formMain, userAssets[i].GetID(), true);
                     newAssetButton.SetName(userAssets[i].GetAssetTitle());
+                    newAssetButton.SetPicturePath(userAssets[i].GetThumbNail());
                 }
                 else if (userProjects != null)
                 {
                     //Create user projects
                     newAssetButton = new AssetButton(formMain, userProjects[i].GetID(), false);
                     newAssetButton.SetName(userProjects[i].GetProjectTitle());
+                    newAssetButton.SetPicturePath(userProjects[i].GetThumbNail());
                 }
                 else
                 {

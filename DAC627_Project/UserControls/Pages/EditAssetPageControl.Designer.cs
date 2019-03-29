@@ -60,6 +60,7 @@
             this.btnUploadThumbnail.TabIndex = 1;
             this.btnUploadThumbnail.Text = "Upload Thumbnail";
             this.btnUploadThumbnail.UseVisualStyleBackColor = true;
+            this.btnUploadThumbnail.Click += new System.EventHandler(this.btnUploadThumbnail_Click);
             // 
             // cboAssetType
             // 
@@ -209,6 +210,7 @@
             this.lblNotes.Size = new System.Drawing.Size(48, 18);
             this.lblNotes.TabIndex = 67;
             this.lblNotes.Text = "Notes";
+            this.lblNotes.Click += new System.EventHandler(this.lblNotes_Click);
             // 
             // lblPegi
             // 
@@ -265,8 +267,10 @@
             this.picThumbnail.Location = new System.Drawing.Point(232, 128);
             this.picThumbnail.Name = "picThumbnail";
             this.picThumbnail.Size = new System.Drawing.Size(225, 225);
+            this.picThumbnail.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picThumbnail.TabIndex = 0;
             this.picThumbnail.TabStop = false;
+            this.picThumbnail.Click += new System.EventHandler(this.picThumbnail_Click);
             // 
             // cboAssetStatus
             // 

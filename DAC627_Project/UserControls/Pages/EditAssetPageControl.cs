@@ -16,6 +16,7 @@ namespace DAC627_Project
         private UserAsset _userAsset = new UserAsset(null);
         private UserAsset _curUserAsset = null;
         private int? _userAssetID = null;
+        private string _thumbNailPic = null;
 
         public EditAssetPageControl(FormMain form, int? userAssetID)
         {
@@ -24,8 +25,9 @@ namespace DAC627_Project
             dataBase.StartConnection();
             _curUserAsset = dataBase.getAsset((int)userAssetID);
             dataBase.CloseConnection();
-
             InitializeComponent();
+            pictureGallery1.InitializePictureGallery((int)_curUserAsset.GetAuthor().GetUserID(), (int)_userAssetID);
+
             formMain = form;
             if (formMain.UsersAccounts.GetCurrentUser() != null)
             {
@@ -41,6 +43,9 @@ namespace DAC627_Project
                     cboPegi.SelectedIndex = (int)_curUserAsset.GetPegiRating();
                     cboAssetStatus.SelectedIndex = (int)_curUserAsset.GetAssetStatus();
                     txtNotes.Text = _curUserAsset.GetNotes();
+                    pictureGallery1.AddPicturesToGallery(_curUserAsset.GetPicturesPath());
+                    picThumbnail.ImageLocation = _curUserAsset.GetThumbNail();
+
                     _userAsset.SetAssetTitle(_curUserAsset.GetAssetTitle());
                     _userAsset.SetAssetType(_curUserAsset.GetAssetType());
                     _userAsset.SetSoftwareUsed(_curUserAsset.GetSoftwareUsed());
@@ -146,12 +151,47 @@ namespace DAC627_Project
                 if (_curUserAsset.GetNotes() != _userAsset.GetNotes())
                     dataBase.ChangeAssetNotes((int)_userAssetID, _userAsset.GetNotes());
 
+                if (_thumbNailPic != null)
+                    dataBase.ChangeAssetThumbnail((int)_userAssetID, _thumbNailPic);
+
+                List<string> tempPictureHolder = pictureGallery1.GetPicturesPathFromGallery();
+                _curUserAsset.SetPicturesPath(tempPictureHolder);
+                if(tempPictureHolder.Count >= 1)
+                dataBase.ChangeAssetGalleryOne((int)_userAssetID ,tempPictureHolder[0]);
+                if (tempPictureHolder.Count >= 2)
+                    dataBase.ChangeAssetGalleryTwo((int)_userAssetID, tempPictureHolder[1]);
+                if (tempPictureHolder.Count >= 3)
+                    dataBase.ChangeAssetGalleryThree((int)_userAssetID, tempPictureHolder[2]);
+                if (tempPictureHolder.Count >= 4)
+                    dataBase.ChangeAssetGalleryFour((int)_userAssetID, tempPictureHolder[3]);
+                if (tempPictureHolder.Count >= 5)
+                    dataBase.ChangeAssetGalleryFive((int)_userAssetID, tempPictureHolder[4]);
+
                 dataBase.CloseConnection();
 
 
                 formMain.curSelectedAssetID = _userAssetID;
                 formMain.ChangeToPage(FormMain.Pages.ViewAssetPage);
             }
+        }
+
+        private void btnUploadThumbnail_Click(object sender, EventArgs e)
+        {
+            string _uploadedPic = HelperTools.LoadFromFile("Choose Image", "PNG File (*.png)|*.png|JPEG File (*.jpg)|*.jpg");
+            _uploadedPic = HelperTools.AddFileToStorage(_uploadedPic, (int)_curUserAsset.GetAuthor().GetUserID(), _userAssetID);
+            _thumbNailPic = _uploadedPic;
+            picThumbnail.ImageLocation = _thumbNailPic;
+
+        }
+
+        private void lblNotes_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void picThumbnail_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

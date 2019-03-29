@@ -52,6 +52,9 @@ namespace DAC627_Project
             lblAssetTypeDisplay.Text = _userProject.GetProjectType().ToString();
             lblCreatorDisplay.Text = _userProject.GetAuthor().userName;
             lblDescriptionDisplay.Text = _userProject.GetNotes();
+            picThumbNail.ImageLocation = _userProject.GetThumbNail();
+            picThumbNail.Location = new Point(10, 10); // broken
+            formMain.Refresh();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)

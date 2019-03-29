@@ -18,6 +18,7 @@ namespace DAC627_Project
         private AssetStatus _assetStatus;
         private string _notes;
         private List<string> _picturesPath = new List<string>(); //First element is thumbnail
+        private string _thumbNailPicture;
         private string _assetPath;
         private int _id;
         private string _tags;
@@ -39,7 +40,7 @@ namespace DAC627_Project
             _assetPath = assetPath;
             _pegiRating = pegiRating;
             _tags = tags;
-            _picturesPath.Add(thumbnail);
+            _thumbNailPicture = thumbnail;
             _picturesPath.Add(galleryOne);
             _picturesPath.Add(galleryTwo);
             _picturesPath.Add(galleryThree);
@@ -82,7 +83,6 @@ namespace DAC627_Project
         {
             _assetPath = assetPath;
         }
-
 
         //Get Functions
         public string GetAssetTitle()
@@ -141,9 +141,19 @@ namespace DAC627_Project
             _picturesPath.Add(picturePath);
         }
 
-        public void SetThumbnailPicture(string picturePath)
+        public void SetPicturesPath(List<string> picturesPaths) //Element 0 is the thumbail
         {
-            _picturesPath[0] = picturePath;
+            _picturesPath = picturesPaths;
+        }
+
+        public string GetThumbNail()
+        {
+            return _thumbNailPicture;
+        }
+
+        public void SetThumbNail(string thumbNail)
+        {
+            _thumbNailPicture = thumbNail;
         }
     }
 }

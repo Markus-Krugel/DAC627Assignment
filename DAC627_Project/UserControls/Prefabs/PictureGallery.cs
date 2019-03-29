@@ -22,6 +22,7 @@ namespace DAC627_Project
             InitializeComponent();
             IsEditable(true);
             //Can anything fuckign work poleawr
+
             _pictures.Add("null");
             //  SetToLarge();
         }
@@ -174,7 +175,11 @@ namespace DAC627_Project
         {
             for (int i = 0; i < picturePaths.Count; i++)
             {
-                if (picturePaths[i] != string.Empty)
+                if(_pictures.Count > i && _pictures[i] == "null" && picturePaths[i] != string.Empty)
+                {
+                    _pictures[i] = picturePaths[i];
+                }
+                else if (picturePaths[i] != string.Empty)
                 {
                     _pictures.Add(picturePaths[i]);
                 }

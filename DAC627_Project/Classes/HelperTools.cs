@@ -51,9 +51,10 @@ namespace DAC627_Project
             string destinationPath = null;
             using (SaveFileDialog saveFileDialog = new SaveFileDialog())
             {
-                saveFileDialog.Title = "Save";
+                saveFileDialog.Title = "Save File";
                 saveFileDialog.InitialDirectory = "c:\\";
                 saveFileDialog.RestoreDirectory = true;
+                saveFileDialog.Filter = "All files (*.*)|*.*";
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     destinationPath = saveFileDialog.FileName;

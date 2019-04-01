@@ -104,7 +104,7 @@
             // 
             // picAccountPageProfile
             // 
-            this.picAccountPageProfile.Image = global::DAC627_Project.Properties.Resources.thEGE72UK4;
+            this.picAccountPageProfile.Image = global::DAC627_Project.Properties.Resources.DefaultProfilePic;
             this.picAccountPageProfile.Location = new System.Drawing.Point(400, 152);
             this.picAccountPageProfile.Name = "picAccountPageProfile";
             this.picAccountPageProfile.Size = new System.Drawing.Size(120, 120);

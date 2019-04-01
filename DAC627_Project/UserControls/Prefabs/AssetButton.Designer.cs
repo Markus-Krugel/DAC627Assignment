@@ -28,23 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AssetButton));
-            this.picAsset = new System.Windows.Forms.PictureBox();
             this.lblName = new System.Windows.Forms.Label();
+            this.picAsset = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.picAsset)).BeginInit();
             this.SuspendLayout();
-            // 
-            // picAsset
-            // 
-            this.picAsset.Image = ((System.Drawing.Image)(resources.GetObject("picAsset.Image")));
-            this.picAsset.InitialImage = null;
-            this.picAsset.Location = new System.Drawing.Point(0, 0);
-            this.picAsset.Name = "picAsset";
-            this.picAsset.Size = new System.Drawing.Size(200, 200);
-            this.picAsset.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picAsset.TabIndex = 0;
-            this.picAsset.TabStop = false;
-            this.picAsset.Click += new System.EventHandler(this.picAsset_Click);
             // 
             // lblName
             // 
@@ -55,6 +42,18 @@
             this.lblName.Size = new System.Drawing.Size(89, 18);
             this.lblName.TabIndex = 1;
             this.lblName.Text = "Asset Name";
+            // 
+            // picAsset
+            // 
+            this.picAsset.Image = global::DAC627_Project.Properties.Resources.DefaultAssetPic;
+            this.picAsset.InitialImage = null;
+            this.picAsset.Location = new System.Drawing.Point(0, 0);
+            this.picAsset.Name = "picAsset";
+            this.picAsset.Size = new System.Drawing.Size(200, 200);
+            this.picAsset.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picAsset.TabIndex = 0;
+            this.picAsset.TabStop = false;
+            this.picAsset.Click += new System.EventHandler(this.picAsset_Click);
             // 
             // AssetButton
             // 

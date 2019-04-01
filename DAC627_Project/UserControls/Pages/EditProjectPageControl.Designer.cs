@@ -122,6 +122,7 @@
             // 
             // picThumbnail
             // 
+            this.picThumbnail.Image = global::DAC627_Project.Properties.Resources.DefaultProjectPic;
             this.picThumbnail.Location = new System.Drawing.Point(232, 128);
             this.picThumbnail.Name = "picThumbnail";
             this.picThumbnail.Size = new System.Drawing.Size(225, 224);

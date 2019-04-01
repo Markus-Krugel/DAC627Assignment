@@ -50,6 +50,7 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.Image = global::DAC627_Project.Properties.Resources.DefaultAssetPic;
             this.pictureBox1.Location = new System.Drawing.Point(38, 106);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(275, 275);

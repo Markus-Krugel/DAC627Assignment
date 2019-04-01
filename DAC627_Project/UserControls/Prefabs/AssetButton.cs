@@ -23,6 +23,8 @@ namespace DAC627_Project
             _isAsset = isAsset;
             _userAssetOrProjectID = userAssetOrProjectID;
             InitializeComponent();
+            if (!_isAsset)
+                picAsset.Image = Properties.Resources.DefaultProjectPic;
             _formMain = formMain;
         }
 

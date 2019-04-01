@@ -28,26 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.picHomeButton = new System.Windows.Forms.PictureBox();
             this.lblProfileName = new System.Windows.Forms.Label();
-            this.picProfile = new System.Windows.Forms.PictureBox();
             this.btnBack = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.picHomeButton)).BeginInit();
+            this.picProfile = new System.Windows.Forms.PictureBox();
+            this.picHomeButton = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.picProfile)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picHomeButton)).BeginInit();
             this.SuspendLayout();
-            // 
-            // picHomeButton
-            // 
-            this.picHomeButton.Image = global::DAC627_Project.Properties.Resources.thEGE72UK4;
-            this.picHomeButton.Location = new System.Drawing.Point(96, 16);
-            this.picHomeButton.Name = "picHomeButton";
-            this.picHomeButton.Size = new System.Drawing.Size(256, 48);
-            this.picHomeButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picHomeButton.TabIndex = 0;
-            this.picHomeButton.TabStop = false;
-            this.picHomeButton.Click += new System.EventHandler(this.picHomeButton_Click);
-            this.picHomeButton.MouseEnter += new System.EventHandler(this.picHomeButton_MouseEnter);
-            this.picHomeButton.MouseLeave += new System.EventHandler(this.picHomeButton_MouseLeave);
             // 
             // lblProfileName
             // 
@@ -60,9 +47,19 @@
             this.lblProfileName.Text = "Default Profile Name";
             this.lblProfileName.Visible = false;
             // 
+            // btnBack
+            // 
+            this.btnBack.Location = new System.Drawing.Point(8, 16);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(75, 48);
+            this.btnBack.TabIndex = 4;
+            this.btnBack.Text = "<--";
+            this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            // 
             // picProfile
             // 
-            this.picProfile.Image = global::DAC627_Project.Properties.Resources.thEGE72UK4;
+            this.picProfile.Image = global::DAC627_Project.Properties.Resources.DefaultProfilePic;
             this.picProfile.Location = new System.Drawing.Point(1200, 16);
             this.picProfile.Name = "picProfile";
             this.picProfile.Size = new System.Drawing.Size(50, 50);
@@ -74,15 +71,18 @@
             this.picProfile.MouseEnter += new System.EventHandler(this.picHomeButton_MouseEnter);
             this.picProfile.MouseLeave += new System.EventHandler(this.picHomeButton_MouseLeave);
             // 
-            // btnBack
+            // picHomeButton
             // 
-            this.btnBack.Location = new System.Drawing.Point(8, 16);
-            this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(75, 48);
-            this.btnBack.TabIndex = 4;
-            this.btnBack.Text = "<--";
-            this.btnBack.UseVisualStyleBackColor = true;
-            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            this.picHomeButton.Image = global::DAC627_Project.Properties.Resources.FAPLogo;
+            this.picHomeButton.Location = new System.Drawing.Point(96, 16);
+            this.picHomeButton.Name = "picHomeButton";
+            this.picHomeButton.Size = new System.Drawing.Size(218, 48);
+            this.picHomeButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picHomeButton.TabIndex = 0;
+            this.picHomeButton.TabStop = false;
+            this.picHomeButton.Click += new System.EventHandler(this.picHomeButton_Click);
+            this.picHomeButton.MouseEnter += new System.EventHandler(this.picHomeButton_MouseEnter);
+            this.picHomeButton.MouseLeave += new System.EventHandler(this.picHomeButton_MouseLeave);
             // 
             // FormMain
             // 
@@ -96,8 +96,8 @@
             this.Controls.Add(this.picHomeButton);
             this.Name = "FormMain";
             this.Text = "Prototype";
-            ((System.ComponentModel.ISupportInitialize)(this.picHomeButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picProfile)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picHomeButton)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

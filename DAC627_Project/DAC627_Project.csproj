@@ -260,6 +260,11 @@
     <None Include="Resources\thEGE72UK4.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\DefaultAssetPic.png" />
+    <None Include="Resources\DefaultProjectPic.png" />
+    <None Include="Resources\DefaultProfilePic.png" />
+    <None Include="Resources\FAPLogo.png" />
+    <None Include="Resources\FAPLogo2.png" />
     <Content Include="Resources\Placeholder.png" />
   </ItemGroup>
   <ItemGroup />

@@ -54,6 +54,11 @@ namespace DAC627_Project
             }
 
             //Functions
+            public string GetProfilePicPath()
+            {
+                return _profilePicturePath;
+            }
+
             public List<UserProject> GetUsersProjects()
             {
                 return _userProjects;

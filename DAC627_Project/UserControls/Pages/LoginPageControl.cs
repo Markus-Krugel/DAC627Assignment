@@ -55,7 +55,7 @@ namespace DAC627_Project
                 if (m_user.IsValidPassword(txtPassword.Text))
                 {
                     formMain.UsersAccounts.SetCurrentUser(m_user);
-                    formMain.ChangeToPage(FormMain.Pages.AccountPage);
+                    formMain.ChangeToPage(FormMain.Pages.HomePage);
                     this.Hide();
                     return;
                 }

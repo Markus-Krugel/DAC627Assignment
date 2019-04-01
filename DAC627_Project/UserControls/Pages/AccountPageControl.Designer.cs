@@ -41,6 +41,7 @@
             this.btnViewMyProjects = new System.Windows.Forms.Button();
             this.btnLogOut = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
+            this.btnChangeProfilePic = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picAccountPageProfile)).BeginInit();
             this.SuspendLayout();
             // 
@@ -171,10 +172,21 @@
             this.btnEdit.UseVisualStyleBackColor = true;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
+            // btnChangeProfilePic
+            // 
+            this.btnChangeProfilePic.Location = new System.Drawing.Point(400, 278);
+            this.btnChangeProfilePic.Name = "btnChangeProfilePic";
+            this.btnChangeProfilePic.Size = new System.Drawing.Size(120, 23);
+            this.btnChangeProfilePic.TabIndex = 21;
+            this.btnChangeProfilePic.Text = "Upload Profile Picture";
+            this.btnChangeProfilePic.UseVisualStyleBackColor = true;
+            this.btnChangeProfilePic.Click += new System.EventHandler(this.btnChangeProfilePic_Click);
+            // 
             // AccountPageControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnChangeProfilePic);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnLogOut);
             this.Controls.Add(this.btnViewMyProjects);
@@ -210,5 +222,6 @@
         private System.Windows.Forms.Button btnViewMyProjects;
         private System.Windows.Forms.Button btnLogOut;
         private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.Button btnChangeProfilePic;
     }
 }

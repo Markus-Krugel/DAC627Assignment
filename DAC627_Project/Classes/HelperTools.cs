@@ -103,8 +103,14 @@ namespace DAC627_Project
         static public string AddFileToStorage(string sourceFilePath, int userID, int? assetID = null)
         {
             string targetPath = @"../../Resources/Users";
-
-            targetPath = Path.Combine(targetPath, "User_" + userID, "Assets", "Asset_" + assetID);
+            if (assetID == null)
+            {
+                targetPath = Path.Combine(targetPath, "User_" + userID);
+            }
+            else
+            {
+                targetPath = Path.Combine(targetPath, "User_" + userID, "Assets", "Asset_" + assetID);
+            }
 
             if (!System.IO.Directory.Exists(targetPath))
             {

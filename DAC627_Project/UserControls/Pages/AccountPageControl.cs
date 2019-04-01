@@ -25,6 +25,8 @@ namespace DAC627_Project
             txtUserName.Text = _currentUser.userName;
             txtEmail.Text = _currentUser.emailAddress;
             txtName.Text = _currentUser.fullName;
+            if(_currentUser.GetProfilePicPath() != "")
+                picAccountPageProfile.ImageLocation = _currentUser.GetProfilePicPath();
         }
 
         private void txt_Enter(object sender, EventArgs e)
@@ -94,6 +96,16 @@ namespace DAC627_Project
                 btnEdit.Text = "Edit User Information";
                 isAccountInfoEditable = false;
             }
+        }
+
+        private void btnChangeProfilePic_Click(object sender, EventArgs e)
+        {
+            string file = HelperTools.LoadFromFile();
+            string databasePath = HelperTools.AddFileToStorage(file, (int)_currentUser.GetUserID());
+            DataBaseAccess dataBaseAccess = new DataBaseAccess();
+            dataBaseAccess.StartConnection();
+            dataBaseAccess.ChangeUserProfile((int)_currentUser.GetUserID() ,databasePath);
+            dataBaseAccess.CloseConnection();
         }
     }
 }

@@ -123,8 +123,13 @@ namespace DAC627_Project
 
         public void ChangeToPage(Pages _page, string message = null)
         {
-            if (UsersAccounts.GetCurrentUser() != null)
+            UsersAccounts.UserData curUser = UsersAccounts.GetCurrentUser();
+
+            if (curUser != null)
             {
+                if (curUser.GetProfilePicPath() != "")
+                    picProfile.ImageLocation = curUser.GetProfilePicPath();
+
                 picProfile.Show();
             }
             else

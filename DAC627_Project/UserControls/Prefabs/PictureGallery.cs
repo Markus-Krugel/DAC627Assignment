@@ -184,6 +184,10 @@ namespace DAC627_Project
                     _pictures.Add(picturePaths[i]);
                 }
             }
+            if (picturePaths.Count > 0)
+            {
+                MoveGalleryRight();
+            }
         }
     }
 }

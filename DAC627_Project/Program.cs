@@ -102,12 +102,12 @@ namespace DAC627_Project
             //Console.WriteLine(database.getProject(1).ToString());
             //Console.WriteLine(database.getProject("Jumper").ToString());
 
-            //Console.WriteLine(database.getAsset(9).ToString());
             //Console.WriteLine(database.getAsset("Solent-Logo").ToString());
+            //Console.WriteLine(database.getAsset(18).ToString());
 
-            // List<DatabaseAsset> assetsOfUser = database.getAssetsOfUser(3);
-            // foreach (DatabaseAsset asset in assetsOfUser)
-            //     Console.WriteLine(asset.ToStringShort());
+            //List<DatabaseAsset> assetsOfUser = database.getAssetsOfUser(3);
+            //foreach (DatabaseAsset asset in assetsOfUser)
+            //    Console.WriteLine(asset.ToStringShort());
 
             //List<DatabaseProject> projectsOfUser = database.getOwnedProjectsOfUser(1);
             //foreach (DatabaseProject project in projectsOfUser)
@@ -170,7 +170,7 @@ namespace DAC627_Project
 
             //database.DeleteProject(1);
             //database.DeleteUser(1);
-            //database.DeleteAsset(1);
+            //database.DeleteAsset(18);
 
 
 
@@ -195,19 +195,41 @@ namespace DAC627_Project
 
             //database.ChangeUserFullName(1, "Markus Krugel");
             //database.ChangeUserProfile(1, "Profile here");
-            database.ChangeProjectTags(1, "Test");
-            database.ChangeProjectThumbnail(1, "Thumbnail");
-            database.ChangeAssetPath(1, "Path");
-            database.ChangeAssetPegi(1, PegiRating._16);
-            database.ChangeAssetThumbnail(1, "Thumbnail");
-            database.ChangeAssetTags(1, "Tags");
-            database.ChangeAssetGalleryOne(1, "One");
-            database.ChangeAssetGalleryTwo(1, "Two");
-            database.ChangeAssetGalleryThree(1, "Three");
-            database.ChangeAssetGalleryFour(1, "Four");
-            database.ChangeAssetGalleryFive(1, "Five");
+            //database.ChangeProjectTags(1, "Test");
+            //database.ChangeProjectThumbnail(1, "Thumbnail");
+            //database.ChangeAssetPath(1, "Path");
+            //database.ChangeAssetPegi(1, PegiRating._16);
+            //database.ChangeAssetThumbnail(1, "Thumb5nail");
+            //database.ChangeAssetTags(1, "Tags");
+            //database.ChangeAssetGalleryOne(1, "On5e");
+            //database.ChangeAssetGalleryTwo(1, "T5o");
+            //database.ChangeAssetGalleryThree(1, "Thr5ee");
+            //database.ChangeAssetGalleryFour(1, "Fou5r");
+            //database.ChangeAssetGalleryFive(1, "F5ive");
 
 
+
+            // Rating commands
+
+            //database.AddRating(3, 1, 2, "Meh");
+            //Console.WriteLine(database.GetAverageStarRating(1));
+            //Console.WriteLine(database.GetRating(2));
+            //
+            //List<DatabaseRating> ratings = new List<DatabaseRating>();
+            //ratings = database.GetRatingsOfAsset(1);
+            //ratings = database.GetRatingsOfUser(5);
+            //
+            //foreach (DatabaseRating rating in ratings)
+            //{
+            //    Console.WriteLine(rating);
+            //}
+
+            //database.DeleteRating(1);
+
+            //database.ChangeRatingStars(2, 3);
+            //database.ChangeRatingComment(2, "Little mistakes");
+            //
+            //database.ShowAllRatings();
 
 
             // Shows list of all datas in the output window

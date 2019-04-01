@@ -162,7 +162,8 @@ namespace DAC627_Project
                 OleDbCommand command = new OleDbCommand();
                 command.Connection = connection;
 
-                string commandtext = "SELECT Asset.* FROM[Asset] ";
+                string commandtext = "SELECT * FROM[Asset] asset Inner join[AssetGallery] gallery" +
+                    " On gallery.AssetID = asset.ID ";
 
                 if (name != null || typeSearch != AssetType.Null || statusSearch != AssetStatus.Null || pegi != 0)
                 {
@@ -238,6 +239,14 @@ namespace DAC627_Project
                     galleryFour = reader["GalleryFour"].ToString();
                     galleryFive = reader["GalleryFive"].ToString();
                     int creatorID = int.Parse(reader["Creator"].ToString());
+
+                    OleDbCommand command2 = new OleDbCommand();
+                    command2.Connection = connection;
+                    command2.CommandText = "Select * from Asset WHERE Assetname = '" + assetname + "'";
+                    reader = command2.ExecuteReader();
+
+                    while (reader.Read())
+                        id = int.Parse(reader["ID"].ToString());
 
                     DatabaseUser creator = GetUser(creatorID);
 
@@ -358,11 +367,9 @@ namespace DAC627_Project
             string software, string notes, string tags, PegiRating pegi, string assetPath = "", string thumbnail = "", 
             string galleryOne = "", string galleryTwo = "", string galleryThree = "", string galleryFour = "", string galleryFive = "")
         {
-            string commandText = "INSERT INTO Asset ( Assetname, Creator, Notes, Status, Type, Software, Tags, PegiRating," +
-                "AssetPath, ThumbnailPath, GalleryOne, GalleryTwo, GalleryThree, GalleryFour, GalleryFive ) VALUES " +
-                                    "('" + name + "'," + creator + ",'" + notes + "','" + status + "','" + type + "', '"+ software +"'" +
-                                    ",'" + tags + "','" + pegi + "','" + assetPath + "','" + thumbnail + "','" + galleryOne + "" +
-                                    "','" + galleryTwo + "','" + galleryThree + "','" + galleryFour + "','" + galleryFive + "')";
+            string commandText = "INSERT INTO Asset ( Assetname, Creator, Notes, Status, Type, Software, Tags, PegiRating, AssetPath) " +
+                "VALUES ('" + name + "'," + creator + ",'" + notes + "','" + status + "','" + type + "', '" + software + "'" +
+                                    ",'" + tags + "','" + pegi + "','" + assetPath + "')";
 
             bool executed = ExecuteCommand(commandText);
 
@@ -378,6 +385,13 @@ namespace DAC627_Project
 
                 while (reader.Read())
                     id = reader.GetInt32(0);
+
+                if (thumbnail != "" || galleryOne != "" || galleryTwo != "" || galleryThree != "" || galleryFour != "" || galleryFive != "")
+                {
+                    commandText = "Insert INTO AssetGallery ( AssetID, ThumbnailPath, GalleryOne, GalleryTwo, GalleryThree, GalleryFour, GalleryFive) " +
+                        "VALUES (" + id + ",'" + thumbnail + "','" + galleryOne + "','" + galleryTwo + "','" + galleryThree + "','" + galleryFour + "','" + galleryFive + "')";
+                    ExecuteCommand(commandText);
+                }
 
             }
 
@@ -397,8 +411,23 @@ namespace DAC627_Project
             // Removes miliseconds as it causes data type mismatch
             DateTime time = new DateTime(sended.Year, sended.Month, sended.Day, sended.Hour, sended.Minute, sended.Second);
 
-            string commandText = "INSERT INTO Messages ( Sender, Receiver, Message, Type, SendedDate) VALUES " +
+            string commandText = "INSERT INTO Messages ( Sender, Receiver, MessageText, Type, SendedDate) VALUES " +
                                     "('" + senderID + "','" + receiverID + "','" + message + "','" + type + "','" + time+ "')";
+
+            ExecuteCommand(commandText);
+        }
+
+        /// <summary>
+        /// Adds a rating to the database
+        /// </summary>
+        /// <param name="userID">The ID of the reviewer</param>
+        /// <param name="assetID">The ID of the reviewed asset</param>
+        /// <param name="stars">The amount of stars given to the asset</param>
+        /// <param name="comment">Comment about the asset by the reviewer</param>
+        public void AddRating(int userID, int assetID, int stars, string comment)
+        {
+            string commandText = "INSERT INTO Ratings ( Reviewer, Asset, Stars, Comment) VALUES " +
+                                    "(" + userID + "," + assetID + "," + stars + ",'" + comment + "')";
 
             ExecuteCommand(commandText);
         }
@@ -454,14 +483,26 @@ namespace DAC627_Project
 
         public void DeleteAsset(int assetID)
         {
-            string command = "DELETE FROM [Asset] WHERE ID = " + assetID;
+            string command = "DELETE FROM [AssetGallery] WHERE AssetID = " + assetID;
 
             ExecuteCommand(command);
+
+            command = "DELETE FROM [Asset] WHERE ID = " + assetID;
+
+            ExecuteCommand(command);
+            
         }
 
         public void DeleteMessage(int messageID)
         {
             string command = "DELETE FROM [Messages] WHERE ID = " + messageID;
+
+            ExecuteCommand(command);
+        }
+
+        public void DeleteRating(int ratingID)
+        {
+            string command = "DELETE FROM [Ratings] WHERE ID = " + ratingID;
 
             ExecuteCommand(command);
         }
@@ -690,7 +731,10 @@ namespace DAC627_Project
             {
                 OleDbCommand command = new OleDbCommand();
                 command.Connection = connection;
-                command.CommandText = "SELECT Asset.* FROM[Asset] ";
+                command.CommandText = "SELECT * FROM[Asset] asset " +
+                    "Inner join [AssetGallery] gallery " +
+                    "On gallery.AssetID = asset.ID " +
+                    "WHERE asset.Assetname = '" + assetname+"'";
 
                 OleDbDataReader reader = command.ExecuteReader();
 
@@ -711,8 +755,7 @@ namespace DAC627_Project
                 string galleryFive = "";
 
                 while (reader.Read())
-                {
-                    assetID = int.Parse(reader["ID"].ToString());
+                {                   
                     assetname = reader["Assetname"].ToString();
                     creatorID = int.Parse(reader["Creator"].ToString());
                     notes = reader["Notes"].ToString();
@@ -731,6 +774,14 @@ namespace DAC627_Project
 
                     Console.WriteLine();
                 }
+
+                OleDbCommand command2 = new OleDbCommand();
+                command2.Connection = connection;
+                command2.CommandText = "Select * from Asset WHERE Assetname = '" + assetname + "'";
+                reader = command2.ExecuteReader();
+
+                while(reader.Read())
+                    assetID = int.Parse(reader["ID"].ToString());
 
                 DatabaseUser creator = GetUser(creatorID);
 
@@ -759,7 +810,10 @@ namespace DAC627_Project
             {
                 OleDbCommand command = new OleDbCommand();
                 command.Connection = connection;
-                command.CommandText = "SELECT Asset.* FROM[Asset] ";
+                command.CommandText = "SELECT * FROM[Asset] asset " +
+                   "Inner join [AssetGallery] gallery " +
+                   "On gallery.AssetID = asset.ID " +
+                   "WHERE asset.ID = " + assetID;
 
                 OleDbDataReader reader = command.ExecuteReader();
 
@@ -845,7 +899,7 @@ namespace DAC627_Project
                     messageID = int.Parse(reader["ID"].ToString());
                     receiverID = int.Parse(reader["Receiver"].ToString());
                     senderID = int.Parse(reader["Sender"].ToString());
-                    message = reader["Message"].ToString();
+                    message = reader["MessageText"].ToString();
                     type = (MessageType)Enum.Parse(typeof(MessageType), reader["Type"].ToString());
                     sended = Convert.ToDateTime(reader["SendedDate"]);
 
@@ -892,7 +946,7 @@ namespace DAC627_Project
                     messageID = int.Parse(reader["ID"].ToString());
                     receiverID = int.Parse(reader["Receiver"].ToString());
                     senderID = int.Parse(reader["Sender"].ToString());
-                    message = reader["Message"].ToString();
+                    message = reader["MessageText"].ToString();
                     type = (MessageType)Enum.Parse(typeof(MessageType), reader["Type"].ToString());
                     sended = Convert.ToDateTime(reader["SendedDate"]);
 
@@ -911,6 +965,186 @@ namespace DAC627_Project
         }
 
         /// <summary>
+        /// Returns the rating of an asset
+        /// </summary>
+        /// <param name="ratingID">The ID of the rating</param>
+        /// <returns>The specified rating</returns>
+        public DatabaseRating GetRating(int ratingID)
+        {
+            try
+            {
+                OleDbCommand command = new OleDbCommand();
+                command.Connection = connection;
+                command.CommandText = "SELECT * FROM[Ratings] "+
+                   "WHERE ID = " + ratingID;
+
+                OleDbDataReader reader = command.ExecuteReader();
+
+                int id = 0;
+                int reviewerID = 0;
+                int assetID = 0;
+                int stars = 0;
+                string comment = "";
+
+                while (reader.Read())
+                {
+                    id = int.Parse(reader["ID"].ToString());
+                    reviewerID = int.Parse(reader["Reviewer"].ToString());
+                    assetID = int.Parse(reader["Asset"].ToString());
+                    stars = int.Parse(reader["Stars"].ToString());
+                    comment = reader["Comment"].ToString();
+
+                    Console.WriteLine();
+                }
+
+                return new DatabaseRating(id, reviewerID, assetID, stars, comment);
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+            Console.WriteLine();
+
+            return null;
+        }
+
+        /// <summary>
+        /// Get all ratings of an asset
+        /// </summary>
+        /// <param name="assetID">The ID of the asset</param>
+        /// <returns>All ratings of the asset</returns>
+        public List<DatabaseRating> GetRatingsOfAsset(int assetID)
+        {
+            try
+            {
+                OleDbCommand command = new OleDbCommand();
+                command.Connection = connection;
+                command.CommandText = "SELECT * FROM[Ratings] " +
+                   "WHERE Asset = " + assetID;
+
+                OleDbDataReader reader = command.ExecuteReader();
+
+                List<DatabaseRating> result = new List<DatabaseRating>();
+
+                int id = 0;
+                int reviewerID = 0;
+                int stars = 0;
+                string comment = "";
+
+                while (reader.Read())
+                {
+                    id = int.Parse(reader["ID"].ToString());
+                    reviewerID = int.Parse(reader["Reviewer"].ToString());
+                    assetID = int.Parse(reader["Asset"].ToString());
+                    stars = int.Parse(reader["Stars"].ToString());
+                    comment = reader["Comment"].ToString();
+
+                    Console.WriteLine();
+
+                    result.Add(new DatabaseRating(id, reviewerID, assetID, stars, comment));
+                }
+
+                return result;
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+            Console.WriteLine();
+
+            return null;
+        }
+
+        /// <summary>
+        /// Returns all ratings by the user
+        /// </summary>
+        /// <param name="reviewerID">The ID of the reviewer</param>
+        /// <returns>All ratings by the user</returns>
+        public List<DatabaseRating> GetRatingsOfUser(int reviewerID)
+        {
+            try
+            {
+                OleDbCommand command = new OleDbCommand();
+                command.Connection = connection;
+                command.CommandText = "SELECT * FROM[Ratings] " +
+                   "WHERE Reviewer = " + reviewerID;
+
+                OleDbDataReader reader = command.ExecuteReader();
+
+                List<DatabaseRating> result = new List<DatabaseRating>();
+
+                int id = 0;
+                int assetID = 0;
+                int stars = 0;
+                string comment = "";
+
+                while (reader.Read())
+                {
+                    id = int.Parse(reader["ID"].ToString());
+                    reviewerID = int.Parse(reader["Reviewer"].ToString());
+                    assetID = int.Parse(reader["Asset"].ToString());
+                    stars = int.Parse(reader["Stars"].ToString());
+                    comment = reader["Comment"].ToString();
+
+                    Console.WriteLine();
+
+                    result.Add(new DatabaseRating(id, reviewerID, assetID, stars, comment));
+                }
+
+                return result;
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+            Console.WriteLine();
+
+            return null;
+        }
+
+        /// <summary>
+        /// Get the average star rating of an asset
+        /// </summary>
+        /// <param name="assetID">The ID of the Asset</param>
+        /// <returns>The average star rating</returns>
+        public float GetAverageStarRating(int assetID)
+        {
+            try
+            {
+                OleDbCommand command = new OleDbCommand();
+                command.Connection = connection;
+                command.CommandText = "SELECT Avg(Stars) AS AverageStars FROM Ratings " +
+                    "WHERE Asset = "+assetID;
+
+                OleDbDataReader reader = command.ExecuteReader();
+
+                float stars = 0;
+
+                while (reader.Read())
+                {
+                    stars = float.Parse(reader["AverageStars"].ToString());
+                }
+
+                return stars;
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+            Console.WriteLine();
+
+            return 0;
+        }
+
+        /// <summary>
         /// Returns the Assets created by the user
         /// </summary>
         /// <param name="userID">The ID of the User</param>
@@ -921,7 +1155,9 @@ namespace DAC627_Project
             {
                 OleDbCommand command = new OleDbCommand();
                 command.Connection = connection;
-                command.CommandText = "SELECT Asset.* FROM[Asset] WHERE Creator = "+userID;
+                command.CommandText = "SELECT * FROM[Asset] asset " +
+                   "Inner join [AssetGallery] gallery " +
+                   "On gallery.AssetID = asset.ID WHERE Creator = " + userID;
 
                 OleDbDataReader reader = command.ExecuteReader();
 
@@ -946,7 +1182,6 @@ namespace DAC627_Project
                     string galleryFour = "";
                     string galleryFive = "";
 
-                    assetID = int.Parse(reader["ID"].ToString());
                     assetname = reader["Assetname"].ToString();
                     creatorID = int.Parse(reader["Creator"].ToString());
                     notes = reader["Notes"].ToString();
@@ -962,6 +1197,14 @@ namespace DAC627_Project
                     galleryThree = reader["GalleryThree"].ToString();
                     galleryFour = reader["GalleryFour"].ToString();
                     galleryFive = reader["GalleryFive"].ToString();
+
+                    OleDbCommand command2 = new OleDbCommand();
+                    command2.Connection = connection;
+                    command2.CommandText = "Select * from Asset WHERE Assetname = '" + assetname + "'";
+                    OleDbDataReader reader2 = command2.ExecuteReader();
+
+                    while (reader2.Read())
+                        assetID = int.Parse(reader2["ID"].ToString());
 
                     DatabaseUser creator = GetUser(creatorID);
 
@@ -1053,10 +1296,12 @@ namespace DAC627_Project
                 OleDbCommand command = new OleDbCommand();
                 command.Connection = connection;
 
-                command.CommandText = "SELECT Asset.* FROM[Asset] asset " +
+                command.CommandText = "SELECT * FROM (([Asset] asset " +                    
                     "Inner join [AssetsInProjects] aip " +
-                    "On aip.AssetID = asset.ID " +
-                    "WHERE aip.ProjectID = "+projectID;
+                    "On aip.AssetID = asset.ID) " +
+                    "Inner join [AssetGallery] gallery " +
+                    "On gallery.AssetID = asset.ID) " +
+                    "WHERE aip.ProjectID = " +projectID;
 
                 OleDbDataReader reader = command.ExecuteReader();
 
@@ -1081,7 +1326,6 @@ namespace DAC627_Project
                     string galleryFour = "";
                     string galleryFive = "";
 
-                    assetID = int.Parse(reader["ID"].ToString());
                     assetname = reader["Assetname"].ToString();
                     creatorID = int.Parse(reader["Creator"].ToString());
                     notes = reader["Notes"].ToString();
@@ -1097,6 +1341,14 @@ namespace DAC627_Project
                     galleryThree = reader["GalleryThree"].ToString();
                     galleryFour = reader["GalleryFour"].ToString();
                     galleryFive = reader["GalleryFive"].ToString();
+
+                    OleDbCommand command2 = new OleDbCommand();
+                    command2.Connection = connection;
+                    command2.CommandText = "Select * from Asset WHERE Assetname = '" + assetname + "'";
+                    OleDbDataReader reader2 = command2.ExecuteReader();
+
+                    while (reader2.Read())
+                        assetID = int.Parse(reader2["ID"].ToString());
 
                     DatabaseUser creator = GetUser(creatorID);
 
@@ -1697,42 +1949,60 @@ namespace DAC627_Project
 
         public void ChangeAssetThumbnail(int id, string newValue)
         {
-            string commandText = "UPDATE [Asset] SET ThumbnailPath = '" + newValue + "' WHERE ID = " + id + "";
+            string commandText = "UPDATE [AssetGallery] SET ThumbnailPath = '" + newValue + "' WHERE AssetID = " + id + "";
 
             ExecuteCommand(commandText);
         }
 
         public void ChangeAssetGalleryOne(int id, string newValue)
         {
-            string commandText = "UPDATE [Asset] SET GalleryOne = '" + newValue + "' WHERE ID = " + id + "";
+            string commandText = "UPDATE [AssetGallery] SET GalleryOne = '" + newValue + "' WHERE AssetID = " + id + "";
 
             ExecuteCommand(commandText);
         }
 
         public void ChangeAssetGalleryTwo(int id, string newValue)
         {
-            string commandText = "UPDATE [Asset] SET GalleryTwo = '" + newValue + "' WHERE ID = " + id + "";
+            string commandText = "UPDATE [AssetGallery] SET GalleryTwo = '" + newValue + "' WHERE AssetID = " + id + "";
 
             ExecuteCommand(commandText);
         }
 
         public void ChangeAssetGalleryThree(int id, string newValue)
         {
-            string commandText = "UPDATE [Asset] SET GalleryThree = '" + newValue + "' WHERE ID = " + id + "";
+            string commandText = "UPDATE [AssetGallery] SET GalleryThree = '" + newValue + "' WHERE AssetID = " + id + "";
 
             ExecuteCommand(commandText);
         }
 
         public void ChangeAssetGalleryFour(int id, string newValue)
         {
-            string commandText = "UPDATE [Asset] SET GalleryFour = '" + newValue + "' WHERE ID = " + id + "";
+            string commandText = "UPDATE [AssetGallery] SET GalleryFour = '" + newValue + "' WHERE AssetID = " + id + "";
 
             ExecuteCommand(commandText);
         }
 
         public void ChangeAssetGalleryFive(int id, string newValue)
         {
-            string commandText = "UPDATE [Asset] SET GalleryFive = '" + newValue + "' WHERE ID = " + id + "";
+            string commandText = "UPDATE [AssetGallery] SET GalleryFive = '" + newValue + "' WHERE AssetID = " + id + "";
+
+            ExecuteCommand(commandText);
+        }
+
+        #endregion
+
+        #region Change rating values
+
+        public void ChangeRatingStars(int ratingID, int stars)
+        {
+            string commandText = "UPDATE [Ratings] SET Stars = " + stars + " WHERE ID = " + ratingID;
+
+            ExecuteCommand(commandText);
+        }
+
+        public void ChangeRatingComment(int ratingID, string comment)
+        {
+            string commandText = "UPDATE [Ratings] SET Comment = '" + comment + "' WHERE ID = " + ratingID;
 
             ExecuteCommand(commandText);
         }
@@ -1820,7 +2090,8 @@ namespace DAC627_Project
             {
                 OleDbCommand command = new OleDbCommand();
                 command.Connection = connection;
-                command.CommandText = "SELECT Asset.* FROM[Asset] ";
+                command.CommandText = "SELECT * FROM[Asset] asset Inner join[AssetGallery] gallery" +
+                    " On gallery.AssetID = asset.ID ";
 
                 OleDbDataReader reader = command.ExecuteReader();
                 while (reader.Read())
@@ -1851,8 +2122,11 @@ namespace DAC627_Project
             }
 
             Console.WriteLine();
-        } 
+        }
 
+        /// <summary>
+        /// Shows a list of all messages
+        /// </summary>
         public void ShowAllMessages()
         {
             try
@@ -1867,7 +2141,7 @@ namespace DAC627_Project
                     Console.Write(reader["ID"].ToString() + ", ");
                     Console.Write(reader["Receiver"].ToString() + ", ");
                     Console.Write(reader["Sender"].ToString() + ", ");
-                    Console.Write(reader["Message"].ToString() + ", ");
+                    Console.Write(reader["MessageText"].ToString() + ", ");
                     Console.Write(reader["SendedDate"].ToString() + ", ");
                     Console.Write(reader["Type"].ToString() + ", ");
 
@@ -1881,6 +2155,37 @@ namespace DAC627_Project
             }
 
             Console.WriteLine(); 
+        }
+
+        /// <summary>
+        /// Shows a list of all ratings
+        /// </summary>
+        public void ShowAllRatings()
+        {
+            try
+            {
+                OleDbCommand command = new OleDbCommand();
+                command.Connection = connection;
+                command.CommandText = "SELECT * FROM[Ratings] ";
+
+                OleDbDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Console.Write(reader["ID"].ToString() + ", ");
+                    Console.Write(reader["Reviewer"].ToString() + ", ");
+                    Console.Write(reader["Asset"].ToString() + ", ");
+                    Console.Write(reader["Stars"].ToString() + ", ");
+                    Console.Write(reader["Comment"].ToString());
+
+                    Console.WriteLine();
+                }
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
         }
 
         #endregion

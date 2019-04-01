@@ -41,16 +41,16 @@ namespace DAC627_Project
                     cboAssetType.SelectedIndex = (int)_curUserAsset.GetAssetType();
                     txtSoftwareUsed.Text = _curUserAsset.GetSoftwareUsed();
                     cboPegi.SelectedIndex = (int)_curUserAsset.GetPegiRating();
-                    cboAssetStatus.SelectedIndex = (int)_curUserAsset.GetAssetStatus();
+                    cboAssetStatus.SelectedIndex = (int)_curUserAsset.GetAssetStatus() - 1;
                     txtNotes.Text = _curUserAsset.GetNotes();
                     pictureGallery1.AddPicturesToGallery(_curUserAsset.GetPicturesPath());
                     picThumbnail.ImageLocation = _curUserAsset.GetThumbNail();
 
                     _userAsset.SetAssetTitle(_curUserAsset.GetAssetTitle());
+                    _userAsset.SetAssetStatus(_curUserAsset.GetAssetStatus());
                     _userAsset.SetAssetType(_curUserAsset.GetAssetType());
                     _userAsset.SetSoftwareUsed(_curUserAsset.GetSoftwareUsed());
                     _userAsset.SetPegiRating(_curUserAsset.GetPegiRating());
-                    _userAsset.SetAssetStatus(_curUserAsset.GetAssetStatus());
                     _userAsset.SetNotes(_curUserAsset.GetNotes());
                 }
             }
@@ -99,7 +99,7 @@ namespace DAC627_Project
             }
             else if (((ComboBox)sender) == cboAssetStatus)
             {
-                _userAsset.SetAssetStatus((AssetStatus)cboAssetStatus.SelectedIndex);
+                _userAsset.SetAssetStatus((AssetStatus)cboAssetStatus.SelectedIndex + 1);
             }
         }
 

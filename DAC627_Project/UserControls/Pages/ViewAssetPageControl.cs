@@ -62,5 +62,10 @@ namespace DAC627_Project
             formMain.curSelectedAssetID = _userAsset.GetID();
             formMain.ChangeToPage(FormMain.Pages.EditAssetPage);
         }
+
+        private void btnDownload_Click(object sender, EventArgs e)
+        {
+           HelperTools.SaveFromFile(_userAsset.GetAssetPath());
+        }
     }
 }

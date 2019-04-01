@@ -38,13 +38,13 @@
             this.lblCreator = new System.Windows.Forms.Label();
             this.btnDownload = new System.Windows.Forms.Button();
             this.lblTitleDisplay = new System.Windows.Forms.Label();
-            this.galPictureGallery = new DAC627_Project.PictureGallery();
             this.btnEdit = new System.Windows.Forms.Button();
             this.lblAssetTypeDisplay = new System.Windows.Forms.Label();
             this.lblSoftwareDisplay = new System.Windows.Forms.Label();
             this.lblPegiDisplay = new System.Windows.Forms.Label();
             this.lblAssetStatusDisplay = new System.Windows.Forms.Label();
             this.lblCreatorDisplay = new System.Windows.Forms.Label();
+            this.galPictureGallery = new DAC627_Project.PictureGallery();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -128,6 +128,7 @@
             this.btnDownload.TabIndex = 9;
             this.btnDownload.Text = "Download";
             this.btnDownload.UseVisualStyleBackColor = true;
+            this.btnDownload.Click += new System.EventHandler(this.btnDownload_Click);
             // 
             // lblTitleDisplay
             // 
@@ -137,13 +138,6 @@
             this.lblTitleDisplay.Size = new System.Drawing.Size(27, 13);
             this.lblTitleDisplay.TabIndex = 11;
             this.lblTitleDisplay.Text = "Title";
-            // 
-            // galPictureGallery
-            // 
-            this.galPictureGallery.Location = new System.Drawing.Point(372, 73);
-            this.galPictureGallery.Name = "galPictureGallery";
-            this.galPictureGallery.Size = new System.Drawing.Size(250, 230);
-            this.galPictureGallery.TabIndex = 10;
             // 
             // btnEdit
             // 
@@ -200,6 +194,13 @@
             this.lblCreatorDisplay.Size = new System.Drawing.Size(27, 13);
             this.lblCreatorDisplay.TabIndex = 17;
             this.lblCreatorDisplay.Text = "Title";
+            // 
+            // galPictureGallery
+            // 
+            this.galPictureGallery.Location = new System.Drawing.Point(372, 73);
+            this.galPictureGallery.Name = "galPictureGallery";
+            this.galPictureGallery.Size = new System.Drawing.Size(250, 230);
+            this.galPictureGallery.TabIndex = 10;
             // 
             // ViewAssetPageControl
             // 

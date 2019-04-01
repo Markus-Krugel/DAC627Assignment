@@ -277,7 +277,6 @@
             this.cboAssetStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboAssetStatus.FormattingEnabled = true;
             this.cboAssetStatus.Items.AddRange(new object[] {
-            "Null",
             "Completed",
             "In development",
             "Planning"});

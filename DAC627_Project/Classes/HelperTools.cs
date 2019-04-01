@@ -17,7 +17,7 @@ namespace DAC627_Project
         {
             string filePath = string.Empty;
             string fileContent = string.Empty;
-
+            
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
                 openFileDialog.Title = titleName;
@@ -46,7 +46,30 @@ namespace DAC627_Project
             }
         }
 
-        static public void CopyFile(string sourcePath, string targetPath, string fileName)
+        static public void SaveFromFile(string sourcePath)
+        {
+            string destinationPath = null;
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                saveFileDialog.Title = "Save";
+                saveFileDialog.InitialDirectory = "c:\\";
+                saveFileDialog.RestoreDirectory = true;
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    destinationPath = saveFileDialog.FileName;
+                }
+            }
+            if (destinationPath != null)
+            {
+                string sourceName = Path.GetFileName(sourcePath);
+                string sourceDir = Path.GetDirectoryName(sourcePath);
+                string dirPath = Path.GetDirectoryName(destinationPath);
+                string dirName = Path.GetFileName(destinationPath) + Path.GetExtension(sourceName);
+                CopyFile(sourceDir, dirPath, sourceName, dirName);
+            }
+        }
+
+        static public void CopyFile(string sourcePath, string targetPath, string fileName, string newFileName = null)
         {
             //string fileName = "";
             //string sourcePath = @"C:\Users\Public\TestFolder";
@@ -54,7 +77,17 @@ namespace DAC627_Project
 
             // Use Path class to manipulate file and directory paths.
             string sourceFile = System.IO.Path.Combine(sourcePath, fileName);
-            string destFile = System.IO.Path.Combine(targetPath, fileName);
+            string destFile = null;
+            if (newFileName == null)
+            {
+                destFile = System.IO.Path.Combine(targetPath, fileName);
+
+            }
+            else
+            {
+                destFile = System.IO.Path.Combine(targetPath, newFileName);
+            }
+
 
             if (System.IO.Directory.Exists(sourcePath))
             {

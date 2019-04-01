@@ -54,10 +54,10 @@ namespace DAC627_Project
                 {
                     case 0:
                     case 1:
-                        filter = "PNG File (*.png) | *.png | JPEG File (*.jpg) | *.jpg";
+                        filter = "PNG File (*.png)|*.png|JPEG File (*.jpg)|*.jpg";
                         break;
                     case 2:
-                        filter = "GIF File (*.gif) | *.gif";
+                        filter = "GIF File (*.gif)|*.gif";
                         break;
                     case 3:
                     case 4:
@@ -115,7 +115,7 @@ namespace DAC627_Project
             }
             else if (((ComboBox)sender) == cboAssetStatus)
             {
-                _userAsset.SetAssetStatus((AssetStatus)cboAssetStatus.SelectedIndex);
+                _userAsset.SetAssetStatus((AssetStatus)cboAssetStatus.SelectedIndex + 1);
             }
         }
 

@@ -142,12 +142,13 @@
             // picThumbNail
             // 
             this.picThumbNail.Image = global::DAC627_Project.Properties.Resources.thEGE72UK4;
-            this.picThumbNail.Location = new System.Drawing.Point(104, 128);
+            this.picThumbNail.Location = new System.Drawing.Point(118, 128);
             this.picThumbNail.Name = "picThumbNail";
             this.picThumbNail.Size = new System.Drawing.Size(275, 275);
             this.picThumbNail.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picThumbNail.TabIndex = 28;
             this.picThumbNail.TabStop = false;
+            this.picThumbNail.Visible = false;
             // 
             // ViewProjectPageControl
             // 

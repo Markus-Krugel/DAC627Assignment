@@ -227,6 +227,7 @@ namespace DAC627_Project
                     string galleryFour = "";
                     string galleryFive = "";
 
+                    id = (int)reader["ID"];
                     assetname = reader["Assetname"].ToString();
                     notes = reader["Notes"].ToString();
                     status = (AssetStatus)Enum.Parse(typeof(AssetStatus), reader["Status"].ToString());

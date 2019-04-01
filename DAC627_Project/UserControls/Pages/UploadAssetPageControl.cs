@@ -113,7 +113,7 @@ namespace DAC627_Project
             {         
                 _userAsset.SetPegiRating((PegiRating)cboPegi.SelectedIndex);
             }
-            else if (((ComboBox)sender) == cboAssetType)
+            else if (((ComboBox)sender) == cboAssetStatus)
             {
                 _userAsset.SetAssetStatus((AssetStatus)cboAssetStatus.SelectedIndex);
             }

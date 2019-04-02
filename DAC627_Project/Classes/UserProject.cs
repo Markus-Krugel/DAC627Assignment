@@ -8,8 +8,8 @@ namespace DAC627_Project
 {
     public class UserProject
     {
-        private List<UserAsset> _connectedAssets = new List<UserAsset>();
         private UsersAccounts.UserData _author;
+        private List<UserAsset> _connectedAssets = new List<UserAsset>();
         private string _projectTitle;
         private ProjectType _projectType;
         private string _notes;
@@ -23,11 +23,11 @@ namespace DAC627_Project
             _author = author;
         }
 
-        public UserProject(int id, string projectname, string notes, UsersAccounts.UserData author, ProjectType projectType, ProjectStatus projectStatus, string tags, string thumbnailPath)
+        public UserProject(int id, string projectName, string notes, UsersAccounts.UserData author, ProjectType projectType, ProjectStatus projectStatus, string tags, string thumbnailPath)
         {
             _author = author;
             _id = id;
-            _projectTitle = projectname;
+            _projectTitle = projectName;
             _notes = notes;
             _projectType = projectType;
             _projectStatus = projectStatus;

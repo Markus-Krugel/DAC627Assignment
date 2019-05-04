@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblDescription = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
             this.lblAssetType = new System.Windows.Forms.Label();
@@ -44,19 +43,14 @@
             this.lblPegiDisplay = new System.Windows.Forms.Label();
             this.lblAssetStatusDisplay = new System.Windows.Forms.Label();
             this.lblCreatorDisplay = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.lblRatingTotal = new System.Windows.Forms.Label();
+            this.lblRatingMessage = new System.Windows.Forms.Label();
+            this.starRating = new DAC627_Project.UserControls.Prefabs.RatingSystem();
+            this.starOverall = new DAC627_Project.UserControls.Prefabs.RatingSystem();
             this.galPictureGallery = new DAC627_Project.PictureGallery();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::DAC627_Project.Properties.Resources.DefaultAssetPic;
-            this.pictureBox1.Location = new System.Drawing.Point(38, 106);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(275, 275);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
             // 
             // lblDescription
             // 
@@ -196,6 +190,48 @@
             this.lblCreatorDisplay.TabIndex = 17;
             this.lblCreatorDisplay.Text = "Title";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::DAC627_Project.Properties.Resources.DefaultAssetPic;
+            this.pictureBox1.Location = new System.Drawing.Point(38, 106);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(275, 275);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
+            // 
+            // lblRatingTotal
+            // 
+            this.lblRatingTotal.AutoSize = true;
+            this.lblRatingTotal.Location = new System.Drawing.Point(64, 440);
+            this.lblRatingTotal.Name = "lblRatingTotal";
+            this.lblRatingTotal.Size = new System.Drawing.Size(145, 13);
+            this.lblRatingTotal.TabIndex = 20;
+            this.lblRatingTotal.Text = "[x] People Rated This Overall";
+            // 
+            // lblRatingMessage
+            // 
+            this.lblRatingMessage.AutoSize = true;
+            this.lblRatingMessage.Location = new System.Drawing.Point(1024, 504);
+            this.lblRatingMessage.Name = "lblRatingMessage";
+            this.lblRatingMessage.Size = new System.Drawing.Size(149, 13);
+            this.lblRatingMessage.TabIndex = 21;
+            this.lblRatingMessage.Text = "Give this Asset a Rating Here!";
+            // 
+            // starRating
+            // 
+            this.starRating.Location = new System.Drawing.Point(1024, 456);
+            this.starRating.Name = "starRating";
+            this.starRating.Size = new System.Drawing.Size(232, 40);
+            this.starRating.TabIndex = 19;
+            // 
+            // starOverall
+            // 
+            this.starOverall.Location = new System.Drawing.Point(64, 392);
+            this.starOverall.Name = "starOverall";
+            this.starOverall.Size = new System.Drawing.Size(232, 40);
+            this.starOverall.TabIndex = 18;
+            // 
             // galPictureGallery
             // 
             this.galPictureGallery.Location = new System.Drawing.Point(372, 73);
@@ -207,6 +243,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.lblRatingMessage);
+            this.Controls.Add(this.lblRatingTotal);
+            this.Controls.Add(this.starRating);
+            this.Controls.Add(this.starOverall);
             this.Controls.Add(this.lblCreatorDisplay);
             this.Controls.Add(this.lblAssetStatusDisplay);
             this.Controls.Add(this.lblPegiDisplay);
@@ -252,5 +292,9 @@
         private System.Windows.Forms.Label lblPegiDisplay;
         private System.Windows.Forms.Label lblAssetStatusDisplay;
         private System.Windows.Forms.Label lblCreatorDisplay;
+        private UserControls.Prefabs.RatingSystem starOverall;
+        private UserControls.Prefabs.RatingSystem starRating;
+        private System.Windows.Forms.Label lblRatingTotal;
+        private System.Windows.Forms.Label lblRatingMessage;
     }
 }

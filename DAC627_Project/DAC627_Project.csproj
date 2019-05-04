@@ -22,7 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>true</Prefer32Bit>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -172,6 +172,12 @@
       <DependentUpon>PictureGallery.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\UserMessage.cs" />
+    <Compile Include="UserControls\Prefabs\RatingSystem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Prefabs\RatingSystem.Designer.cs">
+      <DependentUpon>RatingSystem.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="UserControls\Pages\CreateAccountPageControl.resx">
       <DependentUpon>CreateAccountPageControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -235,6 +241,9 @@
     <EmbeddedResource Include="UserControls\Prefabs\PictureGallery.resx">
       <DependentUpon>PictureGallery.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Prefabs\RatingSystem.resx">
+      <DependentUpon>RatingSystem.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -260,6 +269,9 @@
     <None Include="Resources\thEGE72UK4.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\StarEmpty.png" />
+    <None Include="Resources\StarFull.png" />
+    <None Include="Resources\StarEmpty1.png" />
     <None Include="Resources\DefaultAssetPic.png" />
     <None Include="Resources\DefaultProjectPic.png" />
     <None Include="Resources\DefaultProfilePic.png" />

@@ -55,6 +55,7 @@ namespace DAC627_Project
             lblAssetStatusDisplay.Text = _userAsset.GetAssetStatus().ToString();
             lblCreatorDisplay.Text = _userAsset.GetAuthor().userName;
             lblDescription.Text = _userAsset.GetNotes();
+            starOverall._canSetRating = false;
         }
 
         private void btnEdit_Click(object sender, EventArgs e)

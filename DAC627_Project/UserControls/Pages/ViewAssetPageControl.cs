@@ -56,7 +56,15 @@ namespace DAC627_Project
             lblCreatorDisplay.Text = _userAsset.GetAuthor().userName;
             lblDescription.Text = _userAsset.GetNotes();
             starOverall._canSetRating = false;
-            starRating.valueChangedEvent += rating_Click;
+            if (_curUserData == null)
+            {
+                starRating.Visible = false;
+                lblRatingMessage.Visible = false;
+            }
+            else
+            {
+                starRating.valueChangedEvent += rating_Click;
+            }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)

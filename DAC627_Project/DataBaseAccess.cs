@@ -23,14 +23,15 @@ namespace DAC627_Project
         /// </summary>
         public void StartConnection()
         {
+            connection = new OleDbConnection();
+            connection.ConnectionString = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = ../../Database/Database.accdb;
+            Persist Security Info = False;";
+
             int amountOfConnectionTrys = 0;
             while (amountOfConnectionTrys < 10)
             {
                 try
                 {
-                    connection = new OleDbConnection();
-                    connection.ConnectionString = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = ../../Database/Database.accdb;
-                    Persist Security Info = False;";
                     connection.Open();
                     return;
                 }

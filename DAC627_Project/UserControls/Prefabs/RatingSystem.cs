@@ -57,19 +57,23 @@ namespace DAC627_Project.UserControls.Prefabs
             _rating = amountOfStars;
             if (_canSetRating)
             {
-                for (int i = 0; i < stars.Count; i++)
+                UpdateStarsGraphics(amountOfStars);
+            }
+        }
+
+        public void UpdateStarsGraphics(int amountOfStars)
+        {
+            for (int i = 0; i < stars.Count; i++)
+            {
+                if (amountOfStars <= i)
                 {
-                    if (amountOfStars <= i)
-                    {
-                        stars[i].Image = DAC627_Project.Properties.Resources.StarEmpty;
-                    }
-                    else if (amountOfStars >= i)
-                    {
-                        stars[i].Image = DAC627_Project.Properties.Resources.StarFull;
-                    }
+                    stars[i].Image = DAC627_Project.Properties.Resources.StarEmpty;
+                }
+                else if (amountOfStars >= i)
+                {
+                    stars[i].Image = DAC627_Project.Properties.Resources.StarFull;
                 }
             }
-           
         }
     }
 }

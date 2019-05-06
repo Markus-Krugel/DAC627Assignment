@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAC627_Project.Classes;
+using System;
 using System.Collections.Generic;
 using System.Data.OleDb;
 using System.Data.SqlClient;
@@ -434,6 +435,21 @@ namespace DAC627_Project
             ExecuteCommand(command);
         }
 
+        /// <summary>
+        /// Adds a rating to the database
+        /// </summary>
+        /// <param name="userID">The ID of the reviewer</param>
+        /// <param name="assetID">The ID of the reviewed asset</param>
+        /// <param name="stars">The amount of stars given to the asset</param>
+        /// <param name="comment">Comment about the asset by the reviewer</param>
+        public void AddRating(int userID, int assetID, int stars, string comment)
+        {
+            string commandText = "INSERT INTO Ratings ( Reviewer, Asset, Stars, Comment) VALUES " +
+                                    "(" + userID + "," + assetID + "," + stars + ",'" + comment + "')";
+
+            ExecuteCommand(commandText);
+        }
+
         #endregion
 
         #region Delete Commands
@@ -467,6 +483,14 @@ namespace DAC627_Project
         public void DeleteMessage(int messageID)
         {
             string command = "DELETE FROM [Messages] WHERE ID = " + messageID;
+
+            ExecuteCommand(command);
+        }
+
+
+        public void DeleteRating(int ratingID)
+        {
+            string command = "DELETE FROM [Ratings] WHERE ID = " + ratingID;
 
             ExecuteCommand(command);
         }
@@ -1243,6 +1267,229 @@ namespace DAC627_Project
             return null;
         }
 
+        /// <summary>
+        /// Returns the rating of an asset
+        /// </summary>
+        /// <param name="ratingID">The ID of the rating</param>
+        /// <returns>The specified rating</returns>
+        public UserRating GetRating(int ratingID)
+        {
+            try
+            {
+                OleDbCommand command = new OleDbCommand();
+                command.Connection = connection;
+                command.CommandText = "SELECT * FROM[Ratings] " +
+                   "WHERE ID = " + ratingID;
+
+                OleDbDataReader reader = command.ExecuteReader();
+
+                int id = 0;
+                int reviewerID = 0;
+                int assetID = 0;
+                int stars = 0;
+                string comment = "";
+
+                while (reader.Read())
+                {
+                    id = int.Parse(reader["ID"].ToString());
+                    reviewerID = int.Parse(reader["Reviewer"].ToString());
+                    assetID = int.Parse(reader["Asset"].ToString());
+                    stars = int.Parse(reader["Stars"].ToString());
+                    comment = reader["Comment"].ToString();
+
+                    Console.WriteLine();
+                }
+
+                return new UserRating(id, reviewerID, assetID, stars, comment);
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+            Console.WriteLine();
+
+            return null;
+        }
+
+        /// <summary>
+        /// Get all ratings of an asset
+        /// </summary>
+        /// <param name="assetID">The ID of the asset</param>
+        /// <returns>All ratings of the asset</returns>
+        public List<UserRating> GetRatingsOfAsset(int assetID)
+        {
+            try
+            {
+                OleDbCommand command = new OleDbCommand();
+                command.Connection = connection;
+                command.CommandText = "SELECT * FROM[Ratings] " +
+                   "WHERE Asset = " + assetID;
+
+                OleDbDataReader reader = command.ExecuteReader();
+
+                List<UserRating> result = new List<UserRating>();
+
+                int id = 0;
+                int reviewerID = 0;
+                int stars = 0;
+                string comment = "";
+
+                while (reader.Read())
+                {
+                    id = int.Parse(reader["ID"].ToString());
+                    reviewerID = int.Parse(reader["Reviewer"].ToString());
+                    assetID = int.Parse(reader["Asset"].ToString());
+                    stars = int.Parse(reader["Stars"].ToString());
+                    comment = reader["Comment"].ToString();
+
+                    Console.WriteLine();
+
+                    result.Add(new UserRating(id, reviewerID, assetID, stars, comment));
+                }
+
+                return result;
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+            Console.WriteLine();
+
+            return null;
+        }
+
+        /// <summary>
+        /// Returns all ratings by the user
+        /// </summary>
+        /// <param name="reviewerID">The ID of the reviewer</param>
+        /// <returns>All ratings by the user</returns>
+        public List<UserRating> GetRatingsOfUser(int reviewerID)
+        {
+            try
+            {
+                OleDbCommand command = new OleDbCommand();
+                command.Connection = connection;
+                command.CommandText = "SELECT * FROM[Ratings] " +
+                   "WHERE Reviewer = " + reviewerID;
+
+                OleDbDataReader reader = command.ExecuteReader();
+
+                List<UserRating> result = new List<UserRating>();
+
+                int id = 0;
+                int assetID = 0;
+                int stars = 0;
+                string comment = "";
+
+                while (reader.Read())
+                {
+                    id = int.Parse(reader["ID"].ToString());
+                    reviewerID = int.Parse(reader["Reviewer"].ToString());
+                    assetID = int.Parse(reader["Asset"].ToString());
+                    stars = int.Parse(reader["Stars"].ToString());
+                    comment = reader["Comment"].ToString();
+
+                    Console.WriteLine();
+
+                    result.Add(new UserRating(id, reviewerID, assetID, stars, comment));
+                }
+
+                return result;
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+            Console.WriteLine();
+
+            return null;
+        }
+
+        /// <summary>
+        /// Get the average star rating of an asset
+        /// </summary>
+        /// <param name="assetID">The ID of the Asset</param>
+        /// <returns>The average star rating</returns>
+        public float GetAverageStarRating(int assetID)
+        {
+            try
+            {
+                OleDbCommand command = new OleDbCommand();
+                command.Connection = connection;
+                command.CommandText = "SELECT Avg(Stars) AS AverageStars FROM Ratings " +
+                    "WHERE Asset = " + assetID;
+
+                OleDbDataReader reader = command.ExecuteReader();
+
+                float stars = 0;
+
+                while (reader.Read())
+                {
+                    stars = float.Parse(reader["AverageStars"].ToString());
+                }
+
+                return stars;
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+            Console.WriteLine();
+
+            return 0;
+        }
+
+        /// <summary>
+        /// Return the amount of ratings for the asset
+        /// </summary>
+        /// <param name="assetID">The ID of the asset</param>
+        /// <returns></returns>
+        public int GetAmountOfRatingsForAsset(int assetID)
+        {
+            return GetRatingsOfAsset(assetID).Count;
+        }
+
+        /// <summary>
+        /// Returns if the user has already rated the asset
+        /// </summary>
+        /// <param name="userID">The user ID</param>
+        /// <param name="assetID">The ID of the asset</param>
+        /// <returns>If the user has rated already</returns>
+        public bool UserRatedAsset(int userID, int assetID)
+        {
+            try
+            {
+                OleDbCommand command = new OleDbCommand();
+                command.Connection = connection;
+                command.CommandText = "SELECT * FROM Ratings " +
+                    "WHERE Asset = " + assetID + " AND Reviewer = "+ userID;
+
+                OleDbDataReader reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                    return true;
+                else
+                    return false;
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+            Console.WriteLine();
+
+            return false;
+        }
+
         #endregion
 
         #region Change values
@@ -1749,6 +1996,24 @@ namespace DAC627_Project
             ExecuteCommand(commandText);
         }
 
+        #region Change rating values
+
+        public void ChangeRatingStars(int ratingID, int stars)
+        {
+            string commandText = "UPDATE [Ratings] SET Stars = " + stars + " WHERE ID = " + ratingID;
+
+            ExecuteCommand(commandText);
+        }
+
+        public void ChangeRatingComment(int ratingID, string comment)
+        {
+            string commandText = "UPDATE [Ratings] SET Comment = '" + comment + "' WHERE ID = " + ratingID;
+
+            ExecuteCommand(commandText);
+        }
+
+        #endregion
+
         #endregion
 
         #endregion
@@ -1898,6 +2163,7 @@ namespace DAC627_Project
         #endregion
     }
 }
+
 
 //        /// <summary>
 //        /// Executes the given command

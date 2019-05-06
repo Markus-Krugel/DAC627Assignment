@@ -68,5 +68,53 @@ namespace DAC627_Project
         {
            HelperTools.SaveFromFile(_userAsset.GetAssetPath());
         }
+
+        private void rating_Click(object sender, EventArgs e)
+        {
+            DataBaseAccess database = new DataBaseAccess();
+            database.StartConnection();
+
+            // if already added a rating then change it
+            if (database.UserRatedAsset((int)_curUserData.GetUserID(), _userAsset.GetID()))
+            {
+                int ratingId = -1;
+
+                List <Classes.UserRating> ratingsOfAsset  = database.GetRatingsOfAsset(_userAsset.GetID());
+
+                // get the rating id of the previous rating
+                for (int i = 0; i < ratingsOfAsset.Count; i++)
+                {
+                    if(ratingsOfAsset[i].ReviewerID == _curUserData.GetUserID())
+                    {
+                        ratingId = ratingsOfAsset[i].ID;
+                        break;
+                    }
+                }
+
+                if(ratingId != -1)
+                    database.ChangeRatingStars(ratingId, starRating._rating);
+            }
+            // if not rated yet then add rating
+            else
+            {
+                database.AddRating((int)_curUserData.GetUserID(), _userAsset.GetID(), starRating._rating, "");
+            }
+
+            updateOverallRating(sender, e);
+        }
+
+        private void updateOverallRating(object sender, EventArgs e)
+        {
+            DataBaseAccess database = new DataBaseAccess();
+            database.StartConnection();
+
+            // update the average stars
+
+            int averageStars = (int)Math.Round(database.GetAverageStarRating(_userAsset.GetID()));
+            int numberRatings = database.GetAmountOfRatingsForAsset(_userAsset.GetID());
+
+            starOverall.UpdateStarsGraphics(averageStars);
+            lblRatingTotal.Text = numberRatings + " People Rated This Overall";
+        }
     }
 }

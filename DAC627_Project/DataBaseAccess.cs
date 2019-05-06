@@ -75,6 +75,14 @@ namespace DAC627_Project
             }
         }
 
+        /// <summary>
+        /// Saves the changes of the previous command(s)
+        /// </summary>
+        private void CommitChanges()
+        {
+            ExecuteCommand("Commit work");
+        }
+
         #region search commands
 
         public List<UserProject> SearchProject(String name = null, ProjectType typeSearch = ProjectType.Null,
@@ -445,7 +453,7 @@ namespace DAC627_Project
         public void AddRating(int userID, int assetID, int stars, string comment)
         {
             string commandText = "INSERT INTO Ratings ( Reviewer, Asset, Stars, Comment) VALUES " +
-                                    "(" + userID + "," + assetID + "," + stars + ",'" + comment + "')";
+                                    "(" + userID + "," + assetID + "," + stars + ",'" + comment + "')"; 
 
             ExecuteCommand(commandText);
         }
@@ -1506,6 +1514,7 @@ namespace DAC627_Project
             string commandText = "UPDATE [User] SET Username = '" + newValue + "' WHERE Username = '" + oldValue + "'";
 
             ExecuteCommand(commandText);
+            CommitChanges();
         }
 
         /// <summary>
@@ -1518,6 +1527,7 @@ namespace DAC627_Project
             string commandText = "UPDATE [User] SET Username = '" + newValue + "' WHERE ID = " + id + "";
 
             ExecuteCommand(commandText);
+            CommitChanges();
         }
 
         /// <summary>
@@ -1530,6 +1540,7 @@ namespace DAC627_Project
             string commandText = "UPDATE [User] SET Email = '" + newValue + "' WHERE Username = '" + username + "'";
 
             ExecuteCommand(commandText);
+            CommitChanges();
         }
 
         /// <summary>
@@ -1542,6 +1553,7 @@ namespace DAC627_Project
             string commandText = "UPDATE [User] SET Email = '" + newValue + "' WHERE ID = " + id + "";
 
             ExecuteCommand(commandText);
+            CommitChanges();
         }
 
         /// <summary>
@@ -1554,6 +1566,7 @@ namespace DAC627_Project
             string commandText = "UPDATE [User] SET Type = '" + newValue + "' WHERE Username = '" + username + "'";
 
             ExecuteCommand(commandText);
+            CommitChanges();
         }
 
         /// <summary>
@@ -1566,6 +1579,7 @@ namespace DAC627_Project
             string commandText = "UPDATE [User] SET Type = '" + newValue + "' WHERE ID = " + id + "";
 
             ExecuteCommand(commandText);
+            CommitChanges();
         }
 
         /// <summary>
@@ -1578,6 +1592,7 @@ namespace DAC627_Project
             string commandText = "UPDATE [User] SET Status = '" + newValue + "' WHERE Username = '" + username + "'";
 
             ExecuteCommand(commandText);
+            CommitChanges();
         }
 
         /// <summary>
@@ -1590,6 +1605,7 @@ namespace DAC627_Project
             string commandText = "UPDATE [User] SET Status = '" + newValue + "' WHERE ID = " + id + "";
 
             ExecuteCommand(commandText);
+            CommitChanges();
         }
 
         /// <summary>
@@ -1602,6 +1618,7 @@ namespace DAC627_Project
             string commandText = "UPDATE [User] SET [Password] = '" + newValue + "' WHERE Username = '" + username + "'";
 
             ExecuteCommand(commandText);
+            CommitChanges();
         }
 
         /// <summary>
@@ -1614,6 +1631,7 @@ namespace DAC627_Project
             string commandText = "UPDATE [User] SET [Password] = '" + newValue + "' WHERE ID = " + id + "";
 
             ExecuteCommand(commandText);
+            CommitChanges();
         }
 
         public void ChangeUserProfile(int id, string newValue)
@@ -1621,6 +1639,7 @@ namespace DAC627_Project
             string commandText = "UPDATE [User] SET [ProfilePicture] = '" + newValue + "' WHERE ID = " + id + "";
 
             ExecuteCommand(commandText);
+            CommitChanges();
         }
 
         public void ChangeUserFullName(int id, string newValue)
@@ -1628,6 +1647,7 @@ namespace DAC627_Project
             string commandText = "UPDATE [User] SET [FullName] = '" + newValue + "' WHERE ID = " + id + "";
 
             ExecuteCommand(commandText);
+            CommitChanges();
         }
 
         #endregion
@@ -1644,6 +1664,7 @@ namespace DAC627_Project
             string commandText = "UPDATE [Project] SET Projectname = '" + newValue + "' WHERE Projectname = '" + oldValue + "'";
 
             ExecuteCommand(commandText);
+            CommitChanges();
         }
 
         /// <summary>
@@ -1656,6 +1677,7 @@ namespace DAC627_Project
             string commandText = "UPDATE [Project] SET Projectname = '" + newValue + "' WHERE ID = " + id + "";
 
             ExecuteCommand(commandText);
+            CommitChanges();
         }
 
         /// <summary>
@@ -1668,6 +1690,7 @@ namespace DAC627_Project
             string commandText = "UPDATE [Project] SET Type = '" + newValue + "' WHERE Projectname = '" + projectname + "'";
 
             ExecuteCommand(commandText);
+            CommitChanges();
         }
 
         /// <summary>
@@ -1680,6 +1703,7 @@ namespace DAC627_Project
             string commandText = "UPDATE [Project] SET Type = '" + newValue + "' WHERE ID = " + id + "";
 
             ExecuteCommand(commandText);
+            CommitChanges();
         }
 
         /// <summary>
@@ -1692,6 +1716,7 @@ namespace DAC627_Project
             string commandText = "UPDATE [Project] SET Description = '" + newValue + "' WHERE Projectname = '" + projectname + "'";
 
             ExecuteCommand(commandText);
+            CommitChanges();
         }
 
         /// <summary>
@@ -1704,6 +1729,7 @@ namespace DAC627_Project
             string commandText = "UPDATE [Project] SET Description = '" + newValue + "' WHERE ID = " + id + "";
 
             ExecuteCommand(commandText);
+            CommitChanges();
         }
 
         /// <summary>
@@ -1716,6 +1742,7 @@ namespace DAC627_Project
             string commandText = "UPDATE [Project] SET Owner = " + newValue + " WHERE Projectname = '" + projectname + "'";
 
             ExecuteCommand(commandText);
+            CommitChanges();
         }
 
         /// <summary>
@@ -1728,6 +1755,7 @@ namespace DAC627_Project
             string commandText = "UPDATE [Project] SET Owner = " + newValue + " WHERE ID = " + id + "";
 
             ExecuteCommand(commandText);
+            CommitChanges();
         }
 
         /// <summary>
@@ -1740,6 +1768,7 @@ namespace DAC627_Project
             string commandText = "UPDATE [Project] SET Tags = '" + newValue + "' WHERE Projectname = '" + projectname + "'";
 
             ExecuteCommand(commandText);
+            CommitChanges();
         }
 
         /// <summary>
@@ -1752,6 +1781,7 @@ namespace DAC627_Project
             string commandText = "UPDATE [Project] SET Tags = '" + newValue + "' WHERE ID = " + id + "";
 
             ExecuteCommand(commandText);
+            CommitChanges();
         }
 
         /// <summary>
@@ -1764,6 +1794,7 @@ namespace DAC627_Project
             string commandText = "UPDATE [Project] SET Status = '" + newValue + "' WHERE Projectname = '" + projectname + "'";
 
             ExecuteCommand(commandText);
+            CommitChanges();
         }
 
         /// <summary>
@@ -1776,6 +1807,7 @@ namespace DAC627_Project
             string commandText = "UPDATE [Project] SET Status = '" + newValue + "' WHERE ID = " + id + "";
 
             ExecuteCommand(commandText);
+            CommitChanges();
         }
 
         public void ChangeProjectThumbnail(int id, string newValue)
@@ -1783,6 +1815,7 @@ namespace DAC627_Project
             string commandText = "UPDATE [Project] SET Thumbnail = '" + newValue + "' WHERE ID = " + id + "";
 
             ExecuteCommand(commandText);
+            CommitChanges();
         }
 
         #endregion
@@ -1799,6 +1832,7 @@ namespace DAC627_Project
             string commandText = "UPDATE [Asset] SET Assetname = '" + newValue + "' WHERE Assetname = '" + oldValue + "'";
 
             ExecuteCommand(commandText);
+            CommitChanges();
         }
 
         /// <summary>
@@ -1811,6 +1845,7 @@ namespace DAC627_Project
             string commandText = "UPDATE [Asset] SET Assetname = '" + newValue + "' WHERE ID = " + id + "";
 
             ExecuteCommand(commandText);
+            CommitChanges();
         }
 
         /// <summary>
@@ -1823,6 +1858,7 @@ namespace DAC627_Project
             string commandText = "UPDATE [Asset] SET Creator = " + newValue + " WHERE Assetname = '" + assetname + "'";
 
             ExecuteCommand(commandText);
+            CommitChanges();
         }
 
         /// <summary>
@@ -1835,6 +1871,7 @@ namespace DAC627_Project
             string commandText = "UPDATE [Asset] SET Creator = " + newValue + " WHERE ID = " + id + "";
 
             ExecuteCommand(commandText);
+            CommitChanges();
         }
 
         /// <summary>
@@ -1847,6 +1884,7 @@ namespace DAC627_Project
             string commandText = "UPDATE [Asset] SET Software  = '" + newValue + "' WHERE Assetname = '" + assetname + "'";
 
             ExecuteCommand(commandText);
+            CommitChanges();
         }
 
         /// <summary>
@@ -1859,6 +1897,7 @@ namespace DAC627_Project
             string commandText = "UPDATE [Asset] SET Software = '" + newValue + "' WHERE ID = " + id + "";
 
             ExecuteCommand(commandText);
+            CommitChanges();
         }
 
         /// <summary>
@@ -1871,6 +1910,7 @@ namespace DAC627_Project
             string commandText = "UPDATE [Asset] SET Notes = '" + newValue + "' WHERE Assetname = '" + assetname + "'";
 
             ExecuteCommand(commandText);
+            CommitChanges();
         }
 
         /// <summary>
@@ -1883,6 +1923,7 @@ namespace DAC627_Project
             string commandText = "UPDATE [Asset] SET Notes = '" + newValue + "' WHERE ID = " + id + "";
 
             ExecuteCommand(commandText);
+            CommitChanges();
         }
 
         /// <summary>
@@ -1895,6 +1936,7 @@ namespace DAC627_Project
             string commandText = "UPDATE [Asset] SET Status = '" + newValue + "' WHERE Assetname = '" + assetname + "'";
 
             ExecuteCommand(commandText);
+            CommitChanges();
         }
 
         /// <summary>
@@ -1907,6 +1949,7 @@ namespace DAC627_Project
             string commandText = "UPDATE [Asset] SET Status = '" + newValue + "' WHERE ID = " + id + "";
 
             ExecuteCommand(commandText);
+            CommitChanges();
         }
 
         /// <summary>
@@ -1919,6 +1962,7 @@ namespace DAC627_Project
             string commandText = "UPDATE [Asset] SET Type = '" + newValue + "' WHERE Assetname = '" + assetname + "'";
 
             ExecuteCommand(commandText);
+            CommitChanges();
         }
 
         /// <summary>
@@ -1931,6 +1975,7 @@ namespace DAC627_Project
             string commandText = "UPDATE [Asset] SET Type = '" + newValue + "' WHERE ID = " + id + "";
 
             ExecuteCommand(commandText);
+            CommitChanges();
         }
 
         public void ChangeAssetPegi(int id, PegiRating newValue)
@@ -1938,6 +1983,7 @@ namespace DAC627_Project
             string commandText = "UPDATE [Asset] SET PegiRating = '" + newValue + "' WHERE ID = " + id + "";
 
             ExecuteCommand(commandText);
+            CommitChanges();
         }
 
         public void ChangeAssetTags(int id, string newValue)
@@ -1945,6 +1991,7 @@ namespace DAC627_Project
             string commandText = "UPDATE [Asset] SET Tags = '" + newValue + "' WHERE ID = " + id + "";
 
             ExecuteCommand(commandText);
+            CommitChanges();
         }
 
         public void ChangeAssetPath(int id, string newValue)
@@ -1952,6 +1999,7 @@ namespace DAC627_Project
             string commandText = "UPDATE [Asset] SET AssetPath = '" + newValue + "' WHERE ID = " + id + "";
 
             ExecuteCommand(commandText);
+            CommitChanges();
         }
 
         public void ChangeAssetThumbnail(int id, string newValue)
@@ -1959,6 +2007,7 @@ namespace DAC627_Project
             string commandText = "UPDATE [Asset] SET ThumbnailPath = '" + newValue + "' WHERE ID = " + id + "";
 
             ExecuteCommand(commandText);
+            CommitChanges();
         }
 
         public void ChangeAssetGalleryOne(int id, string newValue)
@@ -1966,6 +2015,7 @@ namespace DAC627_Project
             string commandText = "UPDATE [Asset] SET GalleryOne = '" + newValue + "' WHERE ID = " + id + "";
 
             ExecuteCommand(commandText);
+            CommitChanges();
         }
 
         public void ChangeAssetGalleryTwo(int id, string newValue)
@@ -1973,6 +2023,7 @@ namespace DAC627_Project
             string commandText = "UPDATE [Asset] SET GalleryTwo = '" + newValue + "' WHERE ID = " + id + "";
 
             ExecuteCommand(commandText);
+            CommitChanges();
         }
 
         public void ChangeAssetGalleryThree(int id, string newValue)
@@ -1980,6 +2031,7 @@ namespace DAC627_Project
             string commandText = "UPDATE [Asset] SET GalleryThree = '" + newValue + "' WHERE ID = " + id + "";
 
             ExecuteCommand(commandText);
+            CommitChanges();
         }
 
         public void ChangeAssetGalleryFour(int id, string newValue)
@@ -1987,6 +2039,7 @@ namespace DAC627_Project
             string commandText = "UPDATE [Asset] SET GalleryFour = '" + newValue + "' WHERE ID = " + id + "";
 
             ExecuteCommand(commandText);
+            CommitChanges();
         }
 
         public void ChangeAssetGalleryFive(int id, string newValue)
@@ -1994,6 +2047,7 @@ namespace DAC627_Project
             string commandText = "UPDATE [Asset] SET GalleryFive = '" + newValue + "' WHERE ID = " + id + "";
 
             ExecuteCommand(commandText);
+            CommitChanges();
         }
 
         #region Change rating values
@@ -2003,6 +2057,7 @@ namespace DAC627_Project
             string commandText = "UPDATE [Ratings] SET Stars = " + stars + " WHERE ID = " + ratingID;
 
             ExecuteCommand(commandText);
+            CommitChanges();
         }
 
         public void ChangeRatingComment(int ratingID, string comment)
@@ -2010,6 +2065,7 @@ namespace DAC627_Project
             string commandText = "UPDATE [Ratings] SET Comment = '" + comment + "' WHERE ID = " + ratingID;
 
             ExecuteCommand(commandText);
+            CommitChanges();
         }
 
         #endregion

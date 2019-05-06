@@ -16,6 +16,8 @@ namespace DAC627_Project.UserControls.Prefabs
         public int _rating = 1;
         public bool _canSetRating = true;
 
+        public event EventHandler valueChangedEvent;
+
         public RatingSystem()
         {
             InitializeComponent();
@@ -54,9 +56,12 @@ namespace DAC627_Project.UserControls.Prefabs
 
         void StarChange(int amountOfStars)
         {
-            _rating = amountOfStars;
             if (_canSetRating)
             {
+                _rating = amountOfStars;
+
+                valueChangedEvent.Invoke(this, new EventArgs());
+
                 UpdateStarsGraphics(amountOfStars);
             }
         }

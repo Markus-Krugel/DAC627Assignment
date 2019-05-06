@@ -56,6 +56,7 @@ namespace DAC627_Project
             lblCreatorDisplay.Text = _userAsset.GetAuthor().userName;
             lblDescription.Text = _userAsset.GetNotes();
             starOverall._canSetRating = false;
+            starRating.valueChangedEvent += rating_Click;
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -79,19 +80,19 @@ namespace DAC627_Project
             {
                 int ratingId = -1;
 
-                List <Classes.UserRating> ratingsOfAsset  = database.GetRatingsOfAsset(_userAsset.GetID());
+                List<Classes.UserRating> ratingsOfAsset = database.GetRatingsOfAsset(_userAsset.GetID());
 
                 // get the rating id of the previous rating
                 for (int i = 0; i < ratingsOfAsset.Count; i++)
                 {
-                    if(ratingsOfAsset[i].ReviewerID == _curUserData.GetUserID())
+                    if (ratingsOfAsset[i].ReviewerID == _curUserData.GetUserID())
                     {
                         ratingId = ratingsOfAsset[i].ID;
                         break;
                     }
                 }
 
-                if(ratingId != -1)
+                if (ratingId != -1)
                     database.ChangeRatingStars(ratingId, starRating._rating);
             }
             // if not rated yet then add rating

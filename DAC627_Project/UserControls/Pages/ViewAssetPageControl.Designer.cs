@@ -208,7 +208,6 @@
             this.lblRatingTotal.Size = new System.Drawing.Size(145, 13);
             this.lblRatingTotal.TabIndex = 20;
             this.lblRatingTotal.Text = "[x] People Rated This Overall";
-
             // 
             // lblRatingMessage
             // 
@@ -225,7 +224,6 @@
             this.starRating.Name = "starRating";
             this.starRating.Size = new System.Drawing.Size(232, 40);
             this.starRating.TabIndex = 19;
-            this.starRating.Click += new System.EventHandler(this.rating_Click);
             // 
             // starOverall
             // 

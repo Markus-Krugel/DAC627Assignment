@@ -102,6 +102,7 @@ namespace DAC627_Project
             }
 
             updateOverallRating(sender, e);
+            database.CloseConnection();
         }
 
         private void updateOverallRating(object sender, EventArgs e)
@@ -116,6 +117,7 @@ namespace DAC627_Project
 
             starOverall.UpdateStarsGraphics(averageStars);
             lblRatingTotal.Text = numberRatings + " People Rated This Overall";
+            database.CloseConnection();
         }
     }
 }

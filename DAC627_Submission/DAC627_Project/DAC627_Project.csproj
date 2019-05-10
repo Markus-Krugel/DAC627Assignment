@@ -1,0 +1,285 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{585DF24A-9BE1-47B3-A259-0A03CE431E7C}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>DAC627_Project</RootNamespace>
+    <AssemblyName>DAC627_Project</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Classes\UserRating.cs" />
+    <Compile Include="Enums.cs" />
+    <Compile Include="Classes\HelperTools.cs" />
+    <Compile Include="Classes\UserProject.cs" />
+    <Compile Include="Classes\UserAsset.cs" />
+    <Compile Include="DataBaseAccess.cs" />
+    <Compile Include="UserControls\Pages\CreateAccountPageControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Pages\CreateAccountPageControl.Designer.cs">
+      <DependentUpon>CreateAccountPageControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Pages\AccountPageControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Pages\AccountPageControl.Designer.cs">
+      <DependentUpon>AccountPageControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMain.Designer.cs">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Pages\EditAssetPageControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Pages\EditAssetPageControl.Designer.cs">
+      <DependentUpon>EditAssetPageControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Pages\EditProjectPageControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Pages\EditProjectPageControl.Designer.cs">
+      <DependentUpon>EditProjectPageControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Pages\HomePageControl.cs">
+      <SubType>UserControl</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="UserControls\Pages\HomePageControl.Designer.cs">
+      <DependentUpon>HomePageControl.cs</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="UserControls\Pages\LoginPageControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Pages\LoginPageControl.Designer.cs">
+      <DependentUpon>LoginPageControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Classes\UsersAccounts.cs" />
+    <Compile Include="UserControls\Pages\MessagingPageControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Pages\MessagingPageControl.Designer.cs">
+      <DependentUpon>MessagingPageControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Pages\MyAssetsPageControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Pages\MyAssetsPageControl.Designer.cs">
+      <DependentUpon>MyAssetsPageControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Pages\TestPageControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Pages\TestPageControl.Designer.cs">
+      <DependentUpon>TestPageControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Pages\UploadAssetPageControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Pages\UploadAssetPageControl.Designer.cs">
+      <DependentUpon>UploadAssetPageControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Pages\UploadProjectPageControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Pages\UploadProjectPageControl.Designer.cs">
+      <DependentUpon>UploadProjectPageControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Pages\ViewAssetPageControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Pages\ViewAssetPageControl.Designer.cs">
+      <DependentUpon>ViewAssetPageControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Pages\ViewProjectPageControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Pages\ViewProjectPageControl.Designer.cs">
+      <DependentUpon>ViewProjectPageControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Prefabs\AssetButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Prefabs\AssetButton.Designer.cs">
+      <DependentUpon>AssetButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Prefabs\Message.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Prefabs\Message.Designer.cs">
+      <DependentUpon>Message.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Prefabs\MessageAccountButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Prefabs\MessageAccountButton.Designer.cs">
+      <DependentUpon>MessageAccountButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Prefabs\MessageHistory.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Prefabs\MessageHistory.Designer.cs">
+      <DependentUpon>MessageHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Prefabs\PictureGallery.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Prefabs\PictureGallery.Designer.cs">
+      <DependentUpon>PictureGallery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\UserMessage.cs" />
+    <Compile Include="UserControls\Prefabs\RatingSystem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Prefabs\RatingSystem.Designer.cs">
+      <DependentUpon>RatingSystem.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="UserControls\Pages\CreateAccountPageControl.resx">
+      <DependentUpon>CreateAccountPageControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Pages\AccountPageControl.resx">
+      <DependentUpon>AccountPageControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMain.resx">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Pages\EditAssetPageControl.resx">
+      <DependentUpon>EditAssetPageControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Pages\EditProjectPageControl.resx">
+      <DependentUpon>EditProjectPageControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Pages\HomePageControl.resx">
+      <DependentUpon>HomePageControl.cs</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Pages\LoginPageControl.resx">
+      <DependentUpon>LoginPageControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Pages\MessagingPageControl.resx">
+      <DependentUpon>MessagingPageControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Pages\MyAssetsPageControl.resx">
+      <DependentUpon>MyAssetsPageControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Pages\TestPageControl.resx">
+      <DependentUpon>TestPageControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Pages\UploadAssetPageControl.resx">
+      <DependentUpon>UploadAssetPageControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Pages\UploadProjectPageControl.resx">
+      <DependentUpon>UploadProjectPageControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Pages\ViewAssetPageControl.resx">
+      <DependentUpon>ViewAssetPageControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Pages\ViewProjectPageControl.resx">
+      <DependentUpon>ViewProjectPageControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Prefabs\AssetButton.resx">
+      <DependentUpon>AssetButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Prefabs\Message.resx">
+      <DependentUpon>Message.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Prefabs\MessageAccountButton.resx">
+      <DependentUpon>MessageAccountButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Prefabs\MessageHistory.resx">
+      <DependentUpon>MessageHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Prefabs\PictureGallery.resx">
+      <DependentUpon>PictureGallery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Prefabs\RatingSystem.resx">
+      <DependentUpon>RatingSystem.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HomePageV1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\thEGE72UK4.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\StarEmpty.png" />
+    <None Include="Resources\StarFull.png" />
+    <None Include="Resources\StarEmpty1.png" />
+    <None Include="Resources\DefaultAssetPic.png" />
+    <None Include="Resources\DefaultProjectPic.png" />
+    <None Include="Resources\DefaultProfilePic.png" />
+    <None Include="Resources\FAPLogo.png" />
+    <None Include="Resources\FAPLogo2.png" />
+    <Content Include="Resources\Placeholder.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
